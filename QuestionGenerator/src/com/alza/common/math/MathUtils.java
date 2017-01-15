@@ -1,4 +1,4 @@
-package org.solahate.util.math;
+package com.alza.common.math;
 import java.util.ArrayList;
 import java.util.List;
 /**
@@ -46,6 +46,18 @@ public class MathUtils {
 	public static int findLCM(int a, int b)
 	{
 	    return a * (b / findGCDDjikstra(a, b));
+	}
+
+	/**
+	 * @param arr array of integer
+	 * @return lcm
+     */
+	public static int findLCM(int[] arr){
+		int lcm = arr[0];
+		for (int i = 1; i < arr.length; i++){
+			lcm = findLCM(lcm,arr[i]);
+		}
+		return lcm;
 	}
 	/**
 	 * Find divisors of an Integer
