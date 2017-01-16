@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
+import com.alza.quiz.model.Fraction;
 import com.alza.quiz.model.MultipleChoiceQuiz;
 import com.alza.quiz.model.Quiz;
 import com.alza.quiz.model.QuizLevel;
@@ -40,21 +41,22 @@ public class FractionEqualityQuestionFactory implements IQuestionFactory{
 			int a = randA[i];
 			int r = ThreadLocalRandom.current().nextInt(1, randA.length);
 			int b = randA[r];
-			int[] question = {a,b};
 			int multip =  randMulti[i];
-			int[] answer = {a*multip,b*multip};
+			Fraction fQuest,fAnswer;
+			fQuest = new Fraction(a, b);
+			fAnswer =  new Fraction(a*multip,b*multip);
 			if (i % 2 == 0){
-				int[] temp;
-				temp = question;
-				question=answer;
-				answer=temp;
+				Fraction temp;
+				temp = fQuest;
+				fQuest=fAnswer;
+				fAnswer=temp;
 			}
-			List<String> choices = buildChoices(question, answer);
+			List<String> choices = buildChoices(fQuest, fAnswer);
 			MultipleChoiceQuiz q = new MultipleChoiceQuiz();
 			q.setDifficultyLevel(QuizLevel.MUDAH);
 			q.setChoices(choices);
-			q.setCorrectAnswer(answer[0]+"/"+answer[1]);
-			q.setQuestion("Pecahan yang sama dengan nilainya dengan pecahan "+question[0]+"/"+question[1]);
+			q.setCorrectAnswer(fAnswer.a+"/"+fAnswer.b);
+			q.setQuestion("Pecahan yang sama dengan nilainya dengan pecahan "+fQuest.a+"/"+fQuest.b);
 			q.setLessonClassifier("Matematika SD");
 			q.setLessonCategory("Pecahan");
 			q.setLessonSubcategory("Kesamaan pecahan");
@@ -63,21 +65,20 @@ public class FractionEqualityQuestionFactory implements IQuestionFactory{
 		return quizList;
 	}
 	
-	private List<String> buildChoices(int[] question, int[] answer){
-		int[][] choices = new int[CHOICE_SIZE][2];
+	private List<String> buildChoices(Fraction question, Fraction answer){
+		Fraction[] choices = new Fraction[CHOICE_SIZE];
 		CommonFunctionAndValues.shuffleArray(simpleMultiplier);
 		for (int i=0; i<CHOICE_SIZE-1; i++){
-			int a = question[0] * simpleMultiplier[i][0];
-			int b = question[1] * simpleMultiplier[i][1];
-			choices[i][0] = a;
-			choices[i][1] = b;
+			int a = question.a * simpleMultiplier[i][0];
+			int b = question.b * simpleMultiplier[i][1];
+			Fraction f = new Fraction(a, b);
+			choices[i]= f;
 		}
-		choices[CHOICE_SIZE-1][0] = answer[0];
-		choices[CHOICE_SIZE-1][1] = answer[1];
+		choices[CHOICE_SIZE-1] = new Fraction(answer.a, answer.b);
 		CommonFunctionAndValues.shuffleArray(choices);
 		List<String> choicesInString = new ArrayList<String>();
-		for (int[] is : choices) {
-			choicesInString.add(is[0]+"/"+is[1]);
+		for (Fraction f : choices) {
+			choicesInString.add(f.a+"/"+f.b);
 		}
 		return choicesInString;
 	}

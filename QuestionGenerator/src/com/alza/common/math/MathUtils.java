@@ -1,6 +1,8 @@
 package com.alza.common.math;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.alza.quiz.model.Fraction;
 /**
  * 
  * @author ewin.sutriandi@gmail.com
@@ -72,5 +74,22 @@ public class MathUtils {
             }
         }
 		return divisors;
+	}
+	/**
+	 * Find greatest fraction
+	 * @param fracs array of Fraction
+	 * @return greatest Fraction from array fracs
+	 */
+	public static Fraction findGreatest(Fraction[] fracs){
+		if (fracs.length>0){
+			Fraction f = fracs[0];
+			for (Fraction fr : fracs) {
+				if (fr.isGreaterThan(f)){
+					f = fr;
+				}
+			}
+			return f;
+		}
+		return null;
 	}
 }
