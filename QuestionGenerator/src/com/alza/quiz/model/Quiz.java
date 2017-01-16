@@ -50,4 +50,6 @@ public abstract class Quiz {
     public void setLessonSubcategory(String lessonSubcategory) {
         this.lessonSubcategory = lessonSubcategory;
     }
+
+	
 }
