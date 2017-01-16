@@ -1,4 +1,4 @@
-package com.alza.quiz.model;
+package com.alza.common.math;
 
 import java.util.Comparator;
 

@@ -1,8 +1,6 @@
 package com.alza.common.math;
 import java.util.ArrayList;
 import java.util.List;
-
-import com.alza.quiz.model.Fraction;
 /**
  * 
  * @author ewin.sutriandi@gmail.com
