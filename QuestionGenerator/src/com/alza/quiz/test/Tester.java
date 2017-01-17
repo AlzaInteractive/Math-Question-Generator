@@ -6,7 +6,7 @@ import java.util.List;
 import com.alza.quiz.model.QuizLevel;
 import com.alza.quiz.model.MultipleChoiceQuiz;
 import com.alza.quiz.model.Quiz;
-import com.alza.quiz.qfactory.fraction.FractionEqualityQuestionFactory;
+import com.alza.quiz.qfactory.fraction.FindGreatestFractionQuestionFactory;
 import com.alza.quiz.qfactory.kpk.BasicKPKQuestionFactory;
 import com.alza.quiz.qfactory.kpk.IQuestionFactory;
 import com.alza.quiz.qfactory.kpk.WhichDayScenarioKPKQuestionFactory;
@@ -15,10 +15,13 @@ public class Tester {
 	public static void main(String[] args) {
 		//basicGenerator();
 		//whichDayGenerator();
-		fractionEquality();
+		//fractionEquality();
+		for (int i = 0; i < 1000; i++) {
+			fractionEquality();
+		}
 	}
 
-	private static void basicGenerator() {
+	protected static void basicGenerator() {
 		BasicKPKQuestionFactory f= new BasicKPKQuestionFactory();
 		List<MultipleChoiceQuiz> lq = new ArrayList<MultipleChoiceQuiz>();
 		for (int i = 0; i < 5; i++) {
@@ -34,7 +37,7 @@ public class Tester {
 			System.out.println("Answer : "+ q.getCorrectAnswer());
 		}
 	}
-	private static void whichDayGenerator(){
+	protected static void whichDayGenerator(){
 		IQuestionFactory qf = new WhichDayScenarioKPKQuestionFactory();
 		List<Quiz> ql = new ArrayList<>();
 		for (int i=1;i<=4;i++){
@@ -49,7 +52,8 @@ public class Tester {
 		}
 	}
 	private static void fractionEquality(){
-		IQuestionFactory qf = new FractionEqualityQuestionFactory();
+		//IQuestionFactory qf = new FractionEqualityQuestionFactory();
+		IQuestionFactory qf = new FindGreatestFractionQuestionFactory();
 		List<Quiz> ql = qf.generateQuizList();
 		for (Quiz q : ql) {
 			System.out.println("------------------------------");
