@@ -25,6 +25,10 @@ public class Fraction implements Comparable<Fraction>,Comparator<Fraction>{
 		}
 		return false;
 	}
-	
+	public Fraction getSimplestForm(){
+		int gcd = MathUtils.findGCDDjikstra(this.a, this.b);
+		Fraction s = new Fraction(this.a/gcd,this.b/gcd);
+		return s;
+	}
 
 }

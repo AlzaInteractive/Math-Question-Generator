@@ -15,6 +15,7 @@ public class CommonFunctionAndValues {
             "Eyang Segep","Eyang Ahmad","Ninik Zaenab","Mbah Soleh","Datuk Sunar","Datuk Menggep",
             "Aki Izudin"," Aki Jarwo"
     };
+    
     public static String[] hari = {
             "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu", "Minggu"
     };
@@ -251,5 +252,13 @@ public class CommonFunctionAndValues {
         String tahun = ""+c.get(Calendar.YEAR);
         s = s + " "+ bl +" "+ tahun;
         return s;
+    }
+    public static int[] getShuffledSimpleInts(){
+    	shuffleArray(simpleInt);
+    	return simpleInt;
+    }
+    public static int[] getShuffledSimpleIntsLarger(){
+    	shuffleArray(simpleIntLarger);
+    	return simpleIntLarger;
     }
 }
