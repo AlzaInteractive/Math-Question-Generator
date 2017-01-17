@@ -68,11 +68,8 @@ public class FindGreatestFractionQuestionFactory implements IQuestionFactory {
 	public MultipleChoiceQuiz generateTypeB(){
 		int choiceSize=3;
 		Fraction[] fracs = new Fraction[choiceSize];
-		long denom = 0;
-		while (denom < 4){
-			long l = System.nanoTime();
-			denom =  l % 13;
-		}
+		long denom = ThreadLocalRandom.current().nextInt(4, 12);
+		
 		for (int i=0; i<choiceSize ; i++){
 			int multip = ThreadLocalRandom.current().nextInt(2, 7);
 			int a = ThreadLocalRandom.current().nextInt(5, 63);
