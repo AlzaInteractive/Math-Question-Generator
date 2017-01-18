@@ -7,6 +7,7 @@ import com.alza.quiz.model.QuizLevel;
 import com.alza.quiz.model.MultipleChoiceQuiz;
 import com.alza.quiz.model.Quiz;
 import com.alza.quiz.qfactory.fraction.FindGreatestFractionQuestionFactory;
+import com.alza.quiz.qfactory.fraction.FractionEqualityQuestionFactory;
 import com.alza.quiz.qfactory.fraction.SimplifyFractionQuestionFactory;
 import com.alza.quiz.qfactory.kpk.BasicKPKQuestionFactory;
 import com.alza.quiz.qfactory.kpk.IQuestionFactory;
@@ -49,14 +50,13 @@ public class Tester {
 		for (Quiz q : ql){
 			System.out.println("------------------------------");
 			System.out.println("Question : " + q.getQuestion());
-			//System.out.println("Choices : "+ String.join(" , ", q.getChoices()));
 			System.out.println("Answer : "+ q.getCorrectAnswer());
 		}
 	}
 	private static void fractionEquality(){
-		//IQuestionFactory qf = new FractionEqualityQuestionFactory();
+		IQuestionFactory qf = new FractionEqualityQuestionFactory();
 		//IQuestionFactory qf = new FindGreatestFractionQuestionFactory();
-		IQuestionFactory qf = new SimplifyFractionQuestionFactory();
+		//IQuestionFactory qf = new SimplifyFractionQuestionFactory();
 		List<Quiz> ql = qf.generateQuizList();
 		for (Quiz q : ql) {
 			System.out.println("------------------------------");

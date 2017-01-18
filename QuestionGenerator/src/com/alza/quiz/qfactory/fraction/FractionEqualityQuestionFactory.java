@@ -38,31 +38,74 @@ public class FractionEqualityQuestionFactory implements IQuestionFactory{
 		CommonFunctionAndValues.shuffleArray(randMulti);
 		List<Quiz> quizList = new ArrayList<Quiz>();
 		for (int i=0;i<5;i++){
-			int a = randA[i];
-			int r = ThreadLocalRandom.current().nextInt(1, randA.length);
-			int b = randA[r];
-			int multip =  randMulti[i];
-			Fraction fQuest,fAnswer;
-			fQuest = new Fraction(a, b);
-			fAnswer =  new Fraction(a*multip,b*multip);
-			if (i % 2 == 0){
-				Fraction temp;
-				temp = fQuest;
-				fQuest=fAnswer;
-				fAnswer=temp;
-			}
-			List<String> choices = buildChoices(fQuest, fAnswer);
-			MultipleChoiceQuiz q = new MultipleChoiceQuiz();
-			q.setDifficultyLevel(QuizLevel.MUDAH);
-			q.setChoices(choices);
-			q.setCorrectAnswer(fAnswer.a+"/"+fAnswer.b);
-			q.setQuestion("Pecahan yang sama dengan nilainya dengan pecahan "+fQuest.a+"/"+fQuest.b);
-			q.setLessonClassifier("Matematika SD");
-			q.setLessonCategory("Pecahan");
-			q.setLessonSubcategory("Kesamaan pecahan");
+			MultipleChoiceQuiz q = generateTypeA(randA, randMulti, i);
+			quizList.add(q);
+		}
+		for (int i=0;i<2;i++){
+			MultipleChoiceQuiz q = generateTypeB(i);
 			quizList.add(q);
 		}
 		return quizList;
+	}
+	private MultipleChoiceQuiz generateTypeB(int i){
+		int min = 30;
+		int max = 45;
+		int a,b,c,d,multip;
+		boolean nmult2,nmult3,nmult5,nmult7;
+		do {
+			a = CommonFunctionAndValues.getRandomInt(min, max);
+			b = CommonFunctionAndValues.getRandomInt(min, max);
+			multip = CommonFunctionAndValues.getRandomInt(2, 6);
+			c = a * multip;
+			d = b * multip;
+			nmult2 = !(b % 2 == 0);
+			nmult3 = !(b % 3 == 0);
+			nmult5 = !(b % 5 == 0);
+			nmult7 = !(b % 7 == 0);
+		} while (nmult2&&nmult3&&nmult5&&nmult7);
+		MultipleChoiceQuiz q = new MultipleChoiceQuiz();
+		q.setDifficultyLevel(QuizLevel.MUDAH);
+		List<String> choices;
+		if (i%2==0){
+			q.setQuestion("Jika pecahan x/"+b+" = "+c+"/"+d+", maka nilai x sama dengan?");
+			q.setCorrectAnswer(String.valueOf(a));
+			choices = buildChoices(a,b,c,d,"x");
+		} else {
+			q.setQuestion("Jika pecahan "+a+"/y"+" = "+c+"/"+d+", maka nilai y sama dengan?");
+			q.setCorrectAnswer(String.valueOf(b));
+			choices = buildChoices(a,b,c,d,"y");
+		}
+		q.setChoices(choices);
+		q.setLessonClassifier("Matematika SD");
+		q.setLessonCategory("Pecahan");
+		q.setLessonSubcategory("Kesamaan pecahan");
+		return q;
+	}
+
+	private MultipleChoiceQuiz generateTypeA(int[] randA, int[] randMulti, int i) {
+		int a = randA[i];
+		int r = ThreadLocalRandom.current().nextInt(1, randA.length);
+		int b = randA[r];
+		int multip =  randMulti[i];
+		Fraction fQuest,fAnswer;
+		fQuest = new Fraction(a, b);
+		fAnswer =  new Fraction(a*multip,b*multip);
+		if (i % 2 == 0){
+			Fraction temp;
+			temp = fQuest;
+			fQuest=fAnswer;
+			fAnswer=temp;
+		}
+		List<String> choices = buildChoices(fQuest, fAnswer);
+		MultipleChoiceQuiz q = new MultipleChoiceQuiz();
+		q.setDifficultyLevel(QuizLevel.MUDAH);
+		q.setChoices(choices);
+		q.setCorrectAnswer(fAnswer.a+"/"+fAnswer.b);
+		q.setQuestion("Pecahan yang sama dengan nilainya dengan pecahan "+fQuest.a+"/"+fQuest.b);
+		q.setLessonClassifier("Matematika SD");
+		q.setLessonCategory("Pecahan");
+		q.setLessonSubcategory("Kesamaan pecahan");
+		return q;
 	}
 	
 	private List<String> buildChoices(Fraction question, Fraction answer){
@@ -79,6 +122,25 @@ public class FractionEqualityQuestionFactory implements IQuestionFactory{
 		List<String> choicesInString = new ArrayList<String>();
 		for (Fraction f : choices) {
 			choicesInString.add(f.a+"/"+f.b);
+		}
+		return choicesInString;
+	}
+	private List<String> buildChoices(int a,int b,int c,int d, String waldo){
+		int[] choices = new int[5];
+		CommonFunctionAndValues.shuffleArray(simpleMultiplier);
+		if (waldo=="x"){
+			choices[0] = a;
+		} else{
+			choices[0] = b;
+		}
+		choices[1] = c * d /b;
+		choices[2] = d * b /c;
+		choices[3] = a * b /c;
+		choices[4] = a * c /d;
+		CommonFunctionAndValues.shuffleArray(choices);
+		List<String> choicesInString = new ArrayList<String>();
+		for (int s : choices) {
+			choicesInString.add(String.valueOf(s));
 		}
 		return choicesInString;
 	}

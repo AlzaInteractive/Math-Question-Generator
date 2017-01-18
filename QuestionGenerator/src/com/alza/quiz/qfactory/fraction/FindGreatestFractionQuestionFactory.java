@@ -2,6 +2,7 @@ package com.alza.quiz.qfactory.fraction;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 import com.alza.common.math.Fraction;
@@ -16,14 +17,14 @@ public class FindGreatestFractionQuestionFactory implements IQuestionFactory {
 	private static final int NUM_OF_QUESTIONS = 6;
 	@Override
 	public Quiz generateQuiz() {
-
-		return null;
+		List<Quiz> quizList = generateQuizList();
+		int rnd = new Random().nextInt(quizList.size()); 
+		return quizList.get(rnd);
 	}
 
 	@Override
 	public Quiz generateQuiz(QuizLevel quizLevel) {
-
-		return null;
+		return generateQuiz();
 	}
 
 	@Override

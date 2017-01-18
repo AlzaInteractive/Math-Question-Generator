@@ -261,4 +261,7 @@ public class CommonFunctionAndValues {
     	shuffleArray(simpleIntLarger);
     	return simpleIntLarger;
     }
+    public static int getRandomInt(int min, int max){
+    	return ThreadLocalRandom.current().nextInt(min, max);
+    }
 }
