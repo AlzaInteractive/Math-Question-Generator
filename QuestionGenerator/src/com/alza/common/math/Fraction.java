@@ -30,5 +30,66 @@ public class Fraction implements Comparable<Fraction>,Comparator<Fraction>{
 		Fraction s = new Fraction(this.a/gcd,this.b/gcd);
 		return s;
 	}
-
+	public void add(Fraction f){
+		int newA1 = this.a * f.b;
+		int newA2 = f.a * this.b;
+		int denom = f.b * this.b;
+		Fraction r = new Fraction(newA1+newA2, denom);
+		r = r.getSimplestForm();
+ 		this.a = r.a;
+ 		this.b = r.b;
+	}
+	public void subtract(Fraction f){
+		Fraction negF = new Fraction(f.a* -1, f.b);
+		add(negF);
+	}
+	public void multiplyBy(Fraction f){
+		int newA = this.a * f.a;
+		int newB = this.b * f.b;
+		Fraction r = new Fraction(newA, newB);
+		r = r.getSimplestForm();
+		this.a = r.a;
+		this.b = r.b;
+	}
+	public void divideBy(Fraction f){
+		Fraction divtomult = new Fraction(f.b, f.a);
+		this.multiplyBy(divtomult);
+	}
+	
+	@Override
+	public Fraction clone(){
+		Fraction f = new Fraction(this.a, this.b);
+		return f;
+	}
+	public Fraction getResultWhenAddedWith(Fraction f){
+		Fraction fOri = this.clone();
+		fOri.add(f);
+		return fOri;
+	}
+	public Fraction getResultWhenSubtractWith(Fraction f){
+		Fraction fOri = this.clone();
+		fOri.subtract(f);
+		return fOri;
+	}
+	public Fraction getResultWhenMultipliedBy(Fraction f){
+		Fraction fOri = this.clone();
+		fOri.multiplyBy(f);
+		return fOri;
+	}
+	public Fraction getResultWhenDividedBy(Fraction f){
+		Fraction fOri = this.clone();
+		fOri.divideBy(f);
+		return fOri;
+	}
+	public boolean equals(Fraction f){
+		Fraction f1 = this.getSimplestForm();
+		Fraction f2 = f.getSimplestForm();
+		if (f1.a!=f2.a){
+			return false;
+		}
+		if (f1.b!=f2.b){
+			return false;
+		}
+		return true;
+	}
 }
