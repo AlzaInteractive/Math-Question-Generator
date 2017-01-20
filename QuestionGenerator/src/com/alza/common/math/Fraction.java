@@ -43,6 +43,9 @@ public class Fraction implements Comparable<Fraction>,Comparator<Fraction>{
 		Fraction negF = new Fraction(f.a* -1, f.b);
 		add(negF);
 	}
+	public Fraction inverse(){
+		return new Fraction(this.b,this.a);
+	}
 	public void multiplyBy(Fraction f){
 		int newA = this.a * f.a;
 		int newB = this.b * f.b;
@@ -58,8 +61,8 @@ public class Fraction implements Comparable<Fraction>,Comparator<Fraction>{
 	
 	@Override
 	public Fraction clone(){
-		Fraction f = new Fraction(this.a, this.b);
-		return f;
+		Fraction clone = new Fraction(this.a, this.b);
+		return clone;
 	}
 	public Fraction getResultWhenAddedWith(Fraction f){
 		Fraction fOri = this.clone();
@@ -81,6 +84,14 @@ public class Fraction implements Comparable<Fraction>,Comparator<Fraction>{
 		fOri.divideBy(f);
 		return fOri;
 	}
+	public CompoundFraction getCompoundFraction(){
+		CompoundFraction c = new CompoundFraction();
+		c.x = this.a / this.b;
+		c.a = this.a % this.b;
+		c.b = this.b;
+		return c;
+		
+	}
 	public boolean equals(Fraction f){
 		Fraction f1 = this.getSimplestForm();
 		Fraction f2 = f.getSimplestForm();
@@ -91,5 +102,12 @@ public class Fraction implements Comparable<Fraction>,Comparator<Fraction>{
 			return false;
 		}
 		return true;
+	}
+	public String toString(){
+		String s = this.a+"/"+this.b;
+		return s;
+	}
+	public class CompoundFraction {
+		int x,a,b;
 	}
 }

@@ -108,6 +108,13 @@ public class CommonFunctionAndValues {
     public static int[] simpleIntLarger = {
             2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18
     };
+    public static int[] prime101stDigit = {
+    		2,3,5,7,11,13,17,19,23,29
+    };
+    public static int getPrime101stRandom(){
+    	int rnd = new Random().nextInt(prime101stDigit.length);
+    	return prime101stDigit[rnd];
+    }
     public static int[] getPairOfIntSimple(){
         int rnd = new Random().nextInt(simpleIntPairs.length);
         return simpleIntPairs[rnd];

@@ -1,7 +1,9 @@
 package com.alza.quiz.model;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 public class MultipleChoiceQuiz extends  Quiz{
 	private String correctAnswer;
@@ -30,12 +32,21 @@ public class MultipleChoiceQuiz extends  Quiz{
 	}
 	public void setChoices(List<String> choices) {
 		this.choices = choices;
+		Collections.shuffle(this.choices);
 	}
 	public void setChoices(String[]  choices){
 		this.choices = new ArrayList<>();
 		for (String c:choices  ) {
 			this.choices.add(c);
 		}
+		Collections.shuffle(this.choices);
+	}
+	public void setChoices(Set<String>  choices){
+		this.choices = new ArrayList<>();
+		for (String c:choices  ) {
+			this.choices.add(c);
+		}
+		Collections.shuffle(this.choices);
 	}
 
 	@Override

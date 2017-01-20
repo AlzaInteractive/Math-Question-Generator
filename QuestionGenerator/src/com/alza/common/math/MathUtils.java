@@ -30,12 +30,21 @@ public class MathUtils {
 	 * @return gcd
 	 */
 	public static int findGCDDjikstra(int m, int n) {
-		   if(m == n)
-		      return m;
-		   else if (m > n)
-		      return findGCDDjikstra(m-n, n);
-		   else
-		      return findGCDDjikstra(m, n-m);
+		if (m==0){
+			return n;
+		}
+		if (n==0){
+			return m;
+		}
+		m = Math.abs(m);
+		n = Math.abs(n);
+		if(m == n)
+			return m;
+		else if (m > n)
+			return findGCDDjikstra(m-n, n);
+		else
+			//System.out.println(m+"  "+n);
+			return findGCDDjikstra(m, n-m);
 	}
 	/**
 	 * Find least common multiple of two int
@@ -45,13 +54,13 @@ public class MathUtils {
 	 */
 	public static int findLCM(int a, int b)
 	{
-	    return a * (b / findGCDDjikstra(a, b));
+		return a * (b / findGCDDjikstra(a, b));
 	}
 
 	/**
 	 * @param arr array of integer
 	 * @return lcm
-     */
+	 */
 	public static int findLCM(int[] arr){
 		int lcm = arr[0];
 		for (int i = 1; i < arr.length; i++){
@@ -67,10 +76,10 @@ public class MathUtils {
 	public static List<Integer> findDivisors(int num){
 		List<Integer> divisors = new ArrayList<>();
 		for (int i = 2; i <= num / 2; i++) {
-            if (num % i == 0) {
-                divisors.add(i);
-            }
-        }
+			if (num % i == 0) {
+				divisors.add(i);
+			}
+		}
 		return divisors;
 	}
 	/**

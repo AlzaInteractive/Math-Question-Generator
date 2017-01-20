@@ -10,7 +10,7 @@ import com.alza.common.math.MathUtils;
 import com.alza.quiz.model.MultipleChoiceQuiz;
 import com.alza.quiz.model.Quiz;
 import com.alza.quiz.model.QuizLevel;
-import com.alza.quiz.qfactory.kpk.IQuestionFactory;
+import com.alza.quiz.qfactory.IQuestionFactory;
 import com.alza.quiz.util.CommonFunctionAndValues;
 
 public class FindGreatestFractionQuestionFactory implements IQuestionFactory {

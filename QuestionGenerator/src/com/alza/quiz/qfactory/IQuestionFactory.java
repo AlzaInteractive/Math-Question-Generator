@@ -1,4 +1,4 @@
-package com.alza.quiz.qfactory.kpk;
+package com.alza.quiz.qfactory;
 
 import com.alza.quiz.model.Quiz;
 import com.alza.quiz.model.QuizLevel;
