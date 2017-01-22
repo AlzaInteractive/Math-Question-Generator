@@ -10,16 +10,18 @@ import com.alza.quiz.model.MultipleChoiceQuiz;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
 
 /**
  * Created by ewin.sutriandi@gmail.com on 24/12/16.
  */
 
 public class WhichDateScenarioKPKQuestionFactory extends BasicKPKQuestionFactory {
-    private List<String> scenariosWithTwoVal = new ArrayList();
-    private List<String> scenariosWithThreeVal = new ArrayList();
+    private List<String> scenariosWithTwoVal = new ArrayList<String>();
+    private List<String> scenariosWithThreeVal = new ArrayList<String>();
     private Date[] refDates;
 
     public WhichDateScenarioKPKQuestionFactory(){
@@ -54,7 +56,7 @@ public class WhichDateScenarioKPKQuestionFactory extends BasicKPKQuestionFactory
             Date answerInDate = c.getTime();
             String answerInString = CommonFunctionAndValues.dateToString(answerInDate);
             //prepare choices
-            String[] choices = prepareChoices(answerInDate);
+            Set<String> choices = prepareChoices(answerInDate);
             //Prepare Quiz
             MultipleChoiceQuiz q = new MultipleChoiceQuiz();
             q.setDifficultyLevel(QuizLevel.TERAPAN);
@@ -84,7 +86,7 @@ public class WhichDateScenarioKPKQuestionFactory extends BasicKPKQuestionFactory
             Date answerInDate = c.getTime();
             String answerInString = CommonFunctionAndValues.dateToString(answerInDate);
             //prepare choices
-            String[] choices = prepareChoices(answerInDate);
+            Set<String> choices = prepareChoices(answerInDate);
             //Prepare Quiz
             MultipleChoiceQuiz q = new MultipleChoiceQuiz();
             q.setDifficultyLevel(QuizLevel.TERAPAN);
@@ -97,23 +99,22 @@ public class WhichDateScenarioKPKQuestionFactory extends BasicKPKQuestionFactory
         return quizList;
     }
 
-    private String[] prepareChoices(Date correctAnswer){
-        String[] choices = new String[6];
+    private Set<String> prepareChoices(Date correctAnswer){
+    	Set<String> choices = new HashSet<String>();
         int[] choicesInInt = CommonFunctionAndValues.simpleInt;
         CommonFunctionAndValues.shuffleArray(choicesInInt);
         for (int i=0;i<5;i++){
             Calendar c = Calendar.getInstance();
             c.setTime(correctAnswer);
             if (i % 2 == 0){
-                c.add(Calendar.DATE,i);
+                c.add(Calendar.DATE,choicesInInt[i]);
             } else {
-                c.add(Calendar.DATE,(i*-1));
+                c.add(Calendar.DATE,choicesInInt[i]*-1);
             }
             String s = CommonFunctionAndValues.dateToString(c.getTime());
-            choices[i] = s;
+            choices.add(s);
         }
-        choices[5] = CommonFunctionAndValues.dateToString(correctAnswer);
-        CommonFunctionAndValues.shuffleArray(choices);
+        choices.add(CommonFunctionAndValues.dateToString(correctAnswer));
         return choices;
     }
 
