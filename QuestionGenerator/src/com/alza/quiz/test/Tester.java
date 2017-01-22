@@ -20,7 +20,7 @@ public class Tester {
 		//basicGenerator();
 		//whichDayGenerator();
 		//fractionEquality();
-		for (int i = 0; i < 1500; i++) {
+		for (int i = 0; i < 1; i++) {
 			System.out.println(i);
 			fractionEquality();
 		}
@@ -57,23 +57,23 @@ public class Tester {
 	}
 	private static void fractionEquality(){
 		List<IQuestionFactory> lqf = new ArrayList<IQuestionFactory>();
+		lqf.add(new FractionEqualityQuestionFactory());
+		lqf.add(new FindGreatestFractionQuestionFactory());
+		lqf.add(new SimplifyFractionQuestionFactory());
+		lqf.add(new FractionAddSubtractQuestionFactory());
 		lqf.add(new FractionMultDivideQuestionFactory());
+		int i = 0;
 		for (IQuestionFactory qf : lqf) {
 			List<Quiz> ql = qf.generateQuizList();
 			for (Quiz q : ql) {
+				i++;
 				System.out.println("------------------------------");
 				System.out.println("Question : " + q.getQuestion());
 				MultipleChoiceQuiz mq = (MultipleChoiceQuiz) q;
 				System.out.println("Choices : "+ String.join(" , ", mq.getChoices()));
 				System.out.println("Answer : "+ q.getCorrectAnswer());
 			}
-			
 		}
-		//IQuestionFactory qf = new FractionAddSubtractQuestionFactory();
-		//IQuestionFactory qf = new FractionMultDivideQuestionFactory();
-		//IQuestionFactory qf = new FractionEqualityQuestionFactory();
-		//IQuestionFactory qf = new FindGreatestFractionQuestionFactory();
-		//IQuestionFactory qf = new SimplifyFractionQuestionFactory();
-		
+		System.out.println(i);
 	}
 }
