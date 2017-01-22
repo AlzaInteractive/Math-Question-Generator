@@ -84,8 +84,8 @@ public class Fraction implements Comparable<Fraction>,Comparator<Fraction>{
 		fOri.divideBy(f);
 		return fOri;
 	}
-	public CompoundFraction getCompoundFraction(){
-		CompoundFraction c = new CompoundFraction();
+	public MixedFraction getMixedFraction(){
+		MixedFraction c = new MixedFraction();
 		c.x = this.a / this.b;
 		c.a = this.a % this.b;
 		c.b = this.b;
@@ -107,7 +107,19 @@ public class Fraction implements Comparable<Fraction>,Comparator<Fraction>{
 		String s = this.a+"/"+this.b;
 		return s;
 	}
-	public class CompoundFraction {
+	public String toHtmlString(){
+		String s = this.a+"/"+this.b;
+		return s;
+	}
+	public class MixedFraction {
 		int x,a,b;
+		public String toString(){
+			String s = this.x+" "+this.a+"/"+this.b;
+			return s;
+		}
+		public String toHtmlString(){
+			String s = this.x+" "+this.a+"/"+this.b;
+			return s;
+		}
 	}
 }

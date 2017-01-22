@@ -10,6 +10,7 @@ import com.alza.quiz.qfactory.IQuestionFactory;
 import com.alza.quiz.qfactory.fraction.FindGreatestFractionQuestionFactory;
 import com.alza.quiz.qfactory.fraction.FractionAddSubtractQuestionFactory;
 import com.alza.quiz.qfactory.fraction.FractionEqualityQuestionFactory;
+import com.alza.quiz.qfactory.fraction.FractionMultDivideQuestionFactory;
 import com.alza.quiz.qfactory.fraction.SimplifyFractionQuestionFactory;
 import com.alza.quiz.qfactory.kpk.BasicKPKQuestionFactory;
 import com.alza.quiz.qfactory.kpk.WhichDayScenarioKPKQuestionFactory;
@@ -55,17 +56,24 @@ public class Tester {
 		}
 	}
 	private static void fractionEquality(){
-		IQuestionFactory qf = new FractionAddSubtractQuestionFactory();
+		List<IQuestionFactory> lqf = new ArrayList<IQuestionFactory>();
+		lqf.add(new FractionMultDivideQuestionFactory());
+		for (IQuestionFactory qf : lqf) {
+			List<Quiz> ql = qf.generateQuizList();
+			for (Quiz q : ql) {
+				System.out.println("------------------------------");
+				System.out.println("Question : " + q.getQuestion());
+				MultipleChoiceQuiz mq = (MultipleChoiceQuiz) q;
+				System.out.println("Choices : "+ String.join(" , ", mq.getChoices()));
+				System.out.println("Answer : "+ q.getCorrectAnswer());
+			}
+			
+		}
+		//IQuestionFactory qf = new FractionAddSubtractQuestionFactory();
+		//IQuestionFactory qf = new FractionMultDivideQuestionFactory();
 		//IQuestionFactory qf = new FractionEqualityQuestionFactory();
 		//IQuestionFactory qf = new FindGreatestFractionQuestionFactory();
 		//IQuestionFactory qf = new SimplifyFractionQuestionFactory();
-		List<Quiz> ql = qf.generateQuizList();
-		for (Quiz q : ql) {
-			System.out.println("------------------------------");
-			System.out.println("Question : " + q.getQuestion());
-			MultipleChoiceQuiz mq = (MultipleChoiceQuiz) q;
-			System.out.println("Choices : "+ String.join(" , ", mq.getChoices()));
-			System.out.println("Answer : "+ q.getCorrectAnswer());
-		}
+		
 	}
 }

@@ -172,7 +172,7 @@ public class WhichDateScenarioKPKQuestionFactory extends BasicKPKQuestionFactory
                 " #val1? hari sekali, sedangkan kapal Amaq Teganang #val2? hari sekali. " +
                 "Pada #refdate? kedua kapal itu berlabuh bersama di Pelabuhan Lombok. " +
                 "Pada tanggal berapa kedua kapal tersebut diperkirakan berlabuh di tempat yang sama? ");
-        scenariosWithTwoVal.add("Mamiq Solah memiliki kebun pepaya dan pisang yang sedang dalam masa panen. " +
+        scenariosWithTwoVal.add("#orang1? memiliki kebun pepaya dan pisang yang sedang dalam masa panen. " +
                 "Ia menjadwalkan panen pepaya #val1? hari sekali di waktu pagi " +
                 "dan panen pisang #val2? hari sekali di waktu sore. " +
                 "Jika tanggal #refdate? ia panen pepaya dan pisang, tanggal berapa " +
