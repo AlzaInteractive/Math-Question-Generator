@@ -11,6 +11,7 @@ import com.alza.quiz.qfactory.fraction.FindGreatestFractionQuestionFactory;
 import com.alza.quiz.qfactory.fraction.FractionAddSubtractQuestionFactory;
 import com.alza.quiz.qfactory.fraction.FractionEqualityQuestionFactory;
 import com.alza.quiz.qfactory.fraction.FractionMultDivideQuestionFactory;
+import com.alza.quiz.qfactory.fraction.MixedFractionQuestionFactory;
 import com.alza.quiz.qfactory.fraction.SimplifyFractionQuestionFactory;
 import com.alza.quiz.qfactory.kpk.BasicKPKQuestionFactory;
 import com.alza.quiz.qfactory.kpk.WhichDayScenarioKPKQuestionFactory;
@@ -62,6 +63,7 @@ public class Tester {
 		lqf.add(new SimplifyFractionQuestionFactory());
 		lqf.add(new FractionAddSubtractQuestionFactory());
 		lqf.add(new FractionMultDivideQuestionFactory());
+		lqf.add(new MixedFractionQuestionFactory());
 		int i = 0;
 		for (IQuestionFactory qf : lqf) {
 			List<Quiz> ql = qf.generateQuizList();

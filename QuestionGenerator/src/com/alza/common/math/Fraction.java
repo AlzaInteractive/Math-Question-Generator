@@ -85,10 +85,10 @@ public class Fraction implements Comparable<Fraction>,Comparator<Fraction>{
 		return fOri;
 	}
 	public MixedFraction getMixedFraction(){
-		MixedFraction c = new MixedFraction();
-		c.x = this.a / this.b;
-		c.a = this.a % this.b;
-		c.b = this.b;
+		int x = this.a / this.b;
+		int a = this.a % this.b;
+		int b = this.b;
+		MixedFraction c = new MixedFraction(x,a,b);
 		return c;
 		
 	}
@@ -112,7 +112,14 @@ public class Fraction implements Comparable<Fraction>,Comparator<Fraction>{
 		return s;
 	}
 	public class MixedFraction {
-		int x,a,b;
+		public int x;
+		public int a;
+		public int b;
+		public MixedFraction(int x, int a, int b){
+			this.x = x;
+			this.a = a;
+			this.b = b;
+		}
 		public String toString(){
 			String s = this.x+" "+this.a+"/"+this.b;
 			return s;
