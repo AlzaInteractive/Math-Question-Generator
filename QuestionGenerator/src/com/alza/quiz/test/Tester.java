@@ -21,7 +21,8 @@ public class Tester {
 		//basicGenerator();
 		//whichDayGenerator();
 		//fractionEquality();
-		for (int i = 0; i < 1; i++) {
+		int testCount = 1000;
+		for (int i = 0; i < testCount; i++) {
 			System.out.println(i);
 			fractionEquality();
 		}

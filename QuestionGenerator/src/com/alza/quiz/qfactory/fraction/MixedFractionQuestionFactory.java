@@ -33,11 +33,11 @@ public class MixedFractionQuestionFactory implements IQuestionFactory{
 		List<Quiz> quizList= new ArrayList<Quiz>();
 		for (int i=0; i<6; i++){
 			MultipleChoiceQuiz q = null;
-			if (i>1){
+			if (i>3){
 				q = generateTypeMultiDivide(i);
 				q.setDifficultyLevel(QuizLevel.MUDAH);
 			}
-			else if (i>5){
+			else if (i>1){
 				q = generateTypeAddSubtract(i);
 				q.setDifficultyLevel(QuizLevel.MUDAH);
 			} else {
@@ -54,12 +54,12 @@ public class MixedFractionQuestionFactory implements IQuestionFactory{
 
 	private MultipleChoiceQuiz generateTypeMultiDivide(int i) {
 		MultipleChoiceQuiz q = new MultipleChoiceQuiz();
-		int denom = CommonFunctionAndValues.getRandomInt(11, 41);
+		int denom = CommonFunctionAndValues.getRandomInt(6, 13);
 		int a1,a2;
 		do {
-			a1 = CommonFunctionAndValues.getRandomInt(5, 17);
-			a2 = CommonFunctionAndValues.getRandomInt(5, 17);
-		} while (!(denom < a1 && denom < a2 ));
+			a1 = CommonFunctionAndValues.getRandomInt(5, 23);
+			a2 = CommonFunctionAndValues.getRandomInt(5, 23);
+		} while (denom > a1 || denom > a2 );
 		Fraction f1 = new Fraction(a1, denom);
 		Fraction f2 = new Fraction(a2, denom);
 		Fraction result;
@@ -78,12 +78,12 @@ public class MixedFractionQuestionFactory implements IQuestionFactory{
 	}
 	private MultipleChoiceQuiz generateTypeAddSubtract(int i) {
 		MultipleChoiceQuiz q = new MultipleChoiceQuiz();
-		int denom = CommonFunctionAndValues.getRandomInt(11, 41);
+		int denom = CommonFunctionAndValues.getRandomInt(6, 13);
 		int a1,a2;
 		do {
-			a1 = CommonFunctionAndValues.getRandomInt(5, 17);
-			a2 = CommonFunctionAndValues.getRandomInt(5, 17);
-		} while (!(denom < a1 && denom < a2));
+			a1 = CommonFunctionAndValues.getRandomInt(5, 23);
+			a2 = CommonFunctionAndValues.getRandomInt(5, 23);
+		} while (denom > a1 || denom > a2 ||a1==a2||((a1+a2)%denom==0));
 		Fraction f1 = new Fraction(a1, denom);
 		Fraction f2 = new Fraction(a2, denom);
 		Fraction result;

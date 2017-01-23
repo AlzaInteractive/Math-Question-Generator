@@ -121,7 +121,19 @@ public class Fraction implements Comparable<Fraction>,Comparator<Fraction>{
 			this.b = b;
 		}
 		public String toString(){
-			String s = this.x+" "+this.a+"/"+this.b;
+			String s;
+			if (this.x==0 && this.a==0){
+				s="0";
+			} else if (this.x==0){
+				s = this.a+"/"+this.b;
+			} else if (this.a==0){
+				s = ""+this.x;
+			} else if (this.b==0){
+				s = ""+this.x;
+			} else {
+				s = this.x+" "+this.a+"/"+this.b;
+			}
+			
 			return s;
 		}
 		public String toHtmlString(){
