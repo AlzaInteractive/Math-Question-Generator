@@ -45,9 +45,6 @@ public class ScenarioBasedFractionQuestionFactory implements IQuestionFactory {
 		}
         return quizList;
     }
-
-    
-
     private Quiz generateScenario1() {
 		/*
 		 * result = one whole subtract by 3 fraction
@@ -57,37 +54,35 @@ public class ScenarioBasedFractionQuestionFactory implements IQuestionFactory {
 		};
 		int rnd = new Random().nextInt(fractionDenoms.length);
 		int[] curDivisors = fractionDenoms[rnd];
-		String scenario = "";
-		if (rnd % 5 ==0){
-			scenario ="Bu guru menugaskan murid-murid membuat gerabah dari tanah liat. "
-					+ "Tiga kelompok siswa diminta untuk berbagi seember tanah liat, "
-					+ "masing-masing kemudian mengambil #frac1?, #frac2?, dan #frac3? bagian. "
-					+ "Sisa tanah di dalam ember adalah"
-					+ " .. bagian";
-		}
-		else if (rnd % 3 == 0){
-			String[] food = {"apel","semangka","melon","pepaya","sirsak"};
-			String curFood = food[rnd];
-			scenario = "#orang1? memiliki sebuah #food1?. "
-					+ "ia memberikan #frac1? kepada #orang2?, "
-					+ "#frac2? kepada #orang3?, dan "
-					+ "#frac3? kepada #orang4?. "
-					+ "Berapakah sisa #food1? #orang1? ";
-			scenario = scenario.replace("#food1?", curFood);
-		} else if (rnd % 2 == 0) {
-			scenario = "Ibu membuat sepiring agar-agar dan meletakkannya di atas meja. "
-					+ "#orang1?, #orang2?, dan #orang3? datang dan memakan "
-					+ "masing masing #frac1?, #frac2?, dan #frac3? bagian. "
-					+ "#orang4? datang terakhir dan mengambil sisanya. "
-					+ "Bagian yang didapatkan #orang4? adalah ... bagian.";
-		} else {
-			scenario = "Empat bersaudara #orang1?, #orang2?, #orang3?, dan #orang4? "
-					+ "menemukan setoples kacang di ruang tamu. "
-					+ "Mereka sepakat membaginya untuk menjadi bekal bermain. "
-					+ "#orang2, #orang3?, dan #orang4? mengambil "
-					+ "masing-masing #frac1?, #frac2?, dan #frac3?. "
-					+ "Jika #orang1? mendapatkan sisanya, berapa bagiankah itu?";
-		}
+		List<String> sce = new ArrayList<String>();
+		sce.add("Bu guru menugaskan murid-murid membuat gerabah dari tanah liat. "
+				+ "Tiga kelompok siswa diminta untuk berbagi seember tanah liat, "
+				+ "masing-masing kemudian mengambil #frac1?, #frac2?, dan #frac3? bagian. "
+				+ "Sisa tanah di dalam ember adalah"
+				+ " .. bagian");
+		String[] food = {"sebuah apel","sebuah semangka","sebuah melon","sebuah pepaya","sebuah sirsak","seloyang pizza"};
+		String curFood = food[rnd];
+		String sce2 = "#orang1? memiliki #food1?. "
+				+ "ia memberikan #frac1? kepada #orang2?, "
+				+ "#frac2? kepada #orang3?, dan "
+				+ "#frac3? kepada #orang4?. "
+				+ "Berapakah sisa #food1? #orang1? ";
+		sce2 = sce2.replace("#food1?", curFood);
+		sce.add(sce2);
+		sce.add("Ibu membuat sepiring agar-agar dan meletakkannya di atas meja. "
+				+ "#orang1?, #orang2?, dan #orang3? datang dan memakan "
+				+ "masing masing #frac1?, #frac2?, dan #frac3? bagian. "
+				+ "#orang4? datang terakhir dan mengambil sisanya. "
+				+ "Bagian yang didapatkan #orang4? adalah ... bagian.");
+		
+		sce.add("Empat bersaudara #orang1?, #orang2?, #orang3?, dan #orang4? "
+				+ "menemukan setoples kacang di ruang tamu. "
+				+ "Mereka sepakat membaginya untuk menjadi bekal bermain. "
+				+ "#orang2, #orang3?, dan #orang4? mengambil "
+				+ "masing-masing #frac1?, #frac2?, dan #frac3?. "
+				+ "Jika #orang1? mendapatkan sisanya, berapa bagiankah itu?");
+		int rndsce = new Random().nextInt(sce.size());
+		String scenario = sce.get(rndsce);
 		Fraction f1 = new Fraction(1, curDivisors[0]);
 		Fraction f2 = new Fraction(1, curDivisors[1]);
 		Fraction f3 = new Fraction(1, curDivisors[2]);
