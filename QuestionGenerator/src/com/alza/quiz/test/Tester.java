@@ -9,6 +9,7 @@ import com.alza.quiz.model.Quiz;
 import com.alza.quiz.qfactory.IQuestionFactory;
 import com.alza.quiz.qfactory.fraction.FindGreatestFractionQuestionFactory;
 import com.alza.quiz.qfactory.fraction.FractionAddSubtractQuestionFactory;
+import com.alza.quiz.qfactory.fraction.FractionDecimalFormQuestionFactory;
 import com.alza.quiz.qfactory.fraction.FractionEqualityQuestionFactory;
 import com.alza.quiz.qfactory.fraction.FractionMultDivideQuestionFactory;
 import com.alza.quiz.qfactory.fraction.MixedFractionQuestionFactory;
@@ -21,7 +22,7 @@ public class Tester {
 		//basicGenerator();
 		//whichDayGenerator();
 		//fractionEquality();
-		int testCount = 1000;
+		int testCount = 1;
 		for (int i = 0; i < testCount; i++) {
 			System.out.println(i);
 			fractionEquality();
@@ -65,6 +66,7 @@ public class Tester {
 		lqf.add(new FractionAddSubtractQuestionFactory());
 		lqf.add(new FractionMultDivideQuestionFactory());
 		lqf.add(new MixedFractionQuestionFactory());
+		lqf.add(new FractionDecimalFormQuestionFactory());
 		int i = 0;
 		for (IQuestionFactory qf : lqf) {
 			List<Quiz> ql = qf.generateQuizList();

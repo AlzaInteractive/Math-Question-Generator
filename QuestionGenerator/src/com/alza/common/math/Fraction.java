@@ -1,5 +1,6 @@
 package com.alza.common.math;
 
+import java.text.DecimalFormat;
 import java.util.Comparator;
 
 public class Fraction implements Comparable<Fraction>,Comparator<Fraction>{
@@ -91,6 +92,11 @@ public class Fraction implements Comparable<Fraction>,Comparator<Fraction>{
 		MixedFraction c = new MixedFraction(x,a,b);
 		return c;
 		
+	}
+	public String getTwoDigitDecimalForm(){
+		double i2=((double)this.a)/((double)this.b);
+		String s = new DecimalFormat("##.##").format(i2);
+		return s;
 	}
 	public boolean equals(Fraction f){
 		Fraction f1 = this.getSimplestForm();
