@@ -144,68 +144,71 @@ public class CommonFunctionAndValues {
             }
             i++;
         }
-        if (base.contains("#orang1?")&&base.contains("#orang2?")&&!base.contains("#orang3?")){
-            String[] peopleExp = {"#orang1?","#orang2?"};
-            String[] people = getPairofPeople();
-            int j = 0;
-            for (String s: peopleExp) {
-                if (base.contains(s)){
-                    base = base.replace(s,people[j]);
-                }
-                j++;
-            }
-        }
-        if (base.contains("#orang1?")){
-            shuffleArray(nameSingle);
-            String orang = nameSingle[0];
-            base.replace("#orang1?",orang);
-        }
-        if (base.contains("#orang")){
-            String[] peopleExp = {"#orang1?","#orang2?","#orang3?","#orang4?","#orang5?"};
-            shuffleArray(nameSingle);
-            int k = 0;
-            for (String s: peopleExp) {
-                if (base.contains(s)){
-                    base = base.replace(s,nameSingle[k]);
-                }
-                k++;
-            }
-        }
-        if (base.contains("#elder")){
-            String[] peopleExp = {"#elder1?","#elder?","#elder3?","#elder4?","#elder?"};
-            shuffleArray(nameElder);
-            int l = 0;
-            for (String s: peopleExp) {
-                if (base.contains(s)){
-                    base = base.replace(s,nameElder[l]);
-                }
-                l++;
-            }
-        }
-        if (base.contains("#bapak")){
-            String[] peopleExp = {"#bapak1?","#bapak2?","#bapak3?","#bapak4?","#bapak5?"};
-            shuffleArray(nameBapak);
-            int l = 0;
-            for (String s: peopleExp) {
-                if (base.contains(s)){
-                    base = base.replace(s,nameBapak[l]);
-                }
-                l++;
-            }
-        }
-        if (base.contains("#sport")){
-            shuffleArray(sportPairs);
-            base = base.replace("#sport1?",sportPairs[0][0]);
-            base = base.replace("#sport2?",sportPairs[0][1]);
-        }
-        if (base.contains("#les")){
-            shuffleArray(lesPairs);
-            base = base.replace("#les1?",lesPairs[0][0]);
-            base = base.replace("#les2?",lesPairs[0][1]);
-        }
+        base = buildScenario(base);
         return base;
     }
-
+    public static String buildScenario(String base){
+         if (base.contains("#orang1?")&&base.contains("#orang2?")&&!base.contains("#orang3?")){
+             String[] peopleExp = {"#orang1?","#orang2?"};
+             String[] people = getPairofPeople();
+             int j = 0;
+             for (String s: peopleExp) {
+                 if (base.contains(s)){
+                     base = base.replace(s,people[j]);
+                 }
+                 j++;
+             }
+         }
+         if (base.contains("#orang1?")){
+             shuffleArray(nameSingle);
+             String orang = nameSingle[0];
+             base.replace("#orang1?",orang);
+         }
+         if (base.contains("#orang")){
+             String[] peopleExp = {"#orang1?","#orang2?","#orang3?","#orang4?","#orang5?"};
+             shuffleArray(nameSingle);
+             int k = 0;
+             for (String s: peopleExp) {
+                 if (base.contains(s)){
+                     base = base.replace(s,nameSingle[k]);
+                 }
+                 k++;
+             }
+         }
+         if (base.contains("#elder")){
+             String[] peopleExp = {"#elder1?","#elder?","#elder3?","#elder4?","#elder?"};
+             shuffleArray(nameElder);
+             int l = 0;
+             for (String s: peopleExp) {
+                 if (base.contains(s)){
+                     base = base.replace(s,nameElder[l]);
+                 }
+                 l++;
+             }
+         }
+         if (base.contains("#bapak")){
+             String[] peopleExp = {"#bapak1?","#bapak2?","#bapak3?","#bapak4?","#bapak5?"};
+             shuffleArray(nameBapak);
+             int l = 0;
+             for (String s: peopleExp) {
+                 if (base.contains(s)){
+                     base = base.replace(s,nameBapak[l]);
+                 }
+                 l++;
+             }
+         }
+         if (base.contains("#sport")){
+             shuffleArray(sportPairs);
+             base = base.replace("#sport1?",sportPairs[0][0]);
+             base = base.replace("#sport2?",sportPairs[0][1]);
+         }
+         if (base.contains("#les")){
+             shuffleArray(lesPairs);
+             base = base.replace("#les1?",lesPairs[0][0]);
+             base = base.replace("#les2?",lesPairs[0][1]);
+         }
+         return base;
+    }
     public static void shuffleArray(int[] ar)
     {
         Random rnd = ThreadLocalRandom.current();

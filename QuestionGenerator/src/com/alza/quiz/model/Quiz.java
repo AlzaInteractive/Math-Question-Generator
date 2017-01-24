@@ -42,6 +42,9 @@ public abstract class Quiz {
     public void setLessonCategory(String lessonCategory) {
         this.lessonCategory = lessonCategory;
     }
+    public void setDifficultyLevel(QuizLevel quizLevel) {
+		this.quizLevel = quizLevel;
+	}
 
     public String getLessonSubcategory() {
         return lessonSubcategory;
