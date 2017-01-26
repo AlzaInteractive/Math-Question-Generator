@@ -105,7 +105,15 @@ public class ScenarioBasedFractionQuestionFactory implements IQuestionFactory {
 		q.setChoices(buildChoices(fracs));
 		return q;
 	}
-	
+	private Quiz generateScenario2() {
+		MultipleChoiceQuiz q = new MultipleChoiceQuiz();
+		List<String> sce = new ArrayList<String>();
+		sce.add("#elder1? memiliki tanah kebun 12 are. Ia menanami kebunnya dengan kubis, dan wortel  "
+				+ "masing-masing #frac1? dan #frac2? bagian. Ia berencana menanami sisanya dengan bayam. "
+				+ "berapakah luas tanah yang tersedia untuk bayam #elder1?");
+				
+		return q;
+	}
     private Set<String> buildChoices(Fraction[] fracs) {
 		Set<String> choiceInString = new HashSet<String>();
 		for (Fraction fraction : fracs) {

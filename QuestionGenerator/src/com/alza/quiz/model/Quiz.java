@@ -11,6 +11,7 @@ public abstract class Quiz {
     String lessonClassifier;
     String lessonCategory;
     String lessonSubcategory;
+    int lessonGrade;
 
     public boolean isCorrect(Object answer){
         return false;
@@ -53,6 +54,26 @@ public abstract class Quiz {
     public void setLessonSubcategory(String lessonSubcategory) {
         this.lessonSubcategory = lessonSubcategory;
     }
+
+	public int getLessonGrade() {
+		return lessonGrade;
+	}
+
+	public void setLessonGrade(int lessonGrade) {
+		this.lessonGrade = lessonGrade;
+	}
+
+	public void setQuizLevel(QuizLevel quizLevel) {
+		this.quizLevel = quizLevel;
+	}
+
+	public void setQuestion(String question) {
+		this.question = question;
+	}
+
+	public void setCorrectAnswer(String correctAnswer) {
+		this.correctAnswer = correctAnswer;
+	}
 
 	
 }
