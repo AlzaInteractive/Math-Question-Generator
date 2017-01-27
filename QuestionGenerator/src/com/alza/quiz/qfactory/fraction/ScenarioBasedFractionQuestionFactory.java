@@ -140,7 +140,7 @@ public class ScenarioBasedFractionQuestionFactory implements IQuestionFactory {
 		Fraction f2 = new Fraction(1, vals[1]);
 		Fraction fAns = new Fraction(1, 1).getResultWhenSubtractWith(f1).getResultWhenSubtractWith(f2);
 		Fraction fRes = fAns.getResultWhenMultipliedBy(vals[2]);
-		System.out.println(fAns+" ");
+		//System.out.println(fAns+" ");
 		int ans = fRes.getOneDigitInteger();
 		scenario = scenario.replace("#frac1?", f1.toString());
 		scenario = scenario.replace("#frac2?", f2.toString());

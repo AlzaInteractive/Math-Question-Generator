@@ -23,11 +23,14 @@ public class Tester {
 		//basicGenerator();
 		//whichDayGenerator();
 		//fractionEquality();
+		final long startTime = System.currentTimeMillis();
 		int testCount = 1;
 		for (int i = 0; i < testCount; i++) {
-			System.out.println(i);
+			//System.out.println(i);
 			fractionEquality();
 		}
+		final long endTime = System.currentTimeMillis();
+		System.out.println("Total running time (ms) =" +(endTime-startTime));
 	}
 
 	protected static void basicGenerator() {

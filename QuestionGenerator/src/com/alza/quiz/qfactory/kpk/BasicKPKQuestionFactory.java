@@ -109,7 +109,7 @@ public class BasicKPKQuestionFactory implements IQuestionFactory {
 			firstNumber = ThreadLocalRandom.current().nextInt(min, max + 1);
 			secondNumber = ThreadLocalRandom.current().nextInt(min, max + 1);
 			repeat = false;
-			System.out.println("Generated: "+firstNumber+" "+secondNumber+" "+(firstNumber==secondNumber));
+			//System.out.println("Generated: "+firstNumber+" "+secondNumber+" "+(firstNumber==secondNumber));
 			if (firstNumber == secondNumber||
 					firstNumber==10||
 					secondNumber==10){

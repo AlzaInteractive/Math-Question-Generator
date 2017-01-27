@@ -51,7 +51,7 @@ public class MultipleChoiceQuiz extends  Quiz{
 
 	@Override
 	public boolean isCorrect(Object answer) {
-		System.out.println(correctAnswer+" vs "+answer);
+		//System.out.println(correctAnswer+" vs "+answer);
 		if (correctAnswer.equals(answer)){
 			return true;
 		}
