@@ -59,6 +59,7 @@ public class FractionDecimalFormQuestionFactory implements IQuestionFactory {
 			q.setLessonClassifier("Matematika SD");
 			q.setLessonCategory("Pecahan");
 			q.setLessonSubcategory("Bentuk desimal");
+			q.setLessonGrade(5);
 			quizList.add(q);
 		}
 		return quizList;

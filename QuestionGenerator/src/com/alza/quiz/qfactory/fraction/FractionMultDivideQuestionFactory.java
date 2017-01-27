@@ -42,6 +42,7 @@ public class FractionMultDivideQuestionFactory implements IQuestionFactory{
 			q.setLessonClassifier("Matematika SD");
 			q.setLessonCategory("Pecahan");
 			q.setLessonSubcategory("Perkalian dan pembagian");
+			q.setLessonGrade(5);
 			quizList.add(q);
 		}
 		return quizList;

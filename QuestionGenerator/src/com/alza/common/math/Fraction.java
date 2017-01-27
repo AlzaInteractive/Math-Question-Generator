@@ -55,6 +55,9 @@ public class Fraction implements Comparable<Fraction>,Comparator<Fraction>{
 		this.a = r.a;
 		this.b = r.b;
 	}
+	public void multiplyBy(int i){
+		this.a = this.a * i;
+	}
 	public void divideBy(Fraction f){
 		Fraction divtomult = new Fraction(f.b, f.a);
 		this.multiplyBy(divtomult);
@@ -80,6 +83,11 @@ public class Fraction implements Comparable<Fraction>,Comparator<Fraction>{
 		fOri.multiplyBy(f);
 		return fOri;
 	}
+	public Fraction getResultWhenMultipliedBy(int i){
+		Fraction fOri = this.clone();
+		fOri.multiplyBy(i);
+		return fOri;
+	}
 	public Fraction getResultWhenDividedBy(Fraction f){
 		Fraction fOri = this.clone();
 		fOri.divideBy(f);
@@ -92,6 +100,9 @@ public class Fraction implements Comparable<Fraction>,Comparator<Fraction>{
 		MixedFraction c = new MixedFraction(x,a,b);
 		return c;
 		
+	}
+	public int getOneDigitInteger(){
+		return this.a / this.b;
 	}
 	public String getTwoDigitDecimalForm(){
 		double i2=((double)this.a)/((double)this.b);

@@ -37,6 +37,7 @@ public class ScenarioBasedFractionQuestionFactory implements IQuestionFactory {
     public List<Quiz> generateQuizList(){
         List<Quiz> quizList = new ArrayList<>();
         quizList.add(generateScenario1());
+        quizList.add(generateScenario2());
         for (Quiz q : quizList) {
         	q.setLessonClassifier("Matematika SD");
 			q.setLessonCategory("Pecahan");
@@ -103,21 +104,70 @@ public class ScenarioBasedFractionQuestionFactory implements IQuestionFactory {
 		q.setQuestion(scenario);
 		q.setCorrectAnswer(result.toString());
 		q.setChoices(buildChoices(fracs));
+		q.setLessonGrade(4);
 		return q;
 	}
 	private Quiz generateScenario2() {
 		MultipleChoiceQuiz q = new MultipleChoiceQuiz();
 		List<String> sce = new ArrayList<String>();
-		sce.add("#elder1? memiliki tanah kebun 12 are. Ia menanami kebunnya dengan kubis, dan wortel  "
+		int[][] randVals = {
+				{2,3,36},{2,4,24},{3,4,72},{4,6,48},{5,3,30},{7,6,42},{8,4,40},{5,8,40},{6,9,36}
+		}; 
+		int indVal = new Random().nextInt(randVals.length);
+		sce.add("#elder1? memiliki tanah kebun #num1? are. Ia menanami kebunnya dengan kubis dan wortel  "
 				+ "masing-masing #frac1? dan #frac2? bagian. Ia berencana menanami sisanya dengan bayam. "
-				+ "berapakah luas tanah yang tersedia untuk bayam #elder1?");
-				
+				+ "Berapakah luas tanah yang tersedia untuk bayam #elder1?");
+		sce.add("#orang1?, #orang2?, dan #orang3? bermain ke pantai sembari mencari kerang. "
+				+ "Saat pulang mereka membawa seember penuh berisi #num1? kerang. "
+				+ "Jika #orang1? mengumpulkan #frac1? bagian, #orang2? #frac2? bagian, "
+				+ "berapakah banyak kerang yang dikumpulkan #orang3??");
+		sce.add("Salah satu teman sekelas #orang1?, #orang2? dan #orang3? sakit sehingga tidak masuk sekolah. "
+				+ "Mereka bertiga kemudian mengumpulkan uang sebesar #num1? ribu rupiah untuk membelikan buah. "
+				+ "Dari nilai tersebut #orang1? dan #orang2? menyumbang #frac1? dan #frac2? bagian. "
+				+ "Berapakah nilai uang yang disumbang #orang3? (dalam ribuan)");
+		sce.add("Di rumah #orang1? ada #num1? ekor kelinci. #frac1?-nya berwarna putih "
+				+ "dan #frac2?-nya berwarna hitam. "
+				+ "Jika sisanya berwarna cokelat, berapakah jumlah kelinci cokelat di rumah #orang1??");
+		sce.add("Bu guru menyita sementara kelereng siswa laki-laki yang bermain saat jam pelajaran. "
+				+ "Ia mengumpulkan #num1? biji kelereng dari kelas 4,5 dan 6. "
+				+ "#frac1? bagian didapatkan dari kelas 4, #frac2? bagian dari kelas 5. "
+				+ "Berapakah jumlah kelereng yang disita dari kelas 6?");
+		int sceVal = new Random().nextInt(sce.size());
+		int[] vals = randVals[indVal];
+		String scenario = sce.get(sceVal);
+		
+		Fraction f1 = new Fraction(1, vals[0]);
+		Fraction f2 = new Fraction(1, vals[1]);
+		Fraction fAns = new Fraction(1, 1).getResultWhenSubtractWith(f1).getResultWhenSubtractWith(f2);
+		Fraction fRes = fAns.getResultWhenMultipliedBy(vals[2]);
+		System.out.println(fAns+" ");
+		int ans = fRes.getOneDigitInteger();
+		scenario = scenario.replace("#frac1?", f1.toString());
+		scenario = scenario.replace("#frac2?", f2.toString());
+		scenario = scenario.replace("#num1?", String.valueOf(vals[2]));
+		scenario = CommonFunctionAndValues.buildScenario(scenario);
+		Fraction[] fracs = {fAns,f1,f2,
+				f1.getResultWhenAddedWith(f2),
+				f2.getResultWhenSubtractWith(f1),
+				f1.getResultWhenSubtractWith(f2),};
+		q.setQuestion(scenario);
+		q.setCorrectAnswer(String.valueOf(ans));
+		q.setChoices(buildChoices(fracs,vals[2]));
+		q.setLessonGrade(4);
 		return q;
 	}
     private Set<String> buildChoices(Fraction[] fracs) {
 		Set<String> choiceInString = new HashSet<String>();
 		for (Fraction fraction : fracs) {
 			choiceInString.add(fraction.toString());
+		}
+		return choiceInString;
+	}
+    private Set<String> buildChoices(Fraction[] fracs, int multiplier) {
+		Set<String> choiceInString = new HashSet<String>();
+		for (Fraction fraction : fracs) {
+			fraction.multiplyBy(multiplier);
+			choiceInString.add(String.valueOf(fraction.getOneDigitInteger()));
 		}
 		return choiceInString;
 	}

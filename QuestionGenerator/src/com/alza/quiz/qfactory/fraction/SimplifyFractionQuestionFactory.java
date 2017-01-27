@@ -59,6 +59,7 @@ public class SimplifyFractionQuestionFactory implements IQuestionFactory {
 			q.setLessonClassifier("Matematika SD");
 			q.setLessonCategory("Pecahan");
 			q.setLessonSubcategory("Menyederhanakan pecahan");
+			q.setLessonGrade(4);
 			quizList.add(q);
 		}
 		return quizList;
