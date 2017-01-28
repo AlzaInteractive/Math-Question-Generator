@@ -1,10 +1,12 @@
 package com.alza.quiz.model;
 
+import java.util.Comparator;
+
 /**
  * Created by galuh on 24/12/16.
  */
 
-public abstract class Quiz {
+public abstract class Quiz implements Comparable<Quiz>, Comparator<Quiz>{
     QuizLevel quizLevel;
     String question;
     String correctAnswer;
@@ -74,6 +76,19 @@ public abstract class Quiz {
 	public void setCorrectAnswer(String correctAnswer) {
 		this.correctAnswer = correctAnswer;
 	}
-
+	
+	public int compareTo(Quiz o){
+		if (this.lessonGrade!=o.lessonGrade){
+			return this.lessonGrade - o.lessonGrade;
+		} else if (this.quizLevel!=o.quizLevel) {
+			return this.quizLevel.compareTo(o.quizLevel);
+		}
+		return 0;
+	}
+	
+	public int compare(Quiz o1, Quiz o2){
+		return o1.compareTo(o2);
+	}
+	
 	
 }

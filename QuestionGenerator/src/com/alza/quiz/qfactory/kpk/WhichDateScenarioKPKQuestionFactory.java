@@ -59,7 +59,7 @@ public class WhichDateScenarioKPKQuestionFactory extends BasicKPKQuestionFactory
             Set<String> choices = prepareChoices(answerInDate);
             //Prepare Quiz
             MultipleChoiceQuiz q = new MultipleChoiceQuiz();
-            q.setDifficultyLevel(QuizLevel.TERAPAN);
+            q.setDifficultyLevel(QuizLevel.SULIT);
             q.setQuestion(sce);
             q.setChoices(choices);
             q.setCorrectAnswer(answerInString);
@@ -89,7 +89,7 @@ public class WhichDateScenarioKPKQuestionFactory extends BasicKPKQuestionFactory
             Set<String> choices = prepareChoices(answerInDate);
             //Prepare Quiz
             MultipleChoiceQuiz q = new MultipleChoiceQuiz();
-            q.setDifficultyLevel(QuizLevel.TERAPAN);
+            q.setDifficultyLevel(QuizLevel.SULIT);
             q.setQuestion(ces);
             q.setChoices(choices);
             q.setCorrectAnswer(answerInString);

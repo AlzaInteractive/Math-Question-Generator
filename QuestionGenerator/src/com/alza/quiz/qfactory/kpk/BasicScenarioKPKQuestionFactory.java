@@ -19,7 +19,7 @@ public class BasicScenarioKPKQuestionFactory extends BasicKPKQuestionFactory {
 
     public BasicScenarioKPKQuestionFactory(){
         super();
-        this.quizLevel = QuizLevel.TERAPAN;
+        this.quizLevel = QuizLevel.SULIT;
         prepareScenario();
     }
     public MultipleChoiceQuiz generateQuiz() {

@@ -29,6 +29,11 @@ public class FractionDecimalFormQuestionFactory implements IQuestionFactory {
 	@Override
 	public List<Quiz> generateQuizList() {
 		List<Quiz> quizList = new ArrayList<Quiz>();
+		generateFractionToDecimal(quizList);
+		return quizList;
+	}
+
+	private void generateFractionToDecimal(List<Quiz> quizList) {
 		for (int i=0;i<6;i++){
 			int a,denom;
 			if (i>2){
@@ -62,7 +67,6 @@ public class FractionDecimalFormQuestionFactory implements IQuestionFactory {
 			q.setLessonGrade(5);
 			quizList.add(q);
 		}
-		return quizList;
 	}
 	private List<String> convertChoices(List<Fraction> fracs){
 		List<String> choicesInString = new ArrayList<String>();
