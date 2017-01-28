@@ -34,17 +34,22 @@ public class FractionAddSubtractQuestionFactory implements IQuestionFactory{
 			MultipleChoiceQuiz q = null;
 			if (i>3){
 				q = generateTypeC(i);
-				q.setDifficultyLevel(QuizLevel.SEDANG);
+				q.setDifficultyLevel(QuizLevel.SULIT);
+				q.setLessonSubcategory("Penjumlahan dan pengurangan (penyebut acak)");
+				q.setLessonGrade(5);
 			} else if (i>1){
 				q = generateTypeB(i);
-				q.setDifficultyLevel(QuizLevel.MUDAH);
+				q.setDifficultyLevel(QuizLevel.SEDANG);
+				q.setLessonSubcategory("Penjumlahan dan pengurangan (penyebut memiliki fpb>1)");
+				q.setLessonGrade(5);
 			} else {
 				q = generateTypeA(i);
 				q.setDifficultyLevel(QuizLevel.MUDAH);
+				q.setLessonSubcategory("Penjumlahan dan pengurangan (penyebut sama)");
+				q.setLessonGrade(4);
 			}
 			q.setLessonClassifier("Matematika SD");
 			q.setLessonCategory("Pecahan");
-			q.setLessonSubcategory("Penjumlahan dan pengurangan");
 			quizList.add(q);
 		}
 		return quizList;

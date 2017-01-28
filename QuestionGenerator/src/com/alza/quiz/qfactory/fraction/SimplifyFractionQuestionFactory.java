@@ -34,7 +34,7 @@ public class SimplifyFractionQuestionFactory implements IQuestionFactory {
 		int maxMulti = 11;
 		int[] simpleNumbers = CommonFunctionAndValues.getShuffledSimpleInts();
 		int[] simpleNumberLarger = CommonFunctionAndValues.getShuffledSimpleIntsLarger();
-		for (int i=0;i<4;i++){
+		for (int i=0;i<2;i++){
 			int multi = ThreadLocalRandom.current().nextInt(minMulti, maxMulti);
 			int a = simpleNumbers[i];
 			int b = simpleNumberLarger[i];

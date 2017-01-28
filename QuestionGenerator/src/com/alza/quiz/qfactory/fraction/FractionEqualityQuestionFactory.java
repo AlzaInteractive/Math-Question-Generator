@@ -64,7 +64,8 @@ public class FractionEqualityQuestionFactory implements IQuestionFactory{
 			nmult7 = !(b % 7 == 0);
 		} while (nmult2&&nmult3&&nmult5&&nmult7);
 		MultipleChoiceQuiz q = new MultipleChoiceQuiz();
-		q.setDifficultyLevel(QuizLevel.MUDAH);
+		q.setDifficultyLevel(QuizLevel.SEDANG);
+		q.setLessonGrade(5);
 		List<String> choices;
 		if (i%2==0){
 			q.setQuestion("Jika pecahan x/"+b+" = "+c+"/"+d+", maka nilai x sama dengan?");
@@ -78,7 +79,7 @@ public class FractionEqualityQuestionFactory implements IQuestionFactory{
 		q.setChoices(choices);
 		q.setLessonClassifier("Matematika SD");
 		q.setLessonCategory("Pecahan");
-		q.setLessonSubcategory("Kesamaan pecahan");
+		q.setLessonSubcategory("Kesamaan pecahan, mencari pembilang/penyebut dua pecahan menjadi sama");
 		return q;
 	}
 
@@ -99,9 +100,10 @@ public class FractionEqualityQuestionFactory implements IQuestionFactory{
 		List<String> choices = buildChoices(fQuest, fAnswer);
 		MultipleChoiceQuiz q = new MultipleChoiceQuiz();
 		q.setDifficultyLevel(QuizLevel.MUDAH);
+		q.setLessonGrade(4);
 		q.setChoices(choices);
 		q.setCorrectAnswer(fAnswer.a+"/"+fAnswer.b);
-		q.setQuestion("Pecahan yang sama dengan nilainya dengan pecahan "+fQuest.a+"/"+fQuest.b);
+		q.setQuestion("Pecahan yang sama nilainya dengan pecahan "+fQuest.a+"/"+fQuest.b);
 		q.setLessonClassifier("Matematika SD");
 		q.setLessonCategory("Pecahan");
 		q.setLessonSubcategory("Kesamaan pecahan");

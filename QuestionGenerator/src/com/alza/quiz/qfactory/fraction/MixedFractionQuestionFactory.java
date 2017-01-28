@@ -35,18 +35,18 @@ public class MixedFractionQuestionFactory implements IQuestionFactory{
 			MultipleChoiceQuiz q = null;
 			if (i>3){
 				q = generateTypeMultiDivide(i);
-				q.setDifficultyLevel(QuizLevel.MUDAH);
+				q.setDifficultyLevel(QuizLevel.SULIT);
 			}
 			else if (i>1){
 				q = generateTypeAddSubtract(i);
-				q.setDifficultyLevel(QuizLevel.MUDAH);
+				q.setDifficultyLevel(QuizLevel.SULIT);
 			} else {
 				q = generateTypeMixedForm(i);
-				q.setDifficultyLevel(QuizLevel.MUDAH);
+				q.setDifficultyLevel(QuizLevel.SEDANG);
 			}
 			q.setLessonClassifier("Matematika SD");
 			q.setLessonCategory("Pecahan");
-			q.setLessonSubcategory("Pecahan campuran");
+			q.setLessonGrade(5);
 			quizList.add(q);
 		}
 		return quizList;
@@ -74,6 +74,7 @@ public class MixedFractionQuestionFactory implements IQuestionFactory{
 		}
 		q.setCorrectAnswer(result.getMixedFraction().toString());
 		q.setChoices(buildChoices(result));
+		q.setLessonSubcategory("Pecahan campuran - perkalian dan pembagian");
 		return q;
 	}
 	private MultipleChoiceQuiz generateTypeAddSubtract(int i) {
@@ -98,6 +99,7 @@ public class MixedFractionQuestionFactory implements IQuestionFactory{
 		}
 		q.setCorrectAnswer(result.getMixedFraction().toString());
 		q.setChoices(buildChoices(result));
+		q.setLessonSubcategory("Pecahan campuran - penjumlahan dan pengurangan");
 		return q;
 	}
 	private MultipleChoiceQuiz generateTypeMixedForm(int i) {
@@ -115,6 +117,7 @@ public class MixedFractionQuestionFactory implements IQuestionFactory{
 		result = f1.getMixedFraction();
 		q.setCorrectAnswer(result.toString());
 		q.setChoices(buildChoices(f1));
+		q.setLessonSubcategory("Pecahan campuran - bentuk");
 		return q;
 	}
 	private Set<String> buildChoices(Fraction f1){

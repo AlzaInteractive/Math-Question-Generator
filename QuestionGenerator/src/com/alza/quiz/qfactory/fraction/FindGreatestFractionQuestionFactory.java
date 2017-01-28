@@ -34,15 +34,23 @@ public class FindGreatestFractionQuestionFactory implements IQuestionFactory {
 			MultipleChoiceQuiz q = new MultipleChoiceQuiz();
 			if (i > 3){
 				q = generateTypeC();
+				q.setLessonSubcategory("Membandingkan nilai pecahan (penyebut acak)");
+				q.setQuizLevel(QuizLevel.SULIT);
+				q.setLessonGrade(4);
 			} else if (i > 1 ){
 				q = generateTypeB();
+				q.setLessonSubcategory("Membandingkan nilai pecahan (penyebut memiliki fpb >1)");
+				q.setQuizLevel(QuizLevel.SEDANG);
+				q.setLessonGrade(4);
 			} else {
 				q = generateTypeA();
+				q.setLessonSubcategory("Membandingkan nilai pecahan (penyebut sama)");
+				q.setQuizLevel(QuizLevel.MUDAH);
+				q.setLessonGrade(4);
 			}
 			q.setQuestion("Pilihlah pecahan dengan nilai paling besar.");
 			q.setLessonClassifier("Matematika SD");
 			q.setLessonCategory("Pecahan");
-			q.setLessonSubcategory("Membandingkan nilai pecahan");
 			quizList.add(q);
 		}
 		return quizList;

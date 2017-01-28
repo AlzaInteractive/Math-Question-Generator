@@ -1,6 +1,7 @@
 package com.alza.quiz.test;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import com.alza.quiz.model.QuizLevel;
@@ -30,7 +31,7 @@ public class Tester {
 			fractionEquality();
 		}
 		final long endTime = System.currentTimeMillis();
-		System.out.println("Total running time (ms) =" +(endTime-startTime));
+		System.out.println("Total running time (ms) = " +(endTime-startTime));
 	}
 
 	protected static void basicGenerator() {
@@ -72,16 +73,21 @@ public class Tester {
 		lqf.add(new FractionDecimalFormQuestionFactory());
 		lqf.add(new ScenarioBasedFractionQuestionFactory());
 		int i = 0;
+		List<Quiz> ql = new ArrayList<Quiz>();
 		for (IQuestionFactory qf : lqf) {
-			List<Quiz> ql = qf.generateQuizList();
-			for (Quiz q : ql) {
-				i++;
-				System.out.println("------------------------------");
-				System.out.println("Question : " + q.getQuestion());
-				MultipleChoiceQuiz mq = (MultipleChoiceQuiz) q;
-				System.out.println("Choices : "+ String.join(" , ", mq.getChoices()));
-				System.out.println("Answer : "+ q.getCorrectAnswer());
-			}
+			ql.addAll(qf.generateQuizList());
+			
+		}
+		Collections.sort(ql);
+		for (Quiz q : ql) {
+			i++;
+			System.out.println("------------------------------");
+			System.out.println("Grade : "+q.getLessonGrade());
+			System.out.println("Subcategory :" +q.getLessonSubcategory());
+			System.out.println("Question : " + q.getQuestion());
+			MultipleChoiceQuiz mq = (MultipleChoiceQuiz) q;
+			System.out.println("Choices : "+ String.join(" , ", mq.getChoices()));
+			System.out.println("Answer : "+ q.getCorrectAnswer());
 		}
 		System.out.println(i);
 	}

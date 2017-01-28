@@ -66,7 +66,6 @@ public class FractionDecimalFormQuestionFactory implements IQuestionFactory {
 			q.setQuestion("Bentuk desimal dari pecahan "+fQuest+" adalah");
 			q.setLessonClassifier("Matematika SD");
 			q.setLessonCategory("Pecahan");
-			
 			q.setLessonGrade(5);
 			quizList.add(q);
 		}
