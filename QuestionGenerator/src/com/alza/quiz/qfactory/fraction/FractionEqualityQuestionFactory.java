@@ -37,7 +37,7 @@ public class FractionEqualityQuestionFactory implements IQuestionFactory{
 		int[] randMulti = CommonFunctionAndValues.simpleInt;
 		CommonFunctionAndValues.shuffleArray(randMulti);
 		List<Quiz> quizList = new ArrayList<Quiz>();
-		for (int i=0;i<5;i++){
+		for (int i=0;i<2;i++){
 			MultipleChoiceQuiz q = generateTypeA(randA, randMulti, i);
 			quizList.add(q);
 		}
@@ -79,7 +79,7 @@ public class FractionEqualityQuestionFactory implements IQuestionFactory{
 		q.setChoices(choices);
 		q.setLessonClassifier("Matematika SD");
 		q.setLessonCategory("Pecahan");
-		q.setLessonSubcategory("Kesamaan pecahan, mencari pembilang/penyebut dua pecahan menjadi sama");
+		q.setLessonSubcategory("Kesamaan pecahan, mencari pembilang/penyebut agar dua pecahan menjadi sama");
 		return q;
 	}
 

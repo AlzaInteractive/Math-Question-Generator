@@ -13,6 +13,7 @@ import com.alza.quiz.qfactory.fraction.FractionAddSubtractQuestionFactory;
 import com.alza.quiz.qfactory.fraction.FractionDecimalFormQuestionFactory;
 import com.alza.quiz.qfactory.fraction.FractionEqualityQuestionFactory;
 import com.alza.quiz.qfactory.fraction.FractionMultDivideQuestionFactory;
+import com.alza.quiz.qfactory.fraction.FractionPercentageFormQuestionFactory;
 import com.alza.quiz.qfactory.fraction.MixedFractionQuestionFactory;
 import com.alza.quiz.qfactory.fraction.ScenarioBasedFractionQuestionFactory;
 import com.alza.quiz.qfactory.fraction.SimplifyFractionQuestionFactory;
@@ -71,8 +72,10 @@ public class Tester {
 		lqf.add(new FractionMultDivideQuestionFactory());
 		lqf.add(new MixedFractionQuestionFactory());
 		lqf.add(new FractionDecimalFormQuestionFactory());
+		lqf.add(new FractionPercentageFormQuestionFactory());
 		lqf.add(new ScenarioBasedFractionQuestionFactory());
-		int i = 0;
+		
+		
 		List<Quiz> ql = new ArrayList<Quiz>();
 		for (IQuestionFactory qf : lqf) {
 			ql.addAll(qf.generateQuizList());
@@ -80,7 +83,6 @@ public class Tester {
 		}
 		Collections.sort(ql);
 		for (Quiz q : ql) {
-			i++;
 			System.out.println("------------------------------");
 			System.out.println("Grade : "+q.getLessonGrade());
 			System.out.println("Subcategory :" +q.getLessonSubcategory());
@@ -89,6 +91,6 @@ public class Tester {
 			System.out.println("Choices : "+ String.join(" , ", mq.getChoices()));
 			System.out.println("Answer : "+ q.getCorrectAnswer());
 		}
-		System.out.println(i);
+		System.out.println("Jumlah soal : "+ql.size());
 	}
 }

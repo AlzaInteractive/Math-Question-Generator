@@ -14,7 +14,7 @@ import com.alza.quiz.qfactory.IQuestionFactory;
 import com.alza.quiz.util.CommonFunctionAndValues;
 
 public class FindGreatestFractionQuestionFactory implements IQuestionFactory {
-	private static final int NUM_OF_QUESTIONS = 6;
+	private static final int NUM_OF_QUESTIONS = 3;
 	@Override
 	public Quiz generateQuiz() {
 		List<Quiz> quizList = generateQuizList();
@@ -32,12 +32,12 @@ public class FindGreatestFractionQuestionFactory implements IQuestionFactory {
 		List<Quiz> quizList = new ArrayList<Quiz>();
 		for (int i=0;i<NUM_OF_QUESTIONS;i++){
 			MultipleChoiceQuiz q = new MultipleChoiceQuiz();
-			if (i > 3){
+			if (i % 3 == 2){
 				q = generateTypeC();
 				q.setLessonSubcategory("Membandingkan nilai pecahan (penyebut acak)");
 				q.setQuizLevel(QuizLevel.SULIT);
 				q.setLessonGrade(4);
-			} else if (i > 1 ){
+			} else if (i % 3 == 1 ){
 				q = generateTypeB();
 				q.setLessonSubcategory("Membandingkan nilai pecahan (penyebut memiliki fpb >1)");
 				q.setQuizLevel(QuizLevel.SEDANG);

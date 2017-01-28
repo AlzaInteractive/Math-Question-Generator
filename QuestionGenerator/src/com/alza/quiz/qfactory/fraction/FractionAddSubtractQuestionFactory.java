@@ -14,7 +14,7 @@ import com.alza.quiz.qfactory.IQuestionFactory;
 import com.alza.quiz.util.CommonFunctionAndValues;
 
 public class FractionAddSubtractQuestionFactory implements IQuestionFactory{
-
+	private static final int NUM_OF_QUESTIONS = 3;
 	@Override
 	public Quiz generateQuiz() {
 		List<Quiz> quizList = generateQuizList();
@@ -30,14 +30,14 @@ public class FractionAddSubtractQuestionFactory implements IQuestionFactory{
 	@Override
 	public List<Quiz> generateQuizList() {
 		List<Quiz> quizList= new ArrayList<Quiz>();
-		for (int i=0; i<6; i++){
+		for (int i=0; i<NUM_OF_QUESTIONS; i++){
 			MultipleChoiceQuiz q = null;
-			if (i>3){
+			if (i % 3 == 2){
 				q = generateTypeC(i);
 				q.setDifficultyLevel(QuizLevel.SULIT);
 				q.setLessonSubcategory("Penjumlahan dan pengurangan (penyebut acak)");
 				q.setLessonGrade(5);
-			} else if (i>1){
+			} else if (i % 3 == 1){
 				q = generateTypeB(i);
 				q.setDifficultyLevel(QuizLevel.SEDANG);
 				q.setLessonSubcategory("Penjumlahan dan pengurangan (penyebut memiliki fpb>1)");
