@@ -45,7 +45,6 @@ public class Tester {
 		for (MultipleChoiceQuiz q : lq) {
 			System.out.println("------------------------------");
 			System.out.println("Question : " + q.getQuestion());
-			//System.out.println("Choices : "+ String.join(" , ", q.getChoices()));
 			System.out.println("Answer : "+ q.getCorrectAnswer());
 		}
 	}

@@ -109,6 +109,11 @@ public class Fraction implements Comparable<Fraction>,Comparator<Fraction>{
 		String s = new DecimalFormat("##.##").format(i2);
 		return s;
 	}
+	public String getThreeDigitDecimalForm(){
+		double i2=((double)this.a)/((double)this.b);
+		String s = new DecimalFormat("##.###").format(i2);
+		return s;
+	}
 	public boolean equals(Fraction f){
 		Fraction f1 = this.getSimplestForm();
 		Fraction f2 = f.getSimplestForm();
