@@ -10,7 +10,7 @@ import com.alza.quiz.model.QuizLevel;
 import com.alza.quiz.qfactory.IQuestionFactory;
 import com.alza.quiz.util.CommonFunctionAndValues;
 
-public class RatioAndScaleQuestionFactory implements IQuestionFactory {
+public class ScaleQuestionFactory implements IQuestionFactory {
 	private static enum TYPE {
 		findScale,findModelLength,findRealLength
 	};
