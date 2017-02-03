@@ -43,14 +43,14 @@ public class ScaleQuestionFactory implements IQuestionFactory {
 		int[][] miniScales= {
 				{1,50},{1,100},{1,150},{1,200},{1,250}	
 		};
-		// for district layout scale
+/*		// for district layout scale
 		int[][] medScales= {
 				{1,10000},{1,15000},{1,20000},{1,25000}	
 		};
 		// for large map scale
 		int[][] largeMapScales= {
 				{1,1000000},{1,1500000},{1,2000000},{1,2500000}	
-		};
+		};*/
 		TYPE t=null;String sce;
 		int rndScale = CommonFunctionAndValues.getRandomInt(0, miniScales.length);
 		int[] scale = miniScales[rndScale];
@@ -83,7 +83,6 @@ public class ScaleQuestionFactory implements IQuestionFactory {
 		q.setChoices(this.buildChoicesFromScale(miniScales,t, num1, num2));
 		q.setLessonClassifier("Matematika SD");
 		q.setLessonCategory("Pecahan");
-		
 		q.setDifficultyLevel(QuizLevel.SEDANG);
 		q.setLessonGrade(5);
 		return q;

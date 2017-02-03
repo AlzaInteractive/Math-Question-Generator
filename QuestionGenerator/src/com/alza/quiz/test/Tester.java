@@ -15,6 +15,7 @@ import com.alza.quiz.qfactory.fraction.FractionEqualityQuestionFactory;
 import com.alza.quiz.qfactory.fraction.FractionMultDivideQuestionFactory;
 import com.alza.quiz.qfactory.fraction.FractionPercentageFormQuestionFactory;
 import com.alza.quiz.qfactory.fraction.MixedFractionQuestionFactory;
+import com.alza.quiz.qfactory.fraction.RatioQuestionFactory;
 import com.alza.quiz.qfactory.fraction.ScaleQuestionFactory;
 import com.alza.quiz.qfactory.fraction.ScenarioBasedFractionQuestionFactory;
 import com.alza.quiz.qfactory.fraction.SimplifyFractionQuestionFactory;
@@ -75,7 +76,8 @@ public class Tester {
 		lqf.add(new FractionDecimalFormQuestionFactory());
 		lqf.add(new FractionPercentageFormQuestionFactory());
 		lqf.add(new ScenarioBasedFractionQuestionFactory());*/
-		lqf.add(new ScaleQuestionFactory());
+		//lqf.add(new ScaleQuestionFactory());
+		lqf.add(new RatioQuestionFactory());
 		
 		
 		List<Quiz> ql = new ArrayList<Quiz>();

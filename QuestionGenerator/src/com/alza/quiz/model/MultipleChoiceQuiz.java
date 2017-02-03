@@ -34,7 +34,7 @@ public class MultipleChoiceQuiz extends  Quiz{
 		this.choices = choices;
 		Collections.shuffle(this.choices);
 	}
-	public void setChoices(String[]  choices){
+	public void setChoices(String...  choices){
 		this.choices = new ArrayList<>();
 		for (String c:choices  ) {
 			this.choices.add(c);
@@ -48,7 +48,21 @@ public class MultipleChoiceQuiz extends  Quiz{
 		}
 		Collections.shuffle(this.choices);
 	}
-
+	public void setChoices(int... choices){
+		this.choices = new ArrayList<>();
+		for (int i : choices) {
+			this.choices.add(String.valueOf(i));
+		}
+		Collections.shuffle(this.choices);
+	}
+	public void setChoices(double... choices){
+		this.choices = new ArrayList<>();
+		for (double i : choices) {
+			this.choices.add(String.valueOf(i));
+		}
+		Collections.shuffle(this.choices);
+	}
+	
 	@Override
 	public boolean isCorrect(Object answer) {
 		//System.out.println(correctAnswer+" vs "+answer);
