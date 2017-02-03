@@ -61,17 +61,19 @@ public class ScaleQuestionFactory implements IQuestionFactory {
 			t = TYPE.findScale;
 			sce = getRandomScaleScenario(TYPE.findScale);
 			q.setCorrectAnswer(scale[0]+":"+scale[1]);
+			q.setLessonSubcategory("Skala : Mencari skala perbandingan");
 
 		} else if (i % 3 == 1){
 			t = TYPE.findModelLength;
 			sce = getRandomScaleScenario(TYPE.findModelLength);
 			q.setCorrectAnswer(String.valueOf(num1));
+			q.setLessonSubcategory("Skala : Mencari ukuran model dari skala");
 			
 		} else {
 			t = TYPE.findRealLength;
 			sce = getRandomScaleScenario(TYPE.findRealLength);
 			q.setCorrectAnswer(String.valueOf(snum2));
-			
+			q.setLessonSubcategory("Skala : Mencari ukuran asli dari skala");
 		}
 		sce = sce.replace("#num1?", String.valueOf(num1));
 		sce = sce.replace("#num2?", snum2);
@@ -81,7 +83,7 @@ public class ScaleQuestionFactory implements IQuestionFactory {
 		q.setChoices(this.buildChoicesFromScale(miniScales,t, num1, num2));
 		q.setLessonClassifier("Matematika SD");
 		q.setLessonCategory("Pecahan");
-		q.setLessonSubcategory("Skala");
+		
 		q.setDifficultyLevel(QuizLevel.SEDANG);
 		q.setLessonGrade(5);
 		return q;
