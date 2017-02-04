@@ -1,9 +1,7 @@
 package com.alza.quiz.qfactory.fraction;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import com.alza.common.math.Fraction;
 import com.alza.common.math.MathUtils;
@@ -81,12 +79,13 @@ public class RatioQuestionFactory implements IQuestionFactory{
 		String sce;
 		MultipleChoiceQuiz q = new MultipleChoiceQuiz();
 		TYPE t = TYPE.findFromRatio;
-		int rat1,rat2,tot,tot1,tot2,multip,min,max;
+		int rat1,rat2,tot,tot1,tot2,multip,min,max,gcd;
 		min = 2; max = 13;
 		do {
 			rat1 = CommonFunctionAndValues.getRandomInt(min, max);
 			rat2 = CommonFunctionAndValues.getRandomInt(min, max);
-		} while (MathUtils.findGCDDjikstra(rat1, rat2)>1);
+			gcd = MathUtils.findGCDDjikstra(rat1, rat2);
+		} while (gcd>1 && rat1==rat2);
 		multip = CommonFunctionAndValues.getRandomInt(min, max);
 		tot1 = rat1 * multip;
 		tot2 = rat2 * multip;
@@ -94,7 +93,7 @@ public class RatioQuestionFactory implements IQuestionFactory{
 		sce = getRandomScenario(t);
 		sce = sce.replace("#total?", String.valueOf(tot));
 		sce = sce.replace("#rat1?", String.valueOf(rat1));
-		sce = sce.replace("#rat2?", String.valueOf(rat1));
+		sce = sce.replace("#rat2?", String.valueOf(rat2));
 		sce = CommonFunctionAndValues.buildScenario(sce);
 		q.setQuestion(sce);
 		q.setCorrectAnswer(String.valueOf(tot1));
@@ -146,7 +145,7 @@ public class RatioQuestionFactory implements IQuestionFactory{
 		sceFindFromRatio.add("Jumlah anak yang suka wortel dibandingkan dengan yang suka"
 				+ " brokoli adalah #rat1? berbading #rat2?. Jika jumlah anak adalah #total? "
 				+ " berapakah jumlah anak yang suka brokoli?");
-		sceFindFromRatio.add("#orang1 memiliki #total? ekor kelinci. "
+		sceFindFromRatio.add("#orang1? memiliki #total? ekor kelinci. "
 				+ "Jumlah kelinci berwarna putih berbanding warna lainnya "
 				+ "adalah #rat1? berbanding #rat2? "
 				+ "Berapakah jumlah kelinci putih #orang1??");
@@ -184,13 +183,5 @@ public class RatioQuestionFactory implements IQuestionFactory{
 			break;
 		}
 		return s;
-	}
-	
-	private Set<String> buildChoices(String... args){
-		Set<String> choices = new HashSet<String>(); 
-		for (String string : args) {
-			choices.add(string);
-		}
-		return choices;
 	}
 }
