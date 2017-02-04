@@ -46,6 +46,14 @@ public class MathUtils {
 			//System.out.println(m+"  "+n);
 			return findGCDDjikstra(m, n-m);
 	}
+	public static int findGCD(int...args){
+		int gcd = args[0];
+		for (int i = 1; i < args.length; i++) {
+			gcd = findGCDDjikstra(gcd, args[i]);
+		}
+		return gcd;
+	}
+	
 	/**
 	 * Find least common multiple of two int
 	 * @param a first integer

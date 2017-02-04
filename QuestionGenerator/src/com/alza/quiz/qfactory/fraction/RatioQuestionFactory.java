@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Set;
 
 import com.alza.common.math.Fraction;
+import com.alza.common.math.MathUtils;
 import com.alza.quiz.model.MultipleChoiceQuiz;
 import com.alza.quiz.model.Quiz;
 import com.alza.quiz.model.QuizLevel;
@@ -34,11 +35,14 @@ public class RatioQuestionFactory implements IQuestionFactory{
 		List<Quiz> ql = new ArrayList<Quiz>();
 		for (int i=0;i<6;i++){
 			MultipleChoiceQuiz q = new MultipleChoiceQuiz();
-			if (true){
+			if (i % 3 == 0){
 				q = generateTypeC();
 				q.setLessonSubcategory("Bentuk persen, mencari jumlah jika persentase dan total diketahui");
+			} else if (i % 3 == 1){
+				q = generateTypeA();
+				q.setLessonSubcategory("Mendeskripsikan perbandingan");
 			}
-			q.setDifficultyLevel(QuizLevel.SEDANG);
+			
 			q.setLessonClassifier("Matematika SD");
 			q.setLessonCategory("Pecahan");
 			q.setLessonGrade(5);
@@ -66,6 +70,32 @@ public class RatioQuestionFactory implements IQuestionFactory{
 		q.setQuestion(sce);
 		q.setCorrectAnswer(String.valueOf(partOfTotal2));
 		q.setChoices(total,partOfTotal,partOfTotal2,partOfTotal*2,partOfTotal2*2);
+		q.setDifficultyLevel(QuizLevel.SEDANG);
+		return q;
+	}
+	private MultipleChoiceQuiz generateTypeA() {
+		MultipleChoiceQuiz q = new MultipleChoiceQuiz();
+		TYPE t = TYPE.describeRatio;
+		String sce = getRandomScenario(t);
+		int a, b, c, min, max, gcd;
+		min = 10; max =51;
+		do {
+			a = CommonFunctionAndValues.getRandomInt(min, max);
+			b = CommonFunctionAndValues.getRandomInt(min, max);
+			c = CommonFunctionAndValues.getRandomInt(min, max);
+			gcd = MathUtils.findGCD(a,b,c);
+		} while (gcd==1);
+		sce = sce.replace("#part1?", String.valueOf(a));
+		sce = sce.replace("#part2?", String.valueOf(b));
+		sce = sce.replace("#part3?", String.valueOf(c));
+		sce = CommonFunctionAndValues.buildScenario(sce);
+		q.setQuestion(sce);
+		q.setCorrectAnswer(a / gcd+":"+b/gcd+":"+c/gcd);
+		q.setChoices(a / gcd+":"+b/gcd+":"+c/gcd,
+				b / gcd+":"+a/gcd+":"+c/gcd,
+				a+b / gcd+":"+b+c/gcd+":"+c+a/gcd,
+				c / gcd+":"+a/gcd+":"+b/gcd);
+		q.setDifficultyLevel(QuizLevel.MUDAH);
 		return q;
 	}
 	
