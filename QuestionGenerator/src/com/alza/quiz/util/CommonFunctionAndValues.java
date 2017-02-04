@@ -27,6 +27,13 @@ public class CommonFunctionAndValues {
             "Januari","Februari","Maret","April","Mei","Juni",
             "Juli","Agustus","September","Oktober","November","Desember"
     };
+    
+    public static String minutesToHour(int min){
+    	int hours = min / 60; 
+    	int minutes = min % 60;
+    	String s = String.format("%d:%02d", hours, minutes);
+    	return s;
+    }
     public static String[] nameSingle = {
             "Juwi","Itet","Yopi","Uli","Aris","Gibran","Rondi","Dudi","Herman","Hari","Toni","Zul",
             "Alda", "Liza", "Yanti", "Zaenab", "Jamilah", "Linda", "Azizah", "Afifa", "Laila","Alwi",

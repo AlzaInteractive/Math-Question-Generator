@@ -21,6 +21,7 @@ import com.alza.quiz.qfactory.fraction.ScenarioBasedFractionQuestionFactory;
 import com.alza.quiz.qfactory.fraction.SimplifyFractionQuestionFactory;
 import com.alza.quiz.qfactory.kpk.BasicKPKQuestionFactory;
 import com.alza.quiz.qfactory.kpk.WhichDayScenarioKPKQuestionFactory;
+import com.alza.quiz.qfactory.kpk.WhichHourScenarioKPKQuestionFactory;
 
 public class Tester {
 	public static void main(String[] args) {
@@ -77,8 +78,8 @@ public class Tester {
 		lqf.add(new FractionPercentageFormQuestionFactory());
 		lqf.add(new ScenarioBasedFractionQuestionFactory());*/
 		//lqf.add(new ScaleQuestionFactory());
-		lqf.add(new RatioQuestionFactory());
-		
+		//lqf.add(new RatioQuestionFactory());
+		lqf.add(new WhichHourScenarioKPKQuestionFactory());
 		
 		List<Quiz> ql = new ArrayList<Quiz>();
 		for (IQuestionFactory qf : lqf) {
