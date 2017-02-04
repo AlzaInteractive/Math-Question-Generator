@@ -11,6 +11,7 @@ import com.alza.quiz.model.Quiz;
 import com.alza.quiz.model.QuizLevel;
 import com.alza.quiz.model.MultipleChoiceQuiz;
 import com.alza.quiz.qfactory.IQuestionFactory;
+import com.alza.quiz.qfactory.fraction.FindGreatestFractionQuestionFactory;
 
 public class BasicKPKQuestionFactory implements IQuestionFactory {
 	protected QuizLevel quizLevel = QuizLevel.MUDAH;
@@ -33,6 +34,7 @@ public class BasicKPKQuestionFactory implements IQuestionFactory {
 		addChoices(correctAnswer);
 		generateChoices();
 		MultipleChoiceQuiz q = new MultipleChoiceQuiz();
+		q.setLessonGrade(4);
 		q.setDifficultyLevel(quizLevel);
 		q.setQuestion("Carilah Kelipatan Persekutuan Terkecil (KPK) dari bilangan " + pairs[0]+" & "+pairs[1]);
 		q.setCorrectAnswer(String.valueOf(correctAnswer));
@@ -45,10 +47,10 @@ public class BasicKPKQuestionFactory implements IQuestionFactory {
 
 	public List<Quiz> generateQuizList() {
 		List<Quiz> quizList = new ArrayList<>();
-		for (int i=1; i <5; i++){
+		for (int i=0; i <2; i++){
 			quizList.add(generateQuiz(QuizLevel.MUDAH));
 		}
-		for (int i=1; i <5; i++){
+		for (int i=0; i <2; i++){
 			quizList.add(generateQuiz(QuizLevel.SEDANG));
 		}
 		return quizList;
@@ -103,30 +105,28 @@ public class BasicKPKQuestionFactory implements IQuestionFactory {
 			min = 6;
 			max = 20;
 		}
-		int firstNumber, secondNumber;
+		int firstNumber, secondNumber, gcd;
 		boolean repeat; 
 		do {
 			firstNumber = ThreadLocalRandom.current().nextInt(min, max + 1);
 			secondNumber = ThreadLocalRandom.current().nextInt(min, max + 1);
+			gcd = MathUtils.findGCD(firstNumber,secondNumber);
 			repeat = false;
 			//System.out.println("Generated: "+firstNumber+" "+secondNumber+" "+(firstNumber==secondNumber));
+			if (firstNumber > secondNumber){
+				int temp;
+				temp = firstNumber;
+				firstNumber = secondNumber;
+				secondNumber = temp;
+			}
 			if (firstNumber == secondNumber||
 					firstNumber==10||
-					secondNumber==10){
+					secondNumber==10||
+					gcd==1){
 				repeat = true;
 			}
-			System.out.println(repeat);
 			if (quizLevel == QuizLevel.SEDANG){
-				//make sure that higher number is not a multiple of lower number
-				int upper,lower;
-				if (firstNumber < secondNumber ){
-					upper = secondNumber;
-					lower = firstNumber;
-				} else {
-					upper = firstNumber;
-					lower = secondNumber;
-				}
-				if (upper % lower == 0){
+				if (secondNumber % firstNumber == 0){
 					repeat = true;
 				}
 			}
@@ -134,13 +134,6 @@ public class BasicKPKQuestionFactory implements IQuestionFactory {
 			(repeat);
 		
 		this.pairs = new int[2];
-		//swap to make sure first number always < second number
-		if (firstNumber > secondNumber){
-			int temp;
-			temp = firstNumber;
-			firstNumber = secondNumber;
-			secondNumber = temp;
-		}
 		this.pairs[0] = firstNumber;
 		this.pairs[1] = secondNumber;
 	}

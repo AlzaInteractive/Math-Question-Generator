@@ -9,6 +9,7 @@ import com.alza.quiz.model.MultipleChoiceQuiz;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -42,12 +43,14 @@ public class WhichDateScenarioKPKQuestionFactory extends BasicKPKQuestionFactory
         constructRefDates();
         int[][] numPair = CommonFunctionAndValues.simpleIntPairs;
         CommonFunctionAndValues.shuffleArray(numPair);
-        int i = 0;
-        for (String s: scenariosWithTwoVal){
+        int j = 0;
+        
+        int rndSce = CommonFunctionAndValues.getRandomInt(0, scenariosWithTwoVal.size());  
+        for (int i=0;i<2;i++){
             //prepare question
-            String sce = CommonFunctionAndValues.buildScenario(s, numPair[i]);
-            int answerInInt = MathUtils.findLCM(numPair[i]);
-            Date refDate = refDates[i];
+            String sce = CommonFunctionAndValues.buildScenario(scenariosWithTwoVal.get(i), numPair[j]);
+            int answerInInt = MathUtils.findLCM(numPair[j]);
+            Date refDate = refDates[j];
             Calendar c = Calendar.getInstance();
             c.setTime(refDate);
             sce = sce.replace("#refdate?",CommonFunctionAndValues.dateToString(refDate));
@@ -63,21 +66,23 @@ public class WhichDateScenarioKPKQuestionFactory extends BasicKPKQuestionFactory
             q.setQuestion(sce);
             q.setChoices(choices);
             q.setCorrectAnswer(answerInString);
+            q.setLessonGrade(5);
             q.setLessonClassifier("Matematika SD");
             q.setLessonCategory("KPK");
-            q.setLessonSubcategory("Terapan - Tanggal");
+            q.setLessonSubcategory("Soal cerita melibatkan tanggal");
             quizList.add(q);
-            i++;
+            j++;
         }
-        i = 0;
-        for (String s: scenariosWithThreeVal){
+        j = 0;
+        for (int i=0;i<2;i++){
             //prepare question
             int[] arr = CommonFunctionAndValues.simpleInt;
             CommonFunctionAndValues.shuffleArray(arr);
             int[] threeNum = {arr[0],arr[1],arr[2]};
-            String ces = CommonFunctionAndValues.buildScenario(s, threeNum);
+            String ces = CommonFunctionAndValues.buildScenario(
+            		scenariosWithThreeVal.get(i), threeNum);
             int answerInInt = MathUtils.findLCM(threeNum);
-            Date refDate = refDates[i];
+            Date refDate = refDates[j];
             Calendar c = Calendar.getInstance();
             c.setTime(refDate);
             ces = ces.replace("#refdate?",CommonFunctionAndValues.dateToString(refDate));
@@ -89,12 +94,16 @@ public class WhichDateScenarioKPKQuestionFactory extends BasicKPKQuestionFactory
             Set<String> choices = prepareChoices(answerInDate);
             //Prepare Quiz
             MultipleChoiceQuiz q = new MultipleChoiceQuiz();
+            q.setLessonGrade(5);
             q.setDifficultyLevel(QuizLevel.SULIT);
             q.setQuestion(ces);
             q.setChoices(choices);
             q.setCorrectAnswer(answerInString);
+            q.setLessonClassifier("Matematika SD");
+            q.setLessonCategory("KPK");
+            q.setLessonSubcategory("Soal cerita melibatkan tanggal");
             quizList.add(q);
-            i++;
+            j++;
         }
         return quizList;
     }
@@ -161,6 +170,10 @@ public class WhichDateScenarioKPKQuestionFactory extends BasicKPKQuestionFactory
                 " #orang1? mengunjungi perpustakaan #val1? hari sekali, #orang2? #val2? hari sekali, dan" +
                 " #orang3? #val3? hari sekali. Pada tanggal berapa mereka kemungkinan akan kembali " +
                 "bertemu saat mengunjungi perpustakaan?  ");
+        scenariosWithThreeVal.add("Pada tanggal #refdate? #orang1?, #orang2? dan #orang3? bersepeda bersama-sama." +
+                " #orang1? bersepeda #val1? hari sekali, #orang2? #val2? hari sekali, dan" +
+                " #orang3? #val3? hari sekali. Pada tanggal berapa mereka kemungkinan akan kembali " +
+                "dapat bersepeda bersama?");
         scenariosWithTwoVal.add("#orang1? berlatih menyanyi #val1? hari sekali sementara #orang2? #val2? hari sekali. " +
                 "Jika hari ini adalah tanggal #refdate? dan mereka berlatih bersama, " +
                 "tanggal berapa mereka akan melakukannya lagi?");
@@ -177,5 +190,7 @@ public class WhichDateScenarioKPKQuestionFactory extends BasicKPKQuestionFactory
                 "dan panen pisang #val2? hari sekali di waktu sore. " +
                 "Jika tanggal #refdate? ia panen pepaya dan pisang, tanggal berapa " +
                 "kemungkinan ia dapat melakukannya lagi di hari yang sama?");
+        Collections.shuffle(scenariosWithTwoVal);
+        Collections.shuffle(scenariosWithThreeVal);
     }
 }

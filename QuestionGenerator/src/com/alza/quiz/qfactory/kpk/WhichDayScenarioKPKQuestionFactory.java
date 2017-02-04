@@ -51,7 +51,8 @@ public class WhichDayScenarioKPKQuestionFactory extends BasicKPKQuestionFactory 
             q.setChoices(choices);
             q.setLessonClassifier("Matematika SD");
             q.setLessonCategory("KPK");
-            q.setLessonSubcategory("Terapan - Hari");
+            q.setLessonSubcategory("Soal cerita melibatkan hari");
+            q.setLessonGrade(4);
             quizList.add(q);
         }
         return  quizList;

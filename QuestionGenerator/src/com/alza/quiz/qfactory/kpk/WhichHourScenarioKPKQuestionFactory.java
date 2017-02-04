@@ -75,7 +75,7 @@ public class WhichHourScenarioKPKQuestionFactory extends BasicKPKQuestionFactory
             q.setChoices(choices);
             q.setLessonClassifier("Matematika SD");
             q.setLessonCategory("KPK");
-            q.setLessonSubcategory("Terapan - Jam");
+            q.setLessonSubcategory("Soal cerita melibatkan jam");
             q.setLessonGrade(5);
             quizList.add(q);
         }

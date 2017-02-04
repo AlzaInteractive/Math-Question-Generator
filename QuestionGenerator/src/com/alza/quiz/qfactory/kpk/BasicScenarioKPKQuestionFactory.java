@@ -19,7 +19,7 @@ public class BasicScenarioKPKQuestionFactory extends BasicKPKQuestionFactory {
 
     public BasicScenarioKPKQuestionFactory(){
         super();
-        this.quizLevel = QuizLevel.SULIT;
+        this.quizLevel = QuizLevel.MUDAH;
         prepareScenario();
     }
     public MultipleChoiceQuiz generateQuiz() {
@@ -40,13 +40,14 @@ public class BasicScenarioKPKQuestionFactory extends BasicKPKQuestionFactory {
             addChoices(correctAnswer);
             generateChoices();
             MultipleChoiceQuiz q = new MultipleChoiceQuiz();
+            q.setLessonGrade(4);
             q.setDifficultyLevel(quizLevel);
             q.setQuestion(sce);
             q.setCorrectAnswer(String.valueOf(correctAnswer));
             q.setChoices(choices);
             q.setLessonClassifier("Matematika SD");
             q.setLessonCategory("KPK");
-            q.setLessonSubcategory("Terapan");
+            q.setLessonSubcategory("Soal cerita sederhana");
             quizList.add(q);
         }
 
@@ -70,7 +71,7 @@ public class BasicScenarioKPKQuestionFactory extends BasicKPKQuestionFactory {
         String sceThree = "#orang1? memasang lampu hias 17-an di depan rumahnya. " +
                 "Lampu tersebut terdiri atas 150 lampu berwarna kuning, merah dan biru. " +
                 "#orang1? mengatur agar lampu merah berkedip tiap #val1? detik, " +
-                "sedangkan lampu biru berkedip tiap #val2? detik dan lampu kuning berkedip tiap detik" +
+                "sedangkan lampu biru berkedip tiap #val2? detik dan lampu kuning berkedip tiap detik. " +
                 "Saat ini lampu kuning, merah dan biru menyala bersama. " +
                 "Mereka akan menyala bersama lagi setelah .... detik. ";
         scenarios.add(sceOne);
