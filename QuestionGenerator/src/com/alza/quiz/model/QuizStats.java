@@ -137,7 +137,15 @@ public class QuizStats implements Serializable{
     	}
 		@Override
 		public int compareTo(QuizSummary o) {
-			return this.grade - o.grade;
+			if (this.grade != o.grade)
+				return this.grade - o.grade;
+			if (this.category != o.category)
+				return this.category.compareTo(o.category);
+			if (this.subCategory != o.subCategory)
+				return this.subCategory.compareTo(o.subCategory);
+			if (this.getPercentage() != o.getPercentage())
+				return this.getPercentage().compareTo(o.getPercentage());
+			return 0;
 		}
 		@Override
 		public int compare(QuizSummary o1, QuizSummary o2) {

@@ -35,7 +35,7 @@ public class FindGreatestFractionQuestionFactory implements IQuestionFactory {
 			if (i % 3 == 2){
 				q = generateTypeC();
 				q.setLessonSubcategory("Membandingkan nilai pecahan (penyebut acak)");
-				q.setQuizLevel(QuizLevel.SULIT);
+				q.setQuizLevel(QuizLevel.SEDANG);
 				q.setLessonGrade(4);
 			} else if (i % 3 == 1 ){
 				q = generateTypeB();
@@ -80,11 +80,11 @@ public class FindGreatestFractionQuestionFactory implements IQuestionFactory {
 		long denom = ThreadLocalRandom.current().nextInt(4, 12);
 		
 		for (int i=0; i<choiceSize ; i++){
-			int multip = ThreadLocalRandom.current().nextInt(2, 7);
-			int a = ThreadLocalRandom.current().nextInt(5, 63);
+			int multip = ThreadLocalRandom.current().nextInt(2, 6);
+			int a = ThreadLocalRandom.current().nextInt(5, 25);
 			int b = (int) denom * multip;
 			while (b<=a){
-				a = ThreadLocalRandom.current().nextInt(5, 63);
+				a = ThreadLocalRandom.current().nextInt(5, 17);
 			}
 			Fraction f = new Fraction(a, b);
 			fracs[i] = f;
@@ -98,9 +98,9 @@ public class FindGreatestFractionQuestionFactory implements IQuestionFactory {
 	}
 	public MultipleChoiceQuiz generateTypeA(){
 		int minDenom = 5;
-		int maxDenom = 101;
+		int maxDenom = 25;
 		int minA = 3;
-		int maxA = 51; 
+		int maxA = 16; 
 		int choiceSize=5;
 		Fraction[] fracs = new Fraction[choiceSize];
 		int denom = ThreadLocalRandom.current().nextInt(minDenom, maxDenom);

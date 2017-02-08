@@ -34,7 +34,7 @@ public class FractionAddSubtractQuestionFactory implements IQuestionFactory{
 			MultipleChoiceQuiz q = null;
 			if (i % 3 == 2){
 				q = generateTypeC(i);
-				q.setDifficultyLevel(QuizLevel.SULIT);
+				q.setDifficultyLevel(QuizLevel.SEDANG);
 				q.setLessonSubcategory("Penjumlahan dan pengurangan (penyebut acak)");
 				q.setLessonGrade(5);
 			} else if (i % 3 == 1){
@@ -57,7 +57,7 @@ public class FractionAddSubtractQuestionFactory implements IQuestionFactory{
 
 	private MultipleChoiceQuiz generateTypeA(int i) {
 		MultipleChoiceQuiz q = new MultipleChoiceQuiz();
-		int denom = CommonFunctionAndValues.getRandomInt(11, 41);
+		int denom = CommonFunctionAndValues.getRandomInt(11, 36);
 		int a1,a2;
 		do {
 			a1 = CommonFunctionAndValues.getRandomInt(5, 17);
@@ -81,11 +81,11 @@ public class FractionAddSubtractQuestionFactory implements IQuestionFactory{
 	}
 	private MultipleChoiceQuiz generateTypeB(int i) {
 		MultipleChoiceQuiz q = new MultipleChoiceQuiz();
-		int denom = CommonFunctionAndValues.getRandomInt(11, 41);
+		int denom = CommonFunctionAndValues.getRandomInt(11, 25);
 		int a1,a2;
 		do {
-			a1 = CommonFunctionAndValues.getRandomInt(5, 17);
-			a2 = CommonFunctionAndValues.getRandomInt(5, 17);
+			a1 = CommonFunctionAndValues.getRandomInt(5, 16);
+			a2 = CommonFunctionAndValues.getRandomInt(5, 16);
 		} while (!(denom > a1 && denom > a2 && (a1+a2)<=denom && a1>a2));
 		Fraction f1 = new Fraction(a1*2, denom*2);
 		Fraction f2 = new Fraction(a2*3, denom*3);
@@ -109,7 +109,7 @@ public class FractionAddSubtractQuestionFactory implements IQuestionFactory{
 		int a1,a2;
 		do {
 			denomLeft = CommonFunctionAndValues.getPrime101stRandom();
-			denomRight = CommonFunctionAndValues.getRandomInt(5, 34);;
+			denomRight = CommonFunctionAndValues.getRandomInt(5, 26);;
 			a1 = CommonFunctionAndValues.getRandomInt(5, 17);
 			a2 = CommonFunctionAndValues.getRandomInt(5, 17);
 		} while (denomLeft==denomRight||denomLeft<a1||denomRight<a2);
