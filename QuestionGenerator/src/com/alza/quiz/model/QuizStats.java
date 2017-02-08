@@ -104,10 +104,10 @@ public class QuizStats implements Serializable{
     	
     }
     public class QuizLog{
-    	int quizNum,score,grade;
-    	boolean correct;
-    	String category;
-    	String subCategory;
+    	public int quizNum,score,grade;
+    	public boolean correct;
+    	public String category;
+    	public String subCategory;
     	public QuizLog(int quizNum, boolean correct, Quiz quiz, long time, int score){
     		this.quizNum = quizNum;
     		this.correct = correct;
@@ -120,11 +120,11 @@ public class QuizStats implements Serializable{
     	}
     }
     public class QuizSummary implements Comparator<QuizSummary>,Comparable<QuizSummary>{
-    	int grade;
-    	String category;
-    	String subCategory;
-    	int correct;
-    	int total;
+    	public int grade;
+    	public String category;
+    	public String subCategory;
+    	public int correct;
+    	public int total;
     	public QuizSummary(int grade, String category, String subCategory){
     		this.grade = grade;
     		this.category = category;
