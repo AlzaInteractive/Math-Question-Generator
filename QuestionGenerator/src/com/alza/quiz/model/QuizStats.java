@@ -103,8 +103,9 @@ public class QuizStats implements Serializable{
     	return l;
     	
     }
-    public class QuizLog{
-    	public int quizNum,score,grade;
+    public class QuizLog implements Serializable{
+		private static final long serialVersionUID = 9019460154714191646L;
+		public int quizNum,score,grade;
     	public boolean correct;
     	public String category;
     	public String subCategory;
