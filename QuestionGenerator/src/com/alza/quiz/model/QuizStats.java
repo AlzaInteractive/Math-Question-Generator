@@ -9,6 +9,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.alza.common.math.Fraction;
+
 /**
  * Created by ewin.sutriandi@gmail.com on 11/01/17.
  */
@@ -127,6 +129,10 @@ public class QuizStats implements Serializable{
     		this.grade = grade;
     		this.category = category;
     		this.subCategory = subCategory;
+    	}
+    	public String getPercentage(){
+    		Fraction f = new Fraction(correct, total);
+    		return f.getPercentage();
     	}
 		@Override
 		public int compareTo(QuizSummary o) {
