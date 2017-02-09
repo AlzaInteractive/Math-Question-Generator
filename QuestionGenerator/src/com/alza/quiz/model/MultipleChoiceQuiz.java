@@ -2,6 +2,7 @@ package com.alza.quiz.model;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -31,7 +32,8 @@ public class MultipleChoiceQuiz extends  Quiz{
 		return choices;
 	}
 	public void setChoices(List<String> choices) {
-		this.choices = choices;
+		Set<String> setChoices = new HashSet<String>(choices);
+		setChoices(setChoices);
 		Collections.shuffle(this.choices);
 	}
 	public void setChoices(String...  choices){

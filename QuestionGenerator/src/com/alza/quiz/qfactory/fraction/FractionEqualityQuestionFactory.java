@@ -18,6 +18,7 @@ public class FractionEqualityQuestionFactory implements IQuestionFactory{
 	private int[][] simpleMultiplier = {{2,3},{3,5},{4,7},{5,8},{3,7}};
 	private static final int CHOICE_SIZE=5;
 	
+	
 	@Override
 	public Quiz generateQuiz() {
 		List<Quiz> quizList = generateQuizList();
@@ -64,7 +65,7 @@ public class FractionEqualityQuestionFactory implements IQuestionFactory{
 			nmult7 = !(b % 7 == 0);
 		} while (nmult2&&nmult3&&nmult5&&nmult7);
 		MultipleChoiceQuiz q = new MultipleChoiceQuiz();
-		q.setDifficultyLevel(QuizLevel.SEDANG);
+		q.setDifficultyLevel(QuizLevel.SULIT);
 		q.setLessonGrade(5);
 		List<String> choices;
 		if (i%2==0){
@@ -80,16 +81,22 @@ public class FractionEqualityQuestionFactory implements IQuestionFactory{
 		q.setLessonClassifier("Matematika SD");
 		q.setLessonCategory("Pecahan");
 		q.setLessonSubcategory("Kesamaan pecahan, mencari pembilang/penyebut agar dua pecahan menjadi sama");
+		q.setSubCategoryOrder(1);
 		return q;
 	}
 
 	private MultipleChoiceQuiz generateTypeA(int[] randA, int[] randMulti, int i) {
-		int a = randA[i];
-		int r = ThreadLocalRandom.current().nextInt(1, randA.length);
-		int b = randA[r];
-		int multip =  randMulti[i];
+		int a,b,r,multip;
+		do {
+			a = randA[i];
+			r = ThreadLocalRandom.current().nextInt(1, randA.length);
+			b = randA[r];
+			multip =  randMulti[i];
+		} while (a==b||a>b);
+		
 		Fraction fQuest,fAnswer;
 		fQuest = new Fraction(a, b);
+		
 		fAnswer =  new Fraction(a*multip,b*multip);
 		if (i % 2 == 0){
 			Fraction temp;
@@ -107,6 +114,7 @@ public class FractionEqualityQuestionFactory implements IQuestionFactory{
 		q.setLessonClassifier("Matematika SD");
 		q.setLessonCategory("Pecahan");
 		q.setLessonSubcategory("Kesamaan pecahan");
+		q.setSubCategoryOrder(1);
 		return q;
 	}
 	

@@ -8,6 +8,7 @@ import java.util.Comparator;
 
 public abstract class Quiz implements Comparable<Quiz>, Comparator<Quiz>{
     QuizLevel quizLevel;
+    int subCategoryOrder;
     String question;
     String correctAnswer;
     String lessonClassifier;
@@ -57,6 +58,14 @@ public abstract class Quiz implements Comparable<Quiz>, Comparator<Quiz>{
         this.lessonSubcategory = lessonSubcategory;
     }
 
+	public int getSubCategoryOrder() {
+		return subCategoryOrder;
+	}
+
+	public void setSubCategoryOrder(int subCategoryOrder) {
+		this.subCategoryOrder = subCategoryOrder;
+	}
+
 	public int getLessonGrade() {
 		return lessonGrade;
 	}
@@ -82,6 +91,8 @@ public abstract class Quiz implements Comparable<Quiz>, Comparator<Quiz>{
 			return this.lessonGrade - o.lessonGrade;
 		} else if (this.quizLevel!=o.quizLevel) {
 			return this.quizLevel.compareTo(o.quizLevel);
+		} else if (this.subCategoryOrder!=o.subCategoryOrder){
+			return this.subCategoryOrder - o.subCategoryOrder;
 		}
 		return 0;
 	}
