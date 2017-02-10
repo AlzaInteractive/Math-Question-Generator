@@ -7,6 +7,7 @@ import java.util.Random;
 import java.util.Set;
 
 import com.alza.common.math.Fraction;
+import com.alza.common.math.MathUtils;
 import com.alza.quiz.model.MultipleChoiceQuiz;
 import com.alza.quiz.model.Quiz;
 import com.alza.quiz.model.QuizLevel;
@@ -41,7 +42,8 @@ public class FractionMultDivideQuestionFactory implements IQuestionFactory{
 			}
 			q.setLessonClassifier("Matematika SD");
 			q.setLessonCategory("Pecahan");
-			q.setLessonSubcategory("Perkalian dan pembagian");
+			q.setLessonSubcategory("Perkalian dan pembagian pecahan");
+			q.setSubCategoryOrder(1);
 			q.setLessonGrade(5);
 			quizList.add(q);
 		}
@@ -75,13 +77,17 @@ public class FractionMultDivideQuestionFactory implements IQuestionFactory{
 	private MultipleChoiceQuiz generateTypeC(int i) {
 		MultipleChoiceQuiz q = new MultipleChoiceQuiz();
 		int denomLeft,denomRight;
-		int a1,a2;
+		int a1,a2,gcdL,gcdR;
 		do {
 			denomLeft = CommonFunctionAndValues.getRandomInt(5, 34);;
 			denomRight = CommonFunctionAndValues.getRandomInt(5, 34);
 			a1 = CommonFunctionAndValues.getRandomInt(5, 17);
 			a2 = CommonFunctionAndValues.getRandomInt(5, 17);
-		} while (denomLeft==denomRight);
+			gcdL = MathUtils.findGCD(a1,denomRight);
+			gcdR = MathUtils.findGCD(a2,denomLeft);
+		} while (denomLeft==denomRight
+				||a1>denomLeft ||a2>denomRight
+				||gcdL < 2 || gcdR<2 );
 		Fraction f1 = new Fraction(a1, denomLeft);
 		Fraction f2 = new Fraction(a2, denomRight);
 		Fraction result;

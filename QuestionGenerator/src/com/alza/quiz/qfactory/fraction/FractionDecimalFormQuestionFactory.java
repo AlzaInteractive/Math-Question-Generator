@@ -42,13 +42,13 @@ public class FractionDecimalFormQuestionFactory implements IQuestionFactory {
 				do {
 					a = CommonFunctionAndValues.getRandomInt(2, 10);
 					denom = CommonFunctionAndValues.getRandomInt(2, 11);
-					q.setLessonSubcategory("Konversi ke bilangan desimal (penyebut < pembilang)");
+					q.setLessonSubcategory("Konversi ke bilangan desimal");
 				} while (denom>=a || (a%denom==0));
 			} else {
 				do {
 					a = CommonFunctionAndValues.getRandomInt(2, 23);
 					denom = CommonFunctionAndValues.getRandomInt(2, 10);
-					q.setLessonSubcategory("Konversi ke bilangan desimal (penyebut > pembilang)");
+					q.setLessonSubcategory("Konversi ke bilangan desimal");
 				} while (denom<=a);
 			}
 			Fraction fQuest = new Fraction(a,denom);
@@ -67,6 +67,7 @@ public class FractionDecimalFormQuestionFactory implements IQuestionFactory {
 			q.setLessonClassifier("Matematika SD");
 			q.setLessonCategory("Pecahan");
 			q.setLessonGrade(5);
+			q.setSubCategoryOrder(3);
 			quizList.add(q);
 		}
 	}
@@ -78,13 +79,13 @@ public class FractionDecimalFormQuestionFactory implements IQuestionFactory {
 				do {
 					a = CommonFunctionAndValues.getRandomInt(2, 10);
 					denom = CommonFunctionAndValues.getRandomInt(2, 11);
-					q.setLessonSubcategory("Konversi dari bilangan desimal(nilai > 1)");
+					q.setLessonSubcategory("Konversi dari bilangan desimal");
 				} while (denom>=a || (a%denom==0) || 1000 % denom >0);
 			} else {
 				do {
 					a = CommonFunctionAndValues.getRandomInt(2, 23);
 					denom = CommonFunctionAndValues.getRandomInt(2, 10);
-					q.setLessonSubcategory("Konversi dari bilangan desimal(nilai < 1)");
+					q.setLessonSubcategory("Konversi dari bilangan desimal");
 				} while (denom<=a || 1000 % denom >0);
 			}
 			Fraction fQuest = new Fraction(a,denom);
@@ -102,6 +103,7 @@ public class FractionDecimalFormQuestionFactory implements IQuestionFactory {
 			q.setQuestion("Bentuk pecahan dari bilangan desimal "+fQuest.getThreeDigitDecimalForm()+" adalah");
 			q.setLessonClassifier("Matematika SD");
 			q.setLessonCategory("Pecahan");
+			q.setSubCategoryOrder(3);
 			q.setLessonGrade(5);
 			quizList.add(q);
 		}

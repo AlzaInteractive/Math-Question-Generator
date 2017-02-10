@@ -42,13 +42,13 @@ public class FractionPercentageFormQuestionFactory implements IQuestionFactory {
 				do {
 					a = CommonFunctionAndValues.getRandomInt(2, 10);
 					denom = CommonFunctionAndValues.getRandomInt(2, 11);
-					q.setLessonSubcategory("Konversi ke bentuk persen (nilai > 100%)");
+					q.setLessonSubcategory("Konversi ke bentuk persen");
 				} while (denom>=a || (a%denom==0));
 			} else {
 				do {
 					a = CommonFunctionAndValues.getRandomInt(2, 23);
 					denom = CommonFunctionAndValues.getRandomInt(2, 10);
-					q.setLessonSubcategory("Konversi ke bentuk persen (nilai < 100%)");
+					q.setLessonSubcategory("Konversi ke bentuk persen");
 				} while (denom<=a);
 			}
 			Fraction fQuest = new Fraction(a,denom);
@@ -66,6 +66,7 @@ public class FractionPercentageFormQuestionFactory implements IQuestionFactory {
 			q.setQuestion("Bentuk persen dari pecahan "+fQuest+" adalah");
 			q.setLessonClassifier("Matematika SD");
 			q.setLessonCategory("Pecahan");
+			q.setSubCategoryOrder(4);
 			q.setLessonGrade(5);
 			quizList.add(q);
 		}
@@ -78,13 +79,13 @@ public class FractionPercentageFormQuestionFactory implements IQuestionFactory {
 				do {
 					a = CommonFunctionAndValues.getRandomInt(2, 10);
 					denom = CommonFunctionAndValues.getRandomInt(2, 11);
-					q.setLessonSubcategory("Konversi dari bentuk persen (nilai > 100 %)");
+					q.setLessonSubcategory("Konversi dari bentuk persen");
 				} while (denom>=a || (a%denom==0) || 1000 % denom >0);
 			} else {
 				do {
 					a = CommonFunctionAndValues.getRandomInt(2, 23);
 					denom = CommonFunctionAndValues.getRandomInt(2, 10);
-					q.setLessonSubcategory("Konversi dari bentuk persen (nilai < 100 %)");
+					q.setLessonSubcategory("Konversi dari bentuk persen");
 				} while (denom<=a || 1000 % denom >0);
 			}
 			Fraction fQuest = new Fraction(a,denom);
@@ -103,6 +104,7 @@ public class FractionPercentageFormQuestionFactory implements IQuestionFactory {
 			q.setLessonClassifier("Matematika SD");
 			q.setLessonCategory("Pecahan");
 			q.setLessonGrade(5);
+			q.setSubCategoryOrder(4);
 			quizList.add(q);
 		}
 	}

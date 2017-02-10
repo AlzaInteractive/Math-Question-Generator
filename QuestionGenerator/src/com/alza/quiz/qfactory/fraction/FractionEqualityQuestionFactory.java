@@ -33,13 +33,9 @@ public class FractionEqualityQuestionFactory implements IQuestionFactory{
 
 	@Override
 	public List<Quiz> generateQuizList() {
-		int[] randA = CommonFunctionAndValues.simpleInt;
-		CommonFunctionAndValues.shuffleArray(randA);
-		int[] randMulti = CommonFunctionAndValues.simpleInt;
-		CommonFunctionAndValues.shuffleArray(randMulti);
 		List<Quiz> quizList = new ArrayList<Quiz>();
 		for (int i=0;i<2;i++){
-			MultipleChoiceQuiz q = generateTypeA(randA, randMulti, i);
+			MultipleChoiceQuiz q = generateTypeA();
 			quizList.add(q);
 		}
 		for (int i=0;i<2;i++){
@@ -80,25 +76,23 @@ public class FractionEqualityQuestionFactory implements IQuestionFactory{
 		q.setChoices(choices);
 		q.setLessonClassifier("Matematika SD");
 		q.setLessonCategory("Pecahan");
-		q.setLessonSubcategory("Kesamaan pecahan, mencari pembilang/penyebut agar dua pecahan menjadi sama");
+		q.setLessonSubcategory("Mencari pecahan yang sama");
 		q.setSubCategoryOrder(1);
 		return q;
 	}
 
-	private MultipleChoiceQuiz generateTypeA(int[] randA, int[] randMulti, int i) {
+	private MultipleChoiceQuiz generateTypeA() {
 		int a,b,r,multip;
 		do {
-			a = randA[i];
-			r = ThreadLocalRandom.current().nextInt(1, randA.length);
-			b = randA[r];
-			multip =  randMulti[i];
-		} while (a==b||a>b);
+			a = ThreadLocalRandom.current().nextInt(2, 7);
+			b = ThreadLocalRandom.current().nextInt(3, 12);
+			multip =  ThreadLocalRandom.current().nextInt(3, 7);
+		} while (a>=b);
 		
 		Fraction fQuest,fAnswer;
 		fQuest = new Fraction(a, b);
-		
 		fAnswer =  new Fraction(a*multip,b*multip);
-		if (i % 2 == 0){
+		if (a % 2 == 0){
 			Fraction temp;
 			temp = fQuest;
 			fQuest=fAnswer;
@@ -113,7 +107,7 @@ public class FractionEqualityQuestionFactory implements IQuestionFactory{
 		q.setQuestion("Pecahan yang sama nilainya dengan pecahan "+fQuest.a+"/"+fQuest.b);
 		q.setLessonClassifier("Matematika SD");
 		q.setLessonCategory("Pecahan");
-		q.setLessonSubcategory("Kesamaan pecahan");
+		q.setLessonSubcategory("Mencari pecahan yang sama");
 		q.setSubCategoryOrder(1);
 		return q;
 	}

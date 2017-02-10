@@ -30,14 +30,14 @@ public class SimplifyFractionQuestionFactory implements IQuestionFactory {
 	@Override
 	public List<Quiz> generateQuizList() {
 		List<Quiz> quizList = new ArrayList<Quiz>();
-		int minMulti = 5;
-		int maxMulti = 11;
-		int[] simpleNumbers = CommonFunctionAndValues.getShuffledSimpleInts();
-		int[] simpleNumberLarger = CommonFunctionAndValues.getShuffledSimpleIntsLarger();
 		for (int i=0;i<2;i++){
-			int multi = ThreadLocalRandom.current().nextInt(minMulti, maxMulti);
-			int a = simpleNumbers[i];
-			int b = simpleNumberLarger[i];
+			int multi = ThreadLocalRandom.current().nextInt(2, 7);
+			int a,b;
+			do {
+				a = ThreadLocalRandom.current().nextInt(2, 13);
+				b = ThreadLocalRandom.current().nextInt(3, 17);
+			} while (a>=b);
+			
 			int c = a * multi;
 			int d = b * multi;
 			Fraction fQuest = new Fraction(c,d);
@@ -60,6 +60,7 @@ public class SimplifyFractionQuestionFactory implements IQuestionFactory {
 			q.setLessonCategory("Pecahan");
 			q.setLessonSubcategory("Menyederhanakan pecahan");
 			q.setLessonGrade(4);
+			q.setSubCategoryOrder(3);
 			quizList.add(q);
 		}
 		return quizList;
@@ -67,7 +68,7 @@ public class SimplifyFractionQuestionFactory implements IQuestionFactory {
 	private List<String> convertChoices(List<Fraction> fracs){
 		List<String> choicesInString = new ArrayList<String>();
 		for (Fraction f : fracs) {
-			choicesInString.add(f.a+"/"+f.b);
+			choicesInString.add(f.toString());
 		}
 		return choicesInString;
 	}

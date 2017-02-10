@@ -34,23 +34,22 @@ public class FindGreatestFractionQuestionFactory implements IQuestionFactory {
 			MultipleChoiceQuiz q = new MultipleChoiceQuiz();
 			if (i % 3 == 2){
 				q = generateTypeC();
-				q.setLessonSubcategory("Membandingkan nilai pecahan (penyebut acak)");
-				q.setQuizLevel(QuizLevel.SEDANG);
+				q.setQuizLevel(QuizLevel.SULIT);
 				q.setLessonGrade(4);
 			} else if (i % 3 == 1 ){
 				q = generateTypeB();
-				q.setLessonSubcategory("Membandingkan nilai pecahan (penyebut memiliki fpb >1)");
 				q.setQuizLevel(QuizLevel.SEDANG);
 				q.setLessonGrade(4);
 			} else {
 				q = generateTypeA();
-				q.setLessonSubcategory("Membandingkan nilai pecahan (penyebut sama)");
 				q.setQuizLevel(QuizLevel.MUDAH);
 				q.setLessonGrade(4);
 			}
+			q.setLessonSubcategory("Membandingkan nilai pecahan");
 			q.setQuestion("Pilihlah pecahan dengan nilai paling besar.");
 			q.setLessonClassifier("Matematika SD");
 			q.setLessonCategory("Pecahan");
+			q.setSubCategoryOrder(2);
 			quizList.add(q);
 		}
 		return quizList;
@@ -59,11 +58,11 @@ public class FindGreatestFractionQuestionFactory implements IQuestionFactory {
 		int choiceSize=2;
 		Fraction[] fracs = new Fraction[choiceSize];
 		for (int i=0; i<choiceSize ; i++){
-			int a = ThreadLocalRandom.current().nextInt(5, 21);
-			int b = ThreadLocalRandom.current().nextInt(7, 25);
-			while (b<=a){
-				b = ThreadLocalRandom.current().nextInt(7, 25);
-			}
+			int a,b;
+			do {
+				a = ThreadLocalRandom.current().nextInt(5, 17);
+				b = ThreadLocalRandom.current().nextInt(7, 19);
+			} while (b<=a);
 			Fraction f = new Fraction(a, b);
 			fracs[i] = f;
 		}
@@ -77,15 +76,13 @@ public class FindGreatestFractionQuestionFactory implements IQuestionFactory {
 	public MultipleChoiceQuiz generateTypeB(){
 		int choiceSize=3;
 		Fraction[] fracs = new Fraction[choiceSize];
-		long denom = ThreadLocalRandom.current().nextInt(4, 12);
-		
+		long denom = ThreadLocalRandom.current().nextInt(3, 7);
 		for (int i=0; i<choiceSize ; i++){
-			int multip = ThreadLocalRandom.current().nextInt(2, 6);
-			int a = ThreadLocalRandom.current().nextInt(5, 25);
-			int b = (int) denom * multip;
-			while (b<=a){
-				a = ThreadLocalRandom.current().nextInt(5, 17);
-			}
+			int a,b;
+			do {
+				a = ThreadLocalRandom.current().nextInt(3, 13);
+				b = ThreadLocalRandom.current().nextInt(3, 34);
+			} while (a>=b || b % denom > 0);
 			Fraction f = new Fraction(a, b);
 			fracs[i] = f;
 		}
@@ -110,7 +107,7 @@ public class FindGreatestFractionQuestionFactory implements IQuestionFactory {
 				a = ThreadLocalRandom.current().nextInt(minA, maxA);
 			}
 			while (denom<=a);
-			Fraction f = new Fraction(a, (int) denom);
+			Fraction f = new Fraction(a, denom);
 			fracs[i] = f;
 		}
 		CommonFunctionAndValues.shuffleArray(fracs);

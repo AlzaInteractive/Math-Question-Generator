@@ -46,6 +46,7 @@ public class RatioQuestionFactory implements IQuestionFactory{
 				q.setDifficultyLevel(QuizLevel.MUDAH);
 				q.setLessonSubcategory("Mendeskripsikan perbandingan");
 			}
+			q.setSubCategoryOrder(5);
 			q.setLessonClassifier("Matematika SD");
 			q.setLessonCategory("Pecahan");
 			q.setLessonGrade(5);
@@ -131,7 +132,7 @@ public class RatioQuestionFactory implements IQuestionFactory{
 		List<String> sceFindFromPct = new ArrayList<String>();
 		List<String> sceFindRatio = new ArrayList<String>();
 		List<String> sceFindFromRatio = new ArrayList<String>();
-		sceFindFromPct.add("#Orang1? memiliki kandang ayam dirumahnya. "
+		sceFindFromPct.add("#orang1? memiliki kandang ayam dirumahnya. "
 				+ "Ia memiliki #total? ekor ayam. #pct1? ayam miliknya adalah ayam pedaging, "
 				+ "sementara sisanya adalah ayam petelur. "
 				+ "Berapakah jumlah ayam petelur yang ia miliki?");
@@ -151,7 +152,7 @@ public class RatioQuestionFactory implements IQuestionFactory{
 				+ "Berapakah jumlah kelinci putih #orang1??");
 		sceFindFromRatio.add("Berapakah jumlah guru perempuan di sekolah #orang1? "
 				+ "jika perbandingan "
-				+ " antara jumlah guru laki-laki dengan perempuan adalah #rat1? berbanding #rat2?"
+				+ " antara jumlah guru laki-laki dengan perempuan adalah #rat2? berbanding #rat1?"
 				+ " dan jumlah semua guru adalah #total?.");
 		sceFindRatio.add("#part1? siswa mengikuti ekstrakurikuler Pramuka "
 				+ "#part2? siswa mengikuti ekstrakurikuler PMR "

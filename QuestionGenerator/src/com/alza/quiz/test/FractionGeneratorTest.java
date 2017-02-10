@@ -23,7 +23,7 @@ import com.alza.quiz.qfactory.kpk.BasicKPKQuestionFactory;
 import com.alza.quiz.qfactory.kpk.WhichDayScenarioKPKQuestionFactory;
 import com.alza.quiz.qfactory.kpk.WhichHourScenarioKPKQuestionFactory;
 
-public class Tester {
+public class FractionGeneratorTest {
 	public static void main(String[] args) {
 		//basicGenerator();
 		//whichDayGenerator();
@@ -68,18 +68,18 @@ public class Tester {
 	}
 	private static void fractionEquality(){
 		List<IQuestionFactory> lqf = new ArrayList<IQuestionFactory>();
-		/*lqf.add(new FractionEqualityQuestionFactory());
-		lqf.add(new FindGreatestFractionQuestionFactory());
-		lqf.add(new SimplifyFractionQuestionFactory());
-		lqf.add(new FractionAddSubtractQuestionFactory());
-		lqf.add(new FractionMultDivideQuestionFactory());
-		lqf.add(new MixedFractionQuestionFactory());
-		lqf.add(new FractionDecimalFormQuestionFactory());
-		lqf.add(new FractionPercentageFormQuestionFactory());
-		lqf.add(new ScenarioBasedFractionQuestionFactory());*/
+		//lqf.add(new FractionEqualityQuestionFactory());
+		//lqf.add(new FindGreatestFractionQuestionFactory());
+		//lqf.add(new SimplifyFractionQuestionFactory());
+		//lqf.add(new FractionAddSubtractQuestionFactory());
+		//lqf.add(new FractionMultDivideQuestionFactory());
+		//lqf.add(new MixedFractionQuestionFactory());
+		//lqf.add(new FractionDecimalFormQuestionFactory());
+		//lqf.add(new FractionPercentageFormQuestionFactory());
+		//lqf.add(new ScenarioBasedFractionQuestionFactory());
 		//lqf.add(new ScaleQuestionFactory());
-		//lqf.add(new RatioQuestionFactory());
-		lqf.add(new WhichHourScenarioKPKQuestionFactory());
+		lqf.add(new RatioQuestionFactory());
+		
 		
 		List<Quiz> ql = new ArrayList<Quiz>();
 		for (IQuestionFactory qf : lqf) {

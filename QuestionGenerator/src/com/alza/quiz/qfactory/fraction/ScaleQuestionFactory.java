@@ -85,6 +85,7 @@ public class ScaleQuestionFactory implements IQuestionFactory {
 		q.setLessonCategory("Pecahan");
 		q.setDifficultyLevel(QuizLevel.SEDANG);
 		q.setLessonGrade(5);
+		q.setSubCategoryOrder(6);
 		return q;
 	}
 	public String getRandomScaleScenario(TYPE type){

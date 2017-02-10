@@ -47,6 +47,7 @@ public class MixedFractionQuestionFactory implements IQuestionFactory{
 			q.setLessonClassifier("Matematika SD");
 			q.setLessonCategory("Pecahan");
 			q.setLessonGrade(5);
+			q.setSubCategoryOrder(2);
 			quizList.add(q);
 		}
 		return quizList;

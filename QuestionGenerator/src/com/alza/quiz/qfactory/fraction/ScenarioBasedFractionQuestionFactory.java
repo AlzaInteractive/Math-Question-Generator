@@ -43,6 +43,7 @@ public class ScenarioBasedFractionQuestionFactory implements IQuestionFactory {
 			q.setLessonCategory("Pecahan");
 			q.setLessonSubcategory("Soal terapan");
 			q.setDifficultyLevel(QuizLevel.SULIT);
+			q.setSubCategoryOrder(11);
 		}
         return quizList;
     }

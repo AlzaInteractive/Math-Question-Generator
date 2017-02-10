@@ -14,7 +14,7 @@ import com.alza.quiz.qfactory.IQuestionFactory;
 import com.alza.quiz.util.CommonFunctionAndValues;
 
 public class FractionAddSubtractQuestionFactory implements IQuestionFactory{
-	private static final int NUM_OF_QUESTIONS = 3;
+	private static final int NUM_OF_QUESTIONS = 6;
 	@Override
 	public Quiz generateQuiz() {
 		List<Quiz> quizList = generateQuizList();
@@ -34,22 +34,23 @@ public class FractionAddSubtractQuestionFactory implements IQuestionFactory{
 			MultipleChoiceQuiz q = null;
 			if (i % 3 == 2){
 				q = generateTypeC(i);
-				q.setDifficultyLevel(QuizLevel.SEDANG);
-				q.setLessonSubcategory("Penjumlahan dan pengurangan (penyebut acak)");
+				q.setDifficultyLevel(QuizLevel.SULIT);
+				q.setLessonSubcategory("Penjumlahan dan pengurangan pecahan");
 				q.setLessonGrade(5);
 			} else if (i % 3 == 1){
 				q = generateTypeB(i);
 				q.setDifficultyLevel(QuizLevel.SEDANG);
-				q.setLessonSubcategory("Penjumlahan dan pengurangan (penyebut memiliki fpb>1)");
+				q.setLessonSubcategory("Penjumlahan dan pengurangan pecahan");
 				q.setLessonGrade(5);
 			} else {
 				q = generateTypeA(i);
 				q.setDifficultyLevel(QuizLevel.MUDAH);
-				q.setLessonSubcategory("Penjumlahan dan pengurangan (penyebut sama)");
+				q.setLessonSubcategory("Penjumlahan dan pengurangan pecahan");
 				q.setLessonGrade(4);
 			}
 			q.setLessonClassifier("Matematika SD");
 			q.setLessonCategory("Pecahan");
+			q.setSubCategoryOrder(4);
 			quizList.add(q);
 		}
 		return quizList;
