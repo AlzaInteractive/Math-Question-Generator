@@ -80,7 +80,7 @@ public class ScenarioBasedFractionQuestionFactory implements IQuestionFactory {
 		sce.add("Empat bersaudara #orang1?, #orang2?, #orang3?, dan #orang4? "
 				+ "menemukan setoples kacang di ruang tamu. "
 				+ "Mereka sepakat membaginya untuk menjadi bekal bermain. "
-				+ "#orang2, #orang3?, dan #orang4? mengambil "
+				+ "#orang2?, #orang3?, dan #orang4? mengambil "
 				+ "masing-masing #frac1?, #frac2?, dan #frac3?. "
 				+ "Jika #orang1? mendapatkan sisanya, berapa bagiankah itu?");
 		int rndsce = new Random().nextInt(sce.size());

@@ -152,4 +152,27 @@ public class QuizStats implements Serializable{
 			return o1.compareTo(o2);
 		}
     }
+    
+    public List<QuizStats.QuizSummary> getStatByCategoryFromMultipleTest(List<QuizStats> statses){
+    	List<QuizLog> logs = new ArrayList<QuizStats.QuizLog>();
+    	for (QuizStats stats : statses){
+    		logs.addAll(stats.getLogs());
+    	}
+    	Map<String , QuizStats.QuizSummary> statsByCategory = new HashMap<String, QuizSummary>();
+    	for (QuizLog log: logs){
+    		String key = log.getKeyByCategory();
+    		QuizSummary v;
+    		if (statsByCategory.containsKey(key)){
+    			v = statsByCategory.get(key);
+    		} else {
+    			v= new QuizSummary(log.grade,log.category,log.subCategory);
+    		}
+    		v.total = v.total + 1;
+    		if (log.correct) v.correct = v.correct+1;
+    		statsByCategory.put(key, v);
+    	}
+    	ArrayList<QuizSummary> l = new ArrayList<QuizStats.QuizSummary>(statsByCategory.values());
+    	Collections.sort(l);
+    	return l;
+    }
 }

@@ -137,9 +137,9 @@ public class RatioQuestionFactory implements IQuestionFactory{
 				+ "sementara sisanya adalah ayam petelur. "
 				+ "Berapakah jumlah ayam petelur yang ia miliki?");
 		sceFindFromPct.add("Luas lahan pekarangan rumah #orang1? adalah #total? meter persegi. "
-				+ "#pct1? digunakan untuk bercock tanam, "
+				+ "#pct1? digunakan untuk bercocok tanam, "
 				+ "sisanya dibiarkan kosong untuk tempat bermain anaknya. "
-				+ "Berapakah meter persegi luas lahan bermain yang tersedia untuk anak #orang1?");
+				+ "Berapa meter persegi luas lahan bermain yang tersedia untuk anak #orang1?");
 		sceFindFromPct.add("Anak laki-laki di sekolah #orang1? berjumlah #total? anak "
 				+ "#pct1? gemar bermain bola, sisanya gemar bermain basket "
 				+ "Berapakah jumlah anak yang gemar bermain basket?");

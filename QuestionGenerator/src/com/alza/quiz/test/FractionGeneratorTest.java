@@ -68,16 +68,16 @@ public class FractionGeneratorTest {
 	}
 	private static void fractionEquality(){
 		List<IQuestionFactory> lqf = new ArrayList<IQuestionFactory>();
-		//lqf.add(new FractionEqualityQuestionFactory());
-		//lqf.add(new FindGreatestFractionQuestionFactory());
-		//lqf.add(new SimplifyFractionQuestionFactory());
-		//lqf.add(new FractionAddSubtractQuestionFactory());
-		//lqf.add(new FractionMultDivideQuestionFactory());
-		//lqf.add(new MixedFractionQuestionFactory());
-		//lqf.add(new FractionDecimalFormQuestionFactory());
-		//lqf.add(new FractionPercentageFormQuestionFactory());
-		//lqf.add(new ScenarioBasedFractionQuestionFactory());
-		//lqf.add(new ScaleQuestionFactory());
+		lqf.add(new FractionEqualityQuestionFactory());
+		lqf.add(new FindGreatestFractionQuestionFactory());
+		lqf.add(new SimplifyFractionQuestionFactory());
+		lqf.add(new FractionAddSubtractQuestionFactory());
+		lqf.add(new FractionMultDivideQuestionFactory());
+		lqf.add(new MixedFractionQuestionFactory());
+		lqf.add(new FractionDecimalFormQuestionFactory());
+		lqf.add(new FractionPercentageFormQuestionFactory());
+		lqf.add(new ScenarioBasedFractionQuestionFactory());
+		lqf.add(new ScaleQuestionFactory());
 		lqf.add(new RatioQuestionFactory());
 		
 		
