@@ -133,7 +133,7 @@ public class QuizStats implements Serializable{
     	}
     	public String getPercentage(){
     		Fraction f = new Fraction(correct, total);
-    		return f.getPercentage();
+    		return f.getPercentageNoDecimal();
     	}
 		@Override
 		public int compareTo(QuizSummary o) {

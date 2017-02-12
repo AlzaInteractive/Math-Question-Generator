@@ -119,6 +119,11 @@ public class Fraction implements Comparable<Fraction>,Comparator<Fraction>{
 		DecimalFormat df = new DecimalFormat("##.##%");
 		return df.format(i2);
 	}
+	public String getPercentageNoDecimal(){
+		double i2=((double)this.a)/((double)this.b);
+		DecimalFormat df = new DecimalFormat("##%");
+		return df.format(i2);
+	}
 	public boolean equals(Fraction f){
 		Fraction f1 = this.getSimplestForm();
 		Fraction f2 = f.getSimplestForm();

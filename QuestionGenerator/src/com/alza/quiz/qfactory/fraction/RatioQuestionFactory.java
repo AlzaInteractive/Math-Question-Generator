@@ -144,7 +144,7 @@ public class RatioQuestionFactory implements IQuestionFactory{
 				+ "#pct1? gemar bermain bola, sisanya gemar bermain basket "
 				+ "Berapakah jumlah anak yang gemar bermain basket?");
 		sceFindFromRatio.add("Jumlah anak yang suka wortel dibandingkan dengan yang suka"
-				+ " brokoli adalah #rat1? berbading #rat2?. Jika jumlah anak adalah #total? "
+				+ " brokoli adalah #rat2? berbading #rat1?. Jika jumlah anak adalah #total? "
 				+ " berapakah jumlah anak yang suka brokoli?");
 		sceFindFromRatio.add("#orang1? memiliki #total? ekor kelinci. "
 				+ "Jumlah kelinci berwarna putih berbanding warna lainnya "
