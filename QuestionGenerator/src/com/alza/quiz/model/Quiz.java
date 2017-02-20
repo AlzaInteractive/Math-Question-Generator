@@ -8,7 +8,7 @@ import java.util.Comparator;
 
 public abstract class Quiz implements Comparable<Quiz>, Comparator<Quiz>{
     QuizLevel quizLevel;
-    int subCategoryOrder;
+    int subCategoryOrder = 99;
     String question;
     String correctAnswer;
     String lessonClassifier;

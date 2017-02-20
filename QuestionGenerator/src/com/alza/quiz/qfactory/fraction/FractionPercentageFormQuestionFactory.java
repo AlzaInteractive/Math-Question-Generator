@@ -52,7 +52,7 @@ public class FractionPercentageFormQuestionFactory implements IQuestionFactory {
 				} while (denom<=a);
 			}
 			Fraction fQuest = new Fraction(a,denom);
-			String correctAnswer = fQuest.getPercentage();
+			String correctAnswer = fQuest.getPercentageNoDecimal();
 			Fraction f1 = fQuest.getResultWhenMultipliedBy(new Fraction(10,1));
 			Fraction f2 = fQuest.getResultWhenMultipliedBy(new Fraction(1,10));
 			Fraction f3 = fQuest.getResultWhenMultipliedBy(new Fraction(1,5));
@@ -79,15 +79,15 @@ public class FractionPercentageFormQuestionFactory implements IQuestionFactory {
 				do {
 					a = CommonFunctionAndValues.getRandomInt(2, 10);
 					denom = CommonFunctionAndValues.getRandomInt(2, 11);
-					q.setLessonSubcategory("Konversi dari bentuk persen");
 				} while (denom>=a || (a%denom==0) || 1000 % denom >0);
 			} else {
 				do {
 					a = CommonFunctionAndValues.getRandomInt(2, 23);
 					denom = CommonFunctionAndValues.getRandomInt(2, 10);
-					q.setLessonSubcategory("Konversi dari bentuk persen");
+					
 				} while (denom<=a || 1000 % denom >0);
 			}
+			q.setLessonSubcategory("Konversi dari bentuk persen");
 			Fraction fQuest = new Fraction(a,denom);
 			//String correctAnswer = fQuest.getTwoDigitDecimalForm();
 			Fraction f1 = fQuest.getResultWhenMultipliedBy(new Fraction(10,1));
@@ -111,7 +111,7 @@ public class FractionPercentageFormQuestionFactory implements IQuestionFactory {
 	private List<String> convertChoices(List<Fraction> fracs, boolean toPercent){
 		List<String> choicesInString = new ArrayList<String>();
 		for (Fraction f : fracs) {
-			if (toPercent) choicesInString.add(f.getPercentage());
+			if (toPercent) choicesInString.add(f.getPercentageNoDecimal());
 			else choicesInString.add(f.getSimplestForm().toString());
 		}
 		return choicesInString;

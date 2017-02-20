@@ -61,11 +61,16 @@ public class RatioQuestionFactory implements IQuestionFactory{
 		TYPE t = TYPE.findFromPct;
 		String sce = getRandomScenario(t);
 		int total, partOfTotal, partOfTotal2;
-		partOfTotal = CommonFunctionAndValues.getRandomInt(24, 51);
-		partOfTotal2 = CommonFunctionAndValues.getRandomInt(9, 51);
-		total = partOfTotal + partOfTotal2;
+		boolean b;
+		do {
+			partOfTotal = CommonFunctionAndValues.getRandomInt(24, 51);
+			partOfTotal2 = CommonFunctionAndValues.getRandomInt(9, 51);
+			total = partOfTotal + partOfTotal2;
+		} while (total % 5 == 0);
+		
+		
 		Fraction f = new Fraction(partOfTotal, total);
-		String pct = f.getPercentage();
+		String pct = f.getPercentageNoDecimal();
 		sce = sce.replace("#total?", String.valueOf(total));
 		sce = sce.replace("#pct1?", pct);
 		sce = CommonFunctionAndValues.buildScenario(sce);
