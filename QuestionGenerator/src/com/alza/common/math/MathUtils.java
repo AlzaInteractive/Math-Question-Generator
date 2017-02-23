@@ -1,6 +1,7 @@
 package com.alza.common.math;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TreeMap;
 /**
  * 
  * @author ewin.sutriandi@gmail.com
@@ -106,5 +107,34 @@ public class MathUtils {
 			return f;
 		}
 		return null;
+	}
+	
+	private final static TreeMap<Integer, String> romansMap = new TreeMap<Integer, String>();
+	static {
+		romansMap.put(1000, "M");
+		romansMap.put(900, "CM");
+		romansMap.put(500, "D");
+		romansMap.put(400, "CD");
+		romansMap.put(100, "C");
+		romansMap.put(90, "XC");
+		romansMap.put(50, "L");
+		romansMap.put(40, "XL");
+		romansMap.put(10, "X");
+		romansMap.put(9, "IX");
+		romansMap.put(5, "V");
+		romansMap.put(4, "IV");
+		romansMap.put(1,"I");
+	}
+	/**
+	 * Find equivalent roman numerals of integer
+	 * @param num
+	 * @return roman numerals of integer num
+	 */
+	public static String toRomanNumeral(int num){
+		int l = romansMap.floorKey(num);
+		if (num == l){
+			return romansMap.get(num);
+		} 
+		return romansMap.get(l) + toRomanNumeral(num -l);
 	}
 }
