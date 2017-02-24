@@ -9,6 +9,7 @@ import com.alza.quiz.qfactory.kpk.BasicScenarioKPKQuestionFactory;
 import com.alza.quiz.qfactory.kpk.WhichDateScenarioKPKQuestionFactory;
 import com.alza.quiz.qfactory.kpk.WhichDayScenarioKPKQuestionFactory;
 import com.alza.quiz.qfactory.kpk.WhichHourScenarioKPKQuestionFactory;
+import com.alza.quiz.qfactory.romans.RomanNumeralsQuestionFactory;
 
 public class Util {
 	public static List<IQuestionFactory> getAllFractionQuestionFactory(){
@@ -35,5 +36,9 @@ public class Util {
 		lqf.add(new WhichDateScenarioKPKQuestionFactory());
 		return lqf;
 	}
-
+	public static List<IQuestionFactory> getAllRomansQuestionFactory(){
+		List<IQuestionFactory> lqf = new ArrayList<IQuestionFactory>();
+		lqf.add(new RomanNumeralsQuestionFactory());
+		return lqf;
+	}
 }
