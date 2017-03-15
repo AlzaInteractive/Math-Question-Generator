@@ -29,33 +29,34 @@ public class MultipleChoiceQuiz extends  Quiz{
 		this.correctAnswer = correctAnswer;
 	}
 	public List<String> getChoices() {
+		Collections.shuffle(this.choices);
 		return choices;
 	}
 	public void setChoices(List<String> choices) {
 		Set<String> setChoices = new HashSet<String>(choices);
 		setChoices(setChoices);
-		Collections.shuffle(this.choices);
+		//Collections.shuffle(this.choices);
 	}
 	public void setChoices(String...  choices){
 		this.choices = new ArrayList<>();
 		for (String c:choices  ) {
 			this.choices.add(c);
 		}
-		Collections.shuffle(this.choices);
+		//Collections.shuffle(this.choices);
 	}
 	public void setChoices(Set<String>  choices){
 		this.choices = new ArrayList<>();
 		for (String c:choices  ) {
 			this.choices.add(c);
 		}
-		Collections.shuffle(this.choices);
+		//Collections.shuffle(this.choices);
 	}
 	public void setChoices(int... choices){
 		this.choices = new ArrayList<>();
 		for (int i : choices) {
 			this.choices.add(String.valueOf(i));
 		}
-		Collections.shuffle(this.choices);
+		//Collections.shuffle(this.choices);
 	}
 	public void setChoices(double... choices){
 		this.choices = new ArrayList<>();
@@ -63,6 +64,11 @@ public class MultipleChoiceQuiz extends  Quiz{
 			this.choices.add(String.valueOf(i));
 		}
 		Collections.shuffle(this.choices);
+	}
+	
+	public void addChoice(String choice){
+		this.choices.add(choice);
+		//Collections.shuffle(choices);
 	}
 	
 	@Override
