@@ -36,12 +36,13 @@ public class BasicKPKQuestionFactory implements IQuestionFactory {
 		MultipleChoiceQuiz q = new MultipleChoiceQuiz();
 		q.setLessonGrade(4);
 		q.setDifficultyLevel(quizLevel);
-		q.setQuestion("Carilah Kelipatan Persekutuan Terkecil (KPK) dari bilangan " + pairs[0]+" & "+pairs[1]);
+		q.setQuestion("Kelipatan Persekutuan Terkecil (KPK) dari bilangan " + pairs[0]+" & "+pairs[1]+" adalah?");
 		q.setCorrectAnswer(String.valueOf(correctAnswer));
 		q.setChoices(choices);
 		q.setLessonClassifier("Matematika SD");
 		q.setLessonCategory("KPK");
 		q.setLessonSubcategory("Dasar");
+		q.setSubCategoryOrder(0);
 		return q;
 	}
 
