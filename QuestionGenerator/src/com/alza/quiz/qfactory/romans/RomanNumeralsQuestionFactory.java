@@ -64,7 +64,7 @@ public class RomanNumeralsQuestionFactory implements IQuestionFactory{
 		return quizList;
 	}
 	
-	public Set<String> populateChoices(int[] bound,int num, boolean toRomans){
+	private Set<String> populateChoices(int[] bound,int num, boolean toRomans){
 		List<String> string = new ArrayList<String>();
 		for (int i=0;i<10;i++){
 			int c = CommonFunctionAndValues.getRandomInt(bound[0], bound[1]);
