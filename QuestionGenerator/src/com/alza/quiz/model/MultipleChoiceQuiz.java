@@ -8,7 +8,7 @@ import java.util.Set;
 
 public class MultipleChoiceQuiz extends  Quiz{
 	private String correctAnswer;
-	private List<String> choices;
+	private List<String> choices = new ArrayList<String>();
 	
 	public QuizLevel getQuizLevel() {
 		return quizLevel;

@@ -49,7 +49,7 @@ public class FindMultipleQuestionFactory implements IQuestionFactory{
 			q.setLessonClassifier("Matematika SD");
 			q.setLessonGrade(4);
 			q.setSubCategoryOrder(0);
-			q.setLessonCategory("Bilangan Romawi");
+			q.setLessonCategory("KPK");
 			lq.add(q);
 		}
 		return lq;

@@ -19,8 +19,10 @@ import com.alza.quiz.qfactory.fraction.RatioQuestionFactory;
 import com.alza.quiz.qfactory.fraction.ScaleQuestionFactory;
 import com.alza.quiz.qfactory.fraction.ScenarioBasedFractionQuestionFactory;
 import com.alza.quiz.qfactory.fraction.SimplifyFractionQuestionFactory;
-import com.alza.quiz.qfactory.kpk.BasicKPKQuestionFactory;
+import com.alza.quiz.qfactory.kpk.TwoNumKPKQuestionFactory;
 import com.alza.quiz.qfactory.kpk.BasicScenarioKPKQuestionFactory;
+import com.alza.quiz.qfactory.kpk.FindMultipleQuestionFactory;
+import com.alza.quiz.qfactory.kpk.TripeNumKPKQuestionFactory;
 import com.alza.quiz.qfactory.kpk.WhichDateScenarioKPKQuestionFactory;
 import com.alza.quiz.qfactory.kpk.WhichDayScenarioKPKQuestionFactory;
 import com.alza.quiz.qfactory.kpk.WhichHourScenarioKPKQuestionFactory;
@@ -40,7 +42,9 @@ public class KPKGeneratorTester {
 	
 	private static void allGenerator(){
 		List<IQuestionFactory> lqf = new ArrayList<IQuestionFactory>();
-		lqf.add(new BasicKPKQuestionFactory());
+		lqf.add(new FindMultipleQuestionFactory());
+		lqf.add(new TwoNumKPKQuestionFactory());
+		lqf.add(new TripeNumKPKQuestionFactory());
 		lqf.add(new BasicScenarioKPKQuestionFactory());
 		lqf.add(new WhichDayScenarioKPKQuestionFactory());
 		lqf.add(new WhichHourScenarioKPKQuestionFactory());

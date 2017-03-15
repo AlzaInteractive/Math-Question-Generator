@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.alza.quiz.qfactory.fraction.*;
-import com.alza.quiz.qfactory.kpk.BasicKPKQuestionFactory;
+import com.alza.quiz.qfactory.kpk.TwoNumKPKQuestionFactory;
 import com.alza.quiz.qfactory.kpk.BasicScenarioKPKQuestionFactory;
 import com.alza.quiz.qfactory.kpk.WhichDateScenarioKPKQuestionFactory;
 import com.alza.quiz.qfactory.kpk.WhichDayScenarioKPKQuestionFactory;
@@ -29,7 +29,7 @@ public class Util {
 	}
 	public static List<IQuestionFactory> getAllKPKQuestionFactory(){
 		List<IQuestionFactory> lqf = new ArrayList<IQuestionFactory>();
-		lqf.add(new BasicKPKQuestionFactory());
+		lqf.add(new TwoNumKPKQuestionFactory());
 		lqf.add(new BasicScenarioKPKQuestionFactory());
 		lqf.add(new WhichDayScenarioKPKQuestionFactory());
 		lqf.add(new WhichHourScenarioKPKQuestionFactory());

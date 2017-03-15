@@ -19,7 +19,7 @@ import com.alza.quiz.qfactory.fraction.RatioQuestionFactory;
 import com.alza.quiz.qfactory.fraction.ScaleQuestionFactory;
 import com.alza.quiz.qfactory.fraction.ScenarioBasedFractionQuestionFactory;
 import com.alza.quiz.qfactory.fraction.SimplifyFractionQuestionFactory;
-import com.alza.quiz.qfactory.kpk.BasicKPKQuestionFactory;
+import com.alza.quiz.qfactory.kpk.TwoNumKPKQuestionFactory;
 import com.alza.quiz.qfactory.kpk.WhichDayScenarioKPKQuestionFactory;
 import com.alza.quiz.qfactory.kpk.WhichHourScenarioKPKQuestionFactory;
 
@@ -39,7 +39,7 @@ public class FractionGeneratorTest {
 	}
 
 	protected static void basicGenerator() {
-		BasicKPKQuestionFactory f= new BasicKPKQuestionFactory();
+		TwoNumKPKQuestionFactory f= new TwoNumKPKQuestionFactory();
 		List<MultipleChoiceQuiz> lq = new ArrayList<MultipleChoiceQuiz>();
 		for (int i = 0; i < 5; i++) {
 			lq.add(f.generateQuiz(QuizLevel.MUDAH));

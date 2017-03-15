@@ -13,13 +13,13 @@ import com.alza.quiz.model.MultipleChoiceQuiz;
 import com.alza.quiz.qfactory.IQuestionFactory;
 import com.alza.quiz.qfactory.fraction.FindGreatestFractionQuestionFactory;
 
-public class BasicKPKQuestionFactory implements IQuestionFactory {
+public class TwoNumKPKQuestionFactory implements IQuestionFactory {
 	protected QuizLevel quizLevel = QuizLevel.MUDAH;
 	protected int[] pairs;
 	protected int correctAnswer;
 	protected List<String> choices;
 
-	public BasicKPKQuestionFactory(){
+	public TwoNumKPKQuestionFactory(){
 
 	}
 	public MultipleChoiceQuiz generateQuiz() {
@@ -41,7 +41,7 @@ public class BasicKPKQuestionFactory implements IQuestionFactory {
 		q.setChoices(choices);
 		q.setLessonClassifier("Matematika SD");
 		q.setLessonCategory("KPK");
-		q.setLessonSubcategory("Dasar");
+		q.setLessonSubcategory("KPK dua bilangan");
 		q.setSubCategoryOrder(0);
 		return q;
 	}
@@ -51,9 +51,9 @@ public class BasicKPKQuestionFactory implements IQuestionFactory {
 		for (int i=0; i <2; i++){
 			quizList.add(generateQuiz(QuizLevel.MUDAH));
 		}
-		for (int i=0; i <2; i++){
+		/*for (int i=0; i <2; i++){
 			quizList.add(generateQuiz(QuizLevel.SEDANG));
-		}
+		}*/
 		return quizList;
 	}
 

@@ -54,7 +54,7 @@ public class MathUtils {
 		}
 		return gcd;
 	}
-	
+
 	/**
 	 * Find least common multiple of two int
 	 * @param a first integer
@@ -67,13 +67,13 @@ public class MathUtils {
 	}
 
 	/**
-	 * @param arr array of integer
+	 * @param args array of integer
 	 * @return lcm
 	 */
-	public static int findLCM(int[] arr){
-		int lcm = arr[0];
-		for (int i = 1; i < arr.length; i++){
-			lcm = findLCM(lcm,arr[i]);
+	public static int findLCM(int...args){
+		int lcm = args[0];
+		for (int i = 1; i < args.length; i++){
+			lcm = findLCM(lcm,args[i]);
 		}
 		return lcm;
 	}

@@ -14,7 +14,7 @@ import java.util.Random;
  * Created by ewin.sutriandi@gmail.com on 24/12/16.
  */
 
-public class BasicScenarioKPKQuestionFactory extends BasicKPKQuestionFactory {
+public class BasicScenarioKPKQuestionFactory extends TwoNumKPKQuestionFactory {
     private List<String> scenarios = new ArrayList();
 
     public BasicScenarioKPKQuestionFactory(){

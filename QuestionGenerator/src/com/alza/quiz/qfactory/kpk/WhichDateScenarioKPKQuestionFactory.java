@@ -20,7 +20,7 @@ import java.util.Set;
  * Created by ewin.sutriandi@gmail.com on 24/12/16.
  */
 
-public class WhichDateScenarioKPKQuestionFactory extends BasicKPKQuestionFactory {
+public class WhichDateScenarioKPKQuestionFactory extends TwoNumKPKQuestionFactory {
     private List<String> scenariosWithTwoVal = new ArrayList<String>();
     private List<String> scenariosWithThreeVal = new ArrayList<String>();
     private Date[] refDates;
@@ -46,7 +46,7 @@ public class WhichDateScenarioKPKQuestionFactory extends BasicKPKQuestionFactory
         int j = 0;
         
         int rndSce = CommonFunctionAndValues.getRandomInt(0, scenariosWithTwoVal.size());  
-        for (int i=0;i<2;i++){
+        for (int i=0;i<1;i++){
             //prepare question
             String sce = CommonFunctionAndValues.buildScenario(scenariosWithTwoVal.get(i), numPair[j]);
             int answerInInt = MathUtils.findLCM(numPair[j]);
@@ -74,7 +74,7 @@ public class WhichDateScenarioKPKQuestionFactory extends BasicKPKQuestionFactory
             j++;
         }
         j = 0;
-        for (int i=0;i<2;i++){
+        for (int i=0;i<1;i++){
             //prepare question
             int[] arr = CommonFunctionAndValues.simpleInt;
             CommonFunctionAndValues.shuffleArray(arr);
