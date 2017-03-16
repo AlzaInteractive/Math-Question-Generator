@@ -84,11 +84,13 @@ public class MathUtils {
 	 */
 	public static List<Integer> findDivisors(int num){
 		List<Integer> divisors = new ArrayList<>();
+		divisors.add(1);
 		for (int i = 2; i <= num / 2; i++) {
 			if (num % i == 0) {
 				divisors.add(i);
 			}
 		}
+		divisors.add(num);
 		return divisors;
 	}
 	/**

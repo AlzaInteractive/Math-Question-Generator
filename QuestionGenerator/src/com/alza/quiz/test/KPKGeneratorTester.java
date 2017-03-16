@@ -19,6 +19,7 @@ import com.alza.quiz.qfactory.fraction.RatioQuestionFactory;
 import com.alza.quiz.qfactory.fraction.ScaleQuestionFactory;
 import com.alza.quiz.qfactory.fraction.ScenarioBasedFractionQuestionFactory;
 import com.alza.quiz.qfactory.fraction.SimplifyFractionQuestionFactory;
+import com.alza.quiz.qfactory.kpk.FindFactorsOfQuestionFactory;
 import com.alza.quiz.qfactory.kpk.TwoNumKPKQuestionFactory;
 import com.alza.quiz.qfactory.kpk.BasicScenarioKPKQuestionFactory;
 import com.alza.quiz.qfactory.kpk.FindMultipleQuestionFactory;
@@ -43,6 +44,7 @@ public class KPKGeneratorTester {
 	private static void allGenerator(){
 		List<IQuestionFactory> lqf = new ArrayList<IQuestionFactory>();
 		lqf.add(new FindMultipleQuestionFactory());
+		lqf.add(new FindFactorsOfQuestionFactory());
 		lqf.add(new TwoNumKPKQuestionFactory());
 		lqf.add(new TripeNumKPKQuestionFactory());
 		lqf.add(new BasicScenarioKPKQuestionFactory());
