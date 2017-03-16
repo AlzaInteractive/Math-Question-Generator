@@ -67,8 +67,10 @@ public class MultipleChoiceQuiz extends  Quiz{
 	}
 	
 	public void addChoice(String choice){
+		for (String s : choices){
+			if (s.equalsIgnoreCase(choice)) return;
+		}
 		this.choices.add(choice);
-		//Collections.shuffle(choices);
 	}
 	
 	@Override
