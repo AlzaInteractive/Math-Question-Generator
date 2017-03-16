@@ -1,23 +1,22 @@
 package com.alza.quiz.qfactory.kpk;
 
-import com.alza.quiz.model.Quiz;
-import com.alza.quiz.util.CommonFunctionAndValues;
-import com.alza.common.math.MathUtils;
-import com.alza.quiz.model.QuizLevel;
-import com.alza.quiz.model.MultipleChoiceQuiz;
-
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
+
+import com.alza.common.math.MathUtils;
+import com.alza.quiz.model.MultipleChoiceQuiz;
+import com.alza.quiz.model.Quiz;
+import com.alza.quiz.model.QuizLevel;
+import com.alza.quiz.util.CommonFunctionAndValues;
 
 /**
  * Created by ewin.sutriandi@gmail.com on 24/12/16.
  */
 
 public class WhichHourScenarioKPKQuestionFactory extends TwoNumKPKQuestionFactory {
-    private List<String> dayScenario = new ArrayList();
+    private List<String> dayScenario = new ArrayList<String>();
     private int[] minutes = {
     		30,45,60,90,120,150,180
     };
@@ -74,7 +73,7 @@ public class WhichHourScenarioKPKQuestionFactory extends TwoNumKPKQuestionFactor
             q.setCorrectAnswer(correctAnswerInHour);
             q.setChoices(choices);
             q.setLessonClassifier("Matematika SD");
-            q.setLessonCategory("KPK");
+            q.setLessonCategory("KPK& FPB");
             q.setLessonSubcategory("Soal cerita melibatkan jam");
             q.setLessonGrade(5);
             quizList.add(q);

@@ -50,7 +50,7 @@ public class WhichDayScenarioKPKQuestionFactory extends TwoNumKPKQuestionFactory
             q.setCorrectAnswer(correctAnswerInDay);
             q.setChoices(choices);
             q.setLessonClassifier("Matematika SD");
-            q.setLessonCategory("KPK");
+            q.setLessonCategory("KPK & FPB");
             q.setLessonSubcategory("Soal cerita melibatkan hari");
             q.setLessonGrade(4);
             quizList.add(q);

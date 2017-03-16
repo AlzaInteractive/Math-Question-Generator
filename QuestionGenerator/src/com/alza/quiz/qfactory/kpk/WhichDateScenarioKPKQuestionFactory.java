@@ -100,7 +100,7 @@ public class WhichDateScenarioKPKQuestionFactory extends TwoNumKPKQuestionFactor
             q.setChoices(choices);
             q.setCorrectAnswer(answerInString);
             q.setLessonClassifier("Matematika SD");
-            q.setLessonCategory("KPK");
+            q.setLessonCategory("KPK & FPB");
             q.setLessonSubcategory("Soal cerita melibatkan tanggal");
             quizList.add(q);
             j++;

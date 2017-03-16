@@ -40,7 +40,7 @@ public class TwoNumKPKQuestionFactory implements IQuestionFactory {
 		q.setCorrectAnswer(String.valueOf(correctAnswer));
 		q.setChoices(choices);
 		q.setLessonClassifier("Matematika SD");
-		q.setLessonCategory("KPK");
+		q.setLessonCategory("KPK & FPB");
 		q.setLessonSubcategory("KPK dua bilangan");
 		q.setSubCategoryOrder(0);
 		return q;

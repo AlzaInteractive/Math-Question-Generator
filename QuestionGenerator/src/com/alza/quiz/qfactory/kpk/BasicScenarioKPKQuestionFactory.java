@@ -46,7 +46,7 @@ public class BasicScenarioKPKQuestionFactory extends TwoNumKPKQuestionFactory {
             q.setCorrectAnswer(String.valueOf(correctAnswer));
             q.setChoices(choices);
             q.setLessonClassifier("Matematika SD");
-            q.setLessonCategory("KPK");
+            q.setLessonCategory("KPK & FPB");
             q.setLessonSubcategory("Soal cerita sederhana");
             quizList.add(q);
         }
