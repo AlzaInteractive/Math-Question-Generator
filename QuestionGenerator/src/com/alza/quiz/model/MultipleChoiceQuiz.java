@@ -63,7 +63,7 @@ public class MultipleChoiceQuiz extends  Quiz{
 		for (double i : choices) {
 			this.choices.add(String.valueOf(i));
 		}
-		Collections.shuffle(this.choices);
+		//Collections.shuffle(this.choices);
 	}
 	
 	public void addChoice(String choice){
@@ -71,6 +71,12 @@ public class MultipleChoiceQuiz extends  Quiz{
 			if (s.equalsIgnoreCase(choice)) return;
 		}
 		this.choices.add(choice);
+	}
+	
+	public void addChoice(int...c){
+		for (int o : c) {
+			addChoice(String.valueOf(o));
+		}
 	}
 	
 	@Override

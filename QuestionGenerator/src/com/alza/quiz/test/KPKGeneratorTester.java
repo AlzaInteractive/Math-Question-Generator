@@ -4,27 +4,16 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import com.alza.quiz.model.QuizLevel;
 import com.alza.quiz.model.MultipleChoiceQuiz;
 import com.alza.quiz.model.Quiz;
 import com.alza.quiz.qfactory.IQuestionFactory;
-import com.alza.quiz.qfactory.fraction.FindGreatestFractionQuestionFactory;
-import com.alza.quiz.qfactory.fraction.FractionAddSubtractQuestionFactory;
-import com.alza.quiz.qfactory.fraction.FractionDecimalFormQuestionFactory;
-import com.alza.quiz.qfactory.fraction.FractionEqualityQuestionFactory;
-import com.alza.quiz.qfactory.fraction.FractionMultDivideQuestionFactory;
-import com.alza.quiz.qfactory.fraction.FractionPercentageFormQuestionFactory;
-import com.alza.quiz.qfactory.fraction.MixedFractionQuestionFactory;
-import com.alza.quiz.qfactory.fraction.RatioQuestionFactory;
-import com.alza.quiz.qfactory.fraction.ScaleQuestionFactory;
-import com.alza.quiz.qfactory.fraction.ScenarioBasedFractionQuestionFactory;
-import com.alza.quiz.qfactory.fraction.SimplifyFractionQuestionFactory;
 import com.alza.quiz.qfactory.kpk.BasicGCDQuestionFactory;
-import com.alza.quiz.qfactory.kpk.FindFactorsOfQuestionFactory;
-import com.alza.quiz.qfactory.kpk.TwoNumKPKQuestionFactory;
+import com.alza.quiz.qfactory.kpk.BasicGCDScenarioQuestionFactory;
 import com.alza.quiz.qfactory.kpk.BasicScenarioKPKQuestionFactory;
+import com.alza.quiz.qfactory.kpk.FindFactorsOfQuestionFactory;
 import com.alza.quiz.qfactory.kpk.FindMultipleQuestionFactory;
 import com.alza.quiz.qfactory.kpk.TripeNumKPKQuestionFactory;
+import com.alza.quiz.qfactory.kpk.TwoNumKPKQuestionFactory;
 import com.alza.quiz.qfactory.kpk.WhichDateScenarioKPKQuestionFactory;
 import com.alza.quiz.qfactory.kpk.WhichDayScenarioKPKQuestionFactory;
 import com.alza.quiz.qfactory.kpk.WhichHourScenarioKPKQuestionFactory;
@@ -50,9 +39,11 @@ public class KPKGeneratorTester {
 		lqf.add(new TripeNumKPKQuestionFactory());
 		lqf.add(new BasicGCDQuestionFactory());
 		lqf.add(new BasicScenarioKPKQuestionFactory());
+		lqf.add(new BasicGCDScenarioQuestionFactory());
 		lqf.add(new WhichDayScenarioKPKQuestionFactory());
 		lqf.add(new WhichHourScenarioKPKQuestionFactory());
 		lqf.add(new WhichDateScenarioKPKQuestionFactory());
+		
 		
 		List<Quiz> ql = new ArrayList<Quiz>();
 		for (IQuestionFactory qf : lqf) {
@@ -63,7 +54,7 @@ public class KPKGeneratorTester {
 		for (Quiz q : ql) {
 			System.out.println("------------------------------");
 			System.out.println("Grade : "+q.getLessonGrade());
-			System.out.println("Subcategory :" +q.getLessonSubcategory());
+			System.out.println("Subcategory : " +q.getLessonSubcategory());
 			System.out.println("Question : " + q.getQuestion());
 			MultipleChoiceQuiz mq = (MultipleChoiceQuiz) q;
 			System.out.println("Choices : "+ String.join(" , ", mq.getChoices()));
