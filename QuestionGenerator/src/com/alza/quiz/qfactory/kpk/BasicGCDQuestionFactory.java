@@ -51,7 +51,7 @@ public class BasicGCDQuestionFactory implements IQuestionFactory{
 			q.addChoice(String.valueOf(val1*val2));
 			
 			q.setDifficultyLevel(QuizLevel.MUDAH);
-			q.setLessonSubcategory("Mencari FPB dua bilangan");
+			q.setLessonSubcategory("FPB dua bilangan");
 			q.setLessonClassifier("Matematika SD");
 			q.setLessonGrade(4);
 			q.setSubCategoryOrder(2);
@@ -80,7 +80,7 @@ public class BasicGCDQuestionFactory implements IQuestionFactory{
 			
 			
 			q.setDifficultyLevel(QuizLevel.SEDANG);
-			q.setLessonSubcategory("Mencari FPB tiga bilangan");
+			q.setLessonSubcategory("FPB tiga bilangan");
 			q.setLessonClassifier("Matematika SD");
 			q.setLessonGrade(4);
 			q.setSubCategoryOrder(2);
