@@ -4,6 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.alza.quiz.qfactory.fraction.*;
+import com.alza.quiz.qfactory.kpk.BasicGCDQuestionFactory;
+import com.alza.quiz.qfactory.kpk.BasicGCDScenarioQuestionFactory;
+import com.alza.quiz.qfactory.kpk.FindFactorsOfQuestionFactory;
+import com.alza.quiz.qfactory.kpk.FindMultipleQuestionFactory;
+import com.alza.quiz.qfactory.kpk.TripeNumKPKQuestionFactory;
 import com.alza.quiz.qfactory.kpk.TwoNumKPKQuestionFactory;
 import com.alza.quiz.qfactory.kpk.BasicScenarioKPKQuestionFactory;
 import com.alza.quiz.qfactory.kpk.WhichDateScenarioKPKQuestionFactory;
@@ -27,10 +32,15 @@ public class Util {
 		lqf.add(new RatioQuestionFactory());
 		return lqf;
 	}
-	public static List<IQuestionFactory> getAllKPKQuestionFactory(){
+	public static List<IQuestionFactory> getAllLCMGCDQuestionFactory(){
 		List<IQuestionFactory> lqf = new ArrayList<IQuestionFactory>();
+		lqf.add(new FindMultipleQuestionFactory());
+		lqf.add(new FindFactorsOfQuestionFactory());
 		lqf.add(new TwoNumKPKQuestionFactory());
+		lqf.add(new TripeNumKPKQuestionFactory());
+		lqf.add(new BasicGCDQuestionFactory());
 		lqf.add(new BasicScenarioKPKQuestionFactory());
+		lqf.add(new BasicGCDScenarioQuestionFactory());
 		lqf.add(new WhichDayScenarioKPKQuestionFactory());
 		lqf.add(new WhichHourScenarioKPKQuestionFactory());
 		lqf.add(new WhichDateScenarioKPKQuestionFactory());
