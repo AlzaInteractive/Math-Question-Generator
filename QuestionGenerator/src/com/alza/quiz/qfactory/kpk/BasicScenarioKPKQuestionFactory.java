@@ -15,7 +15,7 @@ import java.util.Random;
  */
 
 public class BasicScenarioKPKQuestionFactory extends TwoNumKPKQuestionFactory {
-    private List<String> scenarios = new ArrayList();
+    private List<String> scenarios = new ArrayList<String>();
 
     public BasicScenarioKPKQuestionFactory(){
         super();
@@ -33,18 +33,15 @@ public class BasicScenarioKPKQuestionFactory extends TwoNumKPKQuestionFactory {
         List<Quiz> quizList = new ArrayList<>();
         for (String sce :scenarios){
             String[] pairPeople = CommonFunctionAndValues.getPairofPeople();
-            pairs = CommonFunctionAndValues.getPairOfIntSimple();
+            int[] pairs = CommonFunctionAndValues.getPairOfIntSimple();
             sce = CommonFunctionAndValues.buildScenario(sce,pairPeople,pairs);
             int correctAnswer = MathUtils.findLCM(pairs);
-            choices = new ArrayList<>();
-            addChoices(correctAnswer);
-            generateChoices();
             MultipleChoiceQuiz q = new MultipleChoiceQuiz();
             q.setLessonGrade(4);
             q.setDifficultyLevel(quizLevel);
             q.setQuestion(sce);
             q.setCorrectAnswer(String.valueOf(correctAnswer));
-            q.setChoices(choices);
+            q.setChoices(generateChoices(pairs));
             q.setLessonClassifier("Matematika SD");
             q.setLessonCategory("KPK & FPB");
             q.setLessonSubcategory("Soal cerita sederhana");

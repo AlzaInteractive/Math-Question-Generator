@@ -16,8 +16,7 @@ import java.util.Random;
  */
 
 public class WhichDayScenarioKPKQuestionFactory extends TwoNumKPKQuestionFactory {
-    private List<String> scenarios = new ArrayList();
-    int refdayInt;
+    private List<String> scenarios = new ArrayList<String>();
 
     public WhichDayScenarioKPKQuestionFactory(){
         super();
@@ -43,7 +42,7 @@ public class WhichDayScenarioKPKQuestionFactory extends TwoNumKPKQuestionFactory
             int correctAnswer = MathUtils.findLCM(numPair[i]) + refDayInInt;
             int rem = correctAnswer % 7;
             String correctAnswerInDay = CommonFunctionAndValues.hari[rem];
-            choices = new ArrayList<String>(Arrays.asList(CommonFunctionAndValues.hari));
+            ArrayList<String> choices = new ArrayList<String>(Arrays.asList(CommonFunctionAndValues.hari));
             MultipleChoiceQuiz q = new MultipleChoiceQuiz();
             q.setDifficultyLevel(quizLevel);
             q.setQuestion(sce);

@@ -4,7 +4,9 @@ import com.alza.common.math.MathUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.ThreadLocalRandom;
 
 import com.alza.quiz.model.Quiz;
@@ -15,10 +17,6 @@ import com.alza.quiz.qfactory.fraction.FindGreatestFractionQuestionFactory;
 
 public class TwoNumKPKQuestionFactory implements IQuestionFactory {
 	protected QuizLevel quizLevel = QuizLevel.MUDAH;
-	protected int[] pairs;
-	protected int correctAnswer;
-	protected List<String> choices;
-
 	public TwoNumKPKQuestionFactory(){
 
 	}
@@ -28,17 +26,16 @@ public class TwoNumKPKQuestionFactory implements IQuestionFactory {
 	@Override
 	public MultipleChoiceQuiz generateQuiz(QuizLevel quizLevel) {
 		this.quizLevel = quizLevel;
-		generatePair();
-		solvePair();
-		choices = new ArrayList<>();
-		addChoices(correctAnswer);
-		generateChoices();
+		int[] pairs = generatePairsOfTwo();
+		String correctAnswer = String.valueOf(MathUtils.findLCM(pairs)); 
+		generateChoices(pairs);
 		MultipleChoiceQuiz q = new MultipleChoiceQuiz();
+		q.addChoice(correctAnswer);
 		q.setLessonGrade(4);
 		q.setDifficultyLevel(quizLevel);
 		q.setQuestion("Kelipatan Persekutuan Terkecil (KPK) dari bilangan " + pairs[0]+" & "+pairs[1]+" adalah?");
 		q.setCorrectAnswer(String.valueOf(correctAnswer));
-		q.setChoices(choices);
+		q.setChoices(generateChoices(pairs));
 		q.setLessonClassifier("Matematika SD");
 		q.setLessonCategory("KPK & FPB");
 		q.setLessonSubcategory("KPK dua bilangan");
@@ -57,86 +54,44 @@ public class TwoNumKPKQuestionFactory implements IQuestionFactory {
 		return quizList;
 	}
 
-	protected void generateChoices() {
-		List<Integer> cAlts = new ArrayList<Integer>();
-		cAlts.add(pairs[0]*2);
-		cAlts.add(pairs[0]*3);
-		cAlts.add(pairs[1]*2);
-		cAlts.add(pairs[1]*3);
-		cAlts.add(pairs[0]*pairs[1]);
-		cAlts.add(correctAnswer * 2);
-		//cAlts.add(correctAnswer * ThreadLocalRandom.current().nextInt(2, 6 + 1));
-		cAlts.add(correctAnswer * 3);
-		cAlts.add(correctAnswer + pairs[0]);
-		cAlts.add(correctAnswer + pairs[1]);
-		cAlts.add(correctAnswer + pairs[1] + pairs[0]);
-		cAlts.add(MathUtils.findGCDDjikstra(pairs[0], pairs[1]));
-		Collections.shuffle(cAlts);
-		int i = 0;
-		while(choices.size()<5&&i<12){
-			addChoices(cAlts.get(i));
-			i++;
-		}
-		Collections.shuffle(choices);
+	protected Set<String> generateChoices(int[] pairs) {
+		int lcm = MathUtils.findLCM(pairs);
+		int gcd = MathUtils.findGCD(pairs);
+		Set<String> choices = new HashSet<String>();
+		choices.add(String.valueOf(pairs[0]*2));
+		choices.add(String.valueOf(pairs[1]*2));
+		choices.add(String.valueOf(pairs[0]*3));
+		choices.add(String.valueOf(pairs[1]*3));
+		choices.add(String.valueOf(pairs[0]*4));
+		choices.add(String.valueOf(pairs[1]*4));
+		choices.add(String.valueOf(lcm));
+		choices.add(String.valueOf(gcd));
+		return choices;	
 	}
-	protected void addChoices(int choice){
-		if (!choices.contains(String.valueOf(choice))){
-			choices.add(String.valueOf(choice));
-		}
 
-	}
-	protected void solvePair() {
-		correctAnswer = MathUtils.findLCM(pairs[0], pairs[1]);
-	}
-	private void generatePair() {
-		switch (quizLevel) {
-		case SEDANG:
-			generatePairsOfTwo();
-			break;
-
-		default:
-			generatePairsOfTwo();
-			break;
-		}
-		
-	}
-	private void generatePairsOfTwo() {
-		int min=3,max=12; // MUDAH
-		if (quizLevel.equals(QuizLevel.SEDANG)){
-			min = 6;
-			max = 20;
-		}
+	private int[] generatePairsOfTwo() {
+		int min=3,max=20; // MUDAH
 		int firstNumber, secondNumber, gcd;
-		boolean repeat; 
 		do {
 			firstNumber = ThreadLocalRandom.current().nextInt(min, max + 1);
 			secondNumber = ThreadLocalRandom.current().nextInt(min, max + 1);
 			gcd = MathUtils.findGCD(firstNumber,secondNumber);
-			repeat = false;
-			//System.out.println("Generated: "+firstNumber+" "+secondNumber+" "+(firstNumber==secondNumber));
 			if (firstNumber > secondNumber){
 				int temp;
 				temp = firstNumber;
 				firstNumber = secondNumber;
 				secondNumber = temp;
 			}
-			if (firstNumber == secondNumber||
-					firstNumber==10||
-					secondNumber==10||
-					gcd==1){
-				repeat = true;
-			}
-			if (quizLevel == QuizLevel.SEDANG){
-				if (secondNumber % firstNumber == 0){
-					repeat = true;
-				}
-			}
 		} while 
-			(repeat);
+			(firstNumber == secondNumber||
+			firstNumber==10||secondNumber==10||
+			secondNumber%firstNumber==0||
+			gcd == 1);
 		
-		this.pairs = new int[2];
-		this.pairs[0] = firstNumber;
-		this.pairs[1] = secondNumber;
+		int[] pairs = new int[2];
+		pairs[0] = firstNumber;
+		pairs[1] = secondNumber;
+		return pairs;
 	}
 	
 }
