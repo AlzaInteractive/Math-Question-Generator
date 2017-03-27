@@ -7,6 +7,7 @@ import com.alza.quiz.util.CommonFunctionAndValues;
 import com.alza.common.math.MathUtils;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -31,7 +32,8 @@ public class BasicScenarioKPKQuestionFactory extends TwoNumKPKQuestionFactory {
 
     public List<Quiz> generateQuizList(){
         List<Quiz> quizList = new ArrayList<>();
-        for (String sce :scenarios){
+        for (int i=0;i<2;i++){
+        	String sce = scenarios.get(i);
             String[] pairPeople = CommonFunctionAndValues.getPairofPeople();
             int[] pairs = CommonFunctionAndValues.getPairOfIntSimple();
             sce = CommonFunctionAndValues.buildScenario(sce,pairPeople,pairs);
@@ -65,14 +67,15 @@ public class BasicScenarioKPKQuestionFactory extends TwoNumKPKQuestionFactory {
                 "tukang bakso dan tukang rujak melewati depan rumahnya. " +
                 "Jika tukang bakso lewat #val1? hari sekali dan tukang rujak #val2?, " +
                 "berapa hari lagi #orang1? akan dapat menikmati keduanya?";
-        String sceThree = "#orang1? memasang lampu hias 17-an di depan rumahnya. " +
+        String sceThree = "#orang1? memiliki lampu hias di depan tokonya. " +
                 "Lampu tersebut terdiri atas 150 lampu berwarna kuning, merah dan biru. " +
                 "#orang1? mengatur agar lampu merah berkedip tiap #val1? detik, " +
-                "sedangkan lampu biru berkedip tiap #val2? detik dan lampu kuning berkedip tiap detik. " +
-                "Saat ini lampu kuning, merah dan biru menyala bersama. " +
-                "Mereka akan menyala bersama lagi setelah .... detik. ";
+                "lampu biru tiap #val2? detik dan lampu kuning tiap detik. " +
+                "Jika saat ini seluruh lampu menyala bersama, " +
+                "maka mereka akan menyala bersama lagi setelah .... detik. ";
         scenarios.add(sceOne);
         scenarios.add(sceTwo);
         scenarios.add(sceThree);
+        Collections.shuffle(scenarios);
     }
 }

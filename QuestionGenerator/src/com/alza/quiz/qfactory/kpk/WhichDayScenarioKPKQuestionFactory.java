@@ -53,6 +53,7 @@ public class WhichDayScenarioKPKQuestionFactory extends TwoNumKPKQuestionFactory
             q.setLessonSubcategory("Soal cerita melibatkan hari");
             q.setLessonGrade(4);
             quizList.add(q);
+            i++;
         }
         return  quizList;
     }
