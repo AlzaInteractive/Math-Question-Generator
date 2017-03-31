@@ -44,12 +44,12 @@ public class RomanNumeralsQuestionFactory implements IQuestionFactory{
 				int num = CommonFunctionAndValues.getRandomInt(bound[0], bound[1]);
 				String romans = MathUtils.toRomanNumeral(num);
 				if (i % 2 == 0){// to romans
-					q.setQuestion("Bentuk bilangan Romawi dari "+num+" adalah?");
+					q.setQuestion("Lambang Romawi dari angka "+num+" adalah?");
 					q.setCorrectAnswer(romans);
 					q.setLessonSubcategory("Konversi ke bilangan Romawi antara "+bound[0]+" s.d "+bound[1]);
 					q.setChoices(populateChoices(bound, num, true));
 				} else {
-					q.setQuestion("Nilai bilangan dari bilangan Romawi "+romans+" adalah?");
+					q.setQuestion("Nilai dari bilangan Romawi "+romans+" adalah?");
 					q.setCorrectAnswer(String.valueOf(num));
 					q.setLessonSubcategory("Konversi dari bilangan Romawi bernilai antara "+bound[0]+" s.d "+bound[1]);
 					q.setChoices(populateChoices(bound, num, false));
