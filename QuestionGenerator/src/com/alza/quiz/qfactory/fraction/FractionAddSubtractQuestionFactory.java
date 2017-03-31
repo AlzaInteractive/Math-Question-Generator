@@ -69,12 +69,12 @@ public class FractionAddSubtractQuestionFactory implements IQuestionFactory{
 		Fraction result;
 		if (i % 2 == 0){
 			result = f1.getResultWhenAddedWith(f2);
-			q.setQuestion("Hitung hasil penjumlahan dari pecahan "
-					+f1.toString()+" dan pecahan "+f2.toString());
+			q.setQuestion("Hitung "
+					+f1.toString()+" + "+f2.toString());
 		} else{
 			result = f1.getResultWhenSubtractWith(f2);
-			q.setQuestion("Hitung hasil dari pecahan "
-					+f1.toString()+" dikurangi pecahan "+f2.toString());
+			q.setQuestion("Hitung "
+					+f1.toString()+" - "+f2.toString());
 		}
 		q.setCorrectAnswer(result.toString());
 		q.setChoices(buildChoices(f1,f2,result));
@@ -93,12 +93,12 @@ public class FractionAddSubtractQuestionFactory implements IQuestionFactory{
 		Fraction result;
 		if (i % 2 == 0){
 			result = f1.getResultWhenAddedWith(f2);
-			q.setQuestion("Hitung hasil penjumlahan dari pecahan "
-					+f1.toString()+" dan pecahan "+f2.toString());
+			q.setQuestion("Hitung "
+					+f1.toString()+" + "+f2.toString());
 		} else{
 			result = f1.getResultWhenSubtractWith(f2);
-			q.setQuestion("Hitung hasil dari pecahan "
-					+f1.toString()+" dikurangi pecahan "+f2.toString());
+			q.setQuestion("Hitung "
+					+f1.toString()+" - "+f2.toString());
 		}
 		q.setCorrectAnswer(result.toString());
 		q.setChoices(buildChoices(f1,f2,result));
@@ -120,12 +120,12 @@ public class FractionAddSubtractQuestionFactory implements IQuestionFactory{
 		Fraction result;
 		if (i % 2 == 0){
 			result = f1.getResultWhenAddedWith(f2);
-			q.setQuestion("Hitung hasil penjumlahan dari pecahan "
-					+f1.toString()+" dan pecahan "+f2.toString());
+			q.setQuestion("Hitung "
+					+f1.toString()+" + "+f2.toString());
 		} else {
 			result = f1.getResultWhenSubtractWith(f2);
-			q.setQuestion("Hitung hasil dari pecahan "
-					+f1.toString()+" dikurangi pecahan "+f2.toString());
+			q.setQuestion("Hitung "
+					+f1.toString()+" - "+f2.toString());
 		}
 		q.setCorrectAnswer(result.toString());
 		q.setChoices(buildChoices(f1,f2,result));
