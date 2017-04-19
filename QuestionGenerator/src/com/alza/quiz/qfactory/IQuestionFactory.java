@@ -9,5 +9,7 @@ public interface IQuestionFactory {
 	public Quiz generateQuiz();
 	public Quiz generateQuiz(QuizLevel quizLevel);
 	public List<Quiz> generateQuizList();
+	public List<Quiz> generateQuizList(int numOfQuestion);
+	
 
 }

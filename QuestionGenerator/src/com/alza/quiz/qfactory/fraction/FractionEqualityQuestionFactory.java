@@ -13,7 +13,7 @@ import com.alza.quiz.qfactory.IQuestionFactory;
 import com.alza.quiz.util.CommonFunctionAndValues;
 
 public class FractionEqualityQuestionFactory implements IQuestionFactory{
-	
+	private static int NUM_OF_QUESTIONS = 4;
 	
 	private int[][] simpleMultiplier = {{2,3},{3,5},{4,7},{5,8},{3,7}};
 	private static final int CHOICE_SIZE=5;
@@ -33,12 +33,13 @@ public class FractionEqualityQuestionFactory implements IQuestionFactory{
 
 	@Override
 	public List<Quiz> generateQuizList() {
+		int z = NUM_OF_QUESTIONS/ 2;
 		List<Quiz> quizList = new ArrayList<Quiz>();
-		for (int i=0;i<2;i++){
+		for (int i=0;i<z;i++){
 			MultipleChoiceQuiz q = generateTypeA();
 			quizList.add(q);
 		}
-		for (int i=0;i<2;i++){
+		for (int i=0;i<z;i++){
 			MultipleChoiceQuiz q = generateTypeB(i);
 			quizList.add(q);
 		}
@@ -82,7 +83,7 @@ public class FractionEqualityQuestionFactory implements IQuestionFactory{
 	}
 
 	private MultipleChoiceQuiz generateTypeA() {
-		int a,b,r,multip;
+		int a,b,multip;
 		do {
 			a = ThreadLocalRandom.current().nextInt(2, 7);
 			b = ThreadLocalRandom.current().nextInt(3, 12);
@@ -148,5 +149,9 @@ public class FractionEqualityQuestionFactory implements IQuestionFactory{
 		}
 		return choicesInString;
 	}
-
+	@Override
+	public List<Quiz> generateQuizList(int numOfQuestion) {
+		NUM_OF_QUESTIONS = numOfQuestion;
+		return generateQuizList();
+	}
 }

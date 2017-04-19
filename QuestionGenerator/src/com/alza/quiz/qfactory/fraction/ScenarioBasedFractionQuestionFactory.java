@@ -18,7 +18,7 @@ import com.alza.quiz.util.CommonFunctionAndValues;
  */
 
 public class ScenarioBasedFractionQuestionFactory implements IQuestionFactory {
-    
+	private static int NUM_OF_QUESTIONS = 2;
     public ScenarioBasedFractionQuestionFactory(){
         super();
     }
@@ -36,8 +36,9 @@ public class ScenarioBasedFractionQuestionFactory implements IQuestionFactory {
 
     public List<Quiz> generateQuizList(){
         List<Quiz> quizList = new ArrayList<>();
-        quizList.add(generateScenario1());
-        quizList.add(generateScenario2());
+        int z = NUM_OF_QUESTIONS/2;
+        for (int i=0;i<z;i++) quizList.add(generateScenario1());
+        for (int i=0;i<z;i++) quizList.add(generateScenario2());
         for (Quiz q : quizList) {
         	q.setLessonClassifier("Matematika SD");
 			q.setLessonCategory("Pecahan");
@@ -171,5 +172,10 @@ public class ScenarioBasedFractionQuestionFactory implements IQuestionFactory {
 			choiceInString.add(String.valueOf(fraction.getOneDigitInteger()));
 		}
 		return choiceInString;
+	}
+    @Override
+	public List<Quiz> generateQuizList(int numOfQuestion) {
+		NUM_OF_QUESTIONS = numOfQuestion;
+		return generateQuizList();
 	}
 }

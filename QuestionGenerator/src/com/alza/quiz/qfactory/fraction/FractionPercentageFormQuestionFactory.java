@@ -13,7 +13,7 @@ import com.alza.quiz.qfactory.IQuestionFactory;
 import com.alza.quiz.util.CommonFunctionAndValues;
 
 public class FractionPercentageFormQuestionFactory implements IQuestionFactory {
-
+	private static int NUM_OF_QUESTIONS = 4;
 	@Override
 	public Quiz generateQuiz() {
 		List<Quiz> quizList = generateQuizList();
@@ -35,7 +35,8 @@ public class FractionPercentageFormQuestionFactory implements IQuestionFactory {
 	}
 
 	private void generateFractionToDecimal(List<Quiz> quizList) {
-		for (int i=0;i<2;i++){
+		int z = NUM_OF_QUESTIONS/ 2;
+		for (int i=0;i<z;i++){
 			MultipleChoiceQuiz q = new MultipleChoiceQuiz();
 			int a,denom=100;
 			if (i % 2 == 1){
@@ -72,7 +73,8 @@ public class FractionPercentageFormQuestionFactory implements IQuestionFactory {
 		}
 	}
 	private void generateDecimalToFraction(List<Quiz> quizList){
-		for (int i=0;i<2;i++){
+		int z = NUM_OF_QUESTIONS/ 2;
+		for (int i=0;i<z;i++){
 			MultipleChoiceQuiz q = new MultipleChoiceQuiz();
 			int a,denom;
 			if (i % 2 == 1){
@@ -115,6 +117,11 @@ public class FractionPercentageFormQuestionFactory implements IQuestionFactory {
 			else choicesInString.add(f.getSimplestForm().toString());
 		}
 		return choicesInString;
+	}
+	@Override
+	public List<Quiz> generateQuizList(int numOfQuestion) {
+		NUM_OF_QUESTIONS = numOfQuestion;
+		return generateQuizList();
 	}
 
 }

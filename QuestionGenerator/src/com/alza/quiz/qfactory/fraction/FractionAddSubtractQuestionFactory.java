@@ -14,7 +14,7 @@ import com.alza.quiz.qfactory.IQuestionFactory;
 import com.alza.quiz.util.CommonFunctionAndValues;
 
 public class FractionAddSubtractQuestionFactory implements IQuestionFactory{
-	private static final int NUM_OF_QUESTIONS = 6;
+	private static int NUM_OF_QUESTIONS = 6;
 	@Override
 	public Quiz generateQuiz() {
 		List<Quiz> quizList = generateQuizList();
@@ -154,6 +154,12 @@ public class FractionAddSubtractQuestionFactory implements IQuestionFactory{
 			choicesInString.add(f.toString());
 		}
 		return choicesInString;
+	}
+
+	@Override
+	public List<Quiz> generateQuizList(int numOfQuestion) {
+		NUM_OF_QUESTIONS = numOfQuestion;
+		return generateQuizList();
 	}
 
 }

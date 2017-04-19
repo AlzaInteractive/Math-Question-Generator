@@ -12,7 +12,7 @@ import com.alza.quiz.model.QuizLevel;
 import com.alza.quiz.qfactory.IQuestionFactory;
 
 public class BasicGCDQuestionFactory implements IQuestionFactory{
-	
+	private static int NUM_OF_QUESTIONS = 2;
 	static int[][] bounds = {
 		{12,29},{30,60}
 	};
@@ -89,5 +89,9 @@ public class BasicGCDQuestionFactory implements IQuestionFactory{
 		}
 		return lq;
 	}
-
+	@Override
+	public List<Quiz> generateQuizList(int numOfQuestion) {
+		NUM_OF_QUESTIONS = numOfQuestion;
+		return generateQuizList();
+	}
 }

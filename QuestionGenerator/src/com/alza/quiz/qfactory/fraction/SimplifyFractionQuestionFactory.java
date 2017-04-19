@@ -14,6 +14,7 @@ import com.alza.quiz.qfactory.IQuestionFactory;
 import com.alza.quiz.util.CommonFunctionAndValues;
 
 public class SimplifyFractionQuestionFactory implements IQuestionFactory {
+	private static int NUM_OF_QUESTIONS = 2;
 
 	@Override
 	public Quiz generateQuiz() {
@@ -30,7 +31,7 @@ public class SimplifyFractionQuestionFactory implements IQuestionFactory {
 	@Override
 	public List<Quiz> generateQuizList() {
 		List<Quiz> quizList = new ArrayList<Quiz>();
-		for (int i=0;i<2;i++){
+		for (int i=0;i<NUM_OF_QUESTIONS;i++){
 			int multi = ThreadLocalRandom.current().nextInt(2, 7);
 			int a,b;
 			do {
@@ -72,5 +73,10 @@ public class SimplifyFractionQuestionFactory implements IQuestionFactory {
 		}
 		return choicesInString;
 	}
+	 @Override
+		public List<Quiz> generateQuizList(int numOfQuestion) {
+			NUM_OF_QUESTIONS = numOfQuestion;
+			return generateQuizList();
+		}
 
 }

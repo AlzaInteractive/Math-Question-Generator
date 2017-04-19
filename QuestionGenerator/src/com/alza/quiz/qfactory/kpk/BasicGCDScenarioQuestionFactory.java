@@ -1,7 +1,6 @@
 package com.alza.quiz.qfactory.kpk;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
@@ -15,8 +14,7 @@ import com.alza.quiz.qfactory.IQuestionFactory;
 import com.alza.quiz.util.CommonFunctionAndValues;
 
 public class BasicGCDScenarioQuestionFactory implements IQuestionFactory{
-	private static List<String> twoNumScenario = new ArrayList<String>();
-	private static List<String> threeNumScenario = new ArrayList<String>();
+	private static int NUM_OF_QUESTIONS = 2;
 	private static List<GCDScenario> scenarios = new ArrayList<BasicGCDScenarioQuestionFactory.GCDScenario>();
 	@Override
 	public Quiz generateQuiz() {
@@ -34,7 +32,7 @@ public class BasicGCDScenarioQuestionFactory implements IQuestionFactory{
 	public List<Quiz> generateQuizList() {
 		generateScenario();
 		List<Quiz> lq = new ArrayList<Quiz>();
-		for (int i=1;i<2;i++){
+		for (int i=1;i<NUM_OF_QUESTIONS;i++){
 			GCDScenario s = scenarios.get(i);
 			String question = s.scenario;
 			int gcd,lcm;
@@ -134,6 +132,11 @@ public class BasicGCDScenarioQuestionFactory implements IQuestionFactory{
 			this.scenario = scenario;
 		}
 		
+	}
+	@Override
+	public List<Quiz> generateQuizList(int numOfQuestion) {
+		NUM_OF_QUESTIONS = numOfQuestion;
+		return generateQuizList();
 	}
 
 }

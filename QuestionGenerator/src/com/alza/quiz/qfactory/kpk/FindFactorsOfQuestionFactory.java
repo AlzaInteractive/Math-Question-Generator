@@ -13,7 +13,7 @@ import com.alza.quiz.qfactory.IQuestionFactory;
 import com.alza.quiz.util.StringUtils;
 
 public class FindFactorsOfQuestionFactory implements IQuestionFactory{
-
+	private static int NUM_OF_QUESTIONS = 2;
 	@Override
 	public Quiz generateQuiz() {
 		List<Quiz> quizList = generateQuizList();
@@ -30,7 +30,7 @@ public class FindFactorsOfQuestionFactory implements IQuestionFactory{
 	public List<Quiz> generateQuizList() {
 		List<Quiz> lq = new ArrayList<Quiz>();
 		int minBase=15,maxBase=41;
-		for (int i=0;i<2;i++){
+		for (int i=0;i<NUM_OF_QUESTIONS;i++){
 			int base;
 			List<Integer> divs;
 			do {
@@ -55,5 +55,9 @@ public class FindFactorsOfQuestionFactory implements IQuestionFactory{
 		}
 		return lq;
 	}
-
+	@Override
+	public List<Quiz> generateQuizList(int numOfQuestion) {
+		NUM_OF_QUESTIONS = numOfQuestion;
+		return generateQuizList();
+	}
 }

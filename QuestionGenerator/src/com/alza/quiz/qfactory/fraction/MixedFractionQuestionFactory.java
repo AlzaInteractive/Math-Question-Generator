@@ -15,7 +15,7 @@ import com.alza.quiz.qfactory.IQuestionFactory;
 import com.alza.quiz.util.CommonFunctionAndValues;
 
 public class MixedFractionQuestionFactory implements IQuestionFactory{
-
+	private static int NUM_OF_QUESTIONS = 6;
 	@Override
 	public Quiz generateQuiz() {
 		List<Quiz> quizList = generateQuizList();
@@ -31,7 +31,7 @@ public class MixedFractionQuestionFactory implements IQuestionFactory{
 	@Override
 	public List<Quiz> generateQuizList() {
 		List<Quiz> quizList= new ArrayList<Quiz>();
-		for (int i=0; i<6; i++){
+		for (int i=0; i<NUM_OF_QUESTIONS; i++){
 			MultipleChoiceQuiz q = null;
 			if (i>3){
 				q = generateTypeMultiDivide(i);
@@ -136,5 +136,9 @@ public class MixedFractionQuestionFactory implements IQuestionFactory{
 		}
 		return choicesInString;
 	}
-	
+	@Override
+	public List<Quiz> generateQuizList(int numOfQuestion) {
+		NUM_OF_QUESTIONS = numOfQuestion;
+		return generateQuizList();
+	}
 }

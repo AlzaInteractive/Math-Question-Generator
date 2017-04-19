@@ -17,6 +17,7 @@ import com.alza.quiz.qfactory.fraction.FindGreatestFractionQuestionFactory;
 
 public class TwoNumKPKQuestionFactory implements IQuestionFactory {
 	protected QuizLevel quizLevel = QuizLevel.MUDAH;
+	private static int NUM_OF_QUESTIONS = 4;
 	public TwoNumKPKQuestionFactory(){
 
 	}
@@ -45,7 +46,7 @@ public class TwoNumKPKQuestionFactory implements IQuestionFactory {
 
 	public List<Quiz> generateQuizList() {
 		List<Quiz> quizList = new ArrayList<>();
-		for (int i=0; i <2; i++){
+		for (int i=0; i <NUM_OF_QUESTIONS; i++){
 			quizList.add(generateQuiz(QuizLevel.MUDAH));
 		}
 		/*for (int i=0; i <2; i++){
@@ -92,6 +93,11 @@ public class TwoNumKPKQuestionFactory implements IQuestionFactory {
 		pairs[0] = firstNumber;
 		pairs[1] = secondNumber;
 		return pairs;
+	}
+	@Override
+	public List<Quiz> generateQuizList(int numOfQuestion) {
+		NUM_OF_QUESTIONS = numOfQuestion;
+		return generateQuizList();
 	}
 	
 }

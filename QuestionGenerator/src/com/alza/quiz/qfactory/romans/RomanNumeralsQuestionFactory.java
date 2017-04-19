@@ -15,6 +15,7 @@ import com.alza.quiz.qfactory.IQuestionFactory;
 import com.alza.quiz.util.CommonFunctionAndValues;
 
 public class RomanNumeralsQuestionFactory implements IQuestionFactory{
+	private static int NUM_OF_QUESTIONS = 2;
 	private int[][] bounds = {
 			{1,5},{5,10},{10,15},{15,20},
 			{20,40},{40,50},{50,90},{90,100},
@@ -85,6 +86,12 @@ public class RomanNumeralsQuestionFactory implements IQuestionFactory{
 			choices.add(String.valueOf(num));
 		}
 		return choices;
+	}
+
+	@Override
+	public List<Quiz> generateQuizList(int numOfQuestion) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

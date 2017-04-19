@@ -12,7 +12,7 @@ import com.alza.quiz.model.QuizLevel;
 import com.alza.quiz.qfactory.IQuestionFactory;
 
 public class TripeNumKPKQuestionFactory implements IQuestionFactory{
-
+	private static int NUM_OF_QUESTIONS = 2;
 	@Override
 	public Quiz generateQuiz() {
 		List<Quiz> quizList = generateQuizList();
@@ -31,7 +31,7 @@ public class TripeNumKPKQuestionFactory implements IQuestionFactory{
 		int maxBase = 16;
 		int val1,val2,val3;
 		List<Quiz> lq = new ArrayList<Quiz>();
-		for (int i = 0; i < 2; i++) {
+		for (int i = 0; i < NUM_OF_QUESTIONS; i++) {
 			do {
 				val1 = ThreadLocalRandom.current().nextInt(minBase, maxBase);
 				val2 = ThreadLocalRandom.current().nextInt(minBase, maxBase);
@@ -61,6 +61,11 @@ public class TripeNumKPKQuestionFactory implements IQuestionFactory{
 			lq.add(q);
 		}
 		return lq;
+	}
+	@Override
+	public List<Quiz> generateQuizList(int numOfQuestion) {
+		NUM_OF_QUESTIONS = numOfQuestion;
+		return generateQuizList();
 	}
 	
 }

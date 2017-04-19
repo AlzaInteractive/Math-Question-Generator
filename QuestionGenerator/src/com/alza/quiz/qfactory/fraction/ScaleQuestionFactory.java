@@ -13,6 +13,7 @@ import com.alza.quiz.qfactory.IQuestionFactory;
 import com.alza.quiz.util.CommonFunctionAndValues;
 
 public class ScaleQuestionFactory implements IQuestionFactory {
+	private static int NUM_OF_QUESTIONS = 6;
 	private static enum TYPE {
 		findScale,findModelLength,findRealLength
 	};
@@ -31,7 +32,7 @@ public class ScaleQuestionFactory implements IQuestionFactory {
 	@Override
 	public List<Quiz> generateQuizList() {
 		List<Quiz> ql = new ArrayList<Quiz>();
-		for (int i=0;i<6;i++){
+		for (int i=0;i<NUM_OF_QUESTIONS;i++){
 			ql.add(generateTypeA(i));
 		}
 		return ql;
@@ -167,5 +168,10 @@ public class ScaleQuestionFactory implements IQuestionFactory {
 			
 		}
 		return s;
+	}
+	@Override
+	public List<Quiz> generateQuizList(int numOfQuestion) {
+		NUM_OF_QUESTIONS = numOfQuestion;
+		return generateQuizList();
 	}
 }

@@ -12,6 +12,7 @@ import com.alza.quiz.qfactory.IQuestionFactory;
 import com.alza.quiz.util.CommonFunctionAndValues;
 
 public class RatioQuestionFactory implements IQuestionFactory{
+	private static int NUM_OF_QUESTIONS = 6;
 	private static enum TYPE  {
 		findFromPct, findFromRatio, describeRatio
 	}
@@ -31,7 +32,7 @@ public class RatioQuestionFactory implements IQuestionFactory{
 	@Override
 	public List<Quiz> generateQuizList() {
 		List<Quiz> ql = new ArrayList<Quiz>();
-		for (int i=0;i<6;i++){
+		for (int i=0;i<NUM_OF_QUESTIONS;i++){
 			MultipleChoiceQuiz q = new MultipleChoiceQuiz();
 			if (i % 3 == 1){
 				q = generateTypeC();
@@ -189,5 +190,10 @@ public class RatioQuestionFactory implements IQuestionFactory{
 			break;
 		}
 		return s;
+	}
+	@Override
+	public List<Quiz> generateQuizList(int numOfQuestion) {
+		NUM_OF_QUESTIONS = numOfQuestion;
+		return generateQuizList();
 	}
 }

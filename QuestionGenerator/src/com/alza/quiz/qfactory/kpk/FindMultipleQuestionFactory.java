@@ -11,7 +11,7 @@ import com.alza.quiz.model.QuizLevel;
 import com.alza.quiz.qfactory.IQuestionFactory;
 
 public class FindMultipleQuestionFactory implements IQuestionFactory{
-
+	private static int NUM_OF_QUESTIONS = 2;
 	@Override
 	public Quiz generateQuiz() {
 		List<Quiz> quizList = generateQuizList();
@@ -29,7 +29,7 @@ public class FindMultipleQuestionFactory implements IQuestionFactory{
 		int minBase = 5;
 		int maxBase = 16;
 		List<Quiz> lq = new ArrayList<Quiz>();
-		for (int i=0;i<2;i++){
+		for (int i=0;i<NUM_OF_QUESTIONS;i++){
 			int base;
 			do {
 				base = ThreadLocalRandom.current().nextInt(minBase, maxBase);
@@ -54,5 +54,9 @@ public class FindMultipleQuestionFactory implements IQuestionFactory{
 		}
 		return lq;
 	}
-	
+	@Override
+	public List<Quiz> generateQuizList(int numOfQuestion) {
+		NUM_OF_QUESTIONS = numOfQuestion;
+		return generateQuizList();
+	}
 }
