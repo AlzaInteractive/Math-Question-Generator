@@ -4,9 +4,17 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Set;
 
 public class MultipleChoiceQuiz extends  Quiz{
+	public MultipleChoiceQuiz(Locale loc) {
+		super(loc);
+		// TODO Auto-generated constructor stub
+	}
+	public MultipleChoiceQuiz(){
+		super();
+	}
 	private String correctAnswer;
 	private List<String> choices = new ArrayList<String>();
 	

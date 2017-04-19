@@ -1,6 +1,7 @@
 package com.alza.quiz.model;
 
 import java.util.Comparator;
+import java.util.Locale;
 
 /**
  * Created by galuh on 24/12/16.
@@ -8,6 +9,7 @@ import java.util.Comparator;
 
 public abstract class Quiz implements Comparable<Quiz>, Comparator<Quiz>{
     QuizLevel quizLevel;
+    Locale loc;
     int subCategoryOrder = 99;
     String question;
     String correctAnswer;
@@ -15,7 +17,12 @@ public abstract class Quiz implements Comparable<Quiz>, Comparator<Quiz>{
     String lessonCategory;
     String lessonSubcategory;
     int lessonGrade;
-
+    public Quiz(Locale loc){
+    	this.loc = loc;
+    }
+    public Quiz(){
+    	this.loc = new Locale("in", "ID");
+    }
     public boolean isCorrect(Object answer){
         return false;
     }
