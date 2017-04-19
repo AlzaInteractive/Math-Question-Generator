@@ -2,8 +2,10 @@ package com.alza.quiz.qfactory;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import com.alza.quiz.qfactory.fraction.*;
+import com.alza.quiz.qfactory.integer.AdditionOfTwoIntegers;
 import com.alza.quiz.qfactory.kpk.BasicGCDQuestionFactory;
 import com.alza.quiz.qfactory.kpk.BasicGCDScenarioQuestionFactory;
 import com.alza.quiz.qfactory.kpk.FindFactorsOfQuestionFactory;
@@ -49,6 +51,17 @@ public class Util {
 	public static List<IQuestionFactory> getAllRomansQuestionFactory(){
 		List<IQuestionFactory> lqf = new ArrayList<IQuestionFactory>();
 		lqf.add(new RomanNumeralsQuestionFactory());
+		return lqf;
+	}
+	public static List<IQuestionFactory> getAllIntegerQuestionFactory(Locale loc){
+		List<IQuestionFactory> lqf = new ArrayList<IQuestionFactory>();
+		lqf.add(new AdditionOfTwoIntegers(loc));
+		return lqf;
+	}
+	public static List<IQuestionFactory> getAllIntegerQuestionFactory(){
+		Locale loc = new Locale("in", "ID");
+		List<IQuestionFactory> lqf = new ArrayList<IQuestionFactory>();
+		lqf.add(new AdditionOfTwoIntegers(loc));
 		return lqf;
 	}
 }
