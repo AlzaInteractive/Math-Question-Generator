@@ -62,6 +62,7 @@ public class AdditionOfTwoIntegers implements IQuestionFactory{
 			} while (a==b);
 			SimpleQuiz q = new SimpleQuiz();
 			int rslt = a+b;
+			
 			q.setQuestion(a+" + "+b);
 			q.setCorrectAnswer(String.valueOf(rslt));
 			q.setDifficultyLevel(QuizLevel.MUDAH);
@@ -69,6 +70,7 @@ public class AdditionOfTwoIntegers implements IQuestionFactory{
 			q.setLessonClassifier(bundle.getString("mathelementary"));
 			q.setLessonGrade(4);
 			q.setSubCategoryOrder(2);
+			q.setLocalGeneratorOrder(idx);
 			q.setLessonCategory(bundle.getString("integer"));
 			lq.add(q);
 		}
@@ -78,8 +80,8 @@ public class AdditionOfTwoIntegers implements IQuestionFactory{
 
 	@Override
 	public List<Quiz> generateQuizList(int numOfQuestion) {
-		// TODO Auto-generated method stub
-		return null;
+		this.numOfQuestion = numOfQuestion;
+		return generateQuizList();
 	}
 
 }

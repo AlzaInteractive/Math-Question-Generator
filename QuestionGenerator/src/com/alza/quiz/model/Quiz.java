@@ -16,13 +16,8 @@ public abstract class Quiz implements Comparable<Quiz>, Comparator<Quiz>{
     String lessonClassifier;
     String lessonCategory;
     String lessonSubcategory;
+    int localGeneratorOrder;
     int lessonGrade;
-    public Quiz(Locale loc){
-    	this.loc = loc;
-    }
-    public Quiz(){
-    	this.loc = new Locale("in", "ID");
-    }
     public boolean isCorrect(Object answer){
         return false;
     }
@@ -73,6 +68,14 @@ public abstract class Quiz implements Comparable<Quiz>, Comparator<Quiz>{
 		this.subCategoryOrder = subCategoryOrder;
 	}
 
+	public int getLocalGeneratorOrder() {
+		return localGeneratorOrder;
+	}
+
+	public void setLocalGeneratorOrder(int localGeneratorOrder) {
+		this.localGeneratorOrder = localGeneratorOrder;
+	}
+
 	public int getLessonGrade() {
 		return lessonGrade;
 	}
@@ -100,6 +103,8 @@ public abstract class Quiz implements Comparable<Quiz>, Comparator<Quiz>{
 			return this.quizLevel.compareTo(o.quizLevel);
 		} else if (this.subCategoryOrder!=o.subCategoryOrder){
 			return this.subCategoryOrder - o.subCategoryOrder;
+		} else if (this.localGeneratorOrder != o.localGeneratorOrder){
+			return this.localGeneratorOrder - o.localGeneratorOrder;
 		}
 		return 0;
 	}

@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Locale;
 
 import com.alza.quiz.qfactory.fraction.*;
+import com.alza.quiz.qfactory.integer.AdditionOfThreeIntegers;
 import com.alza.quiz.qfactory.integer.AdditionOfTwoIntegers;
 import com.alza.quiz.qfactory.kpk.BasicGCDQuestionFactory;
 import com.alza.quiz.qfactory.kpk.BasicGCDScenarioQuestionFactory;
@@ -56,12 +57,11 @@ public class Util {
 	public static List<IQuestionFactory> getAllIntegerQuestionFactory(Locale loc){
 		List<IQuestionFactory> lqf = new ArrayList<IQuestionFactory>();
 		lqf.add(new AdditionOfTwoIntegers(loc));
+		lqf.add(new AdditionOfThreeIntegers(loc));
 		return lqf;
 	}
 	public static List<IQuestionFactory> getAllIntegerQuestionFactory(){
 		Locale loc = new Locale("in", "ID");
-		List<IQuestionFactory> lqf = new ArrayList<IQuestionFactory>();
-		lqf.add(new AdditionOfTwoIntegers(loc));
-		return lqf;
+		return getAllIntegerQuestionFactory(loc);
 	}
 }
