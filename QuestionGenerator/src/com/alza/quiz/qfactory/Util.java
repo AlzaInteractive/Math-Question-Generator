@@ -7,6 +7,7 @@ import java.util.Locale;
 import com.alza.quiz.qfactory.fraction.*;
 import com.alza.quiz.qfactory.integer.AdditionOfThreeIntegers;
 import com.alza.quiz.qfactory.integer.AdditionOfTwoIntegers;
+import com.alza.quiz.qfactory.integer.DivisionOfTwoIntegers;
 import com.alza.quiz.qfactory.integer.MultiplicationOfTwoIntegers;
 import com.alza.quiz.qfactory.integer.SubtractionOfTwoIntegers;
 import com.alza.quiz.qfactory.kpk.BasicGCDQuestionFactory;
@@ -62,6 +63,7 @@ public class Util {
 		lqf.add(new SubtractionOfTwoIntegers(loc));
 		lqf.add(new AdditionOfThreeIntegers(loc));
 		lqf.add(new MultiplicationOfTwoIntegers(loc));
+		lqf.add(new DivisionOfTwoIntegers(loc));
 		return lqf;
 	}
 	public static List<IQuestionFactory> getAllIntegerQuestionFactory(){
