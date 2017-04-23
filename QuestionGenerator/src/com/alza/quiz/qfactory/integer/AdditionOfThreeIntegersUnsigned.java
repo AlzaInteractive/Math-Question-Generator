@@ -7,19 +7,22 @@ import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.concurrent.ThreadLocalRandom;
 
+import net.objecthunter.exp4j.Expression;
+import net.objecthunter.exp4j.ExpressionBuilder;
+
 import com.alza.quiz.model.Quiz;
 import com.alza.quiz.model.QuizLevel;
 import com.alza.quiz.model.SimpleQuiz;
 import com.alza.quiz.qfactory.IQuestionFactory;
 
-public class AdditionOfThreeIntegers implements IQuestionFactory{
+public class AdditionOfThreeIntegersUnsigned implements IQuestionFactory{
 	Locale loc;
 	ResourceBundle bundle;
-	public AdditionOfThreeIntegers(Locale loc){
+	public AdditionOfThreeIntegersUnsigned(Locale loc){
 		this.loc = loc;
 		initStringFromLocale();
 	}
-	public AdditionOfThreeIntegers(){
+	public AdditionOfThreeIntegersUnsigned(){
 		this.loc = new Locale("in", "ID");
 		initStringFromLocale();
 	}
@@ -28,11 +31,11 @@ public class AdditionOfThreeIntegers implements IQuestionFactory{
 	}
 	int numOfQuestion = 4;
 	int[][] bounds = {
-			{0,25},{25,50},{50,100},{100,250}
+			{300,450},{3000,4500}
 	};
-	boolean[][] signs = {
-			{true,true,true},{true,true,false},{true,false,true},
-			{true,false,false},{false,false,false}
+	String[] expression = {
+			"a + b + c" ,"c + b + a"
+			 
 	};
 	@Override
 	public Quiz generateQuiz() {
@@ -50,60 +53,44 @@ public class AdditionOfThreeIntegers implements IQuestionFactory{
 	public List<Quiz> generateQuizList() {
 		List<Quiz> lq = new ArrayList<Quiz>();
 		for (int i= 0;i<numOfQuestion;i++){
-			
-			int a=0,b=0,c=0;
-			int pos = (i % signs.length) % bounds.length;
-			int farBound = bounds[pos][1];
-			int nearBound = bounds[pos][0];
-			do {
-				// assign a,b,c
-				a = ThreadLocalRandom.current().nextInt(-farBound, 
-						farBound);
-				b = ThreadLocalRandom.current().nextInt(-farBound, 
-						farBound);
-				c = ThreadLocalRandom.current().nextInt(-farBound, 
-						farBound);
-			} while (a==b||a==c||b==c
-					||Math.abs(a)<nearBound
-					||Math.abs(b)<nearBound
-					||Math.abs(c)<nearBound);
-			
 			int idx;
-			if (i<signs.length){
+			if (i<bounds.length){
 				idx = i;
 			} else {
-				idx = i % signs.length; 
+				idx = i % bounds.length; 
 			}
-			boolean[] sign = signs[idx];
-			//prepare question composition
-			String question = ""+a;
-			int correctAnswer = a;
-			if (sign[1]){
-				question = question +" + "+b;
-				correctAnswer = correctAnswer + b;
-			} else {
-				question = question +" - "+b;
-				correctAnswer = correctAnswer - b;
-			}
-			if (sign[2]){
-				question = question +" + "+c;
-				correctAnswer = correctAnswer + c;
-			} else {
-				question = question +" - "+c;
-				correctAnswer = correctAnswer - c;
-			}
-			
 			//System.out.println("index "+idx);
-			
+			int a=0,b=0,c=0;
+			do {
+				a = ThreadLocalRandom.current().nextInt(bounds[idx][0], 
+						bounds[idx][1]);
+				b = ThreadLocalRandom.current().nextInt(bounds[idx][0], 
+						bounds[idx][1]);
+				c = ThreadLocalRandom.current().nextInt(bounds[idx][0], 
+						bounds[idx][1]);
+			} while (a<=b||a<=c||b<=c);
 			SimpleQuiz q = new SimpleQuiz();
+			
+			Expression e = new ExpressionBuilder(expression[idx])
+				.variables("a","b","c")
+				.build()
+				.setVariable("a", a)
+				.setVariable("b", b)
+				.setVariable("c", c);
+			int rslt = (int) e.evaluate();
+			
+			String question = expression[idx].replace("*", "x");
+			question = question.replace("a", String.valueOf(a));
+			question = question.replace("b", String.valueOf(b));
+			question = question.replace("c", String.valueOf(c));
 			q.setQuestion(question);
-			q.setCorrectAnswer(String.valueOf(correctAnswer));
+			q.setCorrectAnswer(String.valueOf(rslt));
 			q.setDifficultyLevel(QuizLevel.MUDAH);
-			q.setLessonSubcategory(bundle.getString("integer.addthreenum"));
+			q.setLessonSubcategory(bundle.getString("integer.addthreenumu"));
 			q.setLessonClassifier(bundle.getString("mathelementary"));
 			q.setLessonGrade(4);
 			q.setSubCategoryOrder(3);
-			q.setLocalGeneratorOrder(pos);
+			q.setLocalGeneratorOrder(idx);
 			q.setLessonCategory(bundle.getString("integer"));
 			lq.add(q);
 		}

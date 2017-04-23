@@ -34,7 +34,9 @@ public class MixedOperationOfIntegers implements IQuestionFactory{
 			{5,10},{10,15},{15,25},{25,50}
 	};
 	String[] expression = {
-			"a * (b + c) ","a * (b - c)", "(a + b) * c", "(a - b) * c ",
+			"a * (b + c) ","a * (b - c)", 
+			"(a * b) + c","a + (b * c)",
+			"(a + b) * c", "(a - b) * c ",
 			"(a * b) + (a * c)","(a * b) - (a * c)" 
 	};
 	@Override

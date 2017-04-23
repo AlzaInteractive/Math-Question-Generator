@@ -5,7 +5,8 @@ import java.util.List;
 import java.util.Locale;
 
 import com.alza.quiz.qfactory.fraction.*;
-import com.alza.quiz.qfactory.integer.AdditionOfThreeIntegers;
+import com.alza.quiz.qfactory.integer.AdditionOfThreeIntegersSigned;
+import com.alza.quiz.qfactory.integer.AdditionOfThreeIntegersUnsigned;
 import com.alza.quiz.qfactory.integer.AdditionOfTwoIntegers;
 import com.alza.quiz.qfactory.integer.DivisionOfTwoIntegers;
 import com.alza.quiz.qfactory.integer.MixedOperationOfIntegers;
@@ -62,7 +63,8 @@ public class Util {
 		List<IQuestionFactory> lqf = new ArrayList<IQuestionFactory>();
 		lqf.add(new AdditionOfTwoIntegers(loc));
 		lqf.add(new SubtractionOfTwoIntegers(loc));
-		lqf.add(new AdditionOfThreeIntegers(loc));
+		lqf.add(new AdditionOfThreeIntegersUnsigned(loc));
+		lqf.add(new AdditionOfThreeIntegersSigned(loc));
 		lqf.add(new MultiplicationOfTwoIntegers(loc));
 		lqf.add(new DivisionOfTwoIntegers(loc));
 		lqf.add(new MixedOperationOfIntegers(loc));
