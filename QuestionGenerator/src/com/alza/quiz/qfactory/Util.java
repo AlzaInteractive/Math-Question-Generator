@@ -12,6 +12,7 @@ import com.alza.quiz.qfactory.integer.DivisionOfTwoIntegers;
 import com.alza.quiz.qfactory.integer.MixedOperationOfIntegers;
 import com.alza.quiz.qfactory.integer.MultiplicationOfTwoIntegers;
 import com.alza.quiz.qfactory.integer.QuadraticOperation;
+import com.alza.quiz.qfactory.integer.SquareRoot;
 import com.alza.quiz.qfactory.integer.SubtractionOfTwoIntegers;
 import com.alza.quiz.qfactory.kpk.BasicGCDQuestionFactory;
 import com.alza.quiz.qfactory.kpk.BasicGCDScenarioQuestionFactory;
@@ -70,6 +71,7 @@ public class Util {
 		lqf.add(new DivisionOfTwoIntegers(loc));
 		lqf.add(new MixedOperationOfIntegers(loc));
 		lqf.add(new QuadraticOperation(loc));
+		lqf.add(new SquareRoot(loc));
 		return lqf;
 	}
 	public static List<IQuestionFactory> getAllIntegerQuestionFactory(){

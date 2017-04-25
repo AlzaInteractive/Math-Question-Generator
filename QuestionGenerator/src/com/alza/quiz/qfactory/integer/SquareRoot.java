@@ -15,15 +15,15 @@ import com.alza.quiz.model.QuizLevel;
 import com.alza.quiz.model.SimpleQuiz;
 import com.alza.quiz.qfactory.IQuestionFactory;
 
-public class QuadraticOperation implements IQuestionFactory{
+public class SquareRoot implements IQuestionFactory{
 	private final static String MJXTAG ="\\"; 
 	Locale loc;
 	ResourceBundle bundle;
-	public QuadraticOperation(Locale loc){
+	public SquareRoot(Locale loc){
 		this.loc = loc;
 		initStringFromLocale();
 	}
-	public QuadraticOperation(){
+	public SquareRoot(){
 		this.loc = new Locale("in", "ID");
 		initStringFromLocale();
 	}
@@ -32,17 +32,13 @@ public class QuadraticOperation implements IQuestionFactory{
 	}
 	int numOfQuestion = 4;
 	int[][] bounds = {
-			{5,10},{10,15},{15,25},{25,50}
+			{05,15},{20,35},{50,100}
 	};
 	String[] expression = {
-			"a^2", 
-			"a^2 + b^2",
-			"a^2 - b^2",
-			"(a+b)^2",
-			"(a-b)^2",
-			"a^2 + b^2 + c^2",
-			"a^2 + (b-c)^2",
-			"(a-b)^2 + c^2"
+			"sqrt(a^2)", "sqrt(b^2)","sqrt(c^2)",
+			//"sqrt(a^2+b^2)",
+			"sqrt(a^2+(2*a*b)+b^2)",
+			"sqrt(a^2-(2*a*b)+b^2)",
 	};
 	@Override
 	public Quiz generateQuiz() {
@@ -75,7 +71,7 @@ public class QuadraticOperation implements IQuestionFactory{
 						bounds[idx][1]);
 				c = ThreadLocalRandom.current().nextInt(bounds[idx][0], 
 						bounds[idx][1]);
-			} while (a<=b||a<=c||b<=c);
+			} while (a==b||a==c||b==c);
 			SimpleQuiz q = new SimpleQuiz();
 			
 			Expression e = new ExpressionBuilder(expression[idx])
@@ -87,15 +83,16 @@ public class QuadraticOperation implements IQuestionFactory{
 			int rslt = (int) e.evaluate();
 			
 			String question = MJXTAG+expression[idx].replace("*", "x")+MJXTAG;
-			question = question.replace("a", String.valueOf(a));
-			question = question.replace("b", String.valueOf(b));
-			question = question.replace("c", String.valueOf(c));
+			question = question.replace("2ab", String.valueOf(2*a*b));
+			question = question.replace("a^2", String.valueOf(a*a));
+			question = question.replace("b^2", String.valueOf(b*b));
+			question = question.replace("c^2", String.valueOf(c*c));
 			q.setQuestion(question);
 			q.setCorrectAnswer(String.valueOf(rslt));
 			q.setDifficultyLevel(QuizLevel.MUDAH);
-			q.setLessonSubcategory(bundle.getString("integer.quadratic"));
+			q.setLessonSubcategory(bundle.getString("integer.squareroot"));
 			q.setLessonClassifier(bundle.getString("mathelementary"));
-			q.setLessonGrade(5);
+			q.setLessonGrade(6);
 			q.setSubCategoryOrder(6);
 			q.setLocalGeneratorOrder(idx);
 			q.setLessonCategory(bundle.getString("integer"));
