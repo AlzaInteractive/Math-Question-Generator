@@ -94,8 +94,8 @@ public class SquareRootPhytagorean implements IQuestionFactory{
 			q.setDifficultyLevel(QuizLevel.MUDAH);
 			q.setLessonSubcategory(bundle.getString("integer.squarerootphyt"));
 			q.setLessonClassifier(bundle.getString("mathelementary"));
-			q.setLessonGrade(6);
-			q.setSubCategoryOrder(6);
+			q.setLessonGrade(5);
+			q.setSubCategoryOrder(8);
 			q.setLocalGeneratorOrder(idx);
 			q.setLessonCategory(bundle.getString("integer"));
 			lq.add(q);

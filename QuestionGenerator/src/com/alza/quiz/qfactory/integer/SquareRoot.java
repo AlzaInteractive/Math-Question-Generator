@@ -92,8 +92,8 @@ public class SquareRoot implements IQuestionFactory{
 			q.setDifficultyLevel(QuizLevel.MUDAH);
 			q.setLessonSubcategory(bundle.getString("integer.squareroot"));
 			q.setLessonClassifier(bundle.getString("mathelementary"));
-			q.setLessonGrade(6);
-			q.setSubCategoryOrder(6);
+			q.setLessonGrade(5);
+			q.setSubCategoryOrder(7);
 			q.setLocalGeneratorOrder(idx);
 			q.setLessonCategory(bundle.getString("integer"));
 			lq.add(q);
