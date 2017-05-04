@@ -19,7 +19,7 @@ public abstract class Quiz implements Comparable<Quiz>, Comparator<Quiz>{
     int localGeneratorOrder;
     int lessonGrade;
     public boolean isCorrect(Object answer){
-        return false;
+        return correctAnswer.equals(answer);
     }
 
     public QuizLevel getQuizLevel() {
