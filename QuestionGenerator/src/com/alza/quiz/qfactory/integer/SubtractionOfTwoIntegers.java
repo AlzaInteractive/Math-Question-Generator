@@ -26,7 +26,7 @@ public class SubtractionOfTwoIntegers implements IQuestionFactory{
 	private void initStringFromLocale(){
 		bundle = ResourceBundle.getBundle("lang.langbundle", loc);
 	}
-	int numOfQuestion = 4;
+	int numOfQuestion = 3;
 	int[][] bounds = {
 			{25,50},{50,75},{75,100},{100,250},{250,500}
 	};

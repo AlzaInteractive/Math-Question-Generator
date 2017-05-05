@@ -16,7 +16,7 @@ import com.alza.quiz.model.SimpleQuiz;
 import com.alza.quiz.qfactory.IQuestionFactory;
 
 public class SquareRootPhytagorean implements IQuestionFactory{
-	private final static String MJXTAG ="\\"; 
+	private final static String MJXTAG ="$$"; 
 	Locale loc;
 	ResourceBundle bundle;
 	public SquareRootPhytagorean(Locale loc){
@@ -34,8 +34,10 @@ public class SquareRootPhytagorean implements IQuestionFactory{
 	int[][] bounds = {
 			{2,5},{2,5}
 	};
-	String[] expression = {
-			"sqrt(a^2+b^2)","sqrt(c^2-b^2)","sqrt(c^2-a^2)",
+	String[][] expression = {
+			{"sqrt(a^2+b^2)","sqrt{a^2+b^2}"},
+			{"sqrt(c^2-b^2)","sqrt{c^2-b^2}"},
+			{"sqrt(c^2-a^2)","sqrt{c^2-a^2}"}
 			
 	};
 	@Override
@@ -76,7 +78,7 @@ public class SquareRootPhytagorean implements IQuestionFactory{
 			} while (m<=n);
 			SimpleQuiz q = new SimpleQuiz();
 			
-			Expression e = new ExpressionBuilder(expression[idx])
+			Expression e = new ExpressionBuilder(expression[idx][0])
 				.variables("a","b","c")
 				.build()
 				.setVariable("a", a)
@@ -84,7 +86,7 @@ public class SquareRootPhytagorean implements IQuestionFactory{
 				.setVariable("c", c);
 			int rslt = (int) e.evaluate();
 			
-			String question = MJXTAG+expression[idx].replace("*", "x")+MJXTAG;
+			String question = MJXTAG+expression[idx][1].replace("*", "x")+MJXTAG;
 			question = question.replace("a", String.valueOf(a));
 			question = question.replace("b", String.valueOf(b));
 			question = question.replace("c", String.valueOf(c));

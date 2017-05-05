@@ -26,7 +26,7 @@ public class AdditionOfThreeIntegersSigned implements IQuestionFactory{
 	private void initStringFromLocale(){
 		bundle = ResourceBundle.getBundle("lang.langbundle", loc);
 	}
-	int numOfQuestion = 4;
+	int numOfQuestion = 3;
 	int[][] bounds = {
 			{0,25},{25,50},{50,100},{100,250}
 	};
@@ -78,18 +78,28 @@ public class AdditionOfThreeIntegersSigned implements IQuestionFactory{
 			//prepare question composition
 			String question = ""+a;
 			int correctAnswer = a;
+			String bSigned;
+			if (b < 0){
+				bSigned = "("+b+")";
+			} else bSigned=""+b;
+			
+			String cSigned;
+			if (c < 0){
+				cSigned = "("+c+")";
+			} else cSigned=""+c;
+			
 			if (sign[1]){
-				question = question +" + "+b;
+				question = question +" + "+bSigned;
 				correctAnswer = correctAnswer + b;
 			} else {
-				question = question +" - "+b;
+				question = question +" - "+bSigned;
 				correctAnswer = correctAnswer - b;
 			}
 			if (sign[2]){
-				question = question +" + "+c;
+				question = question +" + "+cSigned;
 				correctAnswer = correctAnswer + c;
 			} else {
-				question = question +" - "+c;
+				question = question +" - "+cSigned;
 				correctAnswer = correctAnswer - c;
 			}
 			

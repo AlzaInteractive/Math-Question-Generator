@@ -16,7 +16,7 @@ import com.alza.quiz.model.SimpleQuiz;
 import com.alza.quiz.qfactory.IQuestionFactory;
 
 public class SquareRoot implements IQuestionFactory{
-	private final static String MJXTAG ="\\"; 
+	private final static String MJXTAG ="$$"; 
 	Locale loc;
 	ResourceBundle bundle;
 	public SquareRoot(Locale loc){
@@ -30,15 +30,14 @@ public class SquareRoot implements IQuestionFactory{
 	private void initStringFromLocale(){
 		bundle = ResourceBundle.getBundle("lang.langbundle", loc);
 	}
-	int numOfQuestion = 4;
+	int numOfQuestion = 3;
 	int[][] bounds = {
-			{05,15},{20,35},{50,100}
+			{5,10},{10,15},{15,20}
 	};
-	String[] expression = {
-			"sqrt(a^2)", "sqrt(b^2)","sqrt(c^2)",
-			//"sqrt(a^2+b^2)",
-			"sqrt(a^2+(2*a*b)+b^2)",
-			"sqrt(a^2-(2*a*b)+b^2)",
+	String[][] expression = {
+			{"sqrt(a^2)","sqrt{a^2}"}, 
+			{"sqrt(a^2+(2*a*b)+b^2)","sqrt{a^2+(2*a*b)+b^2}"},
+			{"sqrt(a^2-(2*a*b)+b^2)","sqrt{a^2-(2*a*b)+b^2}"},
 	};
 	@Override
 	public Quiz generateQuiz() {
@@ -74,7 +73,7 @@ public class SquareRoot implements IQuestionFactory{
 			} while (a==b||a==c||b==c);
 			SimpleQuiz q = new SimpleQuiz();
 			
-			Expression e = new ExpressionBuilder(expression[idx])
+			Expression e = new ExpressionBuilder(expression[idx][0])
 				.variables("a","b","c")
 				.build()
 				.setVariable("a", a)
@@ -82,7 +81,7 @@ public class SquareRoot implements IQuestionFactory{
 				.setVariable("c", c);
 			int rslt = (int) e.evaluate();
 			
-			String question = MJXTAG+expression[idx].replace("*", "x")+MJXTAG;
+			String question = MJXTAG+expression[idx][1].replace("*", "x")+MJXTAG;
 			question = question.replace("2ab", String.valueOf(2*a*b));
 			question = question.replace("a^2", String.valueOf(a*a));
 			question = question.replace("b^2", String.valueOf(b*b));

@@ -29,7 +29,7 @@ public class MixedOperationOfIntegers implements IQuestionFactory{
 	private void initStringFromLocale(){
 		bundle = ResourceBundle.getBundle("lang.langbundle", loc);
 	}
-	int numOfQuestion = 4;
+	int numOfQuestion = 3;
 	int[][] bounds = {
 			{5,10},{10,15},{15,25},{25,50}
 	};

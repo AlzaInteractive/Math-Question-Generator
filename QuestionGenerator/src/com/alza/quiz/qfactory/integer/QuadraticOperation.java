@@ -16,7 +16,7 @@ import com.alza.quiz.model.SimpleQuiz;
 import com.alza.quiz.qfactory.IQuestionFactory;
 
 public class QuadraticOperation implements IQuestionFactory{
-	private final static String MJXTAG ="\\"; 
+	private final static String MJXTAG ="$$"; 
 	Locale loc;
 	ResourceBundle bundle;
 	public QuadraticOperation(Locale loc){
@@ -30,19 +30,19 @@ public class QuadraticOperation implements IQuestionFactory{
 	private void initStringFromLocale(){
 		bundle = ResourceBundle.getBundle("lang.langbundle", loc);
 	}
-	int numOfQuestion = 4;
+	int numOfQuestion = 3;
 	int[][] bounds = {
-			{5,10},{10,15},{15,25},{25,50}
+			{5,10},{10,15},{15,20},{20,33}
 	};
-	String[] expression = {
-			"a^2", 
-			"a^2 + b^2",
-			"a^2 - b^2",
-			"(a+b)^2",
-			"(a-b)^2",
-			"a^2 + b^2 + c^2",
-			"a^2 + (b-c)^2",
-			"(a-b)^2 + c^2"
+	String[][] expression = {
+			{"a^2","a^2"}, 
+			{"a^2 + b^2","a^2 + b^2"},
+			{"a^2 - b^2","a^2 - b^2"},
+			{"(a+b)^2","{(a+b)}^2"},
+			{"(a-b)^2","{(a-b)}^2"},
+			{"a^2 + b^2 + c^2","a^2 + b^2 +c^2"},
+			{"a^2 + (b-c)^2","a^2 + {b-c}^2"},
+			{"(a-b)^2 + c^2","{a-b}^2 + c^2"}
 	};
 	@Override
 	public Quiz generateQuiz() {
@@ -78,7 +78,7 @@ public class QuadraticOperation implements IQuestionFactory{
 			} while (a<=b||a<=c||b<=c);
 			SimpleQuiz q = new SimpleQuiz();
 			
-			Expression e = new ExpressionBuilder(expression[idx])
+			Expression e = new ExpressionBuilder(expression[idx][0])
 				.variables("a","b","c")
 				.build()
 				.setVariable("a", a)
@@ -86,7 +86,7 @@ public class QuadraticOperation implements IQuestionFactory{
 				.setVariable("c", c);
 			int rslt = (int) e.evaluate();
 			
-			String question = MJXTAG+expression[idx].replace("*", "x")+MJXTAG;
+			String question = MJXTAG+expression[idx][1].replace("*", "x")+MJXTAG;
 			question = question.replace("a", String.valueOf(a));
 			question = question.replace("b", String.valueOf(b));
 			question = question.replace("c", String.valueOf(c));

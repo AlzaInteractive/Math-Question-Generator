@@ -26,7 +26,7 @@ public class AdditionOfTwoIntegers implements IQuestionFactory{
 	private void initStringFromLocale(){
 		bundle = ResourceBundle.getBundle("lang.langbundle", loc);
 	}
-	int numOfQuestion = 4;
+	int numOfQuestion = 3;
 	int[][] bounds = {
 			{3,10},{10,25},{25,50},{50,100},{250,500}
 	};
