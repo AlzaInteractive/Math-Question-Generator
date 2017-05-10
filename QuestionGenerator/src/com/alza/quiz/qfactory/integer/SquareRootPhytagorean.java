@@ -35,9 +35,9 @@ public class SquareRootPhytagorean implements IQuestionFactory{
 			{2,5},{2,5}
 	};
 	String[][] expression = {
-			{"sqrt(a^2+b^2)","sqrt{a^2+b^2}"},
-			{"sqrt(c^2-b^2)","sqrt{c^2-b^2}"},
-			{"sqrt(c^2-a^2)","sqrt{c^2-a^2}"}
+			{"sqrt(a^2+b^2)","\\sqrt{a^2+b^2}"},
+			{"sqrt(c^2-b^2)","\\sqrt{c^2-b^2}"},
+			{"sqrt(c^2-a^2)","\\sqrt{c^2-a^2}"}
 			
 	};
 	@Override

@@ -15,15 +15,15 @@ import com.alza.quiz.model.QuizLevel;
 import com.alza.quiz.model.SimpleQuiz;
 import com.alza.quiz.qfactory.IQuestionFactory;
 
-public class SquareRoot implements IQuestionFactory{
+public class CubicOperation implements IQuestionFactory{
 	private final static String MJXTAG ="$$"; 
 	Locale loc;
 	ResourceBundle bundle;
-	public SquareRoot(Locale loc){
+	public CubicOperation(Locale loc){
 		this.loc = loc;
 		initStringFromLocale();
 	}
-	public SquareRoot(){
+	public CubicOperation(){
 		this.loc = new Locale("in", "ID");
 		initStringFromLocale();
 	}
@@ -32,12 +32,14 @@ public class SquareRoot implements IQuestionFactory{
 	}
 	int numOfQuestion = 3;
 	int[][] bounds = {
-			{5,10},{10,15},{15,20}
+			{2,5},{5,10},{10,15}
 	};
 	String[][] expression = {
-			{"sqrt(a^2)","\\sqrt{a^2}"}, 
-			{"sqrt(a^2+(2*a*b)+b^2)","\\sqrt{a^2+(2*a*b)+b^2}"},
-			{"sqrt(a^2-(2*a*b)+b^2)","\\sqrt{a^2-(2*a*b)+b^2}"},
+			{"a^3","a^3"}, 
+			{"a^3 + b^3","a^3 + b^3"},
+			{"a^3 - b^3","a^3 - b^3"},
+			{"(a+b)^3","{(a+b)}^3"},
+			{"(a-b)^3","{(a-b)}^3"},
 	};
 	@Override
 	public Quiz generateQuiz() {
@@ -70,7 +72,7 @@ public class SquareRoot implements IQuestionFactory{
 						bounds[idx][1]);
 				c = ThreadLocalRandom.current().nextInt(bounds[idx][0], 
 						bounds[idx][1]);
-			} while (a==b||a==c||b==c);
+			} while (a<=b||a<=c||b<=c);
 			SimpleQuiz q = new SimpleQuiz();
 			
 			Expression e = new ExpressionBuilder(expression[idx][0])
@@ -82,18 +84,16 @@ public class SquareRoot implements IQuestionFactory{
 			int rslt = (int) e.evaluate();
 			
 			String question = MJXTAG+expression[idx][1].replace("*", "x")+MJXTAG;
-			int ab2 = 2*a*b;
-			question = question.replace("2xaxb", String.valueOf(ab2));
-			question = question.replace("a^2", String.valueOf(a*a));
-			question = question.replace("b^2", String.valueOf(b*b));
-			question = question.replace("c^2", String.valueOf(c*c));
+			question = question.replace("a", String.valueOf(a));
+			question = question.replace("b", String.valueOf(b));
+			question = question.replace("c", String.valueOf(c));
 			q.setQuestion(question);
 			q.setCorrectAnswer(String.valueOf(rslt));
 			q.setDifficultyLevel(QuizLevel.MUDAH);
-			q.setLessonSubcategory(bundle.getString("integer.squareroot"));
+			q.setLessonSubcategory(bundle.getString("integer.cubic"));
 			q.setLessonClassifier(bundle.getString("mathelementary"));
-			q.setLessonGrade(5);
-			q.setSubCategoryOrder(7);
+			q.setLessonGrade(6);
+			q.setSubCategoryOrder(3);
 			q.setLocalGeneratorOrder(idx);
 			q.setLessonCategory(bundle.getString("integer"));
 			lq.add(q);

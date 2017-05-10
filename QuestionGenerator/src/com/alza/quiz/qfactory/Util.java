@@ -8,6 +8,7 @@ import com.alza.quiz.qfactory.fraction.*;
 import com.alza.quiz.qfactory.integer.AdditionOfThreeIntegersSigned;
 import com.alza.quiz.qfactory.integer.AdditionOfThreeIntegersUnsigned;
 import com.alza.quiz.qfactory.integer.AdditionOfTwoIntegers;
+import com.alza.quiz.qfactory.integer.CubicOperation;
 import com.alza.quiz.qfactory.integer.DivisionOfTwoIntegers;
 import com.alza.quiz.qfactory.integer.MixedOperationOfIntegers;
 import com.alza.quiz.qfactory.integer.MultiplicationOfTwoIntegers;
@@ -74,6 +75,7 @@ public class Util {
 		lqf.add(new QuadraticOperation(loc));
 		lqf.add(new SquareRoot(loc));
 		lqf.add(new SquareRootPhytagorean(loc));
+		lqf.add(new CubicOperation(loc));
 		return lqf;
 	}
 	public static List<IQuestionFactory> getAllIntegerQuestionFactory(){
