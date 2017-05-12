@@ -13,14 +13,14 @@ import com.alza.quiz.model.QuizLevel;
 import com.alza.quiz.model.SimpleQuiz;
 import com.alza.quiz.qfactory.IQuestionFactory;
 
-public class RoundingUpIntegers implements IQuestionFactory{
+public class Rounding implements IQuestionFactory{
 	Locale loc;
 	ResourceBundle bundle;
-	public RoundingUpIntegers(Locale loc){
+	public Rounding(Locale loc){
 		this.loc = loc;
 		initStringFromLocale();
 	}
-	public RoundingUpIntegers(){
+	public Rounding(){
 		this.loc = new Locale("in", "ID");
 		initStringFromLocale();
 	}
