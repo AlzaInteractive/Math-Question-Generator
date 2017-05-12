@@ -11,9 +11,6 @@ public class MultipleChoiceQuiz extends  Quiz{
 	private String correctAnswer;
 	private List<String> choices = new ArrayList<String>();
 	
-	public QuizLevel getQuizLevel() {
-		return quizLevel;
-	}
 	public void setDifficultyLevel(QuizLevel quizLevel) {
 		this.quizLevel = quizLevel;
 	}

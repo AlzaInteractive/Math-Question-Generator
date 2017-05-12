@@ -2,6 +2,7 @@ package com.alza.quiz.model;
 
 import java.util.Comparator;
 import java.util.Locale;
+import java.util.ResourceBundle;
 
 /**
  * Created by galuh on 24/12/16.
@@ -22,8 +23,20 @@ public abstract class Quiz implements Comparable<Quiz>, Comparator<Quiz>{
         return correctAnswer.equals(answer);
     }
 
-    public QuizLevel getQuizLevel() {
-        return quizLevel;
+    public String getQuizLevel() {
+    	ResourceBundle bundle = ResourceBundle.getBundle("lang.langbundle", loc);
+		switch (quizLevel) {
+		case MUDAH:
+			return bundle.getString("level.easy");
+		case SEDANG:
+			return bundle.getString("level.medium");
+		case SULIT:
+			return bundle.getString("level.hard");
+		case GILA:
+			return bundle.getString("level.insane");
+		default:
+			return "";
+		}
     }
 
     public String getQuestion() {
