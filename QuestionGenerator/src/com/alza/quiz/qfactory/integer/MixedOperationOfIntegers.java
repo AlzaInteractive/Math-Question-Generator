@@ -94,6 +94,7 @@ public class MixedOperationOfIntegers implements IQuestionFactory{
 			q.setSubCategoryOrder(5);
 			q.setLocalGeneratorOrder(idx);
 			q.setLessonCategory(bundle.getString("integer"));
+			q.setLocale(loc);
 			lq.add(q);
 		}
 		

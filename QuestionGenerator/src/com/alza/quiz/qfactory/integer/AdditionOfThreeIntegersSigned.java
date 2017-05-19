@@ -114,6 +114,7 @@ public class AdditionOfThreeIntegersSigned implements IQuestionFactory{
 			q.setLessonGrade(4);
 			q.setSubCategoryOrder(3);
 			q.setLocalGeneratorOrder(pos);
+			q.setLocale(loc);
 			q.setLessonCategory(bundle.getString("integer"));
 			lq.add(q);
 		}

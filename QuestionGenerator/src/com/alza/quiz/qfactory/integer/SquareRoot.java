@@ -96,6 +96,7 @@ public class SquareRoot implements IQuestionFactory{
 			q.setSubCategoryOrder(7);
 			q.setLocalGeneratorOrder(idx);
 			q.setLessonCategory(bundle.getString("integer"));
+			q.setLocale(loc);
 			lq.add(q);
 		}
 		

@@ -100,6 +100,7 @@ public class SquareRootPhytagorean implements IQuestionFactory{
 			q.setSubCategoryOrder(8);
 			q.setLocalGeneratorOrder(idx);
 			q.setLessonCategory(bundle.getString("integer"));
+			q.setLocale(loc);
 			lq.add(q);
 		}
 		

@@ -35,6 +35,7 @@ public class IntegerGeneratorTest {
 			System.out.println("Grade : "+q.getLessonGrade());
 			System.out.println("Subcategory :" +q.getLessonSubcategory());
 			System.out.println("Question : " + q.getQuestion());
+			System.out.println("Level : "+q.getQuizLevel());
 			if (q instanceof MultipleChoiceQuiz){
 				MultipleChoiceQuiz mq = (MultipleChoiceQuiz) q;
 				System.out.println("Choices : "+ String.join(" , ", mq.getChoices()));

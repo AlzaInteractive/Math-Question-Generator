@@ -72,6 +72,7 @@ public class AdditionOfTwoIntegers implements IQuestionFactory{
 			q.setSubCategoryOrder(2);
 			q.setLocalGeneratorOrder(idx);
 			q.setLessonCategory(bundle.getString("integer"));
+			q.setLocale(loc);
 			lq.add(q);
 		}
 		

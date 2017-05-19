@@ -96,6 +96,7 @@ public class CubeRoot implements IQuestionFactory{
 			q.setSubCategoryOrder(3);
 			q.setLocalGeneratorOrder(idx);
 			q.setLessonCategory(bundle.getString("integer"));
+			q.setLocale(loc);
 			lq.add(q);
 		}
 		

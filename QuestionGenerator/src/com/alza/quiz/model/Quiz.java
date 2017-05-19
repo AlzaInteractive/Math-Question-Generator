@@ -10,7 +10,7 @@ import java.util.ResourceBundle;
 
 public abstract class Quiz implements Comparable<Quiz>, Comparator<Quiz>{
     QuizLevel quizLevel;
-    Locale loc;
+    Locale locale;
     int subCategoryOrder = 99;
     String question;
     String correctAnswer;
@@ -22,9 +22,9 @@ public abstract class Quiz implements Comparable<Quiz>, Comparator<Quiz>{
     public boolean isCorrect(Object answer){
         return correctAnswer.equals(answer);
     }
-
+    
     public String getQuizLevel() {
-    	ResourceBundle bundle = ResourceBundle.getBundle("lang.langbundle", loc);
+    	ResourceBundle bundle = ResourceBundle.getBundle("lang.langbundle", locale);
 		switch (quizLevel) {
 		case MUDAH:
 			return bundle.getString("level.easy");
@@ -95,6 +95,14 @@ public abstract class Quiz implements Comparable<Quiz>, Comparator<Quiz>{
 
 	public void setLessonGrade(int lessonGrade) {
 		this.lessonGrade = lessonGrade;
+	}
+
+	public Locale getLocale() {
+		return locale;
+	}
+
+	public void setLocale(Locale loc) {
+		this.locale = loc;
 	}
 
 	public void setQuizLevel(QuizLevel quizLevel) {

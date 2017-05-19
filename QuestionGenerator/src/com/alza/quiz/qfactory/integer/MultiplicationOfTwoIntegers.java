@@ -72,6 +72,7 @@ public class MultiplicationOfTwoIntegers implements IQuestionFactory{
 			q.setSubCategoryOrder(4);
 			q.setLocalGeneratorOrder(idx);
 			q.setLessonCategory(bundle.getString("integer"));
+			q.setLocale(loc);
 			lq.add(q);
 		}
 		
