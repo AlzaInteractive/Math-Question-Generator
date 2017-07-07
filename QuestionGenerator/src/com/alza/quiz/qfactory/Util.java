@@ -67,6 +67,7 @@ public class Util {
 		return lqf;
 	}
 	public static List<IQuestionFactory> getAllIntegerQuestionFactory(Locale loc){
+		System.out.println("get All Integer qfac :");
 		List<IQuestionFactory> lqf = new ArrayList<IQuestionFactory>();
 		lqf.add(new AdditionOfTwoIntegers(loc));
 		lqf.add(new SubtractionOfTwoIntegers(loc));

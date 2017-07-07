@@ -24,7 +24,7 @@ public class IntegerGeneratorTest {
 
 	
 	private static void allGenerator(){
-		List<IQuestionFactory> lqf = Util.getAllIntegerQuestionFactory(new Locale("en","US"));
+		List<IQuestionFactory> lqf = Util.getAllIntegerQuestionFactory(new Locale("my","MY"));
 		List<Quiz> ql = new ArrayList<Quiz>();
 		for (IQuestionFactory iQuestionFactory : lqf) {
 			ql.addAll(iQuestionFactory.generateQuizList(5));
