@@ -1,17 +1,17 @@
 package com.alza.quiz.qfactory.geom;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 public class Parallelogram implements Shapes2D{
 	private double length;
-	private double width;
 	private double height;
 	private double shear;
 	
 	public Parallelogram(){
 		
 	}
-	public Parallelogram(double length, double width, double height, double shear){
+	public Parallelogram(double length, double height, double shear){
 		this.length = length;
-		this.width = width;
 		this.height = height;
 		this.shear = shear;
 	}
@@ -24,12 +24,6 @@ public class Parallelogram implements Shapes2D{
 		this.length = length;
 	}
 
-	public double getWidth() {
-		return width;
-	}
-	public void setWidth(double width) {
-		this.width = width;
-	}
 	public double getHeight() {
 		return height;
 	}
@@ -42,14 +36,19 @@ public class Parallelogram implements Shapes2D{
 	public void setShear(double shear) {
 		this.shear = shear;
 	}
+	public double getSlope(){
+		double slope;
+		slope = Math.sqrt(((length-shear) * (length-shear)) + (height * height)) ; 
+		return slope;
+	}
 	@Override
 	public double getArea() {
-		return height * width;
+		return height * length;
 	}
 
 	@Override
 	public double getPerimeter() {
-		return 2 * (length + width);
+		return 2 * (length + getSlope());
 	}
 	@Override
 	public int getReflectionalSymmetryCount() {
@@ -63,7 +62,7 @@ public class Parallelogram implements Shapes2D{
 	public String getLocalName(String lang) {
 		switch (lang) {
 		case "EN":
-			return "rectangle";
+			return "parallelogram";
 		case "ID":
 			return "persegi panjang";
 		default:
@@ -71,7 +70,24 @@ public class Parallelogram implements Shapes2D{
 		}
 		return null;
 	}
-	
-	
-
+	@Override
+	public Shapes2D createExample() {
+		int l,h,s;
+		do {
+			l = ThreadLocalRandom.current().nextInt(5, 26);
+			h = ThreadLocalRandom.current().nextInt(5, 26);
+		} while (l==h);
+		do {
+			s = ThreadLocalRandom.current().nextInt(5, 10);
+		} while (s+3>=l);
+		return new Parallelogram(l, h, s);
+	}
+	@Override
+	public double getOccupiedLength() {
+		return length + shear;
+	}
+	@Override
+	public double getOccupiedHeight() {
+		return height;
+	}
 }

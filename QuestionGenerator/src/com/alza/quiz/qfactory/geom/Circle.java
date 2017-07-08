@@ -1,5 +1,7 @@
 package com.alza.quiz.qfactory.geom;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 public class Circle implements Shapes2D{
 	private double radius;
 	
@@ -46,6 +48,19 @@ public class Circle implements Shapes2D{
 			break;
 		}
 		return null;
+	}
+	@Override
+	public Shapes2D createExample() {
+		int r = ThreadLocalRandom.current().nextInt(5, 26);
+		return new Circle(r);
+	}
+	@Override
+	public double getOccupiedLength() {
+		return 2 * radius;
+	}
+	@Override
+	public double getOccupiedHeight() {
+		return 2 * radius;
 	}
 	
 	

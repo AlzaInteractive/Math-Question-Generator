@@ -1,5 +1,7 @@
 package com.alza.quiz.qfactory.geom;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 public class Kite implements Shapes2D{
 	private double diagonalHoriz;
 	private double diagonalVert;
@@ -58,6 +60,25 @@ public class Kite implements Shapes2D{
 			break;
 		}
 		return null;
+	}
+	@Override
+	public Shapes2D createExample() {
+		int p,q,s;
+		p = ThreadLocalRandom.current().nextInt(5, 26);
+		q = ThreadLocalRandom.current().nextInt(5, 26);
+		do {
+			s = ThreadLocalRandom.current().nextInt(5, 26);
+		} while (s>=q/2);
+		Kite k = new Kite(p, q, s);
+		return k;
+	}
+	@Override
+	public double getOccupiedLength() {
+		return diagonalHoriz;
+	}
+	@Override
+	public double getOccupiedHeight() {
+		return diagonalVert;
 	}
 	
 	

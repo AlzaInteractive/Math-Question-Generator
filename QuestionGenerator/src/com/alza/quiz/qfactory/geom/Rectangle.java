@@ -1,5 +1,7 @@
 package com.alza.quiz.qfactory.geom;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 public class Rectangle implements Shapes2D{
 	private double length;
 	private double width;
@@ -54,6 +56,24 @@ public class Rectangle implements Shapes2D{
 			break;
 		}
 		return null;
+	}
+	@Override
+	public Shapes2D createExample() {
+		int w,l;
+		do {
+			w = ThreadLocalRandom.current().nextInt(5, 26);
+			l = ThreadLocalRandom.current().nextInt(5, 26);
+		} while (w==l);
+		Rectangle r = new Rectangle(l, w);
+		return r;
+	}
+	@Override
+	public double getOccupiedLength() {
+		return this.length;
+	}
+	@Override
+	public double getOccupiedHeight() {
+		return this.width;
 	}
 	
 	

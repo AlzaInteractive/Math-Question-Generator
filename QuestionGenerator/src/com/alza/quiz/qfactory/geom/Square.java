@@ -1,5 +1,7 @@
 package com.alza.quiz.qfactory.geom;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 public class Square implements Shapes2D{
 	private double length;
 	
@@ -46,6 +48,20 @@ public class Square implements Shapes2D{
 			break;
 		}
 		return null;
+	}
+	@Override
+	public Shapes2D createExample() {
+		int i = ThreadLocalRandom.current().nextInt(5, 26);
+		Square a = new Square(i);
+		return a;
+	}
+	@Override
+	public double getOccupiedLength() {
+		return this.length;
+	}
+	@Override
+	public double getOccupiedHeight() {
+		return this.length;
 	}
 	
 	

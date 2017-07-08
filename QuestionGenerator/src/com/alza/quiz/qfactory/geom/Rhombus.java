@@ -1,5 +1,7 @@
 package com.alza.quiz.qfactory.geom;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 public class Rhombus implements Shapes2D{
 	private double diagonalHoriz;
 	private double diagonalVert;
@@ -51,7 +53,24 @@ public class Rhombus implements Shapes2D{
 		}
 		return null;
 	}
-	
+	@Override
+	public Shapes2D createExample() {
+		int p,q;
+		do {
+			p = ThreadLocalRandom.current().nextInt(5, 26);
+			q = ThreadLocalRandom.current().nextInt(5, 26);
+		} while (p==q);
+		Rhombus r = new Rhombus(p, q);
+		return r;
+	}
+	@Override
+	public double getOccupiedLength() {
+		return diagonalHoriz;
+	}
+	@Override
+	public double getOccupiedHeight() {
+		return diagonalVert;
+	}
 	
 
 }
