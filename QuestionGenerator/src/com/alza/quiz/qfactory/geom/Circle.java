@@ -1,5 +1,7 @@
 package com.alza.quiz.qfactory.geom;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Circle implements Shapes2D{
@@ -63,6 +65,33 @@ public class Circle implements Shapes2D{
 		return 2 * radius;
 	}
 	
-	
-
+	@Override
+	public List<Path> getPaths(int width, int height, int margin) {
+		if (margin >= width/2 || margin >= height/2){
+			margin = 0;
+		}
+		System.out.println("margin "+margin);
+		List<Path> l = new ArrayList<Path>();
+		int allocatedSpace=0;
+		if (width<=height){
+			allocatedSpace = width - (2 * margin);
+		} else {
+			allocatedSpace = height - (2 * margin);
+		}
+		System.out.println("allocated space "+allocatedSpace);
+		l.add(Path.createCirclePath(new Point(width/2, height/2), allocatedSpace/2));
+		return l;
+	}
+	@Override
+	public List<Path> getPaths(int width, int height) {
+		int margin;
+		if (width >= height) {
+			margin = height / 5;
+		} else margin = width / 5;
+		return getPaths(width, height, margin);
+	}
+	public String toString(){
+		String s = "Circle with "+this.radius+" radius";
+		return s;
+	}
 }
