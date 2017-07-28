@@ -52,16 +52,8 @@ public class Kite implements Shapes2D{
 		return 0;
 	}
 	@Override
-	public String getLocalName(String lang) {
-		switch (lang) {
-		case "EN":
-			return "rhombus";
-		case "ID":
-			return "belah ketupat";
-		default:
-			break;
-		}
-		return null;
+	public String getName() {
+		return "kite";
 	}
 	@Override
 	public Shapes2D createExample() {

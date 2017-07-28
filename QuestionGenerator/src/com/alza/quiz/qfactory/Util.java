@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Locale;
 
 import com.alza.quiz.qfactory.fraction.*;
+import com.alza.quiz.qfactory.geom.WhichGeomShape;
 import com.alza.quiz.qfactory.integer.AdditionOfThreeIntegersSigned;
 import com.alza.quiz.qfactory.integer.AdditionOfThreeIntegersUnsigned;
 import com.alza.quiz.qfactory.integer.AdditionOfTwoIntegers;
@@ -65,6 +66,16 @@ public class Util {
 		List<IQuestionFactory> lqf = new ArrayList<IQuestionFactory>();
 		lqf.add(new RomanNumeralsQuestionFactory());
 		return lqf;
+	}
+	
+	public static List<IQuestionFactory> getAllGeometryQuestionFactory(Locale loc){
+		List<IQuestionFactory> lqf = new ArrayList<IQuestionFactory>();
+		lqf.add(new WhichGeomShape(loc));
+		return lqf;
+	}
+	public static List<IQuestionFactory> getAllGeometryQuestionFactory(){
+		Locale loc = new Locale("in", "ID");
+		return getAllGeometryQuestionFactory(loc);
 	}
 	public static List<IQuestionFactory> getAllIntegerQuestionFactory(Locale loc){
 		System.out.println("get All Integer qfac :");

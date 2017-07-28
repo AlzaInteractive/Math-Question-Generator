@@ -40,16 +40,8 @@ public class Circle implements Shapes2D{
 		return -1;
 	}
 	@Override
-	public String getLocalName(String lang) {
-		switch (lang) {
-		case "EN":
-			return "circle";
-		case "ID":
-			return "lingkaran";
-		default:
-			break;
-		}
-		return null;
+	public String getName() {
+		return "circle";
 	}
 	@Override
 	public Shapes2D createExample() {

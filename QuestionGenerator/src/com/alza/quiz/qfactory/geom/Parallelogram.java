@@ -61,16 +61,8 @@ public class Parallelogram implements Shapes2D{
 		return 2;
 	}
 	@Override
-	public String getLocalName(String lang) {
-		switch (lang) {
-		case "EN":
-			return "parallelogram";
-		case "ID":
-			return "persegi panjang";
-		default:
-			break;
-		}
-		return null;
+	public String getName() {
+		return "parallelogram";
 	}
 	@Override
 	public Shapes2D createExample() {

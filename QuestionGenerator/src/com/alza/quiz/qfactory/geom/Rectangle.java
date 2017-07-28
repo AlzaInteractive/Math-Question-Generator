@@ -48,16 +48,8 @@ public class Rectangle implements Shapes2D{
 		return 2;
 	}
 	@Override
-	public String getLocalName(String lang) {
-		switch (lang) {
-		case "EN":
-			return "rectangle";
-		case "ID":
-			return "persegi panjang";
-		default:
-			break;
-		}
-		return null;
+	public String getName() {
+		return "rectangle";
 	}
 	@Override
 	public Shapes2D createExample() {

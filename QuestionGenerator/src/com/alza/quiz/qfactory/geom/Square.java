@@ -40,16 +40,8 @@ public class Square implements Shapes2D{
 		return 4;
 	}
 	@Override
-	public String getLocalName(String lang) {
-		switch (lang) {
-		case "EN":
-			return "square";
-		case "ID":
-			return "persegi";
-		default:
-			break;
-		}
-		return null;
+	public String getName() {
+		return "square";
 	}
 	@Override
 	public Shapes2D createExample() {
