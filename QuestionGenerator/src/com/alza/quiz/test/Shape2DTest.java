@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
+import com.alza.quiz.model.MultipleChoiceGeomQuiz;
 import com.alza.quiz.model.MultipleChoiceQuiz;
 import com.alza.quiz.model.Quiz;
 import com.alza.quiz.qfactory.IQuestionFactory;
@@ -63,6 +64,16 @@ public final class Shape2DTest {
 			if (q instanceof MultipleChoiceQuiz){
 				MultipleChoiceQuiz mq = (MultipleChoiceQuiz) q;
 				System.out.println("Choices : "+ String.join(" , ", mq.getChoices()));
+			}
+			if (q instanceof MultipleChoiceGeomQuiz){
+				MultipleChoiceGeomQuiz mq = (MultipleChoiceGeomQuiz) q;
+				System.out.println("Choices : "+ String.join(" , ", mq.getChoices()));
+				Shapes2D shapes2d = mq.getGeomShape();
+				System.out.println(shapes2d.toString());
+				List<Path> ps = shapes2d.getPaths(200, 100);
+				for (Path path : ps) {
+					System.out.println(path.toString());
+				}
 			}
 			System.out.println("Answer : "+ q.getCorrectAnswer());
 		}

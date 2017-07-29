@@ -91,26 +91,28 @@ public class Parallelogram implements Shapes2D{
 		List<Path> l = new ArrayList<Path>();
 		int scale=0;
 		double maxHeightRatio = ((double) (pxHeight-margin*2)) / ((double) height);
-		double maxLengthRatio = ((double) (pxWidth-margin*2)) / ((double) (length + shear));
+		double maxLengthRatio = ((double) (pxWidth-margin*2)) / ((double) getOccupiedLength());
 		if (maxHeightRatio>maxLengthRatio){
 			scale = (int) maxLengthRatio;
 		} else {
 			scale = (int) maxHeightRatio;
 		}
+		System.out.println("scale "+scale);
 		int pxL = (int) (length * scale);
 		int pxH  = (int) (height * scale);
 		int pxSh = (int) (shear * scale);
 		System.out.println("Mapped LHS:  "+pxL+","+pxH+","+pxSh);
 		int x1,x2,x3,x4;
 		int y1,y2,y3,y4;
-		x1 = ((pxWidth-pxL)/2)+pxSh; 
+		x4 = (pxWidth-(pxL+pxSh))/2;
+		x1 = x4 + pxSh; 
 		x2 = x1 + pxL;
 		x3 = x2-pxSh;
-		x4 = x3-pxL;
 		y1 = (pxHeight - pxH) / 2; 
 		y2 = y1;
 		y3 = y1 + pxH;
 		y4 = y3;
+		System.out.println("x1-x4 :  "+x1+","+x2+","+x3+","+x4);
 		l.add(Path.createLinePath(new Point(x1, y1), new Point(x2, y2)));
 		l.add(Path.createLinePath(new Point(x2, y2), new Point(x3, y3)));
 		l.add(Path.createLinePath(new Point(x3, y3), new Point(x4, y4)));

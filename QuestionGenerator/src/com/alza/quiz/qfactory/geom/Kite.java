@@ -11,9 +11,9 @@ public class Kite implements Shapes2D{
 	public Kite(){
 		
 	}
-	public Kite(double p, double q, double shear){
-		this.diagonalHoriz = p;
-		this.diagonalVert = q;
+	public Kite(double diagHoriz, double diagVert, double shear){
+		this.diagonalHoriz = diagHoriz;
+		this.diagonalVert = diagVert;
 		this.shear = shear;
 	}
 	public double getDiagonalHoriz() {
@@ -62,7 +62,7 @@ public class Kite implements Shapes2D{
 			p = ThreadLocalRandom.current().nextInt(5, 26);
 			q = ThreadLocalRandom.current().nextInt(5, 26);
 			s = ThreadLocalRandom.current().nextInt(5, 26);
-		} while (s>=q/3);
+		} while (s>=q||s==q/2);
 		Kite k = new Kite(p, q, s);
 		return k;
 	}
@@ -81,8 +81,8 @@ public class Kite implements Shapes2D{
 		List<Path> l = new ArrayList<Path>();
 		int scale=0;
 		System.out.println("margin "+margin);
-		double maxHeightRatio = ((double) (pxHeight-margin*2)) / ((double) diagonalVert);
-		double maxLengthRatio = ((double) (pxWidth-margin*2)) / ((double) diagonalHoriz);
+		double maxHeightRatio = ((double) (pxHeight-margin*2)) / ((double) getOccupiedHeight());
+		double maxLengthRatio = ((double) (pxWidth-margin*2)) / ((double) getOccupiedLength());
 		if (maxHeightRatio>maxLengthRatio){
 			scale = (int) maxLengthRatio;
 		} else {
@@ -99,7 +99,7 @@ public class Kite implements Shapes2D{
 		x3 = x1 + pxDH; 
 		x4 = x2;
 		y2 = (pxHeight - pxDV) /2 ;
-		y1 = y2 + (pxDV / 2) - pxSh;
+		y1 = y2 + pxSh;
 		y3 = y1;
 		y4 = y2 + pxDV;
 		l.add(Path.createLinePath(new Point(x1, y1), new Point(x2, y2)));
