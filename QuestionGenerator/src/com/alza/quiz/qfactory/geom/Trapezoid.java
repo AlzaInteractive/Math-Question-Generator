@@ -67,7 +67,7 @@ public class Trapezoid implements Shapes2D{
 
 	@Override
 	public double getPerimeter() {
-		return topLength + bottomLength + shearLeft + getShearRight();
+		return topLength + bottomLength + getLeftSlope() + getRightSlope();
 	}
 	@Override
 	public int getReflectionalSymmetryCount() {
