@@ -43,7 +43,7 @@ public class Trapezoid implements Shapes2D{
 		this.shearLeft = shearLeft;
 	}
 	public double getShearRight() {
-		double sr = Math.abs(bottomLength-topLength) - shearLeft;
+		//double sr = Math.abs(bottomLength-topLength) - shearLeft;
 		//return sr;
 		return bottomLength - (topLength + shearLeft);
 	}
@@ -88,18 +88,27 @@ public class Trapezoid implements Shapes2D{
 			tl = ThreadLocalRandom.current().nextInt(5, 26);
 			h = ThreadLocalRandom.current().nextInt(5, 10);
 			bl = ThreadLocalRandom.current().nextInt(5, 26);
-			sl = ThreadLocalRandom.current().nextInt(5, 10);
+			sl = ThreadLocalRandom.current().nextInt(0, Math.abs(bl-tl));
 			if (bl<tl) {
-				sl = -1 * sl;
+				sl = sl * -1;
 			}
-		} while (tl==bl || sl>Math.abs(tl-bl));
-		
+		} while (tl==bl);
+		//System.out.println("new trapezoid:"+tl+" "+bl+" "+h+" "+sl);
 		return new Trapezoid(tl, bl, h, sl);
 	}
 	@Override
 	public double getOccupiedLength() {
-		double dtm = Math.min(bottomLength, topLength);
-		return dtm + Math.abs(shearLeft+getShearRight());
+		double ol;
+		if (bottomLength>topLength) {
+			if (topLength + shearLeft > bottomLength) {
+				ol = topLength + shearLeft; 
+			} else ol = bottomLength;
+		} else {
+			if (bottomLength + shearLeft > topLength) {
+				ol = bottomLength + shearLeft;
+			} else ol = topLength; 
+		}
+		return ol;
 	}
 	@Override
 	public double getOccupiedHeight() {
@@ -126,8 +135,9 @@ public class Trapezoid implements Shapes2D{
 		int pxSh = (int) (shearLeft * scale);
 		int pxShR = (int) (getShearRight() * scale);
 		int pxOL = (int) (getOccupiedLength() * scale);
-		System.out.println("Occupied length : "+pxOL);
+		System.out.println("TBHSLR:  "+topLength+","+bottomLength+","+height+","+shearLeft+","+getShearRight());
 		System.out.println("Mapped TBHSLR:  "+pxTL+","+pxBL+","+pxH+","+pxSh+","+pxShR);
+		System.out.println("Occupied length : "+getOccupiedLength()+" in px:"+pxOL);
 		int x1,x2,x3,x4;
 		int y1,y2,y3,y4;
 		if (pxTL<pxBL) {
@@ -136,8 +146,8 @@ public class Trapezoid implements Shapes2D{
 			x1 = ((pxWidth - pxOL)/2);
 		}
 		x2 = x1 + pxTL;
-		x4 = x1 + pxSh;
-		x3 = x2 + pxBL;
+		x4 = x1 - pxSh;
+		x3 = x4 + pxBL;
 		y1 = (pxHeight - pxH) / 2; 
 		y2 = y1;
 		y3 = y1 + pxH;

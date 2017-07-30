@@ -15,11 +15,12 @@ public class WhichGeomShape implements IQuestionFactory {
 	Locale loc;
 	ResourceBundle bundle;
 	List<Shapes2D> shapes = new ArrayList<Shapes2D>(); 
-	private int defnumq = 7;
+	private int defnumq;
 	public WhichGeomShape(Locale loc) {
 		this.loc = loc;
 		initStringFromLocale();
 		prepareShape();
+		defnumq = shapes.size();
 	}
 	public WhichGeomShape() {
 		this.loc = new Locale("en", "US");
@@ -27,12 +28,12 @@ public class WhichGeomShape implements IQuestionFactory {
 		prepareShape();
 	}
 	private void prepareShape(){
-		shapes.add(new Square());
+		/**shapes.add(new Square());
 		shapes.add(new Rectangle());
 		shapes.add(new Circle());
 		shapes.add(new Rhombus());
 		shapes.add(new Kite());
-		shapes.add(new Parallelogram());
+		shapes.add(new Parallelogram());**/
 		shapes.add(new Trapezoid());
 	}
 	private void initStringFromLocale(){
