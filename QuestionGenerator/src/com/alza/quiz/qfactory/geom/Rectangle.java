@@ -76,8 +76,8 @@ public class Rectangle implements Shapes2D{
 		}
 		List<Path> l = new ArrayList<Path>();
 		int scale=0;
-		double maxHeightRatio = ((double) (pxHeight-margin*2)) / ((double) width);
-		double maxLengthRatio = ((double) (pxWidth-margin*2)) / ((double) length);
+		double maxHeightRatio = ((double) (pxHeight-margin*2)) / ((double) getOccupiedHeight());
+		double maxLengthRatio = ((double) (pxWidth-margin*2)) / ((double) getOccupiedLength());
 		if (maxHeightRatio>maxLengthRatio){
 			scale = (int) maxLengthRatio;
 		} else {

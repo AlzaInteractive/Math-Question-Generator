@@ -28,12 +28,13 @@ public class WhichGeomShape implements IQuestionFactory {
 		prepareShape();
 	}
 	private void prepareShape(){
-		/**shapes.add(new Square());
+		shapes.add(new Square());
 		shapes.add(new Rectangle());
+		shapes.add(new Triangle());
 		shapes.add(new Circle());
 		shapes.add(new Rhombus());
 		shapes.add(new Kite());
-		shapes.add(new Parallelogram());**/
+		shapes.add(new Parallelogram());
 		shapes.add(new Trapezoid());
 	}
 	private void initStringFromLocale(){

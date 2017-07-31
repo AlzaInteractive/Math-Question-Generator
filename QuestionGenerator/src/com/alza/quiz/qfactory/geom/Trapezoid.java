@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
-import com.alza.common.math.MathUtils;
-
 public class Trapezoid implements Shapes2D{
 	private double topLength;
 	private double bottomLength;
