@@ -32,6 +32,13 @@ public class Path {
 		p.pathType = PATH_TYPE_ARC;
 		return p;
 	}
+	public static Path createLinePathDotted(Point start, Point finish){
+		Path p = new Path();
+		p.start = start;
+		p.finish = finish;
+		p.pathType = PATH_TYPE_LINE_DOTTED;
+		return p;
+	}
 	public String toString(){
 		String s="";
 		switch (pathType) {
