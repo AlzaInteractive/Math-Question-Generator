@@ -5,34 +5,41 @@ public class Path {
 	public static final int PATH_TYPE_CIRCLE=12;
 	public static final int PATH_TYPE_ARC=13;
 	public static final int PATH_TYPE_LINE_DOTTED=14;
-	public Point start;
-	public Point finish;
+	public Point2D start;
+	public Point2D finish;
 	public int pathType;
-	public Point center;
+	public Point2D center;
 	public int radius;
 	
-	public static Path createLinePath(Point start, Point finish){
+	public static Path createLinePath(Point2D start, Point2D finish){
 		Path p = new Path();
 		p.start = start;
 		p.finish = finish;
 		p.pathType = PATH_TYPE_LINE;
 		return p;
 	}
-	public static Path createCirclePath(Point center, int radius){
+	public static Path createLinePath(Point3D start, Point3D finish){
+		Path p = new Path();
+		p.start = start.project2D();
+		p.finish = finish.project2D();
+		p.pathType = PATH_TYPE_LINE;
+		return p;
+	}
+	public static Path createCirclePath(Point2D center, int radius){
 		Path p = new Path();
 		p.radius = radius;
 		p.center = center;
 		p.pathType = PATH_TYPE_CIRCLE;
 		return p;
 	}
-	public static Path createArcPath(Point start, Point finish){
+	public static Path createArcPath(Point2D start, Point2D finish){
 		Path p = new Path();
 		p.start = start;
 		p.finish = finish;
 		p.pathType = PATH_TYPE_ARC;
 		return p;
 	}
-	public static Path createLinePathDotted(Point start, Point finish){
+	public static Path createLinePathDotted(Point2D start, Point2D finish){
 		Path p = new Path();
 		p.start = start;
 		p.finish = finish;
