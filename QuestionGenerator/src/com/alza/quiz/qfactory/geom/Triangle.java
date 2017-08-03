@@ -24,17 +24,35 @@ public class Triangle implements Shapes2D{
 		this.height = height;
 		this.shear = shear;
 	}
-
+	
+	public double getBaseLine() {
+		return baseLine;
+	}
+	public void setBaseLine(double baseLine) {
+		this.baseLine = baseLine;
+	}
+	public double getHeight() {
+		return height;
+	}
+	public void setHeight(double height) {
+		this.height = height;
+	}
+	public double getShear() {
+		return shear;
+	}
+	public void setShear(double shear) {
+		this.shear = shear;
+	}
 	@Override
 	public double getArea() {
 		return baseLine * height / 2;
 	}
 	
-	private double getLeftEdge() {
+	public double getLeftEdge() {
 		return Math.sqrt((height*height)+(shear*shear));
 	}
 	
-	private double getRightEdge() {
+	public double getRightEdge() {
 		return Math.sqrt((height*height)+((baseLine-shear)*(baseLine-shear)));
 	}
 	
@@ -128,9 +146,9 @@ public class Triangle implements Shapes2D{
 		y2 = (pxHeight - pxH) / 2; 
 		y1 = y2+pxH;
 		y3 = y1;
-		l.add(Path.createLinePath(new Point(x1, y1), new Point(x2, y2)));
-		l.add(Path.createLinePath(new Point(x2, y2), new Point(x3, y3)));
-		l.add(Path.createLinePath(new Point(x3, y3), new Point(x1, y1)));
+		l.add(Path.createLinePath(new Point2D(x1, y1), new Point2D(x2, y2)));
+		l.add(Path.createLinePath(new Point2D(x2, y2), new Point2D(x3, y3)));
+		l.add(Path.createLinePath(new Point2D(x3, y3), new Point2D(x1, y1)));
 		return l;
 	}
 

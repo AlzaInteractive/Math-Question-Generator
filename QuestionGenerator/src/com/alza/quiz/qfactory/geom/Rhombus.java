@@ -92,10 +92,10 @@ public class Rhombus implements Shapes2D{
 		y1 = y2 + (pxDV / 2);
 		y3 = y1;
 		y4 = y2 + pxDV;
-		l.add(Path.createLinePath(new Point(x1, y1), new Point(x2, y2)));
-		l.add(Path.createLinePath(new Point(x2, y2), new Point(x3, y3)));
-		l.add(Path.createLinePath(new Point(x3, y3), new Point(x4, y4)));
-		l.add(Path.createLinePath(new Point(x4, y4), new Point(x1, y1)));
+		l.add(Path.createLinePath(new Point2D(x1, y1), new Point2D(x2, y2)));
+		l.add(Path.createLinePath(new Point2D(x2, y2), new Point2D(x3, y3)));
+		l.add(Path.createLinePath(new Point2D(x3, y3), new Point2D(x4, y4)));
+		l.add(Path.createLinePath(new Point2D(x4, y4), new Point2D(x1, y1)));
 		return l;
 	}
 	@Override

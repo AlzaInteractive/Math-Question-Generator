@@ -71,7 +71,7 @@ public class Circle implements Shapes2D{
 			allocatedSpace = height - (2 * margin);
 		}
 		System.out.println("allocated space "+allocatedSpace);
-		l.add(Path.createCirclePath(new Point(width/2, height/2), allocatedSpace/2));
+		l.add(Path.createCirclePath(new Point2D(width/2, height/2), allocatedSpace/2));
 		return l;
 	}
 	@Override

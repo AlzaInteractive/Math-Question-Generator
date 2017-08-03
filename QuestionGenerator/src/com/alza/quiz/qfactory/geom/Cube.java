@@ -103,20 +103,20 @@ public class Cube implements Shapes3D{
 		y2 = y1;
 		y3 = y2 + canvasEdgeLength;
 		y4 = y3;
-		l.add(Path.createLinePath(new Point(x1, y1), new Point(x2, y2)));
-		l.add(Path.createLinePath(new Point(x2, y2), new Point(x3, y3)));
-		l.add(Path.createLinePath(new Point(x3, y3), new Point(x4, y4)));
-		l.add(Path.createLinePath(new Point(x4, y4), new Point(x1, y1)));
+		l.add(Path.createLinePath(new Point2D(x1, y1), new Point2D(x2, y2)));
+		l.add(Path.createLinePath(new Point2D(x2, y2), new Point2D(x3, y3)));
+		l.add(Path.createLinePath(new Point2D(x3, y3), new Point2D(x4, y4)));
+		l.add(Path.createLinePath(new Point2D(x4, y4), new Point2D(x1, y1)));
 		
-		l.add(Path.createLinePath(new Point(x1, y1), new Point(x5, y5)));
-		l.add(Path.createLinePath(new Point(x2, y2), new Point(x6, y6)));
-		l.add(Path.createLinePath(new Point(x3, y3), new Point(x7, y7)));
-		l.add(Path.createLinePathDotted(new Point(x4, y4), new Point(x8, y8)));
+		l.add(Path.createLinePath(new Point2D(x1, y1), new Point2D(x5, y5)));
+		l.add(Path.createLinePath(new Point2D(x2, y2), new Point2D(x6, y6)));
+		l.add(Path.createLinePath(new Point2D(x3, y3), new Point2D(x7, y7)));
+		l.add(Path.createLinePathDotted(new Point2D(x4, y4), new Point2D(x8, y8)));
 		
-		l.add(Path.createLinePath(new Point(x5, y5), new Point(x6, y6)));
-		l.add(Path.createLinePath(new Point(x6, y6), new Point(x7, y7)));
-		l.add(Path.createLinePathDotted(new Point(x7, y7), new Point(x8, y8)));
-		l.add(Path.createLinePathDotted(new Point(x8, y8), new Point(x5, y5)));
+		l.add(Path.createLinePath(new Point2D(x5, y5), new Point2D(x6, y6)));
+		l.add(Path.createLinePath(new Point2D(x6, y6), new Point2D(x7, y7)));
+		l.add(Path.createLinePathDotted(new Point2D(x7, y7), new Point2D(x8, y8)));
+		l.add(Path.createLinePathDotted(new Point2D(x8, y8), new Point2D(x5, y5)));
 		System.out.println(x1+" "+x2+" "+x3+" "+x4);
 		return l;
 	}

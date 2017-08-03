@@ -151,10 +151,10 @@ public class Trapezoid implements Shapes2D{
 		y3 = y1 + pxH;
 		y4 = y3;
 		System.out.println("x1-x4 :  "+x1+","+x2+","+x3+","+x4);
-		l.add(Path.createLinePath(new Point(x1, y1), new Point(x2, y2)));
-		l.add(Path.createLinePath(new Point(x2, y2), new Point(x3, y3)));
-		l.add(Path.createLinePath(new Point(x3, y3), new Point(x4, y4)));
-		l.add(Path.createLinePath(new Point(x4, y4), new Point(x1, y1)));
+		l.add(Path.createLinePath(new Point2D(x1, y1), new Point2D(x2, y2)));
+		l.add(Path.createLinePath(new Point2D(x2, y2), new Point2D(x3, y3)));
+		l.add(Path.createLinePath(new Point2D(x3, y3), new Point2D(x4, y4)));
+		l.add(Path.createLinePath(new Point2D(x4, y4), new Point2D(x1, y1)));
 		return l;
 	}
 	@Override
