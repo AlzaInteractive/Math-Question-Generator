@@ -15,7 +15,7 @@ public class Point3D {
 	 * @param angle in radian
 	 * @return point projected in 2d space using cabinet projection (60 deg)
 	 */
-	public Point2D project2D() {
+	public Point2D getProjectedPoint() {
 		double angle = Math.PI/3;
 		double newX = this.x + (0.5 * this.z * Math.cos(angle));
 		double newY = this.y + (0.5 * this.z * Math.sin(angle));

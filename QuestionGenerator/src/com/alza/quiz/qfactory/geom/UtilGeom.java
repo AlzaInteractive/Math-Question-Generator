@@ -9,7 +9,7 @@ public class UtilGeom {
 		double maxY = 0;
 		for (Point2D p : points) {
 			if (p.x>maxX) maxX = p.x;
-			if (p.y>maxY) maxX = p.y;
+			if (p.y>maxY) maxY = p.y;
 		}
 		return new Point2D(maxX, maxY);
 	}
@@ -17,22 +17,33 @@ public class UtilGeom {
 		double maxX = 0;
 		double maxY = 0;
 		for (Point3D p : points) {
-			if (p.project2D().x > maxX) maxX = p.x;
-			if (p.project2D().y > maxY) maxX = p.y;
+			if (p.getProjectedPoint().x > maxX) maxX = p.x;
+			if (p.getProjectedPoint().y > maxY) maxY = p.y;
 		}
 		return new Point2D(maxX, maxY);
 	}
-	private static Point2D getTransformedPointOnScreen(double scale,double margin, Point2D p) {
-		double newX = p.x * scale + margin;
-		double newY = p.y * scale + margin;
+	private static Point2D getTransformedPointOnScreen(double scale,Point2D margin, Point2D p) {
+		double newX = (p.x * scale) + margin.x;
+		double newY = (p.y * scale) + margin.y;
 		return new Point2D(newX,newY);
 	}
 	public static List<Path> getPaths(int canvasWidth, int canvasHeight, Shapes2D shp){
-		double margin = 0.1;
-		Point2D maxP = getMaxXY(shp.getVertices());
-		double scaleY = (canvasHeight-(canvasHeight*margin*2))/maxP.y;
-		double scaleX = (canvasWidth -(canvasWidth*margin*2) )/maxP.x;
+		double marginRatio = 0.1;
+		Point2D maxP = new Point2D(0, 0);
+		if (shp.getVertices()!=null) {
+			maxP = getMaxXY(shp.getVertices());
+		} else {
+			if (shp instanceof Circle) {
+				Circle c = (Circle) shp;
+				maxP = new Point2D(c.getRadius()*2, c.getRadius()*2);
+			}
+		} 
+		double scaleY = (canvasHeight-(canvasHeight*marginRatio*2))/maxP.y;
+		double scaleX = (canvasWidth -(canvasWidth*marginRatio*2) )/maxP.x;
 		double scale = Math.min(scaleY, scaleX);
+		double marginX = (canvasWidth - (scale * maxP.x))/2;
+		double marginY = (canvasHeight - (scale * maxP.y))/2;
+		Point2D margin = new Point2D(marginX, marginY);
 		//transform paths by scale
 		List<Path> lOri = shp.getPaths();
 		List<Path> l = new ArrayList<Path>();

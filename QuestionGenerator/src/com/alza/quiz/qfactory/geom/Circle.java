@@ -14,11 +14,11 @@ public class Circle implements Shapes2D{
 		this.radius = radius;
 	}
 	
-	public double getLength() {
+	public double getRadius() {
 		return radius;
 	}
 
-	public void setLength(double radius) {
+	public void setRadius(double radius) {
 		this.radius = radius;
 	}
 

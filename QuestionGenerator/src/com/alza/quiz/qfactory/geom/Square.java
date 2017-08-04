@@ -55,7 +55,7 @@ public class Square implements Shapes2D{
 		l.add(Path.createLinePath(getVertices().get(0), getVertices().get(1)));
 		l.add(Path.createLinePath(getVertices().get(1), getVertices().get(2)));
 		l.add(Path.createLinePath(getVertices().get(2), getVertices().get(3)));
-		l.add(Path.createLinePath(getVertices().get(3), getVertices().get(1)));
+		l.add(Path.createLinePath(getVertices().get(3), getVertices().get(0)));
 		return l;
 	}
 	public String toString(){

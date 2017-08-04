@@ -30,7 +30,7 @@ public final class Shape2DTest {
 		List<Shapes2D> l = generateShapes();
 		for (Shapes2D shapes2d : l) {
 			System.out.println(shapes2d.toString());
-			List<Path> ps = shapes2d.getPaths(200, 100);
+			List<Path> ps = shapes2d.getPaths();
 			for (Path path : ps) {
 				System.out.println(path.toString());
 			}
@@ -70,7 +70,7 @@ public final class Shape2DTest {
 				System.out.println("Choices : "+ String.join(" , ", mq.getChoices()));
 				Shapes2D shapes2d = mq.getGeomShape();
 				System.out.println(shapes2d.toString());
-				List<Path> ps = shapes2d.getPaths(200, 100);
+				List<Path> ps = shapes2d.getPaths();
 				for (Path path : ps) {
 					System.out.println(path.toString());
 				}

@@ -115,9 +115,9 @@ public class Triangle implements Shapes2D{
 	public List<Point2D> getVertices() {
 		List<Point2D> points = new ArrayList<Point2D>();
 		Point2D a,b,c;
-		a = new Point2D(0, this.shear);
-		b = new Point2D(this.height, 0);
-		c = new Point2D(this.height, this.baseLine);
+		a = new Point2D(this.shear, 0);
+		b = new Point2D(this.baseLine, this.height);
+		c = new Point2D(0, this.height);
 		points.add(a);points.add(b);points.add(c);
 		return points;
 	}
@@ -130,7 +130,7 @@ public class Triangle implements Shapes2D{
 		List<Path> l = new ArrayList<Path>();
 		l.add(Path.createLinePath(getVertices().get(0), getVertices().get(1)));
 		l.add(Path.createLinePath(getVertices().get(1), getVertices().get(2)));
-		l.add(Path.createLinePath(getVertices().get(2), getVertices().get(1)));
+		l.add(Path.createLinePath(getVertices().get(2), getVertices().get(0)));
 		return l;
 	}
 

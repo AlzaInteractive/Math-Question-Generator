@@ -20,8 +20,8 @@ public class Path {
 	}
 	public static Path createLinePath(Point3D start, Point3D finish){
 		Path p = new Path();
-		p.start = start.project2D();
-		p.finish = finish.project2D();
+		p.start = start.getProjectedPoint();
+		p.finish = finish.getProjectedPoint();
 		p.pathType = PATH_TYPE_LINE;
 		return p;
 	}
@@ -48,8 +48,8 @@ public class Path {
 	}
 	public static Path createLinePathDotted(Point3D start, Point3D finish){
 		Path p = new Path();
-		p.start = start.project2D();
-		p.finish = finish.project2D();
+		p.start = start.getProjectedPoint();
+		p.finish = finish.getProjectedPoint();
 		p.pathType = PATH_TYPE_LINE_DOTTED;
 		return p;
 	}
