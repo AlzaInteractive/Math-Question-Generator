@@ -28,11 +28,6 @@ public class TriangularPrism implements Shapes3D{
 		this.prismHeight = prismHeight;
 	}
 	@Override
-	public int getVerticesCount() {
-		return 9;
-
-	}
-	@Override
 	public double getSurfaceArea() {
 		List<Shapes2D> fcs = getFaces();
 		double surfaceArea = 0.0;
@@ -56,18 +51,6 @@ public class TriangularPrism implements Shapes3D{
 		fcs.add(new Rectangle(baseTriangle.getRightEdge(), prismHeight));
 		return fcs;
 	}
-
-	@Override
-	public double get2DOccupiedLength(double projRatio, double projAngle) {
-		return baseTriangle.getBaseLine();
-	}
-
-	@Override
-	public double get2DOccupiedHeight(double projRatio, double projAngle) {
-		double addHeight = projRatio * baseTriangle.getLeftEdge() * Math.sin(projAngle);
-		return addHeight+prismHeight;
-	}
-
 	@Override
 	public String getName() {
 		return "triangularprism";
@@ -81,65 +64,42 @@ public class TriangularPrism implements Shapes3D{
 	}
 
 	@Override
-	public List<Path> getPaths(int canvasWidth, int canvasHeight, int margin, double projRatio, double projAngle) {
-		if (margin >= canvasWidth/2 || margin >= canvasHeight/2){
-			margin = 0;
-		}
-		System.out.println("margin "+margin+ " OH "+ get2DOccupiedHeight(projRatio, projAngle));
-		List<Path> l = new ArrayList<Path>();
-		int scale=0;
-		double maxHeightRatio = ((double) (canvasHeight-margin*2)) / ((double) get2DOccupiedHeight(projRatio, projAngle));
-		double maxLengthRatio = ((double) (canvasWidth-margin*2)) / ((double) get2DOccupiedLength(projRatio, projAngle));
-		if (maxHeightRatio>maxLengthRatio){
-			scale = (int) maxLengthRatio;
-		} else {
-			scale = (int) maxHeightRatio;
-		}
-		int canvasTriangleBaseWidth = (int) (scale * baseTriangle.getBaseLine());
-		int canvasPrismHeight = (int) (scale * prismHeight);
-		int pxOl = (int) (scale * get2DOccupiedLength(projRatio, projAngle));
-		int pxOh = (int) (scale * get2DOccupiedHeight(projRatio, projAngle));
-		int x1,x2,x3,x4,x5,x6;
-		int y1,y2,y3,y4,y5,y6;
-		System.out.println("scale "+scale+" pxol "+pxOl+" pxoh "+pxOh+" pxCvOL "+canvasTriangleBaseWidth+" pxCvOH "+pxOh);
-		x1 = (canvasWidth-pxOl)/2;
-		x2 = x1 + (int) (projRatio * baseTriangle.getLeftEdge() * Math.cos(projAngle));
-		x3 = x1 + canvasTriangleBaseWidth;
-		x4 = x1; 
-		x5 = x2;
-		x6 = x3;
+	public List<Point3D> getVertices() {
+		List<Point3D> points = new ArrayList<Point3D>();
+		Point3D a,b,c;
+		Point3D d,e,f;
+		a = new Point3D(0, 0, 0);
+		b = new Point3D(this.baseTriangle.getBaseLine(), 0, 0);
+		c = new Point3D(this.baseTriangle.getShear(), 0 , this.baseTriangle.getHeight());
+		
+		d = new Point3D(0, prismHeight, 0);
+		e = new Point3D(this.baseTriangle.getBaseLine(), prismHeight, 0);
+		f = new Point3D(this.baseTriangle.getShear(), prismHeight , this.baseTriangle.getHeight());
 		
 		
-		y5 = (canvasHeight-pxOh)/2;
-		y4 = y5 + (int) (projRatio * baseTriangle.getLeftEdge() * Math.sin(projAngle));
-		y6 = y4;
-		y2 = y5 + canvasPrismHeight;
-		y1 = y4 + canvasPrismHeight;
-		y3 = y1;
-		l.add(Path.createLinePathDotted(new Point2D(x1, y1), new Point2D(x2, y2)));
-		l.add(Path.createLinePathDotted(new Point2D(x2, y2), new Point2D(x3, y3)));
-		l.add(Path.createLinePath(new Point2D(x3, y3), new Point2D(x1, y1)));
-		
-		l.add(Path.createLinePath(new Point2D(x1, y1), new Point2D(x4, y4)));
-		l.add(Path.createLinePathDotted(new Point2D(x2, y2), new Point2D(x5, y5)));
-		l.add(Path.createLinePath(new Point2D(x3, y3), new Point2D(x6, y6)));
-		
-		l.add(Path.createLinePath(new Point2D(x4, y4), new Point2D(x5, y5)));
-		l.add(Path.createLinePath(new Point2D(x5, y5), new Point2D(x6, y6)));
-		l.add(Path.createLinePath(new Point2D(x6, y6), new Point2D(x4, y4)));
-		
-		System.out.println(x1+" "+x2+" "+x3+" "+x4);
-		return l;
+		points.add(a);points.add(b);points.add(c);
+		points.add(d);points.add(e);points.add(f);
+		return points;
 	}
-
 	@Override
-	public List<Path> getPaths(int width, int height) {
-		double defRatio = 1;
-		double defAngle = Math.PI/4;
-		int margin;
-		if (width >= height) {
-			margin = height / 4;
-		} else margin = width / 4;
-		return getPaths(width, height, margin, defRatio, defAngle);
+	public int getEdgeCount() {
+		return 6;
+	}
+	@Override
+	public List<Path> getPaths() {
+		List<Path> l = new ArrayList<Path>();
+		
+		l.add(Path.createLinePath(getVertices().get(0), getVertices().get(1)));
+		l.add(Path.createLinePath(getVertices().get(1), getVertices().get(2)));
+		l.add(Path.createLinePath(getVertices().get(2), getVertices().get(0)));
+		
+		l.add(Path.createLinePath(getVertices().get(3), getVertices().get(4)));
+		l.add(Path.createLinePathDotted(getVertices().get(4), getVertices().get(5)));
+		l.add(Path.createLinePathDotted(getVertices().get(5), getVertices().get(3)));
+		
+		l.add(Path.createLinePath(getVertices().get(0), getVertices().get(3)));
+		l.add(Path.createLinePath(getVertices().get(1), getVertices().get(4)));
+		l.add(Path.createLinePathDotted(getVertices().get(2), getVertices().get(5)));
+		return l;
 	}
 }

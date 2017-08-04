@@ -14,8 +14,8 @@ public class UtilGeom {
 		return new Point2D(maxX, maxY);
 	}
 	public static Point2D getMaxXY3D(List<Point3D> points) {
-		int maxX = 0;
-		int maxY = 0;
+		double maxX = 0;
+		double maxY = 0;
 		for (Point3D p : points) {
 			if (p.project2D().x > maxX) maxX = p.x;
 			if (p.project2D().y > maxY) maxX = p.y;
