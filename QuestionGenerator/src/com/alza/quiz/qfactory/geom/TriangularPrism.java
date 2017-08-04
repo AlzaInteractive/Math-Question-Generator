@@ -58,8 +58,13 @@ public class TriangularPrism implements Shapes3D{
 
 	@Override
 	public Shapes3D createExample() {
-		Triangle bs = (Triangle) new Triangle().createExample();
-		int height = ThreadLocalRandom.current().nextInt(5, 26);
+		Triangle bs;
+		int height;
+		do {
+			bs = (Triangle) new Triangle().createExample();
+			height = ThreadLocalRandom.current().nextInt(5, 26);
+		} while (bs.getShear()/bs.getBaseLine()>0.3);
+		
 		return new TriangularPrism(bs, height);
 	}
 
