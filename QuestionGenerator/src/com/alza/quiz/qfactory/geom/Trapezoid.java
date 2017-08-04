@@ -108,8 +108,8 @@ public class Trapezoid implements Shapes2D{
 		} else {
 			a = new Point2D(0,0);
 			b = new Point2D(this.topLength, 0);
-			c = new Point2D(this.shearLeft+this.bottomLength, this.height);
-			d = new Point2D(this.shearLeft, this.height);
+			c = new Point2D(-this.shearLeft+this.bottomLength, this.height);
+			d = new Point2D(-this.shearLeft, this.height);
 		}
 		points.add(a);points.add(b);points.add(c);points.add(d);
 		return points;
