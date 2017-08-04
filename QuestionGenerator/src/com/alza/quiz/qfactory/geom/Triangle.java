@@ -95,17 +95,6 @@ public class Triangle implements Shapes2D{
 			return 0;
 		}
 	}
-
-	@Override
-	public double getOccupiedLength() {
-		return baseLine;
-	}
-
-	@Override
-	public double getOccupiedHeight() {
-		return height;
-	}
-
 	@Override
 	public String getName() {
 		return "triangle";
@@ -118,51 +107,31 @@ public class Triangle implements Shapes2D{
 		int sh = ThreadLocalRandom.current().nextInt(0, bs+1);
 		return new Triangle(bs, ht, sh);
 	}
-
-	@Override
-	public List<Path> getPaths(int pxWidth, int pxHeight, int margin) {
-		if (margin >= pxWidth/2 || margin >= pxHeight/2){
-			margin = 0;
-		}
-		List<Path> l = new ArrayList<Path>();
-		int scale=0;
-		double maxHeightRatio = ((double) (pxHeight-margin*2)) / ((double) getOccupiedHeight());
-		double maxLengthRatio = ((double) (pxWidth-margin*2)) / ((double) getOccupiedLength());
-		if (maxHeightRatio>maxLengthRatio){
-			scale = (int) maxLengthRatio;
-		} else {
-			scale = (int) maxHeightRatio;
-		}
-		System.out.println("scale  "+scale);
-		int pxBs = (int) (baseLine * scale);
-		int pxH  = (int) (height * scale);
-		int pxSh  = (int) (shear * scale);
-		System.out.println("Mapped bs h sh:  "+pxBs+","+pxH+","+pxSh);
-		int x1,x2,x3;
-		int y1,y2,y3;
-		x1 = (pxWidth-pxBs)/2; 
-		x2 = x1 + pxSh;
-		x3 = x1+pxBs;
-		y2 = (pxHeight - pxH) / 2; 
-		y1 = y2+pxH;
-		y3 = y1;
-		l.add(Path.createLinePath(new Point2D(x1, y1), new Point2D(x2, y2)));
-		l.add(Path.createLinePath(new Point2D(x2, y2), new Point2D(x3, y3)));
-		l.add(Path.createLinePath(new Point2D(x3, y3), new Point2D(x1, y1)));
-		return l;
-	}
-
-	@Override
-	public List<Path> getPaths(int width, int height) {
-		int margin;
-		if (width >= height) {
-			margin = height / 5;
-		} else margin = width / 5;
-		return getPaths(width, height, margin);
-	}
 	public String toString(){
 		String s = "Triangle with "+this.baseLine+" base"+this.height+" height"+this.shear+" shear";
 		return s;
+	}
+	@Override
+	public List<Point2D> getVertices() {
+		List<Point2D> points = new ArrayList<Point2D>();
+		Point2D a,b,c;
+		a = new Point2D(0, this.shear);
+		b = new Point2D(this.height, 0);
+		c = new Point2D(this.height, this.baseLine);
+		points.add(a);points.add(b);points.add(c);
+		return points;
+	}
+	@Override
+	public int getEdgeCount() {
+		return 3;
+	}
+	@Override
+	public List<Path> getPaths() {
+		List<Path> l = new ArrayList<Path>();
+		l.add(Path.createLinePath(getVertices().get(0), getVertices().get(1)));
+		l.add(Path.createLinePath(getVertices().get(1), getVertices().get(2)));
+		l.add(Path.createLinePath(getVertices().get(2), getVertices().get(1)));
+		return l;
 	}
 
 }

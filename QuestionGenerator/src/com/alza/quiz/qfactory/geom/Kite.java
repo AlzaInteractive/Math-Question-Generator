@@ -67,54 +67,28 @@ public class Kite implements Shapes2D{
 		return k;
 	}
 	@Override
-	public double getOccupiedLength() {
-		return diagonalHoriz;
+	public List<Point2D> getVertices() {
+		List<Point2D> points = new ArrayList<Point2D>();
+		Point2D a,b,c,d;
+		a = new Point2D(0, shear);
+		b = new Point2D(diagonalHoriz/2, 0);
+		c = new Point2D(diagonalHoriz, shear);
+		d = new Point2D(diagonalHoriz/2, diagonalVert);
+		points.add(a);points.add(b);points.add(c);points.add(d);
+		return points;
 	}
 	@Override
-	public double getOccupiedHeight() {
-		return diagonalVert;
+	public int getEdgeCount() {
+		return 4;
 	}
-	public List<Path> getPaths(int pxWidth, int pxHeight, int margin) {
-		if (margin >= pxWidth/2 || margin >= pxHeight/2){
-			margin = 0;
-		}
+	@Override
+	public List<Path> getPaths() {
 		List<Path> l = new ArrayList<Path>();
-		int scale=0;
-		System.out.println("margin "+margin);
-		double maxHeightRatio = ((double) (pxHeight-margin*2)) / ((double) getOccupiedHeight());
-		double maxLengthRatio = ((double) (pxWidth-margin*2)) / ((double) getOccupiedLength());
-		if (maxHeightRatio>maxLengthRatio){
-			scale = (int) maxLengthRatio;
-		} else {
-			scale = (int) maxHeightRatio;
-		}
-		int pxDH = (int) (scale * diagonalHoriz);
-		int pxDV = (int) (scale * diagonalVert);
-		int pxSh = (int) (scale * shear);
-		System.out.println("Mapped DHVS:  "+pxDH+","+pxDV+","+pxSh);
-		int x1,x2,x3,x4;
-		int y1,y2,y3,y4;
-		x1 = (pxWidth - pxDH) / 2; 
-		x2 = x1 + ( pxDH / 2);
-		x3 = x1 + pxDH; 
-		x4 = x2;
-		y2 = (pxHeight - pxDV) /2 ;
-		y1 = y2 + pxSh;
-		y3 = y1;
-		y4 = y2 + pxDV;
-		l.add(Path.createLinePath(new Point2D(x1, y1), new Point2D(x2, y2)));
-		l.add(Path.createLinePath(new Point2D(x2, y2), new Point2D(x3, y3)));
-		l.add(Path.createLinePath(new Point2D(x3, y3), new Point2D(x4, y4)));
-		l.add(Path.createLinePath(new Point2D(x4, y4), new Point2D(x1, y1)));
+		l.add(Path.createLinePath(getVertices().get(0), getVertices().get(1)));
+		l.add(Path.createLinePath(getVertices().get(1), getVertices().get(2)));
+		l.add(Path.createLinePath(getVertices().get(2), getVertices().get(3)));
+		l.add(Path.createLinePath(getVertices().get(3), getVertices().get(1)));
 		return l;
-	}
-	@Override
-	public List<Path> getPaths(int width, int height) {
-		int margin;
-		if (width >= height) {
-			margin = height / 5;
-		} else margin = width / 5;
-		return getPaths(width, height, margin);
 	}
 	public String toString(){
 		String s = "Kite with "+this.diagonalHoriz+" horizontal diagonal, "+this.diagonalVert+

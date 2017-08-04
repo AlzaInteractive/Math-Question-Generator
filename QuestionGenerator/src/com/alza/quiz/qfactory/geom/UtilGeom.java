@@ -22,9 +22,9 @@ public class UtilGeom {
 		}
 		return new Point2D(maxX, maxY);
 	}
-	private static Point2D scalePoint(double scale,Point2D p) {
-		double newX = p.x * scale;
-		double newY = p.y * scale;
+	private static Point2D getTransformedPointOnScreen(double scale,double margin, Point2D p) {
+		double newX = p.x * scale + margin;
+		double newY = p.y * scale + margin;
 		return new Point2D(newX,newY);
 	}
 	public static List<Path> getPaths(int canvasWidth, int canvasHeight, Shapes2D shp){
@@ -39,16 +39,16 @@ public class UtilGeom {
 		for (Path p : lOri) {
 			switch (p.pathType) {
 			case Path.PATH_TYPE_LINE:
-				l.add(Path.createLinePath(scalePoint(scale, p.start),scalePoint(scale, p.finish)));
+				l.add(Path.createLinePath(getTransformedPointOnScreen(scale, margin, p.start),getTransformedPointOnScreen(scale, margin, p.finish)));
 				break;
 			case Path.PATH_TYPE_LINE_DOTTED:
-				l.add(Path.createLinePathDotted(scalePoint(scale, p.start),scalePoint(scale, p.finish)));
+				l.add(Path.createLinePathDotted(getTransformedPointOnScreen(scale, margin, p.start),getTransformedPointOnScreen(scale, margin, p.finish)));
 				break;
 			case Path.PATH_TYPE_CIRCLE:
-				l.add(Path.createCirclePath(scalePoint(scale, p.center), p.radius * scale));
+				l.add(Path.createCirclePath(getTransformedPointOnScreen(scale, margin, p.center), p.radius * scale));
 				break;
 			case Path.PATH_TYPE_ARC:
-				l.add(Path.createArcPath(scalePoint(scale, p.start),scalePoint(scale, p.finish)));
+				l.add(Path.createArcPath(getTransformedPointOnScreen(scale, margin, p.start),getTransformedPointOnScreen(scale, margin, p.finish)));
 				break;
 			default:
 				break;
