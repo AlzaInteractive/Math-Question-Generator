@@ -9,7 +9,7 @@ public class Path {
 	public Point2D finish;
 	public int pathType;
 	public Point2D center;
-	public int radius;
+	public double radius;
 	
 	public static Path createLinePath(Point2D start, Point2D finish){
 		Path p = new Path();
@@ -25,7 +25,7 @@ public class Path {
 		p.pathType = PATH_TYPE_LINE;
 		return p;
 	}
-	public static Path createCirclePath(Point2D center, int radius){
+	public static Path createCirclePath(Point2D center, double radius){
 		Path p = new Path();
 		p.radius = radius;
 		p.center = center;

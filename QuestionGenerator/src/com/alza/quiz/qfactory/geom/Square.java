@@ -50,53 +50,31 @@ public class Square implements Shapes2D{
 		return a;
 	}
 	@Override
-	public double getOccupiedLength() {
-		return this.length;
-	}
-	@Override
-	public double getOccupiedHeight() {
-		return this.length;
-	}
-	@Override
-	public List<Path> getPaths(int pxWidth, int pxHeight, int margin) {
-		System.out.println(margin);
-		if (margin >= pxWidth/2 || margin >= pxHeight/2){
-			margin = 0;
-		}
+	public List<Path> getPaths() {
 		List<Path> l = new ArrayList<Path>();
-		int allocatedSpace=0;
-		if (pxWidth<=pxHeight){
-			allocatedSpace = pxWidth - (2 * margin);
-		} else {
-			allocatedSpace = pxHeight - (2 * margin);
-		}
-		System.out.println(allocatedSpace);
-		int x1,x2,x3,x4;
-		int y1,y2,y3,y4;
-		x1 = (pxWidth-allocatedSpace)/2; 
-		x2 = x1 + allocatedSpace;
-		x3 = x2;
-		x4 = x1;
-		y1 = (pxHeight-allocatedSpace)/2; 
-		y2 = y1;
-		y3 = y1 + allocatedSpace; 
-		y4 = y3;
-		l.add(Path.createLinePath(new Point2D(x1, y1), new Point2D(x2, y2)));
-		l.add(Path.createLinePath(new Point2D(x2, y2), new Point2D(x3, y3)));
-		l.add(Path.createLinePath(new Point2D(x3, y3), new Point2D(x4, y4)));
-		l.add(Path.createLinePath(new Point2D(x4, y4), new Point2D(x1, y1)));
+		l.add(Path.createLinePath(getVertices().get(0), getVertices().get(1)));
+		l.add(Path.createLinePath(getVertices().get(1), getVertices().get(2)));
+		l.add(Path.createLinePath(getVertices().get(2), getVertices().get(3)));
+		l.add(Path.createLinePath(getVertices().get(3), getVertices().get(1)));
 		return l;
-	}
-	@Override
-	public List<Path> getPaths(int width, int height) {
-		int margin;
-		if (width >= height) {
-			margin = height / 5;
-		} else margin = width / 5;
-		return getPaths(width, height, margin);
 	}
 	public String toString(){
 		String s = "Square with "+this.length+" length";
 		return s;
+	}
+	@Override
+	public List<Point2D> getVertices() {
+		List<Point2D> points = new ArrayList<Point2D>();
+		Point2D a,b,c,d;
+		a = new Point2D(0, 0);
+		b = new Point2D(this.length, 0);
+		c = new Point2D(this.length, this.length);
+		d = new Point2D(0, this.length);
+		points.add(a);points.add(b);points.add(c);points.add(d);
+		return points;
+	}
+	@Override
+	public int getEdgeCount() {
+		return 4;
 	}
 }
