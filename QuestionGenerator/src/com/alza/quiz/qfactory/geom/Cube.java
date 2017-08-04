@@ -84,7 +84,7 @@ public class Cube implements Shapes3D{
 		l.add(Path.createLinePath(getVertices().get(0), getVertices().get(1)));
 		l.add(Path.createLinePath(getVertices().get(1), getVertices().get(2)));
 		l.add(Path.createLinePath(getVertices().get(2), getVertices().get(3)));
-		l.add(Path.createLinePath(getVertices().get(3), getVertices().get(1)));
+		l.add(Path.createLinePath(getVertices().get(3), getVertices().get(0)));
 		
 		l.add(Path.createLinePath(getVertices().get(4), getVertices().get(5)));
 		l.add(Path.createLinePath(getVertices().get(5), getVertices().get(6)));

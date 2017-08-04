@@ -18,7 +18,7 @@ public class Point3D {
 	public Point2D getProjectedPoint() {
 		double angle = Math.PI/3;
 		double newX = this.x + (0.5 * this.z * Math.cos(angle));
-		double newY = this.y + (0.5 * this.z * Math.sin(angle));
+		double newY = this.y - (0.5 * this.z * Math.sin(angle));
 		return new Point2D((int)newX, (int)newY);
 	}
 
