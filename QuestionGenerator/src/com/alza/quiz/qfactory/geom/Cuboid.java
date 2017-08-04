@@ -20,12 +20,6 @@ public class Cuboid implements Shapes3D{
 		this.edgeHeight = edgeHeight;
 	}
 
-
-	@Override
-	public int getVerticesCount() {
-		return 12;
-
-	}
 	@Override
 	public double getSurfaceArea() {
 		List<Shapes2D> fcs = getFaces();
@@ -56,18 +50,6 @@ public class Cuboid implements Shapes3D{
 	}
 
 	@Override
-	public double get2DOccupiedLength(double projRatio, double projAngle) {
-		double addLength = projRatio * edgeWidth * Math.cos(projAngle);
-		return addLength+edgeLength;
-	}
-
-	@Override
-	public double get2DOccupiedHeight(double projRatio, double projAngle) {
-		double addHeight = projRatio * edgeWidth * Math.sin(projAngle);
-		return addHeight+edgeHeight;
-	}
-
-	@Override
 	public String getName() {
 		return "cuboid";
 	}
@@ -85,69 +67,50 @@ public class Cuboid implements Shapes3D{
 	}
 
 	@Override
-	public List<Path> getPaths(int canvasWidth, int canvasHeight, int margin, double projRatio, double projAngle) {
-		if (margin >= canvasWidth/2 || margin >= canvasHeight/2){
-			margin = 0;
-		}
-		List<Path> l = new ArrayList<Path>();
-		int scale=0;
-		double maxHeightRatio = ((double) (canvasHeight-margin*2)) / ((double) get2DOccupiedHeight(projRatio, projAngle));
-		double maxLengthRatio = ((double) (canvasWidth-margin*2)) / ((double) get2DOccupiedLength(projRatio, projAngle));
-		if (maxHeightRatio>maxLengthRatio){
-			scale = (int) maxLengthRatio;
-		} else {
-			scale = (int) maxHeightRatio;
-		}
-		int canvasEdgeLength = (int) (scale * edgeLength);
-		int canvasEdgeWidth = (int) (scale * edgeWidth);
-		int canvasEdgeHeight = (int) (scale * edgeHeight);
-		int pxOl = (int) (scale * get2DOccupiedLength(projRatio, projAngle));
-		int pxOh = (int) (scale * get2DOccupiedHeight(projRatio, projAngle));
-		int x1,x2,x3,x4,x5,x6,x7,x8;
-		int y1,y2,y3,y4,y5,y6,y7,y8;
-		System.out.println("scale "+scale+" pxol "+pxOl+" pxoh "+pxOh+" pxCvOL "+canvasEdgeLength);
-		x1 = (canvasWidth-pxOl)/2;
-		x2 = x1 + canvasEdgeLength;
-		x3 = x2;
-		x4 = x1;
-		x5 = x1 + (int)(projRatio * canvasEdgeWidth * Math.cos(projAngle));
-		x6 = x5 + canvasEdgeLength;
-		x7 = x6;
-		x8 = x5;
-		y5 = (canvasHeight-pxOh)/2;
-		y6 = y5;
-		y7 = y6 + canvasEdgeHeight;
-		y8 = y7;
-		y1 = y5 + (int) (projRatio * canvasEdgeWidth * Math.sin(projAngle));
-		y2 = y1;
-		y3 = y2 + canvasEdgeHeight;
-		y4 = y3;
-		l.add(Path.createLinePath(new Point2D(x1, y1), new Point2D(x2, y2)));
-		l.add(Path.createLinePath(new Point2D(x2, y2), new Point2D(x3, y3)));
-		l.add(Path.createLinePath(new Point2D(x3, y3), new Point2D(x4, y4)));
-		l.add(Path.createLinePath(new Point2D(x4, y4), new Point2D(x1, y1)));
+	public List<Point3D> getVertices() {
+		List<Point3D> points = new ArrayList<Point3D>();
+		Point3D a,b,c,d;
+		Point3D e,f,g,h;
+		a = new Point3D(0, 0, 0);
+		b = new Point3D(this.edgeLength, 0, 0);
+		c = new Point3D(this.edgeLength, this.edgeHeight,0);
+		d = new Point3D(0, this.edgeHeight,0);
 		
-		l.add(Path.createLinePath(new Point2D(x1, y1), new Point2D(x5, y5)));
-		l.add(Path.createLinePath(new Point2D(x2, y2), new Point2D(x6, y6)));
-		l.add(Path.createLinePath(new Point2D(x3, y3), new Point2D(x7, y7)));
-		l.add(Path.createLinePathDotted(new Point2D(x4, y4), new Point2D(x8, y8)));
+		e = new Point3D(0, 0, this.edgeWidth);
+		f = new Point3D(this.edgeLength, 0, this.edgeWidth);
+		g = new Point3D(this.edgeLength, this.edgeHeight,this.edgeWidth);
+		h = new Point3D(0, this.edgeHeight,this.edgeWidth);
 		
-		l.add(Path.createLinePath(new Point2D(x5, y5), new Point2D(x6, y6)));
-		l.add(Path.createLinePath(new Point2D(x6, y6), new Point2D(x7, y7)));
-		l.add(Path.createLinePathDotted(new Point2D(x7, y7), new Point2D(x8, y8)));
-		l.add(Path.createLinePathDotted(new Point2D(x8, y8), new Point2D(x5, y5)));
-		System.out.println(x1+" "+x2+" "+x3+" "+x4);
-		return l;
+		points.add(a);points.add(b);points.add(c);points.add(d);
+		points.add(e);points.add(f);points.add(g);points.add(h);
+		return points;
 	}
 
+
 	@Override
-	public List<Path> getPaths(int width, int height) {
-		double defRatio = 0.3;
-		double defAngle = Math.PI/6;
-		int margin;
-		if (width >= height) {
-			margin = height / 5;
-		} else margin = width / 5;
-		return getPaths(width, height, margin, defRatio, defAngle);
+	public int getEdgeCount() {
+		return 12;
+	}
+
+
+	@Override
+	public List<Path> getPaths() {
+		List<Path> l = new ArrayList<Path>();
+		
+		l.add(Path.createLinePath(getVertices().get(0), getVertices().get(1)));
+		l.add(Path.createLinePath(getVertices().get(1), getVertices().get(2)));
+		l.add(Path.createLinePath(getVertices().get(2), getVertices().get(3)));
+		l.add(Path.createLinePath(getVertices().get(3), getVertices().get(1)));
+		
+		l.add(Path.createLinePath(getVertices().get(4), getVertices().get(5)));
+		l.add(Path.createLinePath(getVertices().get(5), getVertices().get(6)));
+		l.add(Path.createLinePathDotted(getVertices().get(6), getVertices().get(7)));
+		l.add(Path.createLinePathDotted(getVertices().get(7), getVertices().get(4)));
+		
+		l.add(Path.createLinePath(getVertices().get(0), getVertices().get(4)));
+		l.add(Path.createLinePath(getVertices().get(1), getVertices().get(5)));
+		l.add(Path.createLinePath(getVertices().get(2), getVertices().get(6)));
+		l.add(Path.createLinePathDotted(getVertices().get(3), getVertices().get(7)));
+		return l;
 	}
 }

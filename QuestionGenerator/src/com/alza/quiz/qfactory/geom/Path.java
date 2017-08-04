@@ -46,6 +46,13 @@ public class Path {
 		p.pathType = PATH_TYPE_LINE_DOTTED;
 		return p;
 	}
+	public static Path createLinePathDotted(Point3D start, Point3D finish){
+		Path p = new Path();
+		p.start = start.project2D();
+		p.finish = finish.project2D();
+		p.pathType = PATH_TYPE_LINE_DOTTED;
+		return p;
+	}
 	public String toString(){
 		String s="";
 		switch (pathType) {

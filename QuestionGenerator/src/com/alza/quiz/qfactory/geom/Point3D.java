@@ -1,9 +1,9 @@
 package com.alza.quiz.qfactory.geom;
 
 public class Point3D {
-	public int x,y,z;
+	public double x,y,z;
 
-	public Point3D(int x, int y, int z) {
+	public Point3D(double x, double y, double z) {
 		super();
 		this.x = x;
 		this.y = y;
