@@ -24,6 +24,12 @@ public class Triangle implements Shapes2D{
 		this.height = height;
 		this.shear = shear;
 	}
+	public Triangle(double baseLine, double height) {
+		super();
+		this.baseLine = baseLine;
+		this.height = height;
+		this.shear = baseLine/2;
+	}
 	
 	public double getBaseLine() {
 		return baseLine;
