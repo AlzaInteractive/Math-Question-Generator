@@ -1,21 +1,19 @@
-package com.alza.quiz.qfactory.geom;
+package com.alza.quiz.qfactory.geom.model;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class Parallelogram implements Shapes2D{
+public class Rectangle implements Shapes2D{
 	private double length;
-	private double height;
-	private double shear;
+	private double width;
 	
-	public Parallelogram(){
+	public Rectangle(){
 		
 	}
-	public Parallelogram(double length, double height, double shear){
+	public Rectangle(double length, double width){
 		this.length = length;
-		this.height = height;
-		this.shear = shear;
+		this.width = width;
 	}
 	
 	public double getLength() {
@@ -26,35 +24,24 @@ public class Parallelogram implements Shapes2D{
 		this.length = length;
 	}
 
-	public double getHeight() {
-		return height;
+	public double getWidth() {
+		return width;
 	}
-	public void setHeight(double height) {
-		this.height = height;
-	}
-	public double getShear() {
-		return shear;
-	}
-	public void setShear(double shear) {
-		this.shear = shear;
-	}
-	public double getSlope(){
-		double slope;
-		slope = Math.sqrt(((length-shear) * (length-shear)) + (height * height)) ; 
-		return slope;
+	public void setWidth(double width) {
+		this.width = width;
 	}
 	@Override
 	public double getArea() {
-		return height * length;
+		return length * width;
 	}
 
 	@Override
 	public double getPerimeter() {
-		return 2 * (length + getSlope());
+		return 2 * (length + width);
 	}
 	@Override
 	public int getReflectionalSymmetryCount() {
-		return 0;
+		return 2;
 	}
 	@Override
 	public int getRotationalSymmetryCount() {
@@ -62,28 +49,31 @@ public class Parallelogram implements Shapes2D{
 	}
 	@Override
 	public String getName() {
-		return "parallelogram";
+		return "rectangle";
 	}
 	@Override
 	public Shapes2D createExample() {
-		int l,h,s;
+		int w,l;
 		do {
+			w = ThreadLocalRandom.current().nextInt(5, 26);
 			l = ThreadLocalRandom.current().nextInt(5, 26);
-			h = ThreadLocalRandom.current().nextInt(5, 26);
-			s = ThreadLocalRandom.current().nextInt(5, 10);
-		} while (l==h || s>=l/3);
-		
-		return new Parallelogram(l, h, s);
+		} while (w==l);
+		Rectangle r = new Rectangle(l, w);
+		return r;
 	}
 	
+	public String toString(){
+		String s = "Rectangle with "+this.length+" length, "+this.width+" width";
+		return s;
+	}
 	@Override
 	public List<Point2D> getVertices() {
 		List<Point2D> points = new ArrayList<Point2D>();
 		Point2D a,b,c,d;
-		a = new Point2D(this.shear,0);
-		b = new Point2D(this.length+this.shear, 0);
-		c = new Point2D(this.length, this.height);
-		d = new Point2D(0, this.height);
+		a = new Point2D(0, 0);
+		b = new Point2D(this.length, 0);
+		c = new Point2D(this.length, this.width);
+		d = new Point2D(0, this.width);
 		points.add(a);points.add(b);points.add(c);points.add(d);
 		return points;
 	}
@@ -99,10 +89,5 @@ public class Parallelogram implements Shapes2D{
 		l.add(Path.createLinePath(getVertices().get(2), getVertices().get(3)));
 		l.add(Path.createLinePath(getVertices().get(3), getVertices().get(0)));
 		return l;
-	}
-	public String toString(){
-		String s = "Parallelogram with "+this.length+" length, "+this.height+
-				" height "+this.shear+" shear";
-		return s;
 	}
 }

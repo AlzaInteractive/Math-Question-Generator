@@ -1,4 +1,6 @@
-package com.alza.quiz.qfactory.geom;
+package com.alza.quiz.qfactory.geom.model;
+
+import com.alza.quiz.qfactory.geom.UtilGeom;
 
 public class Path {
 	public static final int PATH_TYPE_LINE=11;

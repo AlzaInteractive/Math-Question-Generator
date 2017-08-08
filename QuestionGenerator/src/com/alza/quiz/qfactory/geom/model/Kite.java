@@ -1,18 +1,20 @@
-package com.alza.quiz.qfactory.geom;
+package com.alza.quiz.qfactory.geom.model;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class Rhombus implements Shapes2D{
+public class Kite implements Shapes2D{
 	private double diagonalHoriz;
 	private double diagonalVert;
-	public Rhombus(){
+	private double shear;
+	public Kite(){
 		
 	}
-	public Rhombus(double p, double q){
-		this.diagonalHoriz = p;
-		this.diagonalVert = q;
+	public Kite(double diagHoriz, double diagVert, double shear){
+		this.diagonalHoriz = diagHoriz;
+		this.diagonalVert = diagVert;
+		this.shear = shear;
 	}
 	public double getDiagonalHoriz() {
 		return diagonalHoriz;
@@ -26,6 +28,12 @@ public class Rhombus implements Shapes2D{
 	public void setDiagonalVert(double diagonalVert) {
 		this.diagonalVert = diagonalVert;
 	}
+	public double getShear() {
+		return shear;
+	}
+	public void setShear(double shear) {
+		this.shear = shear;
+	}
 	@Override
 	public double getArea() {
 		return diagonalHoriz * diagonalVert / 2;
@@ -37,38 +45,34 @@ public class Rhombus implements Shapes2D{
 	}
 	@Override
 	public int getReflectionalSymmetryCount() {
-		return 2;
+		return 0;
 	}
 	@Override
 	public int getRotationalSymmetryCount() {
-		return 2;
+		return 0;
 	}
 	@Override
 	public String getName() {
-		return "rhombus";
+		return "kite";
 	}
 	@Override
 	public Shapes2D createExample() {
-		int p,q;
+		int p,q,s;
 		do {
 			p = ThreadLocalRandom.current().nextInt(5, 26);
 			q = ThreadLocalRandom.current().nextInt(5, 26);
-		} while (p==q);
-		Rhombus r = new Rhombus(p, q);
-		return r;
-	}
-	
-	public String toString(){
-		String s = "Rhombus with "+this.diagonalHoriz+" horizontal diagonal, "+this.diagonalVert+" vertical diagonal";
-		return s;
+			s = ThreadLocalRandom.current().nextInt(5, 26);
+		} while (s>=q||s==q/2);
+		Kite k = new Kite(p, q, s);
+		return k;
 	}
 	@Override
 	public List<Point2D> getVertices() {
 		List<Point2D> points = new ArrayList<Point2D>();
 		Point2D a,b,c,d;
-		a = new Point2D(0, diagonalVert/2);
+		a = new Point2D(0, shear);
 		b = new Point2D(diagonalHoriz/2, 0);
-		c = new Point2D(diagonalHoriz, diagonalVert/2);
+		c = new Point2D(diagonalHoriz, shear);
 		d = new Point2D(diagonalHoriz/2, diagonalVert);
 		points.add(a);points.add(b);points.add(c);points.add(d);
 		return points;
@@ -85,5 +89,10 @@ public class Rhombus implements Shapes2D{
 		l.add(Path.createLinePath(getVertices().get(2), getVertices().get(3)));
 		l.add(Path.createLinePath(getVertices().get(3), getVertices().get(0)));
 		return l;
+	}
+	public String toString(){
+		String s = "Kite with "+this.diagonalHoriz+" horizontal diagonal, "+this.diagonalVert+
+				" vertical diagonal "+this.shear+" shear";
+		return s;
 	}
 }

@@ -1,18 +1,23 @@
-package com.alza.quiz.qfactory.geom;
+package com.alza.quiz.qfactory.geom.model;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class Cube implements Shapes3D{
+public class Cuboid implements Shapes3D{
 	private double edgeLength;
-	public Cube() {
+	private double edgeWidth;
+	private double edgeHeight;
+	public Cuboid() {
 		
 	}
 	
-	public Cube(double edgeLength) {
+	
+	public Cuboid(double edgeLength, double edgeWidth, double edgeHeight) {
 		super();
 		this.edgeLength = edgeLength;
+		this.edgeWidth = edgeWidth;
+		this.edgeHeight = edgeHeight;
 	}
 
 	@Override
@@ -27,29 +32,38 @@ public class Cube implements Shapes3D{
 
 	@Override
 	public double getVolume() {
-		return edgeLength * edgeLength * edgeLength;
+		return edgeLength * edgeWidth * edgeHeight;
 	}
 
 	@Override
 	public List<Shapes2D> getFaces() {
 		List<Shapes2D> fcs = new ArrayList<Shapes2D>();
-		for (int i = 0; i < 6; i++) {
-			Square shp = new Square(edgeLength);
-			fcs.add(shp);
+		for (int i = 0; i < 2; i++) {
+			Rectangle r1 = new Rectangle(edgeLength, edgeWidth);
+			Rectangle r2 = new Rectangle(edgeLength, edgeHeight);
+			Rectangle r3 = new Rectangle(edgeHeight, edgeWidth);
+			fcs.add(r1);
+			fcs.add(r2);
+			fcs.add(r3);
 		}
 		return fcs;
 	}
 
-
 	@Override
 	public String getName() {
-		return "cube";
+		return "cuboid";
 	}
 
 	@Override
 	public Shapes3D createExample() {
-		double el = ThreadLocalRandom.current().nextInt(5, 26);
-		return new Cube(el);
+		double el,wi,hi;
+		do {
+			el = ThreadLocalRandom.current().nextInt(5, 26);
+			wi = ThreadLocalRandom.current().nextInt(5, 26);
+			hi = ThreadLocalRandom.current().nextInt(5, 26);
+		} while (el==wi||el==hi);
+		
+		return new Cuboid(el,wi,hi);
 	}
 
 	@Override
@@ -59,23 +73,25 @@ public class Cube implements Shapes3D{
 		Point3D e,f,g,h;
 		a = new Point3D(0, 0, 0);
 		b = new Point3D(this.edgeLength, 0, 0);
-		c = new Point3D(this.edgeLength, this.edgeLength,0);
-		d = new Point3D(0, this.edgeLength,0);
+		c = new Point3D(this.edgeLength, this.edgeHeight,0);
+		d = new Point3D(0, this.edgeHeight,0);
 		
-		e = new Point3D(0, 0, this.edgeLength);
-		f = new Point3D(this.edgeLength, 0, this.edgeLength);
-		g = new Point3D(this.edgeLength, this.edgeLength,this.edgeLength);
-		h = new Point3D(0, this.edgeLength,this.edgeLength);
+		e = new Point3D(0, 0, this.edgeWidth);
+		f = new Point3D(this.edgeLength, 0, this.edgeWidth);
+		g = new Point3D(this.edgeLength, this.edgeHeight,this.edgeWidth);
+		h = new Point3D(0, this.edgeHeight,this.edgeWidth);
 		
 		points.add(a);points.add(b);points.add(c);points.add(d);
 		points.add(e);points.add(f);points.add(g);points.add(h);
 		return points;
 	}
 
+
 	@Override
 	public int getEdgeCount() {
 		return 12;
 	}
+
 
 	@Override
 	public List<Path> getPaths() {

@@ -1,6 +1,6 @@
 package com.alza.quiz.model;
 
-import com.alza.quiz.qfactory.geom.Shapes2D;
+import com.alza.quiz.qfactory.geom.model.Shapes2D;
 
 /**
  * Created by galuh on 24/12/16.

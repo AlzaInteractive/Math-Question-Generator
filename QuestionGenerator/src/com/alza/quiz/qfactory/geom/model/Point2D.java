@@ -1,4 +1,4 @@
-package com.alza.quiz.qfactory.geom;
+package com.alza.quiz.qfactory.geom.model;
 
 public class Point2D {
 	public double x,y;
