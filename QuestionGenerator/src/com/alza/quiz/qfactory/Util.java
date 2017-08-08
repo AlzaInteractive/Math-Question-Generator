@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Locale;
 
 import com.alza.quiz.qfactory.fraction.*;
-import com.alza.quiz.qfactory.geom.WhichGeomShape;
+import com.alza.quiz.qfactory.geom.WhichGeomShapeQuestionFactory;
 import com.alza.quiz.qfactory.integer.AdditionOfThreeIntegersSigned;
 import com.alza.quiz.qfactory.integer.AdditionOfThreeIntegersUnsigned;
 import com.alza.quiz.qfactory.integer.AdditionOfTwoIntegers;
@@ -70,7 +70,7 @@ public class Util {
 	
 	public static List<IQuestionFactory> getAllGeometryQuestionFactory(Locale loc){
 		List<IQuestionFactory> lqf = new ArrayList<IQuestionFactory>();
-		lqf.add(new WhichGeomShape(loc));
+		lqf.add(new WhichGeomShapeQuestionFactory(loc));
 		return lqf;
 	}
 	public static List<IQuestionFactory> getAllGeometryQuestionFactory(){
