@@ -10,9 +10,9 @@ public class Pyramid implements Shapes3D{
 	public Pyramid() {
 		
 	}
-	public Pyramid(Rectangle baseTriangle, double height) {
+	public Pyramid(Rectangle base, double height) {
 		super();
-		this.baseRectangle = baseTriangle;
+		this.baseRectangle = base;
 		this.height = height;
 	}
 	public Rectangle getBaseTriangle() {
