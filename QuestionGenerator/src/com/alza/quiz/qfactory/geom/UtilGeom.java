@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.alza.quiz.qfactory.geom.model.Circle;
-import com.alza.quiz.qfactory.geom.model.Cylinder;
 import com.alza.quiz.qfactory.geom.model.Path;
 import com.alza.quiz.qfactory.geom.model.Point2D;
 import com.alza.quiz.qfactory.geom.model.Point3D;
@@ -39,11 +38,7 @@ public class UtilGeom {
 		}
 		return new Point2D(minX, minY);
 	}
-	private static Point2D getTransformedPointOnScreen(double scale,Point2D margin, Point2D p) {
-		double newX = (p.x * scale) + margin.x;
-		double newY = (p.y * scale) + margin.y;
-		return new Point2D(newX,newY);
-	}
+
 	private static Point2D getTransformedPointOnScreen(double scale,Point2D margin, Point2D corr, Point2D p) {
 		
 		double newX = (p.x * scale) + margin.x - corr.x;
@@ -109,7 +104,6 @@ public class UtilGeom {
 		return l;
 	}
 	public static List<Path> transformPaths(int canvasWidth, int canvasHeight, Shapes2D shp){
-		//double marginRatio = 0.1;
 		Point2D bound = new Point2D(0, 0);
 		if (shp.getVertices()!=null) {
 			bound = getMaxXY(shp.getVertices());
@@ -120,18 +114,13 @@ public class UtilGeom {
 			}
 		}
 		return transformPaths(canvasWidth, canvasHeight, shp.getPaths(), bound);
-		
 	}
 	public static List<Path> transformPaths(int canvasWidth, int canvasHeight, Shapes3D shp){
-		double marginRatio = 0.1;
 		Point2D maxP = new Point2D(0, 0);
 		Point2D minP = new Point2D(0, 0);
 		if (shp.getVertices()!=null) {
 			maxP = getMaxXY3D(shp.getVertices());
 			minP = getMinXY3D(shp.getVertices());
-			if (shp instanceof Cylinder) {
-				
-			}
 		} else {
 			if (shp instanceof Circle) {
 				Circle c = (Circle) shp;
@@ -139,7 +128,6 @@ public class UtilGeom {
 			}
 		} 
 		return transformPaths(canvasWidth, canvasHeight, shp.getPaths(), maxP, minP);
-		
 	}
 	
 	public static double distance(Point2D ori, Point2D dest) {

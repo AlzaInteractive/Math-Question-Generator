@@ -10,22 +10,13 @@ import com.alza.quiz.model.MultipleChoiceGeomQuiz;
 import com.alza.quiz.model.Quiz;
 import com.alza.quiz.model.QuizLevel;
 import com.alza.quiz.qfactory.IQuestionFactory;
-import com.alza.quiz.qfactory.geom.model.Circle;
 import com.alza.quiz.qfactory.geom.model.Cone;
 import com.alza.quiz.qfactory.geom.model.Cube;
 import com.alza.quiz.qfactory.geom.model.Cuboid;
 import com.alza.quiz.qfactory.geom.model.Cylinder;
-import com.alza.quiz.qfactory.geom.model.Kite;
-import com.alza.quiz.qfactory.geom.model.Parallelogram;
 import com.alza.quiz.qfactory.geom.model.Pyramid;
-import com.alza.quiz.qfactory.geom.model.Rectangle;
-import com.alza.quiz.qfactory.geom.model.Rhombus;
-import com.alza.quiz.qfactory.geom.model.Shapes2D;
 import com.alza.quiz.qfactory.geom.model.Shapes3D;
 import com.alza.quiz.qfactory.geom.model.Sphere;
-import com.alza.quiz.qfactory.geom.model.Square;
-import com.alza.quiz.qfactory.geom.model.Trapezoid;
-import com.alza.quiz.qfactory.geom.model.Triangle;
 
 public class WhichGeom3DShapeQuestionFactory implements IQuestionFactory {
 	Locale loc;
@@ -77,7 +68,7 @@ public class WhichGeom3DShapeQuestionFactory implements IQuestionFactory {
 			Shapes3D s = shapes.get(st-1);
 			//System.out.println(s.toString());
 			MultipleChoiceGeomQuiz q = new MultipleChoiceGeomQuiz();
-			q.setGeomShape(s.createExample());
+			q.setGeomShape(s.createExample().getPaths());
 			q.setQuestion(bundle.getString("geom.whichshape"));
 			q.setCorrectAnswer(bundle.getString("geom."+s.getName()));
 			q.setChoices(getChoices());

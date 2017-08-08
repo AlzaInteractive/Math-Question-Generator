@@ -1,16 +1,15 @@
 package com.alza.quiz.model;
 
+import java.util.List;
 
-/**
- * Created by galuh on 24/12/16.
- */
+import com.alza.quiz.qfactory.geom.model.Path;
 
 public class GeomQuiz extends Quiz {
-	Object geomShape;        
-    public Object getGeomShape() {
-		return geomShape;
+	private List<Path> geomPaths;        
+    public List<Path> getGeomShape() {
+		return geomPaths;
 	}
-	public void setGeomShape(Object geomShape) {
-		this.geomShape = geomShape;
+	public void setGeomShape(List<Path> geomPaths) {
+		this.geomPaths = geomPaths;
 	}
 }

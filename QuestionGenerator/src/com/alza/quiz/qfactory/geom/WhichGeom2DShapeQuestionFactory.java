@@ -72,7 +72,7 @@ public class WhichGeom2DShapeQuestionFactory implements IQuestionFactory {
 			Shapes2D s = shapes.get(st-1);
 			//System.out.println(s.toString());
 			MultipleChoiceGeomQuiz q = new MultipleChoiceGeomQuiz();
-			q.setGeomShape(s.createExample());
+			q.setGeomShape(s.createExample().getPaths());
 			q.setQuestion(bundle.getString("geom.whichshape"));
 			q.setCorrectAnswer(bundle.getString("geom."+s.getName()));
 			q.setChoices(getChoices());
