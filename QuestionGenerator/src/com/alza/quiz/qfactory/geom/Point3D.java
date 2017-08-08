@@ -21,5 +21,10 @@ public class Point3D {
 		double newY = this.y - (0.5 * this.z * Math.sin(angle));
 		return new Point2D((int)newX, (int)newY);
 	}
+	
+	@Override
+	public String toString() {
+		return "("+(int)x+","+(int)y+","+(int)z+")";
+	}
 
 }
