@@ -68,12 +68,12 @@ public final class Shape2DTest {
 			if (q instanceof MultipleChoiceGeomQuiz){
 				MultipleChoiceGeomQuiz mq = (MultipleChoiceGeomQuiz) q;
 				System.out.println("Choices : "+ String.join(" , ", mq.getChoices()));
-				Shapes2D shapes2d = mq.getGeomShape();
+				/**Shapes2D shapes2d = mq.getGeomShape();
 				System.out.println(shapes2d.toString());
 				List<Path> ps = shapes2d.getPaths();
 				for (Path path : ps) {
 					System.out.println(path.toString());
-				}
+				}**/
 			}
 			System.out.println("Answer : "+ q.getCorrectAnswer());
 		}
