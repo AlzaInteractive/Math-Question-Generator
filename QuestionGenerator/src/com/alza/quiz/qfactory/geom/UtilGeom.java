@@ -52,18 +52,52 @@ public class UtilGeom {
 		//System.out.println("scale "+scale+" corr "+corr+" margin "+margin+" ori "+p+" transformed "+ transformed);
 		return transformed;
 	}
-	
-	public static List<Path> transformPaths(int canvasWidth, int canvasHeight, Shapes2D shp){
+	public static List<Path> transformPaths(int canvasWidth, int canvasHeight, List<Path> paths, Point2D bound){
 		double marginRatio = 0.1;
-		Point2D maxP = new Point2D(0, 0);
+		double scaleY = (canvasHeight-(canvasHeight*marginRatio*2))/bound.y;
+		double scaleX = (canvasWidth -(canvasWidth*marginRatio*2) )/bound.x;
+		double scale = Math.min(scaleY, scaleX);
+		double marginX = (canvasWidth - (scale * bound.x))/2;
+		double marginY = (canvasHeight - (scale * bound.y))/2;
+		Point2D margin = new Point2D(marginX, marginY);
+		List<Path> l = new ArrayList<Path>();
+		for (Path p : paths) {
+			switch (p.pathType) {
+			case Path.PATH_TYPE_LINE:
+				l.add(Path.createLinePath(getTransformedPointOnScreen(scale, margin, p.start),getTransformedPointOnScreen(scale, margin, p.finish)));
+				break;
+			case Path.PATH_TYPE_LINE_DOTTED:
+				l.add(Path.createLinePathDotted(getTransformedPointOnScreen(scale, margin, p.start),getTransformedPointOnScreen(scale, margin, p.finish)));
+				break;
+			case Path.PATH_TYPE_CIRCLE:
+				l.add(Path.createCirclePath(getTransformedPointOnScreen(scale, margin, p.center), p.radHoriz * scale));
+				break;
+			case Path.PATH_TYPE_OVAL:
+				l.add(Path.createOvalPath(getTransformedPointOnScreen(scale, margin,p.center), 
+						p.radHoriz * scale,p.radVert * scale, p.startAngle, p.sweepAngle));
+				break;
+			case Path.PATH_TYPE_ARC:
+				//l.add(Path.createArcPath(getTransformedPointOnScreen(scale, margin, p.start),getTransformedPointOnScreen(scale, margin, p.finish)));
+				break;
+			default:
+				break;
+			}
+		}
+		return l;
+	}
+	public static List<Path> transformPaths(int canvasWidth, int canvasHeight, Shapes2D shp){
+		//double marginRatio = 0.1;
+		Point2D bound = new Point2D(0, 0);
 		if (shp.getVertices()!=null) {
-			maxP = getMaxXY(shp.getVertices());
+			bound = getMaxXY(shp.getVertices());
 		} else {
 			if (shp instanceof Circle) {
 				Circle c = (Circle) shp;
-				maxP = new Point2D(c.getRadius()*2, c.getRadius()*2);
+				bound = new Point2D(c.getRadius()*2, c.getRadius()*2);
 			}
-		} 
+		}
+		return transformPaths(canvasWidth, canvasHeight, shp.getPaths(), bound);
+		/**
 		double scaleY = (canvasHeight-(canvasHeight*marginRatio*2))/maxP.y;
 		double scaleX = (canvasWidth -(canvasWidth*marginRatio*2) )/maxP.x;
 		double scale = Math.min(scaleY, scaleX);
@@ -84,6 +118,10 @@ public class UtilGeom {
 			case Path.PATH_TYPE_CIRCLE:
 				l.add(Path.createCirclePath(getTransformedPointOnScreen(scale, margin, p.center), p.radHoriz * scale));
 				break;
+			case Path.PATH_TYPE_OVAL:
+				l.add(Path.createOvalPath(getTransformedPointOnScreen(scale, margin,p.center), 
+						p.radHoriz * scale,p.radVert * scale, p.startAngle, p.sweepAngle));
+				break;
 			case Path.PATH_TYPE_ARC:
 				//l.add(Path.createArcPath(getTransformedPointOnScreen(scale, margin, p.start),getTransformedPointOnScreen(scale, margin, p.finish)));
 				break;
@@ -91,7 +129,7 @@ public class UtilGeom {
 				break;
 			}
 		}
-		return l;
+		return l;**/
 	}
 	public static List<Path> transformPaths(int canvasWidth, int canvasHeight, Shapes3D shp){
 		double marginRatio = 0.1;

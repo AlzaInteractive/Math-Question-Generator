@@ -20,18 +20,18 @@ import com.alza.quiz.qfactory.geom.model.Square;
 import com.alza.quiz.qfactory.geom.model.Trapezoid;
 import com.alza.quiz.qfactory.geom.model.Triangle;
 
-public class WhichGeomShapeQuestionFactory implements IQuestionFactory {
+public class WhichGeom2DShapeQuestionFactory implements IQuestionFactory {
 	Locale loc;
 	ResourceBundle bundle;
 	List<Shapes2D> shapes = new ArrayList<Shapes2D>(); 
 	private int defnumq;
-	public WhichGeomShapeQuestionFactory(Locale loc) {
+	public WhichGeom2DShapeQuestionFactory(Locale loc) {
 		this.loc = loc;
 		initStringFromLocale();
 		prepareShape();
 		defnumq = shapes.size();
 	}
-	public WhichGeomShapeQuestionFactory() {
+	public WhichGeom2DShapeQuestionFactory() {
 		this.loc = new Locale("en", "US");
 		initStringFromLocale();
 		prepareShape();
