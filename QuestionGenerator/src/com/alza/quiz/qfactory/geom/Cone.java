@@ -49,7 +49,7 @@ public class Cone implements Shapes3D{
 	}
 	@Override
 	public String getName() {
-		return "pyramid";
+		return "cone";
 	}
 
 	@Override
