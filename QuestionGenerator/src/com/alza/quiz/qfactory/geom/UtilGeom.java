@@ -38,19 +38,44 @@ public class UtilGeom {
 		}
 		return new Point2D(minX, minY);
 	}
-
+	private static Point2D getBoundMin(List<Path> paths) {
+		double minx=0,miny=0;
+		for (Path path : paths) {
+			if (path.boundMin.x<minx) {
+				minx = path.boundMin.x;
+			}
+			if (path.boundMin.y<miny) {
+				miny = path.boundMin.y;
+			}
+		}
+		return new Point2D(minx, miny);
+	}
+	private static Point2D getBoundMax(List<Path> paths) {
+		double maxx=0,maxy=0;
+		for (Path path : paths) {
+			if (path.boundMax.x>maxx) {
+				maxx = path.boundMax.x;
+			}
+			if (path.boundMax.y>maxy) {
+				maxy = path.boundMax.y;
+			}
+		}
+		return new Point2D(maxx, maxy);
+	}
 	private static Point2D getTransformedPointOnScreen(double scale,Point2D margin, Point2D corr, Point2D p) {
-		
 		double newX = (p.x * scale) + margin.x - corr.x;
 		double newY = (p.y * scale) + margin.y - corr.y;
 		Point2D transformed = new Point2D(newX,newY); 
 		return transformed;
 	}
+	public static List<Path> transformPaths(int canvasWidth, int canvasHeight, List<Path> paths){
+		return transformPaths(canvasWidth, canvasHeight, paths, getBoundMax(paths),getBoundMin(paths));
+	}
 	public static List<Path> transformPaths(int canvasWidth, int canvasHeight, List<Path> paths, Point2D bound ){
 		return transformPaths(canvasWidth, canvasHeight, paths, bound, new Point2D(0, 0));
 	}
 	public static List<Path> transformPaths(int canvasWidth, int canvasHeight, List<Path> paths, Point2D boundMax, Point2D boundMin){
-		//calculate scale and amrgin
+		//calculate scale and margin
 		double marginRatio = 0.1;
 		double xDist = boundMax.x-boundMin.x;
 		double yDist = boundMax.y-boundMin.y;

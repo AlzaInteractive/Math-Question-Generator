@@ -1,6 +1,5 @@
 package com.alza.quiz.qfactory.geom.model;
 
-import com.alza.quiz.qfactory.geom.UtilGeom;
 
 public class Path {
 	public static final int PATH_TYPE_LINE=11;
@@ -13,7 +12,10 @@ public class Path {
 	public Point2D finish;
 	public double startAngle,endAngle,sweepAngle;
 	public int pathType;
+	public boolean fill;
 	public Point2D center;
+	public Point2D boundMax;
+	public Point2D boundMin;
 	public double radHoriz;
 	public double radVert;
 	
@@ -22,16 +24,29 @@ public class Path {
 		p.start = start;
 		p.finish = finish;
 		p.pathType = PATH_TYPE_LINE;
+		double maxX = 0;
+		double maxY = 0;
+		double minX = 0;
+		double minY = 0;
+		maxX = Math.max(start.x, finish.x);
+		maxY = Math.max(start.y, finish.y);
+		minX = Math.min(start.x, finish.x);
+		minY = Math.min(start.y, finish.y);
+		p.boundMin = new Point2D(minX, minY);
+		p.boundMax = new Point2D(maxX, maxY);
 		return p;
 	}
 	public static Path createLinePath(Point3D start, Point3D finish){
-		Path p = new Path();
-		p.start = start.getProjectedPoint();
-		p.finish = finish.getProjectedPoint();
-		p.pathType = PATH_TYPE_LINE;
-		
-		System.out.println("ori "+start+" to "+finish);
-		System.out.println("trf "+p.start+" to "+p.finish);
+		return Path.createLinePath(start.getProjectedPoint(), finish.getProjectedPoint());
+	}
+	public static Path createLinePathDotted(Point2D start, Point2D finish){
+		Path p = Path.createLinePath(start, finish);
+		p.pathType = PATH_TYPE_LINE_DOTTED;
+		return p;
+	}
+	public static Path createLinePathDotted(Point3D start, Point3D finish){
+		Path p = Path.createLinePath(start, finish);
+		p.pathType = PATH_TYPE_LINE_DOTTED;
 		return p;
 	}
 	public static Path createCirclePath(Point2D center, double radius){
@@ -39,16 +54,8 @@ public class Path {
 		p.radHoriz = radius;
 		p.center = center;
 		p.pathType = PATH_TYPE_CIRCLE;
-		return p;
-	}
-	public static Path createOvalPath(Point2D center, double radiusX, double radiusY){
-		Path p = new Path();
-		p.radHoriz = radiusX;
-		p.radVert = radiusY;
-		p.center = center;
-		p.pathType = PATH_TYPE_OVAL;
-		p.startAngle = 0;
-		p.sweepAngle = 360;
+		p.boundMin = new Point2D(center.x - radius, center.y -radius);
+		p.boundMax = new Point2D(center.x + radius, center.y +radius);
 		return p;
 	}
 	public static Path createOvalPath(Point2D center, double radiusX, double radiusY, double angleStart, double angleSweep){
@@ -59,9 +66,15 @@ public class Path {
 		p.startAngle = angleStart;
 		p.sweepAngle = angleSweep;
 		p.pathType = PATH_TYPE_OVAL;
-		System.out.println("center "+p.center);
+		p.boundMin = new Point2D(center.x - radiusX, center.y -radiusY);
+		p.boundMax = new Point2D(center.x + radiusX, center.y +radiusY);
 		return p;
 	}
+	public static Path createOvalPath(Point2D center, double radiusX, double radiusY){
+		Path p = Path.createOvalPath(center, radiusX, radiusY, 0, 360);
+		return p;
+	}
+	
 	public static Path createOvalPathDotted(Point2D center, double radiusX, double radiusY, double angleStart, double angleSweep){
 		Path p = createOvalPath(center, radiusX, radiusY, angleStart, angleSweep);
 		p.pathType = PATH_TYPE_OVAL_DOTTED;		
@@ -72,44 +85,6 @@ public class Path {
 	}
 	public static Path createOvalPathDotted(Point3D center, double radiusX, double radiusY, double angleStart, double angleSweep){
 		Path p = Path.createOvalPathDotted(center.getProjectedPoint(), radiusX, radiusY, angleStart, angleSweep);
-		return p;
-	}
-	public static Path createArcPath(Point2D p1, Point2D p2, double width, double height){
-		//System.out.println("p start l create path "+p1.x+" , "+p1.y);
-		double centerX = p1.x + (p2.x-p1.x)/2;
-		double centerY = p1.y + (p2.y-p1.y)/2;
-		Point2D topLeft = UtilGeom.getTopLeft(p1, p2);
-		Point2D botRight = UtilGeom.getBottomRight(p1, p2);
-		Path p = new Path();
-		p.start = topLeft;
-		p.finish = botRight;
-		p.center = new Point2D(centerX, centerY);
-		p.radHoriz = width;
-		p.radVert = height;
-		p.startAngle = UtilGeom.angle(p1, p.center);
-		p.endAngle = UtilGeom.angle(p2, p.center);
-		System.out.println("angle "+p.startAngle+" "+p.endAngle);
-		p.pathType = PATH_TYPE_ARC;
-		return p;
-	}
-	public static Path createArcPath(Point3D p13d, Point3D p23d, double width, double height){
-		Point2D p1 = p13d.getProjectedPoint();
-		Point2D p2 = p23d.getProjectedPoint();
-		return createArcPath(p1, p2, width, height);
-	}
-	
-	public static Path createLinePathDotted(Point2D start, Point2D finish){
-		Path p = new Path();
-		p.start = start;
-		p.finish = finish;
-		p.pathType = PATH_TYPE_LINE_DOTTED;
-		return p;
-	}
-	public static Path createLinePathDotted(Point3D start, Point3D finish){
-		Path p = new Path();
-		p.start = start.getProjectedPoint();
-		p.finish = finish.getProjectedPoint();
-		p.pathType = PATH_TYPE_LINE_DOTTED;
 		return p;
 	}
 	public String toString(){
