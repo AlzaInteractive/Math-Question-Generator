@@ -18,7 +18,7 @@ import com.alza.quiz.qfactory.fraction.MixedFractionQuestionFactory;
 import com.alza.quiz.qfactory.fraction.RatioQuestionFactory;
 import com.alza.quiz.qfactory.fraction.ScaleQuestionFactory;
 import com.alza.quiz.qfactory.fraction.ScenarioBasedFractionQuestionFactory;
-import com.alza.quiz.qfactory.fraction.SimplifyFractionQuestionFactory;
+import com.alza.quiz.qfactory.fraction.SimplifyFraction;
 import com.alza.quiz.qfactory.kpk.TwoNumKPKQuestionFactory;
 import com.alza.quiz.qfactory.kpk.WhichDayScenarioKPKQuestionFactory;
 import com.alza.quiz.qfactory.kpk.WhichHourScenarioKPKQuestionFactory;
@@ -70,7 +70,7 @@ public class FractionGeneratorTest {
 		List<IQuestionFactory> lqf = new ArrayList<IQuestionFactory>();
 		lqf.add(new FractionEqualityQuestionFactory());
 		lqf.add(new FindGreatestFractionQuestionFactory());
-		lqf.add(new SimplifyFractionQuestionFactory());
+		lqf.add(new SimplifyFraction());
 		lqf.add(new FractionAddSubtractQuestionFactory());
 		lqf.add(new FractionMultDivideQuestionFactory());
 		lqf.add(new MixedFractionQuestionFactory());

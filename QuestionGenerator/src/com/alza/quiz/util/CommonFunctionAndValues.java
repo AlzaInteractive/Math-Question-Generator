@@ -10,6 +10,7 @@ import java.util.concurrent.ThreadLocalRandom;
  */
 
 public class CommonFunctionAndValues {
+	public final static String MJXTAG ="$$"; 
     public static String[] nameElder = {
             "Mbah Jamil","Papuq Abok","Ninik Senah","Papuq Senep"," Wak Ikoh", "Wak Marli",
             "Eyang Segep","Eyang Ahmad","Ninik Zaenab","Mbah Soleh","Datuk Sunar","Datuk Menggep",

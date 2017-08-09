@@ -3,7 +3,9 @@ package com.alza.quiz.qfactory.fraction;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 import java.util.Random;
+import java.util.ResourceBundle;
 import java.util.concurrent.ThreadLocalRandom;
 
 import com.alza.common.math.Fraction;
@@ -13,9 +15,25 @@ import com.alza.quiz.model.QuizLevel;
 import com.alza.quiz.qfactory.IQuestionFactory;
 import com.alza.quiz.util.CommonFunctionAndValues;
 
-public class SimplifyFractionQuestionFactory implements IQuestionFactory {
-	private static int NUM_OF_QUESTIONS = 2;
+public class SimplifyFraction implements IQuestionFactory {
+	private int numq = 2;
+	Locale loc;
+	ResourceBundle bundle;
+	
+	public SimplifyFraction() {
+		this.loc = new Locale("in", "ID");
+		initStringFromLocale();
+	}
+	
+	public SimplifyFraction(Locale loc) {
+		super();
+		this.loc = loc;
+	}
 
+	private void initStringFromLocale(){
+		bundle = ResourceBundle.getBundle("lang.langbundle", loc);
+	}
+	
 	@Override
 	public Quiz generateQuiz() {
 		List<Quiz> quizList = generateQuizList();
@@ -31,7 +49,7 @@ public class SimplifyFractionQuestionFactory implements IQuestionFactory {
 	@Override
 	public List<Quiz> generateQuizList() {
 		List<Quiz> quizList = new ArrayList<Quiz>();
-		for (int i=0;i<NUM_OF_QUESTIONS;i++){
+		for (int i=0;i<numq;i++){
 			int multi = ThreadLocalRandom.current().nextInt(2, 7);
 			int a,b;
 			do {
@@ -53,15 +71,19 @@ public class SimplifyFractionQuestionFactory implements IQuestionFactory {
 			}
 			Collections.shuffle(choices);
 			MultipleChoiceQuiz q = new MultipleChoiceQuiz();
-			q.setDifficultyLevel(QuizLevel.MUDAH);
 			q.setChoices(convertChoices(choices));
 			q.setCorrectAnswer(fAns.a+"/"+fAns.b);
-			q.setQuestion("Pilihlah bentuk paling sederhana dari pecahan "+c+"/"+d);
-			q.setLessonClassifier("Matematika SD");
-			q.setLessonCategory("Pecahan");
-			q.setLessonSubcategory("Menyederhanakan pecahan");
+			String question = bundle.getString("fraction.simplifyquestion");
+			q.setQuestion(CommonFunctionAndValues.MJXTAG+
+					question+"\frac{"+c+"}{"+d+"}"+
+					CommonFunctionAndValues.MJXTAG);
+			q.setDifficultyLevel(QuizLevel.MUDAH);
+			q.setLessonSubcategory(bundle.getString("fraction.simplify"));
+			q.setLessonClassifier(bundle.getString("mathelementary"));
 			q.setLessonGrade(4);
-			q.setSubCategoryOrder(3);
+			q.setSubCategoryOrder(5);
+			q.setLocale(loc);
+			q.setLessonCategory(bundle.getString("fraction"));
 			quizList.add(q);
 		}
 		return quizList;
@@ -75,7 +97,7 @@ public class SimplifyFractionQuestionFactory implements IQuestionFactory {
 	}
 	 @Override
 		public List<Quiz> generateQuizList(int numOfQuestion) {
-			NUM_OF_QUESTIONS = numOfQuestion;
+			numq = numOfQuestion;
 			return generateQuizList();
 		}
 

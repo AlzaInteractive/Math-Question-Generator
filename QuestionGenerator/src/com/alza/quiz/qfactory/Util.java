@@ -38,7 +38,7 @@ public class Util {
 		List<IQuestionFactory> lqf = new ArrayList<IQuestionFactory>();
 		lqf.add(new FractionEqualityQuestionFactory());
 		lqf.add(new FindGreatestFractionQuestionFactory());
-		lqf.add(new SimplifyFractionQuestionFactory());
+		lqf.add(new SimplifyFraction());
 		lqf.add(new FractionAddSubtractQuestionFactory());
 		lqf.add(new FractionMultDivideQuestionFactory());
 		lqf.add(new MixedFractionQuestionFactory());
