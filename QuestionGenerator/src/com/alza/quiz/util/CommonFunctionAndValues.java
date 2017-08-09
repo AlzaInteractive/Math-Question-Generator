@@ -126,6 +126,10 @@ public class CommonFunctionAndValues {
         int rnd = new Random().nextInt(simpleIntPairs.length);
         return simpleIntPairs[rnd];
     }
+    public static int getRandom(int[] array) {
+        int rnd = new Random().nextInt(array.length);
+        return array[rnd];
+    }
 
     public static String buildScenario(String base, String[] people, int[] values){
         String[] peopleExp = {"#orang1?","#orang2?","#orang3?","#orang4?","#orang5?"};
