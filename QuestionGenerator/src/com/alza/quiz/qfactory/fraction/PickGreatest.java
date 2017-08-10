@@ -2,7 +2,9 @@ package com.alza.quiz.qfactory.fraction;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Random;
+import java.util.ResourceBundle;
 import java.util.concurrent.ThreadLocalRandom;
 
 import com.alza.common.math.Fraction;
@@ -13,8 +15,21 @@ import com.alza.quiz.model.QuizLevel;
 import com.alza.quiz.qfactory.IQuestionFactory;
 import com.alza.quiz.util.CommonFunctionAndValues;
 
-public class FindGreatestFractionQuestionFactory implements IQuestionFactory {
-	private static int NUM_OF_QUESTIONS = 4;
+public class PickGreatest implements IQuestionFactory {
+	private static int numq = 4;
+	Locale loc;
+	ResourceBundle bundle;
+	public PickGreatest(Locale loc){
+		this.loc = loc;
+		initStringFromLocale();
+	}
+	public PickGreatest(){
+		this.loc = new Locale("in", "ID");
+		initStringFromLocale();
+	}
+	private void initStringFromLocale(){
+		bundle = ResourceBundle.getBundle("lang.langbundle", loc);
+	}
 	@Override
 	public Quiz generateQuiz() {
 		List<Quiz> quizList = generateQuizList();
@@ -30,7 +45,7 @@ public class FindGreatestFractionQuestionFactory implements IQuestionFactory {
 	@Override
 	public List<Quiz> generateQuizList() {
 		List<Quiz> quizList = new ArrayList<Quiz>();
-		for (int i=0;i<NUM_OF_QUESTIONS;i++){
+		for (int i=0;i<numq;i++){
 			MultipleChoiceQuiz q = new MultipleChoiceQuiz();
 			if (i % 3 == 2){
 				q = generateTypeC();
@@ -45,10 +60,10 @@ public class FindGreatestFractionQuestionFactory implements IQuestionFactory {
 				q.setQuizLevel(QuizLevel.MUDAH);
 				q.setLessonGrade(4);
 			}
-			q.setLessonSubcategory("Membandingkan nilai pecahan");
-			q.setQuestion("Pilihlah pecahan dengan nilai paling besar.");
-			q.setLessonClassifier("Matematika SD");
-			q.setLessonCategory("Pecahan");
+			q.setQuestion(bundle.getString("fraction.pickgreatest"));
+			q.setLessonSubcategory(bundle.getString("fraction.compare"));
+			q.setLessonClassifier(bundle.getString("mathelementary"));
+			q.setLessonCategory(bundle.getString("fraction"));
 			q.setSubCategoryOrder(2);
 			quizList.add(q);
 		}
@@ -127,7 +142,7 @@ public class FindGreatestFractionQuestionFactory implements IQuestionFactory {
 
 	@Override
 	public List<Quiz> generateQuizList(int numOfQuestion) {
-		NUM_OF_QUESTIONS = numOfQuestion;
+		numq = numOfQuestion;
 		return generateQuizList();
 	}
 
