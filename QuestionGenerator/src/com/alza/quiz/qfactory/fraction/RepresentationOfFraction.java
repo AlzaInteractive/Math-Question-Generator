@@ -11,11 +11,9 @@ import com.alza.common.math.Fraction;
 import com.alza.quiz.model.MultipleChoiceGeomQuiz;
 import com.alza.quiz.model.Quiz;
 import com.alza.quiz.model.QuizLevel;
-import com.alza.quiz.model.SimpleQuiz;
 import com.alza.quiz.qfactory.IQuestionFactory;
 import com.alza.quiz.qfactory.geom.model.Path;
 import com.alza.quiz.qfactory.geom.model.Point2D;
-import com.alza.quiz.util.CommonFunctionAndValues;
 
 public class RepresentationOfFraction implements IQuestionFactory{
 	Locale loc;

@@ -36,7 +36,7 @@ import com.alza.quiz.qfactory.romans.RomanNumeralsQuestionFactory;
 public class Util {
 	public static List<IQuestionFactory> getAllFractionQuestionFactory(){
 		List<IQuestionFactory> lqf = new ArrayList<IQuestionFactory>();
-		lqf.add(new FractionEqualityQuestionFactory());
+		lqf.add(new FractionEqualityTypeB());
 		lqf.add(new FindGreatestFractionQuestionFactory());
 		lqf.add(new SimplifyFraction());
 		lqf.add(new FractionAddSubtractQuestionFactory());
