@@ -42,7 +42,7 @@ public class Util {
 		lqf.add(new FractionAddSubtractQuestionFactory());
 		lqf.add(new FractionMultDivideQuestionFactory());
 		lqf.add(new MixedFractionQuestionFactory());
-		lqf.add(new FractionDecimalFormQuestionFactory());
+		lqf.add(new FractionConvertToDecimal());
 		lqf.add(new FractionPercentageFormQuestionFactory());
 		lqf.add(new ScenarioBasedFractionQuestionFactory());
 		lqf.add(new ScaleQuestionFactory());

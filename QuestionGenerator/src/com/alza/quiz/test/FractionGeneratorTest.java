@@ -10,7 +10,7 @@ import com.alza.quiz.model.Quiz;
 import com.alza.quiz.qfactory.IQuestionFactory;
 import com.alza.quiz.qfactory.fraction.PickGreatest;
 import com.alza.quiz.qfactory.fraction.FractionAddSubtractQuestionFactory;
-import com.alza.quiz.qfactory.fraction.FractionDecimalFormQuestionFactory;
+import com.alza.quiz.qfactory.fraction.FractionConvertToDecimal;
 import com.alza.quiz.qfactory.fraction.FractionEqualityTypeB;
 import com.alza.quiz.qfactory.fraction.FractionMultDivideQuestionFactory;
 import com.alza.quiz.qfactory.fraction.FractionPercentageFormQuestionFactory;
@@ -74,7 +74,7 @@ public class FractionGeneratorTest {
 		lqf.add(new FractionAddSubtractQuestionFactory());
 		lqf.add(new FractionMultDivideQuestionFactory());
 		lqf.add(new MixedFractionQuestionFactory());
-		lqf.add(new FractionDecimalFormQuestionFactory());
+		lqf.add(new FractionConvertToDecimal());
 		lqf.add(new FractionPercentageFormQuestionFactory());
 		lqf.add(new ScenarioBasedFractionQuestionFactory());
 		lqf.add(new ScaleQuestionFactory());
