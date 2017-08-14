@@ -3,7 +3,9 @@ package com.alza.quiz.qfactory.fraction;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Random;
+import java.util.ResourceBundle;
 import java.util.Set;
 
 import com.alza.common.math.Fraction;
@@ -13,8 +15,21 @@ import com.alza.quiz.model.QuizLevel;
 import com.alza.quiz.qfactory.IQuestionFactory;
 import com.alza.quiz.util.CommonFunctionAndValues;
 
-public class FractionAddSubtractQuestionFactory implements IQuestionFactory{
-	private static int NUM_OF_QUESTIONS = 6;
+public class FractionAddSubtract implements IQuestionFactory{
+	private static int numq = 6;
+	Locale loc;
+	ResourceBundle bundle;
+	public FractionAddSubtract(Locale loc){
+		this.loc = loc;
+		initStringFromLocale();
+	}
+	public FractionAddSubtract(){
+		this.loc = new Locale("in", "ID");
+		initStringFromLocale();
+	}
+	private void initStringFromLocale(){
+		bundle = ResourceBundle.getBundle("lang.langbundle", loc);
+	}
 	@Override
 	public Quiz generateQuiz() {
 		List<Quiz> quizList = generateQuizList();
@@ -30,26 +45,25 @@ public class FractionAddSubtractQuestionFactory implements IQuestionFactory{
 	@Override
 	public List<Quiz> generateQuizList() {
 		List<Quiz> quizList= new ArrayList<Quiz>();
-		for (int i=0; i<NUM_OF_QUESTIONS; i++){
+		for (int i=0; i<numq; i++){
 			MultipleChoiceQuiz q = null;
 			if (i % 3 == 2){
 				q = generateTypeC(i);
 				q.setDifficultyLevel(QuizLevel.SULIT);
-				q.setLessonSubcategory("Penjumlahan dan pengurangan pecahan");
 				q.setLessonGrade(5);
 			} else if (i % 3 == 1){
 				q = generateTypeB(i);
 				q.setDifficultyLevel(QuizLevel.SEDANG);
-				q.setLessonSubcategory("Penjumlahan dan pengurangan pecahan");
 				q.setLessonGrade(5);
 			} else {
 				q = generateTypeA(i);
 				q.setDifficultyLevel(QuizLevel.MUDAH);
-				q.setLessonSubcategory("Penjumlahan dan pengurangan pecahan");
 				q.setLessonGrade(4);
 			}
-			q.setLessonClassifier("Matematika SD");
-			q.setLessonCategory("Pecahan");
+			q.setQuestion(CommonFunctionAndValues.enclosedWithMathJaxExp(q.getQuestion()));
+			q.setLessonSubcategory(bundle.getString("fraction.addsubtract"));
+			q.setLessonClassifier(bundle.getString("mathelementary"));
+			q.setLessonCategory(bundle.getString("fraction"));
 			q.setSubCategoryOrder(4);
 			quizList.add(q);
 		}
@@ -64,20 +78,7 @@ public class FractionAddSubtractQuestionFactory implements IQuestionFactory{
 			a1 = CommonFunctionAndValues.getRandomInt(5, 17);
 			a2 = CommonFunctionAndValues.getRandomInt(5, 17);
 		} while (!(denom > a1 && denom > a2 && (a1+a2)<=denom && a1>a2));
-		Fraction f1 = new Fraction(a1, denom);
-		Fraction f2 = new Fraction(a2, denom);
-		Fraction result;
-		if (i % 2 == 0){
-			result = f1.getResultWhenAddedWith(f2);
-			q.setQuestion("Hitung "
-					+f1.toString()+" + "+f2.toString());
-		} else{
-			result = f1.getResultWhenSubtractWith(f2);
-			q.setQuestion("Hitung "
-					+f1.toString()+" - "+f2.toString());
-		}
-		q.setCorrectAnswer(result.toString());
-		q.setChoices(buildChoices(f1,f2,result));
+		buildQuestion(i, q, denom, denom, a1, a2);
 		return q;
 	}
 	private MultipleChoiceQuiz generateTypeB(int i) {
@@ -88,20 +89,7 @@ public class FractionAddSubtractQuestionFactory implements IQuestionFactory{
 			a1 = CommonFunctionAndValues.getRandomInt(5, 16);
 			a2 = CommonFunctionAndValues.getRandomInt(5, 16);
 		} while (!(denom > a1 && denom > a2 && (a1+a2)<=denom && a1>a2));
-		Fraction f1 = new Fraction(a1*2, denom*2);
-		Fraction f2 = new Fraction(a2*3, denom*3);
-		Fraction result;
-		if (i % 2 == 0){
-			result = f1.getResultWhenAddedWith(f2);
-			q.setQuestion("Hitung "
-					+f1.toString()+" + "+f2.toString());
-		} else{
-			result = f1.getResultWhenSubtractWith(f2);
-			q.setQuestion("Hitung "
-					+f1.toString()+" - "+f2.toString());
-		}
-		q.setCorrectAnswer(result.toString());
-		q.setChoices(buildChoices(f1,f2,result));
+		buildQuestion(i, q, denom, denom, a1, a2);
 		return q;
 	}
 	private MultipleChoiceQuiz generateTypeC(int i) {
@@ -115,21 +103,23 @@ public class FractionAddSubtractQuestionFactory implements IQuestionFactory{
 			a2 = CommonFunctionAndValues.getRandomInt(5, 17);
 		} while (denomLeft==denomRight||denomLeft<a1||denomRight<a2);
 
+		buildQuestion(i, q, denomLeft, denomRight, a1, a2);
+		return q;
+	}
+	private void buildQuestion(int i, MultipleChoiceQuiz q, int denomLeft,
+			int denomRight, int a1, int a2) {
 		Fraction f1 = new Fraction(a1, denomLeft);
 		Fraction f2 = new Fraction(a2, denomRight);
 		Fraction result;
 		if (i % 2 == 0){
 			result = f1.getResultWhenAddedWith(f2);
-			q.setQuestion("Hitung "
-					+f1.toString()+" + "+f2.toString());
-		} else {
+			q.setQuestion(f1.toMathJaxString()+" + "+f2.toMathJaxString());
+		} else{
 			result = f1.getResultWhenSubtractWith(f2);
-			q.setQuestion("Hitung "
-					+f1.toString()+" - "+f2.toString());
+			q.setQuestion(f1.toMathJaxString()+" - "+f2.toMathJaxString());
 		}
 		q.setCorrectAnswer(result.toString());
 		q.setChoices(buildChoices(f1,f2,result));
-		return q;
 	}
 	private Set<String> buildChoices(Fraction f1,Fraction f2,Fraction result){
 		Fraction[] choices = new Fraction[6];
@@ -158,7 +148,7 @@ public class FractionAddSubtractQuestionFactory implements IQuestionFactory{
 
 	@Override
 	public List<Quiz> generateQuizList(int numOfQuestion) {
-		NUM_OF_QUESTIONS = numOfQuestion;
+		numq = numOfQuestion;
 		return generateQuizList();
 	}
 

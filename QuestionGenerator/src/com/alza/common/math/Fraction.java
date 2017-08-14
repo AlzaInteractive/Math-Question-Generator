@@ -26,6 +26,12 @@ public class Fraction implements Comparable<Fraction>,Comparator<Fraction>{
 		}
 		return false;
 	}
+	public boolean isBetween(Fraction f1, Fraction f2){
+		if (this.compareTo(f1)>=0&&this.compareTo(f2)<=0){
+			return true;
+		}
+		return false;
+	}
 	public Fraction getSimplestForm(){
 		int gcd = MathUtils.findGCDDjikstra(this.a, this.b);
 		Fraction s = new Fraction(this.a/gcd,this.b/gcd);
@@ -143,6 +149,10 @@ public class Fraction implements Comparable<Fraction>,Comparator<Fraction>{
 		String s = this.a+"/"+this.b;
 		return s;
 	}
+	public String toMathJaxString(){
+		String s = "\frac{"+this.a+"}{"+this.b+"}";
+		return s;
+	}
 	public class MixedFraction {
 		public int x;
 		public int a;
@@ -170,6 +180,10 @@ public class Fraction implements Comparable<Fraction>,Comparator<Fraction>{
 		}
 		public String toHtmlString(){
 			String s = this.x+" "+this.a+"/"+this.b;
+			return s;
+		}
+		public String toMathJaxString(){
+			String s = this.x+"\frac{"+this.a+"}{"+this.b+"}";
 			return s;
 		}
 	}

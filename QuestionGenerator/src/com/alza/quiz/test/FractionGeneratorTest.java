@@ -8,17 +8,19 @@ import com.alza.quiz.model.QuizLevel;
 import com.alza.quiz.model.MultipleChoiceQuiz;
 import com.alza.quiz.model.Quiz;
 import com.alza.quiz.qfactory.IQuestionFactory;
-import com.alza.quiz.qfactory.fraction.PickGreatest;
-import com.alza.quiz.qfactory.fraction.FractionAddSubtractQuestionFactory;
+import com.alza.quiz.qfactory.fraction.FractionRealWorldProblemFindFromPercentage;
+import com.alza.quiz.qfactory.fraction.FractionPickGreatest;
+import com.alza.quiz.qfactory.fraction.FractionAddSubtract;
 import com.alza.quiz.qfactory.fraction.FractionConvertToDecimal;
 import com.alza.quiz.qfactory.fraction.FractionEqualityTypeB;
-import com.alza.quiz.qfactory.fraction.FractionMultDivideQuestionFactory;
-import com.alza.quiz.qfactory.fraction.FractionPercentageFormQuestionFactory;
-import com.alza.quiz.qfactory.fraction.MixedFractionQuestionFactory;
+import com.alza.quiz.qfactory.fraction.FractionMultiplication;
+import com.alza.quiz.qfactory.fraction.FractionConvertToPercentage;
+import com.alza.quiz.qfactory.fraction.FractionMixedFormOperation;
+import com.alza.quiz.qfactory.fraction.FractionRealWorldProblemFindFromRatio;
 import com.alza.quiz.qfactory.fraction.RatioQuestionFactory;
 import com.alza.quiz.qfactory.fraction.ScaleQuestionFactory;
 import com.alza.quiz.qfactory.fraction.ScenarioBasedFractionQuestionFactory;
-import com.alza.quiz.qfactory.fraction.SimplifyFraction;
+import com.alza.quiz.qfactory.fraction.FractionSimplify;
 import com.alza.quiz.qfactory.kpk.TwoNumKPKQuestionFactory;
 import com.alza.quiz.qfactory.kpk.WhichDayScenarioKPKQuestionFactory;
 import com.alza.quiz.qfactory.kpk.WhichHourScenarioKPKQuestionFactory;
@@ -68,17 +70,19 @@ public class FractionGeneratorTest {
 	}
 	private static void fractionEquality(){
 		List<IQuestionFactory> lqf = new ArrayList<IQuestionFactory>();
-		lqf.add(new FractionEqualityTypeB());
-		lqf.add(new PickGreatest());
-		lqf.add(new SimplifyFraction());
-		lqf.add(new FractionAddSubtractQuestionFactory());
-		lqf.add(new FractionMultDivideQuestionFactory());
-		lqf.add(new MixedFractionQuestionFactory());
+		/**lqf.add(new FractionEqualityTypeB());
+		lqf.add(new FractionPickGreatest());
+		lqf.add(new FractionSimplify());
+		lqf.add(new FractionAddSubtract());
+		lqf.add(new FractionMultiplication());
+		lqf.add(new FractionMixedFormOperation());
 		lqf.add(new FractionConvertToDecimal());
-		lqf.add(new FractionPercentageFormQuestionFactory());
+		lqf.add(new FractionConvertToPercentage());
 		lqf.add(new ScenarioBasedFractionQuestionFactory());
 		lqf.add(new ScaleQuestionFactory());
 		lqf.add(new RatioQuestionFactory());
+		lqf.add(new FractionRealWorldProblemFindFromPercentage());*/
+		lqf.add(new FractionRealWorldProblemFindFromRatio());
 		
 		
 		List<Quiz> ql = new ArrayList<Quiz>();

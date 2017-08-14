@@ -13,7 +13,7 @@ import com.alza.quiz.model.Quiz;
 import com.alza.quiz.model.QuizLevel;
 import com.alza.quiz.model.MultipleChoiceQuiz;
 import com.alza.quiz.qfactory.IQuestionFactory;
-import com.alza.quiz.qfactory.fraction.PickGreatest;
+import com.alza.quiz.qfactory.fraction.FractionPickGreatest;
 
 public class TwoNumKPKQuestionFactory implements IQuestionFactory {
 	protected QuizLevel quizLevel = QuizLevel.MUDAH;

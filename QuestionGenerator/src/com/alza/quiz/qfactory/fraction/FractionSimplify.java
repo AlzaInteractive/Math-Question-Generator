@@ -15,17 +15,17 @@ import com.alza.quiz.model.QuizLevel;
 import com.alza.quiz.qfactory.IQuestionFactory;
 import com.alza.quiz.util.CommonFunctionAndValues;
 
-public class SimplifyFraction implements IQuestionFactory {
+public class FractionSimplify implements IQuestionFactory {
 	private int numq = 2;
 	Locale loc;
 	ResourceBundle bundle;
 	
-	public SimplifyFraction() {
+	public FractionSimplify() {
 		this.loc = new Locale("in", "ID");
 		initStringFromLocale();
 	}
 	
-	public SimplifyFraction(Locale loc) {
+	public FractionSimplify(Locale loc) {
 		super();
 		this.loc = loc;
 	}

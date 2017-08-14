@@ -1,8 +1,12 @@
 package com.alza.quiz.util;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Enumeration;
+import java.util.List;
 import java.util.Random;
+import java.util.ResourceBundle;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
@@ -10,7 +14,10 @@ import java.util.concurrent.ThreadLocalRandom;
  */
 
 public class CommonFunctionAndValues {
-	public final static String MJXTAG ="$$"; 
+	public final static String MJXTAG ="$$";
+	public static String enclosedWithMathJaxExp(String s) {
+		return MJXTAG+s+MJXTAG;
+	}
     public static String[] nameElder = {
             "Mbah Jamil","Papuq Abok","Ninik Senah","Papuq Senep"," Wak Ikoh", "Wak Marli",
             "Eyang Segep","Eyang Ahmad","Ninik Zaenab","Mbah Soleh","Datuk Sunar","Datuk Menggep",
@@ -285,5 +292,18 @@ public class CommonFunctionAndValues {
     }
     public static int getRandomInt(int min, int max){
     	return ThreadLocalRandom.current().nextInt(min, max);
+    }
+    public static List<String> getStringCollection(ResourceBundle bundle, String key){
+		Enumeration<String> a = bundle.getKeys();
+		List<String> l = new ArrayList<String>();
+		while (a.hasMoreElements()) {
+			String string = (String) a.nextElement();
+			//System.out.println(string+" : "+bundle.getString(string));
+			if (string.startsWith(key)) {
+				l.add(bundle.getString(string));
+				System.out.println(string+" : "+bundle.getString(string));
+			}
+		}
+		return l;
     }
 }

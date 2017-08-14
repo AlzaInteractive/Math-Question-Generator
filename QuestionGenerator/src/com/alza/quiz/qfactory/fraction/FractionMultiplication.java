@@ -3,7 +3,9 @@ package com.alza.quiz.qfactory.fraction;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Random;
+import java.util.ResourceBundle;
 import java.util.Set;
 
 import com.alza.common.math.Fraction;
@@ -14,8 +16,21 @@ import com.alza.quiz.model.QuizLevel;
 import com.alza.quiz.qfactory.IQuestionFactory;
 import com.alza.quiz.util.CommonFunctionAndValues;
 
-public class FractionMultDivideQuestionFactory implements IQuestionFactory{
-	private static int NUM_OF_QUESTIONS = 4;
+public class FractionMultiplication implements IQuestionFactory{
+	private static int numq = 4;
+	Locale loc;
+	ResourceBundle bundle;
+	public FractionMultiplication(Locale loc){
+		this.loc = loc;
+		initStringFromLocale();
+	}
+	public FractionMultiplication(){
+		this.loc = new Locale("in", "ID");
+		initStringFromLocale();
+	}
+	private void initStringFromLocale(){
+		bundle = ResourceBundle.getBundle("lang.langbundle", loc);
+	}
 	@Override
 	public Quiz generateQuiz() {
 		List<Quiz> quizList = generateQuizList();
@@ -31,18 +46,13 @@ public class FractionMultDivideQuestionFactory implements IQuestionFactory{
 	@Override
 	public List<Quiz> generateQuizList() {
 		List<Quiz> quizList= new ArrayList<Quiz>();
-		for (int i=0; i<NUM_OF_QUESTIONS; i++){
+		for (int i=0; i<numq; i++){
 			MultipleChoiceQuiz q = null;
-			if (i>1){
-				q = generateTypeC(i);
-				q.setDifficultyLevel(QuizLevel.MUDAH);
-			} else {
-				q = generateTypeA(i);
-				q.setDifficultyLevel(QuizLevel.MUDAH);
-			}
-			q.setLessonClassifier("Matematika SD");
-			q.setLessonCategory("Pecahan");
-			q.setLessonSubcategory("Perkalian dan pembagian pecahan");
+			q = generateTypeA(i);
+			q.setDifficultyLevel(QuizLevel.MUDAH);
+			q.setLessonSubcategory(bundle.getString("fraction.multiplication"));
+			q.setLessonClassifier(bundle.getString("mathelementary"));
+			q.setLessonCategory(bundle.getString("fraction"));
 			q.setSubCategoryOrder(1);
 			q.setLessonGrade(5);
 			quizList.add(q);
@@ -54,56 +64,41 @@ public class FractionMultDivideQuestionFactory implements IQuestionFactory{
 		MultipleChoiceQuiz q = new MultipleChoiceQuiz();
 		int denom = CommonFunctionAndValues.getRandomInt(11, 41);
 		int a1,a2;
-		do {
-			a1 = CommonFunctionAndValues.getRandomInt(5, 17);
-			a2 = CommonFunctionAndValues.getRandomInt(5, 17);
-		} while (!(denom > a1 && denom > a2 && (a1+a2)<=denom && a1>a2));
-		Fraction f1 = new Fraction(a1, denom);
-		Fraction f2 = new Fraction(a2, denom);
-		Fraction result;
-		if (i % 2 == 0){
-			result = f1.getResultWhenMultipliedBy(f2);
-			q.setQuestion("Hitung hasil perkalian dari pecahan "
-					+f1.toString()+" dan pecahan "+f2.toString());
-		} else{
-			result = f1.getResultWhenDividedBy(f2);
-			q.setQuestion("Hitung hasil dari pecahan "
-					+f1.toString()+" dibagi pecahan "+f2.toString());
-		}
-		q.setCorrectAnswer(result.toString());
-		q.setChoices(buildChoices(f1,f2,result));
-		return q;
-	}
-	private MultipleChoiceQuiz generateTypeC(int i) {
-		MultipleChoiceQuiz q = new MultipleChoiceQuiz();
 		int denomLeft,denomRight;
-		int a1,a2,gcdL,gcdR;
-		do {
-			denomLeft = CommonFunctionAndValues.getRandomInt(5, 34);;
-			denomRight = CommonFunctionAndValues.getRandomInt(5, 34);
-			a1 = CommonFunctionAndValues.getRandomInt(5, 17);
-			a2 = CommonFunctionAndValues.getRandomInt(5, 17);
-			gcdL = MathUtils.findGCD(a1,denomRight);
-			gcdR = MathUtils.findGCD(a2,denomLeft);
-		} while (denomLeft==denomRight
-				||a1>denomLeft ||a2>denomRight
-				||gcdL < 2 || gcdR<2 );
-		Fraction f1 = new Fraction(a1, denomLeft);
-		Fraction f2 = new Fraction(a2, denomRight);
+		int gcdL,gcdR;
+		Fraction f1,f2;
+		if (i % 2 == 0) {
+			do {
+				a1 = CommonFunctionAndValues.getRandomInt(5, 17);
+				a2 = CommonFunctionAndValues.getRandomInt(5, 17);
+			} while (!(denom > a1 && denom > a2 && (a1+a2)<=denom && a1>a2));
+			f1 = new Fraction(a1, denom);
+			f2 = new Fraction(a2, denom);
+			
+		} else  {
+			do {
+				denomLeft = CommonFunctionAndValues.getRandomInt(5, 34);;
+				denomRight = CommonFunctionAndValues.getRandomInt(5, 34);
+				a1 = CommonFunctionAndValues.getRandomInt(5, 17);
+				a2 = CommonFunctionAndValues.getRandomInt(5, 17);
+				gcdL = MathUtils.findGCD(a1,denomRight);
+				gcdR = MathUtils.findGCD(a2,denomLeft);
+			} while (denomLeft==denomRight
+					||a1>denomLeft ||a2>denomRight
+					||gcdL < 2 || gcdR<2 );
+			f1 = new Fraction(a1, denomLeft);
+			f2 = new Fraction(a2, denomRight);
+		} 
+		
 		Fraction result;
-		if (i % 2 == 0){
-			result = f1.getResultWhenMultipliedBy(f2);
-			q.setQuestion("Hitung hasil perkalian dari pecahan "
-					+f1.toString()+" dan pecahan "+f2.toString());
-		} else {
-			result = f1.getResultWhenDividedBy(f2);
-			q.setQuestion("Hitung hasil dari pecahan "
-					+f1.toString()+" dibagi pecahan "+f2.toString());
-		}
+		result = f1.getResultWhenMultipliedBy(f2);
+		q.setQuestion(f1.toMathJaxString()+" X "+f2.toMathJaxString());
+		q.setQuestion(CommonFunctionAndValues.enclosedWithMathJaxExp(q.getQuestion()));
 		q.setCorrectAnswer(result.toString());
 		q.setChoices(buildChoices(f1,f2,result));
 		return q;
 	}
+	
 	private Set<String> buildChoices(Fraction f1,Fraction f2,Fraction result){
 		Fraction[] choices = new Fraction[6];
 		choices[0] = result;
@@ -131,7 +126,7 @@ public class FractionMultDivideQuestionFactory implements IQuestionFactory{
 	
 	@Override
 	public List<Quiz> generateQuizList(int numOfQuestion) {
-		NUM_OF_QUESTIONS = numOfQuestion;
+		numq = numOfQuestion;
 		return generateQuizList();
 	}
 

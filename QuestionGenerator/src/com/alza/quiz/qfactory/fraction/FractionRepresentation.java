@@ -15,14 +15,14 @@ import com.alza.quiz.qfactory.IQuestionFactory;
 import com.alza.quiz.qfactory.geom.model.Path;
 import com.alza.quiz.qfactory.geom.model.Point2D;
 
-public class RepresentationOfFraction implements IQuestionFactory{
+public class FractionRepresentation implements IQuestionFactory{
 	Locale loc;
 	ResourceBundle bundle;
-	public RepresentationOfFraction(Locale loc){
+	public FractionRepresentation(Locale loc){
 		this.loc = loc;
 		initStringFromLocale();
 	}
-	public RepresentationOfFraction(){
+	public FractionRepresentation(){
 		this.loc = new Locale("in", "ID");
 		initStringFromLocale();
 	}

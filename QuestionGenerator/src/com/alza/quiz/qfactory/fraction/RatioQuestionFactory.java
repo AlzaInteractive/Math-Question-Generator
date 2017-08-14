@@ -2,6 +2,8 @@ package com.alza.quiz.qfactory.fraction;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 import com.alza.common.math.Fraction;
 import com.alza.common.math.MathUtils;
@@ -12,7 +14,27 @@ import com.alza.quiz.qfactory.IQuestionFactory;
 import com.alza.quiz.util.CommonFunctionAndValues;
 
 public class RatioQuestionFactory implements IQuestionFactory{
-	private static int NUM_OF_QUESTIONS = 6;
+	private static int numq = 6;
+	List<String> sceFindFromPct;
+	List<String> sceFindRatio;
+	List<String> sceFindFromRatio;
+	Locale loc;
+	ResourceBundle bundle,scenarioBundle;
+	public RatioQuestionFactory(Locale loc){
+		this.loc = loc;
+		initStringFromLocale();
+	}
+	public RatioQuestionFactory(){
+		this.loc = new Locale("in", "ID");
+		initStringFromLocale();
+	}
+	private void initStringFromLocale(){
+		bundle = ResourceBundle.getBundle("lang.langbundle", loc);
+		scenarioBundle = ResourceBundle.getBundle("lang.scenario", loc);
+		sceFindFromPct = CommonFunctionAndValues.getStringCollection(scenarioBundle, "fraction.findfrompct");
+		sceFindRatio = CommonFunctionAndValues.getStringCollection(scenarioBundle, "fraction.findratio");
+		sceFindFromRatio = CommonFunctionAndValues.getStringCollection(scenarioBundle, "fraction.findfromratio");
+	}
 	private static enum TYPE  {
 		findFromPct, findFromRatio, describeRatio
 	}
@@ -32,24 +54,24 @@ public class RatioQuestionFactory implements IQuestionFactory{
 	@Override
 	public List<Quiz> generateQuizList() {
 		List<Quiz> ql = new ArrayList<Quiz>();
-		for (int i=0;i<NUM_OF_QUESTIONS;i++){
+		for (int i=0;i<numq;i++){
 			MultipleChoiceQuiz q = new MultipleChoiceQuiz();
 			if (i % 3 == 1){
 				q = generateTypeC();
 				q.setDifficultyLevel(QuizLevel.SEDANG);
-				q.setLessonSubcategory("Bentuk persen, mencari jumlah jika persentase dan total diketahui");
+				q.setLessonSubcategory(bundle.getString("fraction.findvalifpctandsumknown"));
 			} else if (i % 3 == 2){
 				q = generateTypeB();
 				q.setDifficultyLevel(QuizLevel.SEDANG);
-				q.setLessonSubcategory("Perbandingan, mencari jumlah jika nilai perbandingan dan total diketahui");
+				q.setLessonSubcategory(bundle.getString("fraction.findvalifratioandsumknown"));
 			} else {
 				q = generateTypeA();
 				q.setDifficultyLevel(QuizLevel.MUDAH);
-				q.setLessonSubcategory("Mendeskripsikan perbandingan");
+				q.setLessonSubcategory(bundle.getString("fraction.describingratio"));
 			}
 			q.setSubCategoryOrder(5);
-			q.setLessonClassifier("Matematika SD");
-			q.setLessonCategory("Pecahan");
+			q.setLessonClassifier(bundle.getString("mathelementary"));
+			q.setLessonCategory(bundle.getString("fraction"));
 			q.setLessonGrade(5);
 			ql.add(q);
 		}
@@ -193,7 +215,7 @@ public class RatioQuestionFactory implements IQuestionFactory{
 	}
 	@Override
 	public List<Quiz> generateQuizList(int numOfQuestion) {
-		NUM_OF_QUESTIONS = numOfQuestion;
+		numq = numOfQuestion;
 		return generateQuizList();
 	}
 }

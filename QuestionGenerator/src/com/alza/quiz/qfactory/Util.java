@@ -37,13 +37,13 @@ public class Util {
 	public static List<IQuestionFactory> getAllFractionQuestionFactory(){
 		List<IQuestionFactory> lqf = new ArrayList<IQuestionFactory>();
 		lqf.add(new FractionEqualityTypeB());
-		lqf.add(new PickGreatest());
-		lqf.add(new SimplifyFraction());
-		lqf.add(new FractionAddSubtractQuestionFactory());
-		lqf.add(new FractionMultDivideQuestionFactory());
-		lqf.add(new MixedFractionQuestionFactory());
+		lqf.add(new FractionPickGreatest());
+		lqf.add(new FractionSimplify());
+		lqf.add(new FractionAddSubtract());
+		lqf.add(new FractionMultiplication());
+		lqf.add(new FractionMixedFormOperation());
 		lqf.add(new FractionConvertToDecimal());
-		lqf.add(new FractionPercentageFormQuestionFactory());
+		lqf.add(new FractionConvertToPercentage());
 		lqf.add(new ScenarioBasedFractionQuestionFactory());
 		lqf.add(new ScaleQuestionFactory());
 		lqf.add(new RatioQuestionFactory());

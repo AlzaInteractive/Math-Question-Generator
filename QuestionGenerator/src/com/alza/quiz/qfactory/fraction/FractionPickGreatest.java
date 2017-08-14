@@ -15,15 +15,15 @@ import com.alza.quiz.model.QuizLevel;
 import com.alza.quiz.qfactory.IQuestionFactory;
 import com.alza.quiz.util.CommonFunctionAndValues;
 
-public class PickGreatest implements IQuestionFactory {
+public class FractionPickGreatest implements IQuestionFactory {
 	private static int numq = 4;
 	Locale loc;
 	ResourceBundle bundle;
-	public PickGreatest(Locale loc){
+	public FractionPickGreatest(Locale loc){
 		this.loc = loc;
 		initStringFromLocale();
 	}
-	public PickGreatest(){
+	public FractionPickGreatest(){
 		this.loc = new Locale("in", "ID");
 		initStringFromLocale();
 	}
