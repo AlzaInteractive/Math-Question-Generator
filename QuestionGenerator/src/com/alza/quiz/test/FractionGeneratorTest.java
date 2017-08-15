@@ -8,6 +8,8 @@ import com.alza.quiz.model.QuizLevel;
 import com.alza.quiz.model.MultipleChoiceQuiz;
 import com.alza.quiz.model.Quiz;
 import com.alza.quiz.qfactory.IQuestionFactory;
+import com.alza.quiz.qfactory.fraction.FractionDescribingRatio;
+import com.alza.quiz.qfactory.fraction.FractionDescribingRatio;
 import com.alza.quiz.qfactory.fraction.FractionRealWorldProblemDiscount;
 import com.alza.quiz.qfactory.fraction.FractionRealWorldProblemFindFromPercentage;
 import com.alza.quiz.qfactory.fraction.FractionPickGreatest;
@@ -20,7 +22,6 @@ import com.alza.quiz.qfactory.fraction.FractionMixedFormOperation;
 import com.alza.quiz.qfactory.fraction.FractionRealWorldProblemFindFromRatio;
 import com.alza.quiz.qfactory.fraction.FractionRealWorldProblemScale;
 import com.alza.quiz.qfactory.fraction.FractionRealWorldProblemTaxTips;
-import com.alza.quiz.qfactory.fraction.RatioQuestionFactory;
 import com.alza.quiz.qfactory.fraction.ScaleQuestionFactory;
 import com.alza.quiz.qfactory.fraction.ScenarioBasedFractionQuestionFactory;
 import com.alza.quiz.qfactory.fraction.FractionSimplify;
@@ -87,8 +88,9 @@ public class FractionGeneratorTest {
 		lqf.add(new FractionRealWorldProblemFindFromPercentage());
 		lqf.add(new FractionRealWorldProblemFindFromRatio());
 		lqf.add(new FractionRealWorldProblemDiscount());
-		lqf.add(new FractionRealWorldProblemTaxTips()); **/
-		lqf.add(new FractionRealWorldProblemScale());
+		lqf.add(new FractionRealWorldProblemTaxTips()); 
+		lqf.add(new FractionRealWorldProblemScale());**/
+		lqf.add(new FractionDescribingRatio());
 		
 		
 		List<Quiz> ql = new ArrayList<Quiz>();
@@ -102,8 +104,10 @@ public class FractionGeneratorTest {
 			System.out.println("Grade : "+q.getLessonGrade());
 			System.out.println("Subcategory :" +q.getLessonSubcategory());
 			System.out.println("Question : " + q.getQuestion());
-			MultipleChoiceQuiz mq = (MultipleChoiceQuiz) q;
-			System.out.println("Choices : "+ String.join(" , ", mq.getChoices()));
+			if (q instanceof MultipleChoiceQuiz) {
+				MultipleChoiceQuiz mq = (MultipleChoiceQuiz) q;
+				System.out.println("Choices : "+ String.join(" , ", mq.getChoices()));
+			}
 			System.out.println("Answer : "+ q.getCorrectAnswer());
 		}
 		System.out.println("Jumlah soal : "+ql.size());
