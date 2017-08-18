@@ -26,6 +26,12 @@ public class Fraction implements Comparable<Fraction>,Comparator<Fraction>{
 		}
 		return false;
 	}
+	public boolean isLessThan(Fraction f){
+		if (this.compareTo(f)<0){
+			return true;
+		}
+		return false;
+	}
 	public boolean isBetween(Fraction f1, Fraction f2){
 		if (this.compareTo(f1)>=0&&this.compareTo(f2)<=0){
 			return true;
