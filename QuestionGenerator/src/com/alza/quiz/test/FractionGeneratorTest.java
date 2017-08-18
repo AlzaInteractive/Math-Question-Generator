@@ -74,8 +74,9 @@ public class FractionGeneratorTest {
 	}
 	private static void fractionEquality(){
 		List<IQuestionFactory> lqf = new ArrayList<IQuestionFactory>();
-		/**lqf.add(new FractionEqualityTypeB());
+		lqf.add(new FractionEqualityTypeB());
 		lqf.add(new FractionPickGreatest());
+		/**
 		lqf.add(new FractionSimplify());
 		lqf.add(new FractionAddSubtract());
 		lqf.add(new FractionMultiplication());
@@ -83,16 +84,14 @@ public class FractionGeneratorTest {
 		lqf.add(new FractionConvertToDecimal());
 		lqf.add(new FractionConvertToPercentage());
 		lqf.add(new ScenarioBasedFractionQuestionFactory());
-		lqf.add(new ScaleQuestionFactory());
-		lqf.add(new RatioQuestionFactory());
 		lqf.add(new FractionRealWorldProblemFindFromPercentage());
 		lqf.add(new FractionRealWorldProblemFindFromRatio());
 		lqf.add(new FractionRealWorldProblemDiscount());
 		lqf.add(new FractionRealWorldProblemTaxTips()); 
 		lqf.add(new FractionRealWorldProblemScale());
 		lqf.add(new FractionDescribingRatio());
-		lqf.add(new FractionRealWorldProblemProportions());**/
-		lqf.add(new FractionRealWorldProblemLeftover());
+		lqf.add(new FractionRealWorldProblemProportions());
+		lqf.add(new FractionRealWorldProblemLeftover()); **/
 		
 		
 		List<Quiz> ql = new ArrayList<Quiz>();
