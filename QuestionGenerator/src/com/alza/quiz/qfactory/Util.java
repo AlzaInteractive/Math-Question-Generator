@@ -44,7 +44,6 @@ public class Util {
 		lqf.add(new FractionMixedFormOperation());
 		lqf.add(new FractionConvertToDecimal());
 		lqf.add(new FractionConvertToPercentage());
-		lqf.add(new ScenarioBasedFractionQuestionFactory());
 		//lqf.add(new ScaleQuestionFactory());
 		//lqf.add(new RatioQuestionFactory());
 		return lqf;
