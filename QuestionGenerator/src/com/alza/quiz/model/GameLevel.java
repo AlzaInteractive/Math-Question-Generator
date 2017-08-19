@@ -15,7 +15,15 @@ import com.alza.quiz.qfactory.IQuestionFactory;
 public class GameLevel {
 	private int order;
 	private String name;
-	private List<GameLevelQuestionFactory> levelQF;
+	private List<GameLevelQuestionFactory> levelQF = new ArrayList<GameLevelQuestionFactory>();
+	
+	public static GameLevel createSingleQF(int order, String name, IQuestionFactory qf, int questionCount) {
+		GameLevel gl = new GameLevel();
+		gl.setOrder(order);
+		gl.setName(name);
+		gl.getLevelQF().add(new GameLevelQuestionFactory(questionCount, qf));
+		return gl;
+	}
 		
 	public int getOrder() {
 		return order;
@@ -40,6 +48,13 @@ public class GameLevel {
 	public void setLevelQF(List<GameLevelQuestionFactory> levelQF) {
 		this.levelQF = levelQF;
 	}
+	
+	public void addQuestionFactory(GameLevelQuestionFactory glqf){
+		levelQF.add(glqf);
+	}
+	public void addQuestionFactory(IQuestionFactory qf, int qCount){
+		levelQF.add(new GameLevelQuestionFactory(qCount, qf));
+	}
 
 	public List<Quiz> generateQuiz(){
 		List<Quiz> ql = new ArrayList<Quiz>();
@@ -49,21 +64,5 @@ public class GameLevel {
 		return ql;
 	}
 	
-	public class GameLevelQuestionFactory{
-		private int qCount;//question count
-		private IQuestionFactory qFactory;
-		public int getqCount() {
-			return qCount;
-		}
-		public void setqCount(int qCount) {
-			this.qCount = qCount;
-		}
-		public IQuestionFactory getqFactory() {
-			return qFactory;
-		}
-		public void setqFactory(IQuestionFactory qFactory) {
-			this.qFactory = qFactory;
-		}
-		
-	}
+	
 }

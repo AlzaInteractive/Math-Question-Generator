@@ -50,12 +50,12 @@ public class FractionEqualityTypeA implements IQuestionFactory{
 	public List<Quiz> generateQuizList() {
 		List<Quiz> quizList = new ArrayList<Quiz>();
 		for (int i=0;i<numq;i++){
-			MultipleChoiceQuiz q = generateTypeA();
+			MultipleChoiceQuiz q = generateEqualityQuiz();
 			quizList.add(q);
 		}
 		return quizList;
 	}
-	private MultipleChoiceQuiz generateTypeA() {
+	private MultipleChoiceQuiz generateEqualityQuiz() {
 		int a,b,multip;
 		do {
 			a = ThreadLocalRandom.current().nextInt(2, 7);
@@ -78,13 +78,13 @@ public class FractionEqualityTypeA implements IQuestionFactory{
 		q.setLessonGrade(4);
 		q.setChoices(choices);
 		q.setCorrectAnswer(fAnswer.a+"/"+fAnswer.b);
-		q.setQuestion(CommonFunctionAndValues.MJXTAG+
-				bundle.getString("fraction.findequal")+"\frac{"+fQuest.a+"}{"+fQuest.b+"}"+
-				CommonFunctionAndValues.MJXTAG);
+		q.setQuestion(bundle.getString("fraction.findequal")+" \frac{"+fQuest.a+"}{"+fQuest.b+"}");
+		q.setQuestion(CommonFunctionAndValues.enclosedWithMathJaxExp(q.getQuestion()));
 		q.setLessonSubcategory(bundle.getString("fraction.equality"));
 		q.setLessonClassifier(bundle.getString("mathelementary"));
 		q.setLessonCategory(bundle.getString("fraction"));
 		q.setSubCategoryOrder(1);
+		q.setLocale(loc);
 		return q;
 	}
 	

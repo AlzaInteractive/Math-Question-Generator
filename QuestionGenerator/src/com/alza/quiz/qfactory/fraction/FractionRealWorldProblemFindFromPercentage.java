@@ -80,6 +80,8 @@ public class FractionRealWorldProblemFindFromPercentage implements IQuestionFact
 			q.setQuestion(sce);
 			q.setCorrectAnswer(String.valueOf(corrAns));
 			q.setChoices(total,tot2,tot1,Math.abs(tot1-tot2));
+			q.setLessonGrade(5);
+			q.setLocale(loc);
 			ql.add(q);
 		}	
 		return ql;

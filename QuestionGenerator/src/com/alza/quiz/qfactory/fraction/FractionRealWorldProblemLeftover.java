@@ -86,6 +86,7 @@ public class FractionRealWorldProblemLeftover implements IQuestionFactory{
 			sce = CommonFunctionAndValues.enclosedWithMathJaxExp(sce);
 			q.setQuestion(sce);
 			q.setCorrectAnswer(corrAns);
+			q.setLocale(loc);
 			ql.add(q);
 		}	
 		return ql;

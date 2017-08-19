@@ -76,6 +76,8 @@ public class FractionRealWorldProblemFindFromRatio implements IQuestionFactory{
 			q.setQuestion(sce);
 			q.setCorrectAnswer(String.valueOf(corrAns));
 			q.setChoices(r1,r2,r1*multip,Math.abs(r1-r2)*multip);
+			q.setLocale(loc);
+			q.setLessonGrade(5);
 			ql.add(q);
 		}	
 		return ql;

@@ -84,7 +84,7 @@ public class FractionRealWorldProblemProportions implements IQuestionFactory{
 			sce = CommonFunctionAndValues.enclosedWithMathJaxExp(sce);
 			q.setQuestion(sce);
 			q.setCorrectAnswer(corrAns);
-
+			q.setLocale(loc);
 			ql.add(q);
 		}	
 		return ql;

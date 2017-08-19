@@ -74,7 +74,7 @@ public class FractionConvertFromDecimal implements IQuestionFactory {
 			choices.add(f1);choices.add(f2);choices.add(f3);choices.add(f4);choices.add(fQuest);
 			Collections.shuffle(choices);
 			q.setQuestion(bundle.getString("fraction.fractionvalueof")
-					+fQuest.getThreeDigitDecimalForm()
+					+" "+fQuest.getThreeDigitDecimalForm()
 					+"?");
 			q.setDifficultyLevel(QuizLevel.MUDAH);
 			q.setChoices(convertChoices(choices, false));
@@ -84,6 +84,7 @@ public class FractionConvertFromDecimal implements IQuestionFactory {
 			q.setLessonCategory(bundle.getString("fraction"));
 			q.setSubCategoryOrder(3);
 			q.setLessonGrade(5);
+			q.setLocale(loc);
 			quizList.add(q);
 		}
 	}

@@ -83,6 +83,7 @@ public class FractionConvertToPercentage implements IQuestionFactory {
 			q.setLessonCategory(bundle.getString("fraction"));
 			q.setSubCategoryOrder(4);
 			q.setLessonGrade(5);
+			q.setLocale(loc);
 			quizList.add(q);
 		}
 	}

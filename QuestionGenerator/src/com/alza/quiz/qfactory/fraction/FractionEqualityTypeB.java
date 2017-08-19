@@ -94,6 +94,7 @@ public class FractionEqualityTypeB implements IQuestionFactory{
 		q.setLessonClassifier(bundle.getString("mathelementary"));
 		q.setLessonCategory(bundle.getString("fraction"));
 		q.setSubCategoryOrder(1);
+		q.setLocale(loc);
 		return q;
 	}
 	private List<String> buildChoices(int a,int b,int c,int d, String waldo){

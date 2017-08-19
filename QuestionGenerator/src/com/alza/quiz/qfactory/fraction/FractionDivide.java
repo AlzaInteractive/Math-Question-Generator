@@ -50,11 +50,12 @@ public class FractionDivide implements IQuestionFactory{
 			MultipleChoiceQuiz q = null;
 			q = generateTypeA(i);
 			q.setDifficultyLevel(QuizLevel.MUDAH);
-			q.setLessonSubcategory(bundle.getString("fraction.divide"));
+			q.setLessonSubcategory(bundle.getString("fraction.division"));
 			q.setLessonClassifier(bundle.getString("mathelementary"));
 			q.setLessonCategory(bundle.getString("fraction"));
 			q.setSubCategoryOrder(1);
 			q.setLessonGrade(5);
+			q.setLocale(loc);
 			quizList.add(q);
 		}
 		return quizList;

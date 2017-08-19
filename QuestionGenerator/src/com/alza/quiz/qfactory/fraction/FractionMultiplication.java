@@ -55,6 +55,7 @@ public class FractionMultiplication implements IQuestionFactory{
 			q.setLessonCategory(bundle.getString("fraction"));
 			q.setSubCategoryOrder(1);
 			q.setLessonGrade(5);
+			q.setLocale(loc);
 			quizList.add(q);
 		}
 		return quizList;

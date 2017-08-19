@@ -89,6 +89,7 @@ public class FractionRealWorldProblemTaxTips implements IQuestionFactory{
 					CommonFunctionAndValues.DF2PLC.format(wrongval2),
 					CommonFunctionAndValues.DF2PLC.format(delta));
 			ql.add(q);
+			q.setLocale(loc);
 		}	
 		return ql;
 	}

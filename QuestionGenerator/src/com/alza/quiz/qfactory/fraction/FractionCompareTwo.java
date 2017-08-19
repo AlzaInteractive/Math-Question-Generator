@@ -65,6 +65,7 @@ public class FractionCompareTwo implements IQuestionFactory {
 			q.setLessonClassifier(bundle.getString("mathelementary"));
 			q.setLessonCategory(bundle.getString("fraction"));
 			q.setSubCategoryOrder(2);
+			q.setLocale(loc);
 			quizList.add(q);
 		}
 		return quizList;
@@ -130,6 +131,7 @@ public class FractionCompareTwo implements IQuestionFactory {
 		MultipleChoiceQuiz q = new MultipleChoiceQuiz();
 		q.setChoices(convertChoices(fracs));
 		q.setCorrectAnswer(fAnswer.a+"/"+fAnswer.b);
+		q.setLocale(loc);
 		return q;
 	}
 	private List<String> convertChoices(Fraction[] fracs){

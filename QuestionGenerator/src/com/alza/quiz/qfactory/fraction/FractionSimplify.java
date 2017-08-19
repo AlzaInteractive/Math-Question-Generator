@@ -28,6 +28,7 @@ public class FractionSimplify implements IQuestionFactory {
 	public FractionSimplify(Locale loc) {
 		super();
 		this.loc = loc;
+		initStringFromLocale();
 	}
 
 	private void initStringFromLocale(){
@@ -74,9 +75,8 @@ public class FractionSimplify implements IQuestionFactory {
 			q.setChoices(convertChoices(choices));
 			q.setCorrectAnswer(fAns.a+"/"+fAns.b);
 			String question = bundle.getString("fraction.simplifyquestion");
-			q.setQuestion(CommonFunctionAndValues.MJXTAG+
-					question+"\frac{"+c+"}{"+d+"}"+
-					CommonFunctionAndValues.MJXTAG);
+			q.setQuestion(question+" \frac{"+c+"}{"+d+"}");
+			q.setQuestion(CommonFunctionAndValues.enclosedWithMathJaxExp(q.getQuestion()));
 			q.setDifficultyLevel(QuizLevel.MUDAH);
 			q.setLessonSubcategory(bundle.getString("fraction.simplify"));
 			q.setLessonClassifier(bundle.getString("mathelementary"));

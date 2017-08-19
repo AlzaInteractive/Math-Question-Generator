@@ -87,6 +87,7 @@ public class FractionRealWorldProblemScale implements IQuestionFactory{
 					CommonFunctionAndValues.DF2PLC.format(reaLen*multip),
 					CommonFunctionAndValues.DF2PLC.format(reaLen/multip));
 					*/
+			q.setLocale(loc);
 			ql.add(q);
 		}	
 		return ql;

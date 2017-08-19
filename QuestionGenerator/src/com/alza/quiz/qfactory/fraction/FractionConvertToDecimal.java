@@ -86,6 +86,7 @@ public class FractionConvertToDecimal implements IQuestionFactory {
 			q.setLessonCategory(bundle.getString("fraction"));
 			q.setLessonGrade(5);
 			q.setSubCategoryOrder(3);
+			q.setLocale(loc);
 			quizList.add(q);
 		}
 	}

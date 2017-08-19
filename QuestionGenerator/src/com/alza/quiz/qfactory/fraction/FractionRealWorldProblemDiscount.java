@@ -90,6 +90,7 @@ public class FractionRealWorldProblemDiscount implements IQuestionFactory{
 					CommonFunctionAndValues.DF2PLC.format(wrongPrice),
 					CommonFunctionAndValues.DF2PLC.format(wrongval2),
 					CommonFunctionAndValues.DF2PLC.format(deltaPrice));
+			q.setLocale(loc);
 			ql.add(q);
 		}	
 		return ql;

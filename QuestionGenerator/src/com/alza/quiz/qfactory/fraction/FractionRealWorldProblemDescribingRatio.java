@@ -12,17 +12,17 @@ import com.alza.quiz.model.QuizLevel;
 import com.alza.quiz.qfactory.IQuestionFactory;
 import com.alza.quiz.util.CommonFunctionAndValues;
 
-public class FractionDescribingRatio implements IQuestionFactory{
+public class FractionRealWorldProblemDescribingRatio implements IQuestionFactory{
 	private static int numq = 6;
 	List<String> sces;
 	Locale loc;
 	ResourceBundle bundle,scenarioBundle;
 	private static final int PARAMLENGTH=8;
-	public FractionDescribingRatio(Locale loc){
+	public FractionRealWorldProblemDescribingRatio(Locale loc){
 		this.loc = loc;
 		initStringFromLocale();
 	}
-	public FractionDescribingRatio(){
+	public FractionRealWorldProblemDescribingRatio(){
 		this.loc = new Locale("in", "ID");
 		initStringFromLocale();
 	}
@@ -89,6 +89,7 @@ public class FractionDescribingRatio implements IQuestionFactory{
 					rightVal+":"+leftVal,
 					rightRat+":"+leftRat,
 					rightRat+":"+rightVal);
+			q.setLocale(loc);
 			ql.add(q);
 		}	
 		return ql;

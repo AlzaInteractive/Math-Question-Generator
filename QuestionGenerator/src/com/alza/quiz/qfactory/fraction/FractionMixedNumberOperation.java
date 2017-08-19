@@ -16,15 +16,15 @@ import com.alza.quiz.model.QuizLevel;
 import com.alza.quiz.qfactory.IQuestionFactory;
 import com.alza.quiz.util.CommonFunctionAndValues;
 
-public class FractionMixedFormOperation implements IQuestionFactory{
+public class FractionMixedNumberOperation implements IQuestionFactory{
 	private static int numq = 6;
 	Locale loc;
 	ResourceBundle bundle;
-	public FractionMixedFormOperation(Locale loc){
+	public FractionMixedNumberOperation(Locale loc){
 		this.loc = loc;
 		initStringFromLocale();
 	}
-	public FractionMixedFormOperation(){
+	public FractionMixedNumberOperation(){
 		this.loc = new Locale("in", "ID");
 		initStringFromLocale();
 	}
@@ -64,6 +64,7 @@ public class FractionMixedFormOperation implements IQuestionFactory{
 			q.setLessonCategory(bundle.getString("fraction"));
 			q.setLessonGrade(5);
 			q.setSubCategoryOrder(2);
+			q.setLocale(loc);
 			quizList.add(q);
 		}
 		return quizList;
@@ -89,7 +90,7 @@ public class FractionMixedFormOperation implements IQuestionFactory{
 		}
 		q.setCorrectAnswer(result.getMixedFraction().toString());
 		q.setChoices(buildChoices(result));
-		q.setLessonSubcategory(bundle.getString("fraction.mixedfraction.multdiv"));
+		q.setLessonSubcategory(bundle.getString("fraction.mixednumber"));
 		return q;
 	}
 	private MultipleChoiceQuiz generateTypeAddSubtract(int i) {
@@ -112,7 +113,7 @@ public class FractionMixedFormOperation implements IQuestionFactory{
 		}
 		q.setCorrectAnswer(result.getMixedFraction().toString());
 		q.setChoices(buildChoices(result));
-		q.setLessonSubcategory(bundle.getString("fraction.mixedfraction.addsub"));		
+		q.setLessonSubcategory(bundle.getString("fraction.mixednumber"));		
 		return q;
 	}
 	private MultipleChoiceQuiz generateTypeMixedForm(int i) {
@@ -125,12 +126,13 @@ public class FractionMixedFormOperation implements IQuestionFactory{
 		} while (denomLeft>=a1 || a1%denomLeft==0);
 		Fraction f1 = new Fraction(a1, denomLeft);
 		MixedFraction result;
-			q.setQuestion(bundle.getString("fraction.mixedfraction.fractionformof")
+			q.setQuestion(bundle.getString("fraction.mixednumber.fractionformof")
 					+f1.toMathJaxString()+"? ");
 		result = f1.getMixedFraction();
 		q.setCorrectAnswer(result.toString());
 		q.setChoices(buildChoices(f1));
-		q.setLessonSubcategory(bundle.getString("fraction.mixedfraction"));
+		q.setLessonSubcategory(bundle.getString("fraction.mixednumber"));
+		
 		return q;
 	}
 	private Set<String> buildChoices(Fraction f1){

@@ -60,6 +60,7 @@ public class FractionRepresentation implements IQuestionFactory{
 			q.setSubCategoryOrder(3);
 			q.setLocale(loc);
 			q.setLessonCategory(bundle.getString("fraction"));
+			q.setLocale(loc);
 			lq.add(q);
 		}
 		return lq;

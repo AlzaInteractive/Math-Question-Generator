@@ -65,6 +65,7 @@ public class FractionAddSubtract implements IQuestionFactory{
 			q.setLessonClassifier(bundle.getString("mathelementary"));
 			q.setLessonCategory(bundle.getString("fraction"));
 			q.setSubCategoryOrder(4);
+			q.setLocale(loc);
 			quizList.add(q);
 		}
 		return quizList;
