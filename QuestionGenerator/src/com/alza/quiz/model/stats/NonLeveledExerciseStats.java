@@ -1,4 +1,4 @@
-package com.alza.quiz.model;
+package com.alza.quiz.model.stats;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -10,12 +10,13 @@ import java.util.List;
 import java.util.Map;
 
 import com.alza.common.math.Fraction;
+import com.alza.quiz.model.Quiz;
 
 /**
  * Created by ewin.sutriandi@gmail.com on 11/01/17.
  */
 
-public class QuizStats implements Serializable{
+public class NonLeveledExerciseStats implements Serializable{
 	private static final long serialVersionUID = 7662137635312010916L;
 	private Date timeTaken = new Date();
     private long time;
@@ -24,8 +25,8 @@ public class QuizStats implements Serializable{
     private int numOfCorrectAnswer=0;
     private List<QuizLog> logs;
 
-    public QuizStats(){
-        logs = new ArrayList<QuizStats.QuizLog>();
+    public NonLeveledExerciseStats(){
+        logs = new ArrayList<NonLeveledExerciseStats.QuizLog>();
     }
 
     public Date getTimeTaken() {
@@ -84,8 +85,8 @@ public class QuizStats implements Serializable{
         this.time = this.time + time;
         logs.add(new QuizLog(quizNum, correct, quiz, time, score));
     }
-    public List<QuizStats.QuizSummary> getStatByCategory(){
-    	Map<String , QuizStats.QuizSummary> statsByCategory = new HashMap<String, QuizSummary>();
+    public List<NonLeveledExerciseStats.QuizSummary> getStatByCategory(){
+    	Map<String , NonLeveledExerciseStats.QuizSummary> statsByCategory = new HashMap<String, QuizSummary>();
     	for (QuizLog log: logs){
     		String key = log.getKeyByCategory();
     		QuizSummary v;
@@ -98,7 +99,7 @@ public class QuizStats implements Serializable{
     		if (log.correct) v.correct = v.correct+1;
     		statsByCategory.put(key, v);
     	}
-    	ArrayList<QuizSummary> l = new ArrayList<QuizStats.QuizSummary>(statsByCategory.values());
+    	ArrayList<QuizSummary> l = new ArrayList<NonLeveledExerciseStats.QuizSummary>(statsByCategory.values());
     	Collections.sort(l);
     	return l;
     	
@@ -112,9 +113,9 @@ public class QuizStats implements Serializable{
     	public QuizLog(int quizNum, boolean correct, Quiz quiz, long time, int score){
     		this.quizNum = quizNum;
     		this.correct = correct;
-    		this.grade = quiz.lessonGrade;
-    		this.category = quiz.lessonCategory;
-    		this.subCategory = quiz.lessonSubcategory;
+    		this.grade = quiz.getLessonGrade();
+    		this.category = quiz.getLessonCategory();
+    		this.subCategory = quiz.getLessonSubcategory();
     	}
     	public String getKeyByCategory(){
     		return "G"+grade+"Cat"+category+"SubCat"+subCategory;
@@ -153,12 +154,12 @@ public class QuizStats implements Serializable{
 		}
     }
     
-    public List<QuizStats.QuizSummary> getStatByCategoryFromMultipleTest(List<QuizStats> statses){
-    	List<QuizLog> logs = new ArrayList<QuizStats.QuizLog>();
-    	for (QuizStats stats : statses){
+    public List<NonLeveledExerciseStats.QuizSummary> getStatByCategoryFromMultipleTest(List<NonLeveledExerciseStats> statses){
+    	List<QuizLog> logs = new ArrayList<NonLeveledExerciseStats.QuizLog>();
+    	for (NonLeveledExerciseStats stats : statses){
     		logs.addAll(stats.getLogs());
     	}
-    	Map<String , QuizStats.QuizSummary> statsByCategory = new HashMap<String, QuizSummary>();
+    	Map<String , NonLeveledExerciseStats.QuizSummary> statsByCategory = new HashMap<String, QuizSummary>();
     	for (QuizLog log: logs){
     		String key = log.getKeyByCategory();
     		QuizSummary v;
@@ -171,7 +172,7 @@ public class QuizStats implements Serializable{
     		if (log.correct) v.correct = v.correct+1;
     		statsByCategory.put(key, v);
     	}
-    	ArrayList<QuizSummary> l = new ArrayList<QuizStats.QuizSummary>(statsByCategory.values());
+    	ArrayList<QuizSummary> l = new ArrayList<NonLeveledExerciseStats.QuizSummary>(statsByCategory.values());
     	Collections.sort(l);
     	return l;
     }
