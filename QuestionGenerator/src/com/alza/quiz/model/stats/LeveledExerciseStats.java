@@ -3,6 +3,8 @@ package com.alza.quiz.model.stats;
 import java.io.Serializable;
 import java.util.Date;
 
+import com.alza.quiz.model.Quiz;
+
 public class LeveledExerciseStats implements Serializable {
 
 	private static final long serialVersionUID = 2810324083750199224L;
@@ -55,6 +57,18 @@ public class LeveledExerciseStats implements Serializable {
 	public void setNumOfCorrectAnswer(int numOfCorrectAnswer) {
 		this.numOfCorrectAnswer = numOfCorrectAnswer;
 	}
+	private void addCount(boolean correct){
+        numOfQuestion ++;
+        if (correct){
+            numOfCorrectAnswer++;
+        }
+    }
+	public void addStats(boolean correct, Quiz quiz, long time, int score){
+        this.score = this.score + score;
+        addCount(correct);
+        this.timeElapsed = this.timeElapsed + time;
+    }
+	
 	public Medals getCorrectnessPerforManceMedals(){
 		Medals m=null;
 		double perf = this.numOfCorrectAnswer/this.numOfQuestion;
