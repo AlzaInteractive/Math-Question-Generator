@@ -80,5 +80,13 @@ public class FractionGameLevel {
 		lgl.add(g);
 		return lgl;
 	}
-	
+	public static GameLevel getGameLevel(int order, Locale loc){
+		List<GameLevel> levels = createGameLevels(loc);
+		for (GameLevel gameLevel : levels) {
+			if (gameLevel.getOrder()==order) {
+				return gameLevel;
+			}
+		}
+		return null;
+	}
 }
