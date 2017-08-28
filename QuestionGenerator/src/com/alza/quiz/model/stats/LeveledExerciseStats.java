@@ -1,28 +1,21 @@
 package com.alza.quiz.model.stats;
 
 import java.io.Serializable;
-import java.util.Date;
 
-public class LeveledExerciseStats implements Serializable {
+public class LeveledExerciseStats extends BasicExerciseStats implements Serializable {
 
 	private static final long serialVersionUID = 2810324083750199224L;
 	private int levelIndex;
-	private String lessonCategory;
-	private Date timeTaken = new Date();
-    private long timeElapsed; //in seconds
-    private int score=0;
-    private int numOfQuestion=0;
-    private int numOfCorrectAnswer=0;
+	
     
 	public LeveledExerciseStats() {
 		
 	}
     public LeveledExerciseStats(int levelIndex, String lessonCategory,
 			int numOfQuestion) {
-		super();
+		super(lessonCategory, numOfQuestion);
 		this.levelIndex = levelIndex;
-		this.lessonCategory = lessonCategory;
-		this.numOfQuestion = numOfQuestion;
+		
 	}
 	public int getLevelIndex() {
 		return levelIndex;
@@ -30,49 +23,7 @@ public class LeveledExerciseStats implements Serializable {
 	public void setLevelIndex(int levelIndex) {
 		this.levelIndex = levelIndex;
 	}
-	public String getLessonCategory() {
-		return lessonCategory;
-	}
-	public void setLessonCategory(String lessonCategory) {
-		this.lessonCategory = lessonCategory;
-	}
-	public Date getTimeTaken() {
-		return timeTaken;
-	}
-	public void setTimeTaken(Date timeTaken) {
-		this.timeTaken = timeTaken;
-	}
-	public long getTimeElapsed() {
-		return timeElapsed;
-	}
-	public void setTimeElapsed(long timeElapsed) {
-		this.timeElapsed = timeElapsed;
-	}
-	public int getScore() {
-		return score;
-	}
-	public void setScore(int score) {
-		this.score = score;
-	}
-	public int getNumOfQuestion() {
-		return numOfQuestion;
-	}
-	public void setNumOfQuestion(int numOfQuestion) {
-		this.numOfQuestion = numOfQuestion;
-	}
-	public int getNumOfCorrectAnswer() {
-		return numOfCorrectAnswer;
-	}
-	public void setNumOfCorrectAnswer(int numOfCorrectAnswer) {
-		this.numOfCorrectAnswer = numOfCorrectAnswer;
-	}
-	public void addStats(boolean correct, long time, int score){
-        this.score = this.score + score;
-        if (correct) {
-			this.numOfCorrectAnswer++;
-		}
-        this.timeElapsed = this.timeElapsed + time;
-    }
+	
 	
 	public Medals getCorrectnessPerforManceMedals(){
 		Medals m=null;
@@ -90,7 +41,7 @@ public class LeveledExerciseStats implements Serializable {
 	}
 	public Medals getTimePerforManceMedals(){
 		Medals m=null;
-		double perf = this.timeElapsed/this.numOfCorrectAnswer;
+		double perf = timeElapsed/numOfCorrectAnswer;
 		if (getCorrectnessPerforManceMedals()!=null) {
 			if (perf < 30) {
 				m = Medals.PLATINUM; 

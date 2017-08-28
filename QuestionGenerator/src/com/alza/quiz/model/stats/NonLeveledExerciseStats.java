@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,61 +15,20 @@ import com.alza.quiz.model.Quiz;
  * Created by ewin.sutriandi@gmail.com on 11/01/17.
  */
 
-public class NonLeveledExerciseStats implements Serializable{
+public class NonLeveledExerciseStats extends BasicExerciseStats implements Serializable{
 	private static final long serialVersionUID = 7662137635312010916L;
-	private Date timeTaken = new Date();
-    private long time;
-    private int score=0;
-    private int numOfQuestion=0;
-    private int numOfCorrectAnswer=0;
     private List<QuizLog> logs;
 
     public NonLeveledExerciseStats(){
         logs = new ArrayList<NonLeveledExerciseStats.QuizLog>();
     }
 
-    public Date getTimeTaken() {
-        return timeTaken;
-    }
-
-    public void setTimeTaken(Date timeTaken) {
-        this.timeTaken = timeTaken;
-    }
-
-    public int getScore() {
-        return score;
-    }
-
-    public void setScore(int score) {
-        this.score = score;
-    }
-
-    public int getNumOfQuestion() {
-        return numOfQuestion;
-    }
-
-    public void setNumOfQuestion(int numOfQuestion) {
-        this.numOfQuestion = numOfQuestion;
-    }
-
-    public int getNumOfCorrectAnswer() {
-        return numOfCorrectAnswer;
-    }
-
-    public void setNumOfCorrectAnswer(int numOfCorrectAnswer) {
-        this.numOfCorrectAnswer = numOfCorrectAnswer;
-    }
-
-    public List<QuizLog> getLogs() {
+        public List<QuizLog> getLogs() {
         return logs;
     }
 
     public void setLogs(List<QuizLog> logs) {
         this.logs = logs;
-    }
-
-    public long getTime() {
-        return time;
     }
 
     private void addCount(boolean correct){
@@ -82,7 +40,7 @@ public class NonLeveledExerciseStats implements Serializable{
     public void addStats(int quizNum, boolean correct, Quiz quiz, long time, int score){
         this.score = this.score + score;
         addCount(correct);
-        this.time = this.time + time;
+        timeElapsed = timeElapsed + time;
         logs.add(new QuizLog(quizNum, correct, quiz, time, score));
     }
     public List<NonLeveledExerciseStats.QuizSummary> getStatByCategory(){
