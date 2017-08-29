@@ -48,10 +48,12 @@ public class FractionRepresentation implements IQuestionFactory{
 		for (int i= 0;i<numOfQuestion;i++){
 			int divisor = ThreadLocalRandom.current().nextInt(4, 10);
 			int numerator = ThreadLocalRandom.current().nextInt(1, divisor);
+			int remainder = divisor - numerator;
 			Fraction f = new Fraction(numerator, divisor);		
 			MultipleChoiceGeomQuiz q = new MultipleChoiceGeomQuiz();
 			q.setQuestion(bundle.getString("fraction.representationquestion"));
-			q.setCorrectAnswer(String.valueOf(f));
+			q.setCorrectAnswer(f.toString());
+			q.setChoices(buildChoices(numerator, divisor, remainder));
 			q.setGeomShape(buildPaths(numerator, divisor));
 			q.setDifficultyLevel(QuizLevel.MUDAH);
 			q.setLessonSubcategory(bundle.getString("fraction.representation"));
@@ -70,6 +72,19 @@ public class FractionRepresentation implements IQuestionFactory{
 	public List<Quiz> generateQuizList(int numOfQuestion) {
 		this.numOfQuestion = numOfQuestion;
 		return generateQuizList();
+	}
+	
+
+	private List<String> buildChoices(int numerator, int divisor, int remainder) {
+		List<String> choices = new ArrayList<String>();
+		choices.add(new Fraction(numerator,divisor).toString());
+		choices.add(new Fraction(numerator,remainder).toString());
+		choices.add(new Fraction(remainder,divisor).toString());
+		choices.add(new Fraction(remainder,numerator).toString());
+		choices.add(new Fraction(remainder,numerator).toString());
+		choices.add(new Fraction(divisor,numerator).toString());
+		choices.add(new Fraction(divisor,remainder).toString());
+		return choices;
 	}
 	
 	private List<Path> buildPaths(int numerator, int divisor) {
