@@ -46,7 +46,10 @@ public class FractionRepresentation implements IQuestionFactory{
 	public List<Quiz> generateQuizList() {
 		List<Quiz> lq = new ArrayList<Quiz>();
 		for (int i= 0;i<numOfQuestion;i++){
-			int divisor = ThreadLocalRandom.current().nextInt(4, 10);
+			int divisor;
+			do {
+				divisor = ThreadLocalRandom.current().nextInt(2, 13);
+			} while (divisor % 2 == 1);
 			int numerator = ThreadLocalRandom.current().nextInt(1, divisor);
 			int remainder = divisor - numerator;
 			Fraction f = new Fraction(numerator, divisor);		
@@ -79,8 +82,8 @@ public class FractionRepresentation implements IQuestionFactory{
 		List<String> choices = new ArrayList<String>();
 		choices.add(new Fraction(numerator,divisor).toString());
 		choices.add(new Fraction(numerator,remainder).toString());
-		choices.add(new Fraction(remainder,divisor).toString());
-		choices.add(new Fraction(remainder,numerator).toString());
+		//choices.add(new Fraction(remainder,divisor).toString());
+		//choices.add(new Fraction(remainder,numerator).toString());
 		choices.add(new Fraction(remainder,numerator).toString());
 		choices.add(new Fraction(divisor,numerator).toString());
 		choices.add(new Fraction(divisor,remainder).toString());
