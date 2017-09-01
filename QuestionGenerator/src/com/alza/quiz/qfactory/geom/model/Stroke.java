@@ -8,10 +8,16 @@ public class Stroke {
 	 */
 	public Stroke() {
 		this.type = Geom.STROKE_LINE;
-		this.color = Geom.COLOR_PRIMARY;
+		this.color = Geom.STROKE_COLOR_PRIMARY;
 	}
 	/**
-	 * 
+	 * @param type, line, dash ...refer to Geom stroke constants
+	 */
+	public Stroke(int type) {
+		super();
+		this.type = type;
+	}
+	/**
 	 * @param type, line, dash ...refer to Geom stroke constants
 	 * @param color, primary, secondary, ... refer to Geom color constants
 	 */

@@ -6,7 +6,7 @@ public class Fill {
 	 * Create a default fill i,e : fill with primary color
 	 */
 	public Fill() {
-		this.color = Geom.COLOR_PRIMARY;
+		this.color = Geom.FILL_COLOR_PRIMARY;
 	}
 	/**
 	 * 

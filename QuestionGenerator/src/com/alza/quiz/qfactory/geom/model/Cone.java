@@ -90,9 +90,9 @@ public class Cone implements Shapes3D{
 		
 		Point3D centerBottom = new Point3D(this.base.getRadius(),height,0);
 		
-		l.add(Path.createOvalPath(centerBottom, this.base.getRadius(), 
+		l.add(Path.createArcPath(centerBottom, this.base.getRadius(), 
 				this.base.getRadius()/2, 0, -180));
-		l.add(Path.createOvalPathDotted(centerBottom, this.base.getRadius(), 
+		l.add(Path.createArcPathDashed(centerBottom, this.base.getRadius(), 
 				this.base.getRadius()/2, 0, 180));
 		
 		return l;

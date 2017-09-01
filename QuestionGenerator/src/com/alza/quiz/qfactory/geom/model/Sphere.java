@@ -72,11 +72,11 @@ public class Sphere implements Shapes3D{
 		
 		l.add(Path.createLinePathDotted(center, getVertices().get(1)));
 		
-		l.add(Path.createOvalPath(center, radius, 
+		l.add(Path.createArcPath(center, radius, 
 				radius, 0, 360)); // full circle front projection
-		l.add(Path.createOvalPath(center, radius, 
+		l.add(Path.createArcPath(center, radius, 
 				radius/2, 0, -180)); // oval projection of horizontal cut, front side
-		l.add(Path.createOvalPathDotted(center, radius, 
+		l.add(Path.createArcPathDashed(center, radius, 
 				radius/2, 0, 180)); // oval projection of horizontal cut, backside
 		
 		return l;

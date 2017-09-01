@@ -94,10 +94,13 @@ public class FractionRepresentation implements IQuestionFactory{
 		double angleStart = 0;
 		List<Path> paths = new ArrayList<Path>();
 		for (int i = 0; i < divisor; i++) {
-			Path p = Path.createOvalPath(center, radius, radius, angleStart, angleSweep);
+			Path p; 
 			if (i<numerator) {
-				p.fill = true;
+				p = Path.createArcPathFilled(center, radius, radius, angleStart, angleSweep);
+			} else {
+				p = Path.createArcPath(center, radius, radius, angleStart, angleSweep);
 			}
+			p.arcUseCenter=true;
 			paths.add(p);
 			angleStart+=angleSweep;
 		}

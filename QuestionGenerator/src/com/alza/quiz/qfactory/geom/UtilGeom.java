@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.alza.quiz.qfactory.geom.model.Circle;
+import com.alza.quiz.qfactory.geom.model.Geom;
 import com.alza.quiz.qfactory.geom.model.Path;
 import com.alza.quiz.qfactory.geom.model.Point2D;
 import com.alza.quiz.qfactory.geom.model.Point3D;
@@ -99,32 +100,43 @@ public class UtilGeom {
 		
 		List<Path> l = new ArrayList<Path>();
 		for (Path p : paths) {
+			Path pt = new Path();
 			switch (p.pathType) {
 			case Path.PATH_TYPE_LINE:
-				l.add(Path.createLinePath(getTransformedPointOnScreen(scale, margin, corr, p.start),
-						getTransformedPointOnScreen(scale, margin, corr, p.finish)));
-				break;
-			case Path.PATH_TYPE_LINE_DOTTED:
-				l.add(Path.createLinePathDotted(getTransformedPointOnScreen(scale, margin, corr, p.start),
-						getTransformedPointOnScreen(scale, margin, corr, p.finish)));
-				break;
-			case Path.PATH_TYPE_CIRCLE:
-				l.add(Path.createCirclePath(getTransformedPointOnScreen(scale, margin, corr, p.center), p.radHoriz * scale));
+				if (p.stroke.type == Geom.STROKE_LINE) {
+					pt = Path.createLinePath(getTransformedPointOnScreen(scale, margin, corr, p.start),
+							getTransformedPointOnScreen(scale, margin, corr, p.finish));
+				} else if(p.stroke.type == Geom.STROKE_DASH) {
+					pt = Path.createLinePathDashed(getTransformedPointOnScreen(scale, margin, corr, p.start),
+							getTransformedPointOnScreen(scale, margin, corr, p.finish));
+				}
 				break;
 			case Path.PATH_TYPE_OVAL:
-				l.add(Path.createOvalPath(getTransformedPointOnScreen(scale, margin,corr,p.center), 
-						p.radHoriz * scale,p.radVert * scale, p.startAngle, p.sweepAngle));
-				break;
-			case Path.PATH_TYPE_OVAL_DOTTED:
-				l.add(Path.createOvalPathDotted(getTransformedPointOnScreen(scale, margin, corr,p.center), 
-						p.radHoriz * scale,p.radVert * scale, p.startAngle, p.sweepAngle));
+				if (p.stroke.type == Geom.STROKE_LINE) {
+					pt = Path.createOvalPath(getTransformedPointOnScreen(scale, margin,corr,p.center), 
+							p.radHoriz * scale,p.radVert * scale);
+				} else if(p.stroke.type == Geom.STROKE_DASH) {
+					pt = Path.createOvalPathDashed(getTransformedPointOnScreen(scale, margin, corr,p.center), 
+							p.radHoriz * scale,p.radVert * scale);
+				}
 				break;
 			case Path.PATH_TYPE_ARC:
-				//l.add(Path.createArcPath(getTransformedPointOnScreen(scale, margin, p.start),getTransformedPointOnScreen(scale, margin, p.finish)));
+				if (p.stroke.type == Geom.STROKE_LINE) {
+					pt=Path.createArcPath(getTransformedPointOnScreen(scale, margin,corr,p.center), 
+							p.radHoriz * scale,p.radVert * scale, p.startAngle, p.sweepAngle);
+				} else if(p.stroke.type == Geom.STROKE_DASH) {
+					pt=Path.createArcPathDashed(getTransformedPointOnScreen(scale, margin, corr,p.center), 
+							p.radHoriz * scale,p.radVert * scale, p.startAngle, p.sweepAngle);
+				}
+
 				break;
 			default:
 				break;
 			}
+			pt.arcUseCenter=p.arcUseCenter;
+			pt.fill = p.fill;
+			pt.stroke = p.stroke;
+			l.add(pt);
 		}
 		return l;
 	}

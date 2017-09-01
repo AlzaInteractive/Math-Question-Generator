@@ -99,11 +99,11 @@ public class Cylinder implements Shapes3D{
 		//double arcHeight = this.base.getRadius() * 2;
 		
 		//l.add(Path.createArcPath(getVertices().get(0),getVertices().get(1),arcWidth,arcHeight));
-		l.add(Path.createOvalPath(centerTop, this.base.getRadius(), 
+		l.add(Path.createArcPath(centerTop, this.base.getRadius(), 
 				this.base.getRadius()/2, 0, 360));
-		l.add(Path.createOvalPath(centerBottom, this.base.getRadius(), 
+		l.add(Path.createArcPath(centerBottom, this.base.getRadius(), 
 				this.base.getRadius()/2, 0, -180));
-		l.add(Path.createOvalPathDotted(centerBottom, this.base.getRadius(), 
+		l.add(Path.createArcPathDashed(centerBottom, this.base.getRadius(), 
 				this.base.getRadius()/2, 0, 180));
 		
 		return l;
