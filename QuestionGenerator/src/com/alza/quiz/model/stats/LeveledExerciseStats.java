@@ -29,13 +29,13 @@ public class LeveledExerciseStats extends BasicExerciseStats implements Serializ
 		Medals m=null;
 		double perf = this.numOfCorrectAnswer/this.numOfQuestion;
 		if (perf > 0.99) {
-			m = Medals.PLATINUM; 
+			m = Medals.GOLD; 
 		} else if (perf > 0.90) {
-			m = Medals.GOLD;
-		} else if (perf > 0.80) {
 			m = Medals.SILVER;
-		} else if (perf > 0.70) {
+		} else if (perf > 0.80) {
 			m = Medals.BRONZE;
+		} else if (perf > 0.70) {
+			m = Medals.NONE;
 		}
 		return m;
 	}
@@ -44,13 +44,13 @@ public class LeveledExerciseStats extends BasicExerciseStats implements Serializ
 		double perf = timeElapsed/numOfCorrectAnswer;
 		if (getCorrectnessPerforManceMedals()!=null) {
 			if (perf < 30) {
-				m = Medals.PLATINUM; 
+				m = Medals.GOLD; 
 			} else if (perf < 60) {
-				m = Medals.GOLD;
-			} else if (perf < 120) {
 				m = Medals.SILVER;
-			} else if (perf < 180) {
+			} else if (perf < 120) {
 				m = Medals.BRONZE;
+			} else if (perf < 180) {
+				m = Medals.NONE;
 			}
 		}
 		return m;
