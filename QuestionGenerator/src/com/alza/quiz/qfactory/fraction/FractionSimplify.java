@@ -75,8 +75,8 @@ public class FractionSimplify implements IQuestionFactory {
 			q.setChoices(convertChoices(choices));
 			q.setCorrectAnswer(fAns.a+"/"+fAns.b);
 			String question = bundle.getString("fraction.simplifyquestion");
-			q.setQuestion(question+" \frac{"+c+"}{"+d+"}");
-			q.setQuestion(CommonFunctionAndValues.enclosedWithMathJaxExp(q.getQuestion()));
+			q.setQuestion(question+fQuest.toMathJaxString());
+			//q.setQuestion(CommonFunctionAndValues.enclosedWithMathJaxExp(q.getQuestion()));
 			q.setDifficultyLevel(QuizLevel.MUDAH);
 			q.setLessonSubcategory(bundle.getString("fraction.simplify"));
 			q.setLessonClassifier(bundle.getString("mathelementary"));

@@ -34,7 +34,7 @@ public class FractionGameLevel {
 		lgl.add(g);
 		//fraction compare simple form
 		name = bundle.getString("fraction.compare");
-		g = GameLevel.createSingleQF(3, name, new FractionCompareTwo(loc), 4);
+		g = GameLevel.createSingleQF(3, name, new FractionCompareTwo(loc), 7);
 		//g.addQuestionFactory(new FractionPickGreatest(), 3);
 		lgl.add(g);
 		//fraction addition and subtraction

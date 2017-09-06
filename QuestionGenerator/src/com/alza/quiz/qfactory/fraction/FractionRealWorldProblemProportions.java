@@ -81,7 +81,7 @@ public class FractionRealWorldProblemProportions implements IQuestionFactory{
 			Fraction f1 = new Fraction(leftVal,tot);
 			sce = sce.replace("#frac?", String.valueOf(f1.getSimplestForm().toMathJaxString()));
 			sce = CommonFunctionAndValues.buildScenario(sce);
-			sce = CommonFunctionAndValues.enclosedWithMathJaxExp(sce);
+			//sce = CommonFunctionAndValues.enclosedWithMathJaxExp(sce);
 			q.setQuestion(sce);
 			q.setCorrectAnswer(corrAns);
 			q.setLocale(loc);

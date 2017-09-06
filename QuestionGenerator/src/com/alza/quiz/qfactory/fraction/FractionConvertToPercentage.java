@@ -49,8 +49,7 @@ public class FractionConvertToPercentage implements IQuestionFactory {
 	}
 
 	private void generateToPct(List<Quiz> quizList) {
-		int z = numq/ 2;
-		for (int i=0;i<z;i++){
+		for (int i=0;i<numq;i++){
 			MultipleChoiceQuiz q = new MultipleChoiceQuiz();
 			int a,denom=100;
 			if (i % 2 == 1){
@@ -78,7 +77,7 @@ public class FractionConvertToPercentage implements IQuestionFactory {
 			q.setCorrectAnswer(correctAnswer);
 			q.setLessonSubcategory(bundle.getString("fraction.convtopct"));
 			q.setQuestion(bundle.getString("fraction.pctvalueof")+" "+fQuest.toMathJaxString());
-			q.setQuestion(CommonFunctionAndValues.enclosedWithMathJaxExp(q.getQuestion()));
+			//q.setQuestion(CommonFunctionAndValues.enclosedWithMathJaxExp(q.getQuestion()));
 			q.setLessonClassifier(bundle.getString("mathelementary"));
 			q.setLessonCategory(bundle.getString("fraction"));
 			q.setSubCategoryOrder(4);

@@ -49,8 +49,7 @@ public class FractionConvertFromDecimal implements IQuestionFactory {
 	}
 
 	private void generateDecimalToFraction(List<Quiz> quizList){
-		int z = numq/ 2;
-		for (int i=0;i<z;i++){
+		for (int i=0;i<numq;i++){
 			MultipleChoiceQuiz q = new MultipleChoiceQuiz();
 			int a,denom;
 			if (i % 2 == 1){

@@ -49,8 +49,7 @@ public class FractionConvertToDecimal implements IQuestionFactory {
 	}
 
 	private void generateFractionToDecimal(List<Quiz> quizList) {
-		int z = numq/ 2;
-		for (int i=0;i<z;i++){
+		for (int i=0;i<numq;i++){
 			MultipleChoiceQuiz q = new MultipleChoiceQuiz();
 			int a,denom;
 			if (i % 2 == 1){
@@ -77,10 +76,9 @@ public class FractionConvertToDecimal implements IQuestionFactory {
 			q.setDifficultyLevel(QuizLevel.MUDAH);
 			q.setChoices(convertChoices(choices,true));
 			q.setCorrectAnswer(correctAnswer);
-			q.setQuestion(CommonFunctionAndValues.MJXTAG+
+			q.setQuestion(
 					bundle.getString("fraction.decimalvalueof")
-					+"\frac{"+a+"}{"+denom+"}"
-					+CommonFunctionAndValues.MJXTAG);
+					+fQuest.toMathJaxString());
 			q.setLessonSubcategory(bundle.getString("fraction.convtodecimal"));
 			q.setLessonClassifier(bundle.getString("mathelementary"));
 			q.setLessonCategory(bundle.getString("fraction"));

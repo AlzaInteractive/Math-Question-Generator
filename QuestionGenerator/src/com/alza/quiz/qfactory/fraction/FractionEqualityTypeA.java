@@ -78,8 +78,8 @@ public class FractionEqualityTypeA implements IQuestionFactory{
 		q.setLessonGrade(4);
 		q.setChoices(choices);
 		q.setCorrectAnswer(fAnswer.a+"/"+fAnswer.b);
-		q.setQuestion(bundle.getString("fraction.findequal")+" \frac{"+fQuest.a+"}{"+fQuest.b+"}");
-		q.setQuestion(CommonFunctionAndValues.enclosedWithMathJaxExp(q.getQuestion()));
+		q.setQuestion(bundle.getString("fraction.findequal")+fQuest.toMathJaxString());
+		//q.setQuestion(CommonFunctionAndValues.enclosedWithMathJaxExp(q.getQuestion()));
 		q.setLessonSubcategory(bundle.getString("fraction.equality"));
 		q.setLessonClassifier(bundle.getString("mathelementary"));
 		q.setLessonCategory(bundle.getString("fraction"));

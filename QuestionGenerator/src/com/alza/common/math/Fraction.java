@@ -156,7 +156,7 @@ public class Fraction implements Comparable<Fraction>,Comparator<Fraction>{
 		return s;
 	}
 	public String toMathJaxString(){
-		String s = "\frac{"+this.a+"}{"+this.b+"}";
+		String s = "\\(\\frac{"+this.a+"}{"+this.b+"}\\)";
 		return s;
 	}
 	public class MixedFraction {
@@ -189,7 +189,7 @@ public class Fraction implements Comparable<Fraction>,Comparator<Fraction>{
 			return s;
 		}
 		public String toMathJaxString(){
-			String s = this.x+"\frac{"+this.a+"}{"+this.b+"}";
+			String s = this.x+new Fraction(a, b).toMathJaxString();
 			return s;
 		}
 	}

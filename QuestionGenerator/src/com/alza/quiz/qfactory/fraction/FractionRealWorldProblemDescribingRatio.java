@@ -73,7 +73,7 @@ public class FractionRealWorldProblemDescribingRatio implements IQuestionFactory
 				leftVal = CommonFunctionAndValues.getRandomInt(tot*limit/100, tot * (100-limit)/100);
 				rightVal = tot - leftVal;
 				gcd = MathUtils.findGCD(leftVal,rightVal);
-			} while (gcd<2);
+			} while (gcd<2||leftVal==rightVal);
 			leftRat = leftVal / gcd;
 			rightRat = rightVal / gcd;
 			

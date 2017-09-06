@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 
 import com.alza.common.math.Fraction;
 import com.alza.common.math.MathUtils;
+import com.alza.quiz.model.MultipleChoiceQuiz;
 import com.alza.quiz.model.Quiz;
 import com.alza.quiz.model.QuizLevel;
 import com.alza.quiz.model.SimpleQuiz;
@@ -49,7 +50,7 @@ public class FractionRealWorldProblemLeftover implements IQuestionFactory{
 	public List<Quiz> generateQuizList() {
 		List<Quiz> ql = new ArrayList<Quiz>();
 		for (int i=0;i<numq;i++){
-			SimpleQuiz q = new SimpleQuiz();
+			MultipleChoiceQuiz q = new MultipleChoiceQuiz();
 			
 			q.setLessonClassifier(bundle.getString("mathelementary"));
 			q.setLessonGrade(5);
@@ -83,9 +84,10 @@ public class FractionRealWorldProblemLeftover implements IQuestionFactory{
 			sce = sce.replace("#frac2?", frac2.toMathJaxString());
 			sce = sce.replace("#frac3?", frac3.toMathJaxString());
 			sce = CommonFunctionAndValues.buildScenario(sce);
-			sce = CommonFunctionAndValues.enclosedWithMathJaxExp(sce);
+			//sce = CommonFunctionAndValues.enclosedWithMathJaxExp(sce);
 			q.setQuestion(sce);
 			q.setCorrectAnswer(corrAns);
+			q.setChoices(buildChoices(frac1, frac2, frac3, leftover));
 			q.setLocale(loc);
 			ql.add(q);
 		}	
@@ -101,5 +103,15 @@ public class FractionRealWorldProblemLeftover implements IQuestionFactory{
 	public List<Quiz> generateQuizList(int numOfQuestion) {
 		numq = numOfQuestion;
 		return generateQuizList();
+	}
+	private List<String> buildChoices(Fraction f1, Fraction f2, Fraction f3, Fraction lo){
+		List<String> cs = new ArrayList<String>();
+		Fraction one = new Fraction(1, 1);
+		cs.add(lo.toString());
+		cs.add(one.getResultWhenSubtractWith(f1).toString());
+		cs.add(one.getResultWhenSubtractWith(f2).toString());
+		cs.add(one.getResultWhenSubtractWith(f3).toString());
+		cs.add(f1.getResultWhenAddedWith(f2).getResultWhenAddedWith(f3).toString());
+		return cs;
 	}
 }

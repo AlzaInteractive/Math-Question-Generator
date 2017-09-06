@@ -73,18 +73,15 @@ public class FractionEqualityTypeB implements IQuestionFactory{
 		q.setLessonGrade(5);
 		List<String> choices;
 		if (i%2==0){
-			q.setQuestion(CommonFunctionAndValues.MJXTAG+
+			q.setQuestion(
 					bundle.getString("if")+ 
-					" \frac{x}{"+b+"} = \frac{"+c+"}{"+d+"} "+bundle.getString("fraction.thenxequal")+
-					CommonFunctionAndValues.MJXTAG);
+					" \\(\\frac{x}{"+b+"} = \\frac{"+c+"}{"+d+"} \\)"+bundle.getString("fraction.thenxequal"));
 			q.setCorrectAnswer(String.valueOf(a));
 			choices = buildChoices(a,b,c,d,"x");
 		} else {
 			q.setQuestion(
-					CommonFunctionAndValues.MJXTAG+
 					bundle.getString("if")+ 
-					" \frac{"+a+"}{y} = \frac{"+c+"}{"+d+"} "+bundle.getString("fraction.thenyequal")+
-					CommonFunctionAndValues.MJXTAG);
+					"\\(\\frac{"+a+"}{y} = \\frac{"+c+"}{"+d+"} \\)"+bundle.getString("fraction.thenyequal"));
 			//q.setQuestion("Jika pecahan "+a+"/y"+" = "+c+"/"+d+", maka nilai y sama dengan?");
 			q.setCorrectAnswer(String.valueOf(b));
 			choices = buildChoices(a,b,c,d,"y");

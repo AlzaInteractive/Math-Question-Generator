@@ -59,7 +59,7 @@ public class FractionMixedNumberOperation implements IQuestionFactory{
 				q = generateTypeMixedForm(i);
 				q.setDifficultyLevel(QuizLevel.SEDANG);
 			}
-			q.setQuestion(CommonFunctionAndValues.enclosedWithMathJaxExp(q.getQuestion()));
+			//q.setQuestion(CommonFunctionAndValues.enclosedWithMathJaxExp(q.getQuestion()));
 			q.setLessonClassifier(bundle.getString("mathelementary"));
 			q.setLessonCategory(bundle.getString("fraction"));
 			q.setLessonGrade(5);
@@ -77,7 +77,8 @@ public class FractionMixedNumberOperation implements IQuestionFactory{
 		do {
 			a1 = CommonFunctionAndValues.getRandomInt(5, 23);
 			a2 = CommonFunctionAndValues.getRandomInt(5, 23);
-		} while (denom > a1 || denom > a2 );
+		} while (denom > a1 || denom > a2 || 
+				a1%denom==0||a2%denom==0);//ensure that none of the numerators can be divided by divisor
 		Fraction f1 = new Fraction(a1, denom);
 		Fraction f2 = new Fraction(a2, denom);
 		Fraction result;
@@ -100,7 +101,10 @@ public class FractionMixedNumberOperation implements IQuestionFactory{
 		do {
 			a1 = CommonFunctionAndValues.getRandomInt(5, 23);
 			a2 = CommonFunctionAndValues.getRandomInt(5, 23);
-		} while (denom > a1 || denom > a2 ||a1==a2||((a1+a2)%denom==0));
+		} while (denom > a1 || denom > a2 || //ensure numerators > divisor
+				a1==a2|| //ensure numerators are not equal
+				((a1+a2)%denom==0|| //ensure the operation resulted in a mixed formed fraction
+				a1%denom==0||a2%denom==0)); //ensure that none of the numerators can be divided by divisor
 		Fraction f1 = new Fraction(a1, denom);
 		Fraction f2 = new Fraction(a2, denom);
 		Fraction result;
@@ -127,7 +131,7 @@ public class FractionMixedNumberOperation implements IQuestionFactory{
 		Fraction f1 = new Fraction(a1, denomLeft);
 		MixedFraction result;
 			q.setQuestion(bundle.getString("fraction.mixednumber.fractionformof")
-					+f1.toMathJaxString()+"? ");
+					+f1.toMathJaxString());
 		result = f1.getMixedFraction();
 		q.setCorrectAnswer(result.toString());
 		q.setChoices(buildChoices(f1));

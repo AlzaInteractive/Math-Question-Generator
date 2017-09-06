@@ -9,6 +9,7 @@ import java.util.ResourceBundle;
 import java.util.Set;
 
 import com.alza.common.math.Fraction;
+import com.alza.common.math.MathUtils;
 import com.alza.quiz.model.MultipleChoiceQuiz;
 import com.alza.quiz.model.Quiz;
 import com.alza.quiz.model.QuizLevel;
@@ -60,7 +61,7 @@ public class FractionAddSubtract implements IQuestionFactory{
 				q.setDifficultyLevel(QuizLevel.MUDAH);
 				q.setLessonGrade(4);
 			}
-			q.setQuestion(CommonFunctionAndValues.enclosedWithMathJaxExp(q.getQuestion()));
+			//q.setQuestion(CommonFunctionAndValues.enclosedWithMathJaxExp(q.getQuestion()));
 			q.setLessonSubcategory(bundle.getString("fraction.addsubtract"));
 			q.setLessonClassifier(bundle.getString("mathelementary"));
 			q.setLessonCategory(bundle.getString("fraction"));
@@ -96,14 +97,14 @@ public class FractionAddSubtract implements IQuestionFactory{
 	private MultipleChoiceQuiz generateTypeC(int i) {
 		MultipleChoiceQuiz q = new MultipleChoiceQuiz();
 		int denomLeft,denomRight;
-		int a1,a2;
+		int a1,a2,gcd;
 		do {
-			denomLeft = CommonFunctionAndValues.getPrime101stRandom();
-			denomRight = CommonFunctionAndValues.getRandomInt(5, 26);;
+			denomLeft = CommonFunctionAndValues.getRandomInt(5, 51);
+			denomRight = CommonFunctionAndValues.getRandomInt(5, 51);
 			a1 = CommonFunctionAndValues.getRandomInt(5, 17);
 			a2 = CommonFunctionAndValues.getRandomInt(5, 17);
-		} while (denomLeft==denomRight||denomLeft<a1||denomRight<a2);
-
+			gcd = MathUtils.findGCDDjikstra(denomLeft, denomRight);
+		} while (denomLeft==denomRight||denomLeft<a1||denomRight<a2||gcd<2);
 		buildQuestion(i, q, denomLeft, denomRight, a1, a2);
 		return q;
 	}
