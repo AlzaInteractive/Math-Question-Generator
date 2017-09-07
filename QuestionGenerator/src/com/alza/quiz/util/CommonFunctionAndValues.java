@@ -17,7 +17,7 @@ import java.util.concurrent.ThreadLocalRandom;
 public class CommonFunctionAndValues {
 	public final static String MJXTAG ="$$";
 	public final static DecimalFormat DF2PLC = new DecimalFormat("#.##");
-	private static String enclosedWithMathJaxExp(String s) {
+	public static String enclosedWithMathJaxExp(String s) {
 		return MJXTAG+s+MJXTAG;
 	}
     public static String[] nameElder = {
@@ -303,7 +303,7 @@ public class CommonFunctionAndValues {
 			//System.out.println(string+" : "+bundle.getString(string));
 			if (string.startsWith(key)) {
 				l.add(bundle.getString(string));
-				System.out.println(string+" : "+bundle.getString(string));
+				//System.out.println(string+" : "+bundle.getString(string));
 			}
 		}
 		return l;
