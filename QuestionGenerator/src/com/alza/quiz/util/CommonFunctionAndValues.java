@@ -17,7 +17,7 @@ import java.util.concurrent.ThreadLocalRandom;
 public class CommonFunctionAndValues {
 	public final static String MJXTAG ="$$";
 	public final static DecimalFormat DF2PLC = new DecimalFormat("#.##");
-	public static String enclosedWithMathJaxExp(String s) {
+	private static String enclosedWithMathJaxExp(String s) {
 		return MJXTAG+s+MJXTAG;
 	}
     public static String[] nameElder = {

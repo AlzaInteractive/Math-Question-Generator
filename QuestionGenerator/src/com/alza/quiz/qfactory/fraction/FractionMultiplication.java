@@ -94,7 +94,6 @@ public class FractionMultiplication implements IQuestionFactory{
 		Fraction result;
 		result = f1.getResultWhenMultipliedBy(f2);
 		q.setQuestion(f1.toMathJaxString()+" X "+f2.toMathJaxString());
-		q.setQuestion(CommonFunctionAndValues.enclosedWithMathJaxExp(q.getQuestion()));
 		q.setCorrectAnswer(result.toString());
 		q.setChoices(buildChoices(f1,f2,result));
 		return q;
