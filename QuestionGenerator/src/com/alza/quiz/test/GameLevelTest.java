@@ -10,14 +10,14 @@ import com.alza.quiz.qfactory.fraction.FractionGameLevel;
 
 public class GameLevelTest {
 	public static void main(String[] args) {
-		List<GameLevel> gls = FractionGameLevel.createGameLevels(new Locale("en","US"));
+		List<GameLevel> gls = FractionGameLevel.createGameLevels(new Locale("id","ID"));
 		for (GameLevel gameLevel : gls) {
 			publishQ(gameLevel);
 		}
 	}
 	private static void publishQ(GameLevel gl) {
 		System.out.println("------------------------");
-		System.out.println("Game Level: " + gl.getOrder()+" "+gl.getName());
+		System.out.println("Game Level: " + gl.getOrder()+" "+gl.getName()+": "+gl.getDesc());
 		List<Quiz> lq = gl.generateQuiz();
 		for (Quiz q : lq) {
 			System.out.println("------------------------------");

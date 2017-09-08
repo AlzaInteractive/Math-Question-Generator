@@ -15,12 +15,21 @@ import com.alza.quiz.qfactory.IQuestionFactory;
 public class GameLevel {
 	private int order;
 	private String name;
+	private String desc;
 	private List<GameLevelQuestionFactory> levelQF = new ArrayList<GameLevelQuestionFactory>();
 	
 	public static GameLevel createSingleQF(int order, String name, IQuestionFactory qf, int questionCount) {
 		GameLevel gl = new GameLevel();
 		gl.setOrder(order);
 		gl.setName(name);
+		gl.getLevelQF().add(new GameLevelQuestionFactory(questionCount, qf));
+		return gl;
+	}
+	public static GameLevel createSingleQF(int order, String name, String desc, IQuestionFactory qf, int questionCount) {
+		GameLevel gl = new GameLevel();
+		gl.setOrder(order);
+		gl.setName(name);
+		gl.setDesc(desc);
 		gl.getLevelQF().add(new GameLevelQuestionFactory(questionCount, qf));
 		return gl;
 	}
@@ -39,6 +48,14 @@ public class GameLevel {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	public String getDesc() {
+		return desc;
+	}
+
+	public void setDesc(String desc) {
+		this.desc = desc;
 	}
 
 	public List<GameLevelQuestionFactory> getLevelQF() {
