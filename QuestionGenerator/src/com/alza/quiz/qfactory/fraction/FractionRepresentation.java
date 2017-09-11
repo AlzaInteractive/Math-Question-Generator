@@ -12,8 +12,6 @@ import com.alza.quiz.model.MultipleChoiceGeomQuiz;
 import com.alza.quiz.model.Quiz;
 import com.alza.quiz.model.QuizLevel;
 import com.alza.quiz.qfactory.IQuestionFactory;
-import com.alza.quiz.qfactory.geom.model.Path;
-import com.alza.quiz.qfactory.geom.model.Point2D;
 
 public class FractionRepresentation implements IQuestionFactory{
 	Locale loc;
@@ -54,10 +52,11 @@ public class FractionRepresentation implements IQuestionFactory{
 			int remainder = divisor - numerator;
 			Fraction f = new Fraction(numerator, divisor);		
 			MultipleChoiceGeomQuiz q = new MultipleChoiceGeomQuiz();
+			FractionRepresentationInAPie fPie = new FractionRepresentationInAPie(numerator, divisor);
 			q.setQuestion(bundle.getString("fraction.representationquestion"));
 			q.setCorrectAnswer(f.toString());
 			q.setChoices(buildChoices(numerator, divisor, remainder));
-			q.setGeomShape(buildPaths(numerator, divisor));
+			q.setGeomShape(fPie.getPaths());
 			q.setDifficultyLevel(QuizLevel.MUDAH);
 			q.setLessonSubcategory(bundle.getString("fraction.representation"));
 			q.setLessonClassifier(bundle.getString("mathelementary"));
@@ -89,7 +88,7 @@ public class FractionRepresentation implements IQuestionFactory{
 		choices.add(new Fraction(divisor,remainder).toString());
 		return choices;
 	}
-	
+	/**
 	private List<Path> buildPaths(int numerator, int divisor) {
 		double angleSweep = 360 / divisor;
 		double radius = 1;
@@ -108,6 +107,6 @@ public class FractionRepresentation implements IQuestionFactory{
 			angleStart+=angleSweep;
 		}
 		return paths;
-	}
+	}**/
 
 }
