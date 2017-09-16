@@ -24,17 +24,19 @@ public class FractionGameLevel {
 		desc = bundle.getString("fraction.representationdesc");
 		g = GameLevel.createSingleQF(0, name, desc, new FractionRepresentation(loc), 5);
 		lgl.add(g);
-		//fraction simplest fraction
-		name = bundle.getString("fraction.simplify");
-		desc = bundle.getString("fraction.simplifydesc");
-		g = GameLevel.createSingleQF(1, name, desc, new FractionSimplify(loc), 7);
-		lgl.add(g);
 		//fraction equality
 		name = bundle.getString("fraction.equality");
 		desc = bundle.getString("fraction.equalitydesc");
-		g = GameLevel.createSingleQF(2, name,desc, new FractionEqualityTypeA(loc), 7);
+		g = GameLevel.createSingleQF(1, name,desc, new FractionEqualityTypeA(loc), 7);
 		g.addQuestionFactory(new FractionEqualityTypeB(loc), 3);
 		lgl.add(g);
+				
+		//fraction simplest fraction
+		name = bundle.getString("fraction.simplify");
+		desc = bundle.getString("fraction.simplifydesc");
+		g = GameLevel.createSingleQF(2, name, desc, new FractionSimplify(loc), 7);
+		lgl.add(g);
+		
 		//fraction compare simple form
 		name = bundle.getString("fraction.compare");
 		desc = bundle.getString("fraction.comparedesc");
