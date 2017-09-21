@@ -16,15 +16,15 @@ import com.alza.quiz.model.QuizLevel;
 import com.alza.quiz.qfactory.IQuestionFactory;
 import com.alza.quiz.util.CommonFunctionAndValues;
 
-public class FractionMixedNumberOperation implements IQuestionFactory{
+public class FractionMixedNumberConversion implements IQuestionFactory{
 	private static int numq = 6;
 	Locale loc;
 	ResourceBundle bundle;
-	public FractionMixedNumberOperation(Locale loc){
+	public FractionMixedNumberConversion(Locale loc){
 		this.loc = loc;
 		initStringFromLocale();
 	}
-	public FractionMixedNumberOperation(){
+	public FractionMixedNumberConversion(){
 		this.loc = new Locale("in", "ID");
 		initStringFromLocale();
 	}
@@ -48,13 +48,14 @@ public class FractionMixedNumberOperation implements IQuestionFactory{
 		List<Quiz> quizList= new ArrayList<Quiz>();
 		for (int i=0; i<numq; i++){
 			MultipleChoiceQuiz q = null;
-			if (i>2){
-				q = generateTypeMultiDivide(i);
-				q.setDifficultyLevel(QuizLevel.SULIT);
+			boolean isOdd = i % 2 > 0; 
+			if (isOdd){
+				q = generateFromMixedForm();
+				q.setDifficultyLevel(QuizLevel.MUDAH);
 			}
 			else {
-				q = generateTypeAddSubtract(i);
-				q.setDifficultyLevel(QuizLevel.SULIT);
+				q = generateToMixedForm();
+				q.setDifficultyLevel(QuizLevel.MUDAH);
 			} 
 			//q.setQuestion(CommonFunctionAndValues.enclosedWithMathJaxExp(q.getQuestion()));
 			q.setLessonClassifier(bundle.getString("mathelementary"));
@@ -67,57 +68,46 @@ public class FractionMixedNumberOperation implements IQuestionFactory{
 		return quizList;
 	}
 
-	private MultipleChoiceQuiz generateTypeMultiDivide(int i) {
-		MultipleChoiceQuiz q = new MultipleChoiceQuiz();
-		int denom = CommonFunctionAndValues.getRandomInt(6, 13);
-		int a1,a2;
-		do {
-			a1 = CommonFunctionAndValues.getRandomInt(5, 23);
-			a2 = CommonFunctionAndValues.getRandomInt(5, 23);
-		} while (denom > a1 || denom > a2 || 
-				a1%denom==0||a2%denom==0);//ensure that none of the numerators can be divided by divisor
-		Fraction f1 = new Fraction(a1, denom);
-		Fraction f2 = new Fraction(a2, denom);
-		Fraction result;
-		if (i % 2 == 0){
-			result = f1.getResultWhenMultipliedBy(f2);
-			q.setQuestion(f1.getMixedFraction().toMathJaxString()+" X "+f2.getMixedFraction().toMathJaxString());
-		} else{
-			result = f1.getResultWhenDividedBy(f2);
-			q.setQuestion(f1.getMixedFraction().toMathJaxString()+" : "+f2.getMixedFraction().toMathJaxString());
-		}
-		q.setCorrectAnswer(result.getMixedFraction().toString());
-		q.setChoices(buildChoices(result));
-		q.setLessonSubcategory(bundle.getString("fraction.mixednumber"));
-		return q;
-	}
-	private MultipleChoiceQuiz generateTypeAddSubtract(int i) {
-		MultipleChoiceQuiz q = new MultipleChoiceQuiz();
-		int denom = CommonFunctionAndValues.getRandomInt(6, 13);
-		int a1,a2;
-		do {
-			a1 = CommonFunctionAndValues.getRandomInt(5, 23);
-			a2 = CommonFunctionAndValues.getRandomInt(5, 23);
-		} while (denom > a1 || denom > a2 || //ensure numerators > divisor
-				a1==a2|| //ensure numerators are not equal
-				((a1+a2)%denom==0|| //ensure the operation resulted in a mixed formed fraction
-				a1%denom==0||a2%denom==0)); //ensure that none of the numerators can be divided by divisor
-		Fraction f1 = new Fraction(a1, denom);
-		Fraction f2 = new Fraction(a2, denom);
-		Fraction result;
-		if (i % 2 == 0){
-			result = f1.getResultWhenAddedWith(f2);
-			q.setQuestion(f1.getMixedFraction().toMathJaxString()+" + "+f2.getMixedFraction().toMathJaxString());
-		} else{
-			result = f1.getResultWhenSubtractWith(f2);
-			q.setQuestion(f1.getMixedFraction().toMathJaxString()+" - "+f2.getMixedFraction().toMathJaxString());
-		}
-		q.setCorrectAnswer(result.getMixedFraction().toString());
-		q.setChoices(buildChoices(result));
-		q.setLessonSubcategory(bundle.getString("fraction.mixednumber"));		
-		return q;
-	}
 	
+	
+	private MultipleChoiceQuiz generateFromMixedForm() {
+		MultipleChoiceQuiz q = new MultipleChoiceQuiz();
+		int denomLeft;
+		int a1;
+		do {
+			denomLeft = CommonFunctionAndValues.getRandomInt(5, 13);;			
+			a1 = CommonFunctionAndValues.getRandomInt(5, 23);
+		} while (denomLeft>=a1 || a1%denomLeft==0);
+		Fraction f1 = new Fraction(a1, denomLeft);
+		Fraction result;
+			q.setQuestion(bundle.getString("fraction.mixednumber.tofractionform")
+					+f1.getMixedFraction().toMathJaxString());
+		result = f1;
+		q.setCorrectAnswer(result.toString());
+		q.setChoices(buildChoices(f1));
+		q.setLessonSubcategory(bundle.getString("fraction.mixednumber"));
+		
+		return q;
+	}
+	private MultipleChoiceQuiz generateToMixedForm() {
+		MultipleChoiceQuiz q = new MultipleChoiceQuiz();
+		int denomLeft;
+		int a1;
+		do {
+			denomLeft = CommonFunctionAndValues.getRandomInt(5, 13);;			
+			a1 = CommonFunctionAndValues.getRandomInt(5, 23);
+		} while (denomLeft>=a1 || a1%denomLeft==0);
+		Fraction f1 = new Fraction(a1, denomLeft);
+		MixedFraction result;
+			q.setQuestion(bundle.getString("fraction.mixednumber.fractionformof")
+					+f1.toMathJaxString());
+		result = f1.getMixedFraction();
+		q.setCorrectAnswer(result.toString());
+		q.setChoices(buildChoices(f1));
+		q.setLessonSubcategory(bundle.getString("fraction.mixednumber"));
+		
+		return q;
+	}
 	private Set<String> buildChoices(Fraction f1){
 		MixedFraction m = f1.getMixedFraction();
 		MixedFraction[] choices = new MixedFraction[6];

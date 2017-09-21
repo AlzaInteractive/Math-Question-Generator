@@ -65,7 +65,8 @@ public class FractionGameLevel {
 		//mixed number form
 		name = bundle.getString("fraction.mixednumber");
 		desc = bundle.getString("fraction.mixednumberdesc");
-		g = GameLevel.createSingleQF(7, name, desc, new FractionMixedNumberOperation(loc), 7);
+		g = GameLevel.createSingleQF(7, name, desc, new FractionMixedNumberConversion(loc), 4);
+		g.addQuestionFactory(new FractionMixedNumberOperation(loc),4);
 		lgl.add(g);
 		
 		//decimal form
