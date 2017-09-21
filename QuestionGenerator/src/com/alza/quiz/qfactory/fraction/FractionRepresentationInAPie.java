@@ -20,11 +20,42 @@ public class FractionRepresentationInAPie {
 	}
 	
 	public List<Path> getPaths(){
+		List<Path> paths = new ArrayList<Path>();
 		int numerator = fraction.a;
 		int divisor = fraction.b;
-		double angleSweep = 360 / divisor;
-		double radius = 1;
-		Point2D center = new Point2D(radius,radius);
+		double radius = 10;
+		double margin = radius / 5;
+		double xCenter,yCenter;
+		Point2D center;
+		if (numerator <= divisor) {
+			xCenter = radius;
+			yCenter = radius;
+			center = new Point2D(xCenter,yCenter);
+			paths = constructSinglePieElement(numerator, divisor,
+					radius, center);
+		} else {
+			int wholePie = fraction.getMixedFraction().x;
+			int numLeft = fraction.getMixedFraction().a;
+			for (int i = 0; i < wholePie + 1; i++) {
+				xCenter = radius + (i * margin ) + (i * 2 * radius);
+				yCenter = radius;
+				center = new Point2D(xCenter,yCenter);
+				if (i<wholePie) {
+					//construct sliced whole pie
+					paths.addAll(constructSinglePieElement(divisor, divisor,
+							radius, center));
+				} else {
+					//construct fractioned pie
+					paths.addAll(constructSinglePieElement(numLeft, divisor,
+							radius, center));
+				}
+			}
+		}
+		return paths;
+	}
+	private List<Path> constructSinglePieElement(int numerator, int divisor,
+			double radius, Point2D center) {
+		double angleSweep = 360 / divisor;			
 		double angleStart = 0;
 		List<Path> paths = new ArrayList<Path>();
 		for (int i = 0; i < divisor; i++) {
