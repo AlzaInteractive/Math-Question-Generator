@@ -3,6 +3,7 @@ package com.alza.quiz.test;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 
 import com.alza.quiz.model.QuizLevel;
 import com.alza.quiz.model.MultipleChoiceQuiz;
@@ -72,6 +73,7 @@ public class FractionGeneratorTest {
 		}
 	}
 	private static void fractionEquality(){
+		Locale loc = new Locale("in","ID");
 		List<IQuestionFactory> lqf = new ArrayList<IQuestionFactory>();
 		/**
 		lqf.add(new FractionEqualityTypeB());
@@ -84,14 +86,15 @@ public class FractionGeneratorTest {
 		lqf.add(new FractionConvertToDecimal());
 		lqf.add(new FractionConvertToPercentage());
 		lqf.add(new ScenarioBasedFractionQuestionFactory());
-		lqf.add(new FractionRealWorldProblemFindFromPercentage());
-		lqf.add(new FractionRealWorldProblemFindFromRatio());
-		lqf.add(new FractionRealWorldProblemDiscount());
-		lqf.add(new FractionRealWorldProblemTaxTips());**/ 
-		lqf.add(new FractionRealWorldProblemScale());
-		/**lqf.add(new FractionDescribingRatio());
-		lqf.add(new FractionRealWorldProblemProportions());
-		lqf.add(new FractionRealWorldProblemLeftover()); **/
+		**/
+		lqf.add(new FractionRealWorldProblemFindFromPercentage(loc));
+		lqf.add(new FractionRealWorldProblemFindFromRatio(loc));
+		lqf.add(new FractionRealWorldProblemDiscount(loc));
+		lqf.add(new FractionRealWorldProblemTaxTips(loc)); 
+		lqf.add(new FractionRealWorldProblemScale(loc));
+		lqf.add(new FractionRealWorldProblemDescribingRatio(loc));
+		lqf.add(new FractionRealWorldProblemProportions(loc));
+		lqf.add(new FractionRealWorldProblemLeftover(loc));
 		
 		
 		List<Quiz> ql = new ArrayList<Quiz>();
