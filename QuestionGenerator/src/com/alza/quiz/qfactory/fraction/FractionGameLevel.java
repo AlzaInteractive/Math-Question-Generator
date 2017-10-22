@@ -111,4 +111,29 @@ public class FractionGameLevel {
 		}
 		return null;
 	}
+	public static GameLevel getExamLevel(Locale loc){
+		ResourceBundle	bundle = ResourceBundle.getBundle("lang.langbundle", loc);
+		String name,desc;
+		name = bundle.getString("exam");
+		desc = bundle.getString("examdesc");
+		GameLevel g = GameLevel.createSingleQF(0, name, desc, new FractionRepresentation(loc), 1);
+		g.addQuestionFactory(new FractionEqualityTypeA(loc), 1);
+		g.addQuestionFactory(new FractionEqualityTypeB(loc), 1);
+		g.addQuestionFactory(new FractionSimplify(loc), 1);
+		g.addQuestionFactory(new FractionCompareTwo(loc), 1);
+		g.addQuestionFactory(new FractionAddSubtract(loc), 1);
+		g.addQuestionFactory(new FractionMultiplication(loc), 1);
+		g.addQuestionFactory(new FractionDivide(loc), 1);
+		g.addQuestionFactory(new FractionMixedNumberConversion(loc), 2);
+		g.addQuestionFactory(new FractionMixedNumberOperation(loc), 2);
+		g.addQuestionFactory(new FractionConvertToDecimal(loc), 1);
+		g.addQuestionFactory(new FractionConvertFromDecimal(loc), 1);
+		g.addQuestionFactory(new FractionConvertToPercentage(loc), 1);
+		g.addQuestionFactory(new FractionConvertFromPercentage(loc), 1);
+		g.addQuestionFactory(new FractionPickGreatest(loc), 1);
+		g.addQuestionFactory(new FractionRealWorldProblemScale(loc), 1);
+		g.addQuestionFactory(new FractionRealWorldProblemLeftover(loc), 1);
+		g.addQuestionFactory(new FractionRealWorldProblemProportions(loc), 1);
+		return g;
+	}
 }
