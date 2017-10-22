@@ -22,7 +22,7 @@ public class FractionGameLevel {
 		//fraction representation
 		name = bundle.getString("fraction.representation");
 		desc = bundle.getString("fraction.representationdesc");
-		g = GameLevel.createSingleQF(0, name, desc, new FractionRepresentation(loc), 5);
+		g = GameLevel.createSingleQF(0, name, desc, new FractionRepresentation(loc), 7);
 		lgl.add(g);
 		//fraction equality
 		name = bundle.getString("fraction.equality");
@@ -116,7 +116,7 @@ public class FractionGameLevel {
 		String name,desc;
 		name = bundle.getString("exam");
 		desc = bundle.getString("examdesc");
-		GameLevel g = GameLevel.createSingleQF(0, name, desc, new FractionRepresentation(loc), 1);
+		GameLevel g = GameLevel.createSingleQF(0, name, desc, new FractionRepresentation(loc), 2);
 		g.addQuestionFactory(new FractionEqualityTypeA(loc), 1);
 		g.addQuestionFactory(new FractionEqualityTypeB(loc), 1);
 		g.addQuestionFactory(new FractionSimplify(loc), 1);

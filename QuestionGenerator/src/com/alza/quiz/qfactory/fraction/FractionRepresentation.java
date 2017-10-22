@@ -48,7 +48,12 @@ public class FractionRepresentation implements IQuestionFactory{
 			do {
 				divisor = ThreadLocalRandom.current().nextInt(2, 13);
 			} while (divisor % 2 == 1);
-			int numerator = ThreadLocalRandom.current().nextInt(1, divisor);
+			int numerator;
+			if (i % 2 == 0){
+				numerator = ThreadLocalRandom.current().nextInt(1, divisor);
+			} else {
+				numerator = ThreadLocalRandom.current().nextInt(divisor+1, 2 * divisor);
+			}
 			int remainder = divisor - numerator;
 			Fraction f = new Fraction(numerator, divisor);		
 			MultipleChoiceGeomQuiz q = new MultipleChoiceGeomQuiz();
@@ -88,25 +93,5 @@ public class FractionRepresentation implements IQuestionFactory{
 		choices.add(new Fraction(divisor,remainder).toString());
 		return choices;
 	}
-	/**
-	private List<Path> buildPaths(int numerator, int divisor) {
-		double angleSweep = 360 / divisor;
-		double radius = 1;
-		Point2D center = new Point2D(radius,radius);
-		double angleStart = 0;
-		List<Path> paths = new ArrayList<Path>();
-		for (int i = 0; i < divisor; i++) {
-			Path p; 
-			if (i<numerator) {
-				p = Path.createArcPathFilled(center, radius, radius, angleStart, angleSweep);
-			} else {
-				p = Path.createArcPath(center, radius, radius, angleStart, angleSweep);
-			}
-			p.arcUseCenter=true;
-			paths.add(p);
-			angleStart+=angleSweep;
-		}
-		return paths;
-	}**/
-
+	
 }
