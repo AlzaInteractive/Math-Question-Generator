@@ -24,6 +24,7 @@ import com.alza.quiz.qfactory.fraction.FractionRealWorldProblemLeftover;
 import com.alza.quiz.qfactory.fraction.FractionRealWorldProblemProportions;
 import com.alza.quiz.qfactory.fraction.FractionRealWorldProblemScale;
 import com.alza.quiz.qfactory.fraction.FractionRealWorldProblemTaxTips;
+import com.alza.quiz.qfactory.fraction.FractionRepresentation;
 import com.alza.quiz.qfactory.fraction.FractionSimplify;
 import com.alza.quiz.qfactory.kpk.TwoNumKPKQuestionFactory;
 import com.alza.quiz.qfactory.kpk.WhichDayScenarioKPKQuestionFactory;
@@ -86,7 +87,7 @@ public class FractionGeneratorTest {
 		lqf.add(new FractionConvertToDecimal());
 		lqf.add(new FractionConvertToPercentage());
 		lqf.add(new ScenarioBasedFractionQuestionFactory());
-		**/
+		
 		lqf.add(new FractionRealWorldProblemFindFromPercentage(loc));
 		lqf.add(new FractionRealWorldProblemFindFromRatio(loc));
 		lqf.add(new FractionRealWorldProblemDiscount(loc));
@@ -94,7 +95,8 @@ public class FractionGeneratorTest {
 		lqf.add(new FractionRealWorldProblemScale(loc));
 		lqf.add(new FractionRealWorldProblemDescribingRatio(loc));
 		lqf.add(new FractionRealWorldProblemProportions(loc));
-		lqf.add(new FractionRealWorldProblemLeftover(loc));
+		lqf.add(new FractionRealWorldProblemLeftover(loc));**/
+		lqf.add(new FractionRepresentation(loc));
 		
 		
 		List<Quiz> ql = new ArrayList<Quiz>();

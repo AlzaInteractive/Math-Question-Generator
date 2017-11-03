@@ -120,13 +120,12 @@ public class FractionMixedNumberOperation implements IQuestionFactory{
 	
 	private Set<String> buildChoices(Fraction f1){
 		MixedFraction m = f1.getMixedFraction();
-		MixedFraction[] choices = new MixedFraction[6];
+		MixedFraction[] choices = new MixedFraction[5];
 		choices[0] = m;
 		choices[1] = f1.new MixedFraction(m.a, m.b, m.x);
 		choices[2] = f1.new MixedFraction(m.a, m.x, m.b);
 		choices[3] = f1.new MixedFraction(m.x, m.b, m.a);
 		choices[4] = f1.new MixedFraction(m.b, m.a, m.x);
-		choices[5] = f1.new MixedFraction(m.b, m.x, m.a);
 		Set<String> choicesInString = new HashSet<String>();
 		for (MixedFraction f : choices) {
 			choicesInString.add(f.toString());

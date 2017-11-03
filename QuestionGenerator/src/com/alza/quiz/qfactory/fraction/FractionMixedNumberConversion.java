@@ -84,7 +84,7 @@ public class FractionMixedNumberConversion implements IQuestionFactory{
 					+f1.getMixedFraction().toMathJaxString());
 		result = f1;
 		q.setCorrectAnswer(result.toString());
-		q.setChoices(buildChoices(f1));
+		q.setChoices(buildChoicesReg(f1));
 		q.setLessonSubcategory(bundle.getString("fraction.mixednumber"));
 		
 		return q;
@@ -123,6 +123,22 @@ public class FractionMixedNumberConversion implements IQuestionFactory{
 		}
 		return choicesInString;
 	}
+	
+	private Set<String> buildChoicesReg(Fraction f1){
+		MixedFraction m = f1.getMixedFraction();
+		Fraction[] choices = new Fraction[5];
+		choices[0] = f1;
+		choices[1] = new Fraction(f1.b, f1.a);
+		choices[2] = new Fraction(m.x, m.b);
+		choices[3] = new Fraction(m.a, m.b);
+		choices[4] = new Fraction(m.x*m.a+m.b, m.a);
+		Set<String> choicesInString = new HashSet<String>();
+		for (Fraction f : choices) {
+			choicesInString.add(f.toString());
+		}
+		return choicesInString;
+	}
+	
 	@Override
 	public List<Quiz> generateQuizList(int numOfQuestion) {
 		numq = numOfQuestion;
