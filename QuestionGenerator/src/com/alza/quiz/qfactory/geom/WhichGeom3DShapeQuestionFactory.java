@@ -9,14 +9,14 @@ import java.util.ResourceBundle;
 import com.alza.quiz.model.MultipleChoiceGeomQuiz;
 import com.alza.quiz.model.Quiz;
 import com.alza.quiz.model.QuizLevel;
+import com.alza.quiz.model.geom.Cone;
+import com.alza.quiz.model.geom.Cube;
+import com.alza.quiz.model.geom.Cuboid;
+import com.alza.quiz.model.geom.Cylinder;
+import com.alza.quiz.model.geom.Pyramid;
+import com.alza.quiz.model.geom.Shapes3D;
+import com.alza.quiz.model.geom.Sphere;
 import com.alza.quiz.qfactory.IQuestionFactory;
-import com.alza.quiz.qfactory.geom.model.Cone;
-import com.alza.quiz.qfactory.geom.model.Cube;
-import com.alza.quiz.qfactory.geom.model.Cuboid;
-import com.alza.quiz.qfactory.geom.model.Cylinder;
-import com.alza.quiz.qfactory.geom.model.Pyramid;
-import com.alza.quiz.qfactory.geom.model.Shapes3D;
-import com.alza.quiz.qfactory.geom.model.Sphere;
 
 public class WhichGeom3DShapeQuestionFactory implements IQuestionFactory {
 	Locale loc;

@@ -1,4 +1,4 @@
-package com.alza.quiz.qfactory.geom.model;
+package com.alza.quiz.model.geom;
 
 public class Fill {
 	public int color;//refer to Geom ColorPrimary

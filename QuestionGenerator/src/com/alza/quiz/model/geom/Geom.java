@@ -1,4 +1,4 @@
-package com.alza.quiz.qfactory.geom.model;
+package com.alza.quiz.model.geom;
 
 public class Geom {
 	public static final int STROKE_COLOR_PRIMARY=1;

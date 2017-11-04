@@ -2,7 +2,7 @@ package com.alza.quiz.model;
 
 import java.util.List;
 
-import com.alza.quiz.qfactory.geom.model.Path;
+import com.alza.quiz.model.geom.Path;
 
 public class GeomQuiz extends Quiz {
 	private List<Path> geomPaths;        

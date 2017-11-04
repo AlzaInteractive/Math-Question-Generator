@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.alza.common.math.Fraction;
-import com.alza.quiz.qfactory.geom.model.Path;
-import com.alza.quiz.qfactory.geom.model.Point2D;
+import com.alza.quiz.model.geom.Path;
+import com.alza.quiz.model.geom.Point2D;
 
 public class FractionRepresentationInAPie {
 	private Fraction fraction;

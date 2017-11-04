@@ -1,43 +1,39 @@
-package com.alza.quiz.qfactory.geom.model;
+package com.alza.quiz.model.geom;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class Rectangle implements Shapes2D{
-	private double length;
-	private double width;
-	
-	public Rectangle(){
+public class Rhombus implements Shapes2D{
+	private double diagonalHoriz;
+	private double diagonalVert;
+	public Rhombus(){
 		
 	}
-	public Rectangle(double length, double width){
-		this.length = length;
-		this.width = width;
+	public Rhombus(double p, double q){
+		this.diagonalHoriz = p;
+		this.diagonalVert = q;
 	}
-	
-	public double getLength() {
-		return length;
+	public double getDiagonalHoriz() {
+		return diagonalHoriz;
 	}
-
-	public void setLength(double length) {
-		this.length = length;
+	public void setDiagonalHoriz(double diagonalHoriz) {
+		this.diagonalHoriz = diagonalHoriz;
 	}
-
-	public double getWidth() {
-		return width;
+	public double getDiagonalVert() {
+		return diagonalVert;
 	}
-	public void setWidth(double width) {
-		this.width = width;
+	public void setDiagonalVert(double diagonalVert) {
+		this.diagonalVert = diagonalVert;
 	}
 	@Override
 	public double getArea() {
-		return length * width;
+		return diagonalHoriz * diagonalVert / 2;
 	}
 
 	@Override
 	public double getPerimeter() {
-		return 2 * (length + width);
+		return 2 * Math.sqrt((diagonalHoriz * diagonalHoriz) + (diagonalVert * diagonalVert));
 	}
 	@Override
 	public int getReflectionalSymmetryCount() {
@@ -49,31 +45,31 @@ public class Rectangle implements Shapes2D{
 	}
 	@Override
 	public String getName() {
-		return "rectangle";
+		return "rhombus";
 	}
 	@Override
 	public Shapes2D createExample() {
-		int w,l;
+		int p,q;
 		do {
-			w = ThreadLocalRandom.current().nextInt(5, 26);
-			l = ThreadLocalRandom.current().nextInt(5, 26);
-		} while (w==l);
-		Rectangle r = new Rectangle(l, w);
+			p = ThreadLocalRandom.current().nextInt(5, 26);
+			q = ThreadLocalRandom.current().nextInt(5, 26);
+		} while (p==q);
+		Rhombus r = new Rhombus(p, q);
 		return r;
 	}
 	
 	public String toString(){
-		String s = "Rectangle with "+this.length+" length, "+this.width+" width";
+		String s = "Rhombus with "+this.diagonalHoriz+" horizontal diagonal, "+this.diagonalVert+" vertical diagonal";
 		return s;
 	}
 	@Override
 	public List<Point2D> getVertices() {
 		List<Point2D> points = new ArrayList<Point2D>();
 		Point2D a,b,c,d;
-		a = new Point2D(0, 0);
-		b = new Point2D(this.length, 0);
-		c = new Point2D(this.length, this.width);
-		d = new Point2D(0, this.width);
+		a = new Point2D(0, diagonalVert/2);
+		b = new Point2D(diagonalHoriz/2, 0);
+		c = new Point2D(diagonalHoriz, diagonalVert/2);
+		d = new Point2D(diagonalHoriz/2, diagonalVert);
 		points.add(a);points.add(b);points.add(c);points.add(d);
 		return points;
 	}

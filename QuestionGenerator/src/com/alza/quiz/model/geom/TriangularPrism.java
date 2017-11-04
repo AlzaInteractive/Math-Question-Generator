@@ -1,4 +1,4 @@
-package com.alza.quiz.qfactory.geom.model;
+package com.alza.quiz.model.geom;
 
 import java.util.ArrayList;
 import java.util.List;
