@@ -2,6 +2,7 @@ package com.alza.common.math;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeMap;
+import java.util.concurrent.ThreadLocalRandom;
 /**
  * 
  * @author ewin.sutriandi@gmail.com
@@ -138,5 +139,26 @@ public class MathUtils {
 			return romansMap.get(num);
 		} 
 		return romansMap.get(l) + toRomanNumeral(num -l);
+	}
+	/**
+	 * 
+	 * @return array of phytagorean triples:a,b,c
+	 * using euclidean theorem where
+	 * given two number m,n where m < n
+	 * a = n2 - m2
+	 * b = 2mn
+	 * c = n2 + m2
+	 * @param maxM = max value of m
+	 * @param maxDistance = max distance between m and n
+	 * */
+	public static int[] generateRandomPhytagoreanTriples(int maxDistance, int maxM) {
+	    int m, n, a, b, c;
+	    m = ThreadLocalRandom.current().nextInt(1, maxM);
+	    n = ThreadLocalRandom.current().nextInt(m+1, m+maxDistance);		
+	    a = (n*n) - (m*m);
+	    b = 2*m*n;
+	    c = m*m + n*n;
+	    int[] triples = {a,b,c};
+	    return triples;
 	}
 }
