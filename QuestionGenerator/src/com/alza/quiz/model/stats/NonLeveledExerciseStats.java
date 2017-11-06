@@ -31,15 +31,10 @@ public class NonLeveledExerciseStats extends BasicExerciseStats implements Seria
 		this.logs = logs;
 	}
 
-	private void addCount(boolean correct){
-		numOfQuestion ++;
-		if (correct){
-			numOfCorrectAnswer++;
-		}
-	}
+
 	public void addStats(int quizNum, boolean correct, Quiz quiz, long time, int score){
 		this.score = this.score + score;
-		addCount(correct);
+		numOfCorrectAnswer++;
 		timeElapsed = timeElapsed + time;
 		logs.add(new QuizLog(quizNum, correct, quiz, time, score));
 	}
