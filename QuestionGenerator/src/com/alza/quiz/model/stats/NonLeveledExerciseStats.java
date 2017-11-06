@@ -34,7 +34,7 @@ public class NonLeveledExerciseStats extends BasicExerciseStats implements Seria
 
 	public void addStats(int quizNum, boolean correct, Quiz quiz, long time, int score){
 		this.score = this.score + score;
-		numOfCorrectAnswer++;
+		if (correct) numOfCorrectAnswer++;
 		timeElapsed = timeElapsed + time;
 		logs.add(new QuizLog(quizNum, correct, quiz, time, score));
 	}

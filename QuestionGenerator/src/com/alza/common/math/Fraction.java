@@ -107,7 +107,7 @@ public class Fraction implements Comparable<Fraction>,Comparator<Fraction>{
 	}
 	public MixedFraction getMixedFraction(){
 		int x = this.a / this.b;
-		int a = this.a % this.b;
+		int a = Math.abs(this.a % this.b);
 		int b = this.b;
 		MixedFraction c = new MixedFraction(x,a,b);
 		return c;

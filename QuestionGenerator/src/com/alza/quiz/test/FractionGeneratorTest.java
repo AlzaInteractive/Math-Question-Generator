@@ -9,6 +9,7 @@ import com.alza.quiz.model.QuizLevel;
 import com.alza.quiz.model.MultipleChoiceQuiz;
 import com.alza.quiz.model.Quiz;
 import com.alza.quiz.qfactory.IQuestionFactory;
+import com.alza.quiz.qfactory.fraction.FractionMixedNumberConversion;
 import com.alza.quiz.qfactory.fraction.FractionRealWorldProblemDescribingRatio;
 import com.alza.quiz.qfactory.fraction.FractionRealWorldProblemDiscount;
 import com.alza.quiz.qfactory.fraction.FractionRealWorldProblemFindFromPercentage;
@@ -82,8 +83,9 @@ public class FractionGeneratorTest {
 		
 		lqf.add(new FractionSimplify());
 		lqf.add(new FractionAddSubtract());
-		lqf.add(new FractionMultiplication());
-		lqf.add(new FractionMixedFormOperation());
+		lqf.add(new FractionMultiplication());**/
+		lqf.add(new FractionMixedNumberConversion());
+		/**
 		lqf.add(new FractionConvertToDecimal());
 		lqf.add(new FractionConvertToPercentage());
 		lqf.add(new ScenarioBasedFractionQuestionFactory());
@@ -95,8 +97,8 @@ public class FractionGeneratorTest {
 		lqf.add(new FractionRealWorldProblemScale(loc));
 		lqf.add(new FractionRealWorldProblemDescribingRatio(loc));
 		lqf.add(new FractionRealWorldProblemProportions(loc));
-		lqf.add(new FractionRealWorldProblemLeftover(loc));**/
-		lqf.add(new FractionRepresentation(loc));
+		lqf.add(new FractionRealWorldProblemLeftover(loc));
+		lqf.add(new FractionRepresentation(loc));**/
 		
 		
 		List<Quiz> ql = new ArrayList<Quiz>();
