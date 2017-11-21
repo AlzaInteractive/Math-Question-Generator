@@ -9,6 +9,10 @@ public class Point2D {
 		this.y = y;
 	}
 	
+	public Point2D move(double xDistance, double yDistance){
+		return new Point2D(x+xDistance, y+yDistance);
+	}
+	
 	@Override
 	public String toString() {
 		return "("+(int)x+","+(int)y+")";
