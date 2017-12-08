@@ -128,7 +128,10 @@ public class UtilGeom {
 					pt=Path.createArcPathDashed(getTransformedPointOnScreen(scale, margin, corr,p.center), 
 							p.radHoriz * scale,p.radVert * scale, p.startAngle, p.sweepAngle);
 				}
-
+				
+				break;
+			case Path.PATH_TYPE_TEXT:
+				pt = Path.createTextPath(p.text, getTransformedPointOnScreen(scale, margin, corr, p.start),p.shift_vertical,p.shift_horizontal);
 				break;
 			default:
 				break;

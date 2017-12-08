@@ -5,6 +5,8 @@ public class Path {
 	public static final int PATH_TYPE_LINE=11;
 	public static final int PATH_TYPE_ARC=13;
 	public static final int PATH_TYPE_OVAL=15;
+	public static final int PATH_TYPE_TEXT=21;
+	
 	public boolean arcUseCenter=false;
 	public Point2D start;
 	public Point2D finish;
@@ -17,6 +19,15 @@ public class Path {
 	public Point2D boundMin;
 	public double radHoriz;
 	public double radVert;
+	public String text;
+	public static final int SHIFT_UP=1;
+	public static final int SHIFT_DOWN=-1;
+	public static final int SHIFT_LEFT=-1;
+	public static final int SHIFT_RIGHT=1;
+	public static final int SHIFT_NONE=0;
+	public int shift_vertical = 0;
+	public int shift_horizontal = 0;
+	
 	
 	public static Path createLinePath(Point2D start, Point2D finish){
 		Path p = new Path();
@@ -34,6 +45,20 @@ public class Path {
 		minY = Math.min(start.y, finish.y);
 		p.boundMin = new Point2D(minX, minY);
 		p.boundMax = new Point2D(maxX, maxY);
+		return p;
+	}
+	public static Path createTextPath(String text,Point3D start, int shiftVertical, int shiftHorizontal){
+		return Path.createTextPath(text, start.getProjectedPoint(),shiftVertical,shiftHorizontal);
+	}
+	public static Path createTextPath(String text,Point2D position, int shiftVertical, int shiftHorizontal){
+		Path p = new Path();
+		p.pathType = PATH_TYPE_TEXT;
+		p.text = text;
+		p.start = position;
+		p.boundMin = position;
+		p.boundMax = position;
+		p.shift_vertical = shiftVertical;
+		p.shift_horizontal = shiftHorizontal;
 		return p;
 	}
 	public static Path createLinePath(Point3D start, Point3D finish){

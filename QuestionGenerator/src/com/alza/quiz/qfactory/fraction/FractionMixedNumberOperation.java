@@ -86,8 +86,13 @@ public class FractionMixedNumberOperation implements IQuestionFactory{
 			result = f1.getResultWhenDividedBy(f2);
 			q.setQuestion(f1.getMixedFraction().toMathJaxString()+" : "+f2.getMixedFraction().toMathJaxString());
 		}
-		q.setCorrectAnswer(result.getMixedFraction().toString());
+		String correctAnswer;
+		if (result.isProper()){
+			correctAnswer = result.toString();
+		} else correctAnswer = result.getMixedFraction().toString();
+		q.setCorrectAnswer(correctAnswer);
 		q.setChoices(buildChoices(result));
+		q.addChoice(correctAnswer);
 		q.setLessonSubcategory(bundle.getString("fraction.mixednumber"));
 		return q;
 	}
@@ -112,20 +117,24 @@ public class FractionMixedNumberOperation implements IQuestionFactory{
 			result = f1.getResultWhenSubtractWith(f2);
 			q.setQuestion(f1.getMixedFraction().toMathJaxString()+" - "+f2.getMixedFraction().toMathJaxString());
 		}
-		q.setCorrectAnswer(result.getMixedFraction().toString());
+		String correctAnswer;
+		if (result.isProper()){
+			correctAnswer = result.toString();
+		} else correctAnswer = result.getMixedFraction().toString();
+		q.setCorrectAnswer(correctAnswer);
 		q.setChoices(buildChoices(result));
+		q.addChoice(correctAnswer);
 		q.setLessonSubcategory(bundle.getString("fraction.mixednumber"));		
 		return q;
 	}
 	
 	private Set<String> buildChoices(Fraction f1){
 		MixedFraction m = f1.getMixedFraction();
-		MixedFraction[] choices = new MixedFraction[5];
-		choices[0] = m;
+		MixedFraction[] choices = new MixedFraction[4];
+		choices[0] = f1.new MixedFraction(m.b, m.a, m.x);
 		choices[1] = f1.new MixedFraction(m.a, m.b, m.x);
 		choices[2] = f1.new MixedFraction(m.a, m.x, m.b);
 		choices[3] = f1.new MixedFraction(m.x, m.b, m.a);
-		choices[4] = f1.new MixedFraction(m.b, m.a, m.x);
 		Set<String> choicesInString = new HashSet<String>();
 		for (MixedFraction f : choices) {
 			choicesInString.add(f.toString());

@@ -7,7 +7,10 @@ import java.util.concurrent.ThreadLocalRandom;
 public class Rectangle implements Shapes2D{
 	private double length;
 	private double width;
-	
+	private boolean showVerticeLabel=true;
+	private boolean showDiagonalLine=true;
+	private boolean showLengthValue=true;
+	private boolean showWidthValue=true;
 	public Rectangle(){
 		
 	}
@@ -29,6 +32,30 @@ public class Rectangle implements Shapes2D{
 	}
 	public void setWidth(double width) {
 		this.width = width;
+	}
+	public boolean isShowVerticeLabel() {
+		return showVerticeLabel;
+	}
+	public void setShowVerticeLabel(boolean showVerticeLabel) {
+		this.showVerticeLabel = showVerticeLabel;
+	}
+	public boolean isShowDiagonalLine() {
+		return showDiagonalLine;
+	}
+	public void setShowDiagonalLine(boolean showDiagonalLine) {
+		this.showDiagonalLine = showDiagonalLine;
+	}
+	public boolean isShowLengthValue() {
+		return showLengthValue;
+	}
+	public void setShowLengthValue(boolean showLengthValue) {
+		this.showLengthValue = showLengthValue;
+	}
+	public boolean isShowWidthValue() {
+		return showWidthValue;
+	}
+	public void setShowWidthValue(boolean showWidthValue) {
+		this.showWidthValue = showWidthValue;
 	}
 	@Override
 	public double getArea() {
@@ -88,6 +115,34 @@ public class Rectangle implements Shapes2D{
 		l.add(Path.createLinePath(getVertices().get(1), getVertices().get(2)));
 		l.add(Path.createLinePath(getVertices().get(2), getVertices().get(3)));
 		l.add(Path.createLinePath(getVertices().get(3), getVertices().get(0)));
+		if (showDiagonalLine) {
+			l.add(Path.createLinePathDashed(getVertices().get(0), getVertices().get(2)));
+			l.add(Path.createLinePathDashed(getVertices().get(1), getVertices().get(3)));
+		}
+		if (showLengthValue) {
+			l.add(Path.createTextPath(Geom.formatMeasurement(this.length), 
+					Point2D.getMidPoint(getVertices().get(0), getVertices().get(1)),
+					Path.SHIFT_UP,Path.SHIFT_NONE));
+		}
+		if (showWidthValue) {
+			l.add(Path.createTextPath(Geom.formatMeasurement(this.width), 
+					Point2D.getMidPoint(getVertices().get(1), getVertices().get(2)),
+					Path.SHIFT_NONE,Path.SHIFT_RIGHT));
+		}
+		if (showVerticeLabel) {
+			l.add(Path.createTextPath(String.valueOf("A"), 
+					getVertices().get(0),
+					Path.SHIFT_UP, Path.SHIFT_LEFT));
+			l.add(Path.createTextPath(String.valueOf("B"),
+				getVertices().get(1),
+				Path.SHIFT_UP, Path.SHIFT_RIGHT));
+			l.add(Path.createTextPath(String.valueOf("C"),
+				getVertices().get(2),
+				Path.SHIFT_DOWN, Path.SHIFT_RIGHT));
+			l.add(Path.createTextPath(String.valueOf("D"),
+				getVertices().get(3),
+				Path.SHIFT_DOWN, Path.SHIFT_LEFT));
+		}
 		return l;
 	}
 }

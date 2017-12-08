@@ -8,6 +8,12 @@ public class Parallelogram implements Shapes2D{
 	private double length;
 	private double height;
 	private double shear;
+	private boolean showVerticeLabel=true;
+	private boolean showDiagonalLine=false;
+	private boolean showHeightLine=true;
+	private boolean showLengthValue=true;
+	private boolean showShearValue=true;
+	private boolean showHeightValue=true;
 	
 	public Parallelogram(){
 		
@@ -37,6 +43,42 @@ public class Parallelogram implements Shapes2D{
 	}
 	public void setShear(double shear) {
 		this.shear = shear;
+	}
+	public boolean isShowVerticeLabel() {
+		return showVerticeLabel;
+	}
+	public void setShowVerticeLabel(boolean showVerticeLabel) {
+		this.showVerticeLabel = showVerticeLabel;
+	}
+	public boolean isShowDiagonalLine() {
+		return showDiagonalLine;
+	}
+	public void setShowDiagonalLine(boolean showDiagonalLine) {
+		this.showDiagonalLine = showDiagonalLine;
+	}
+	public boolean isShowHeightLine() {
+		return showHeightLine;
+	}
+	public void setShowHeightLine(boolean showHeightLine) {
+		this.showHeightLine = showHeightLine;
+	}
+	public boolean isShowLengthValue() {
+		return showLengthValue;
+	}
+	public void setShowLengthValue(boolean showLengthValue) {
+		this.showLengthValue = showLengthValue;
+	}
+	public boolean isShowShearValue() {
+		return showShearValue;
+	}
+	public void setShowShearValue(boolean showShearValue) {
+		this.showShearValue = showShearValue;
+	}
+	public boolean isShowHeightValue() {
+		return showHeightValue;
+	}
+	public void setShowHeightValue(boolean showHeightValue) {
+		this.showHeightValue = showHeightValue;
 	}
 	public double getSlope(){
 		double slope;
@@ -98,6 +140,42 @@ public class Parallelogram implements Shapes2D{
 		l.add(Path.createLinePath(getVertices().get(1), getVertices().get(2)));
 		l.add(Path.createLinePath(getVertices().get(2), getVertices().get(3)));
 		l.add(Path.createLinePath(getVertices().get(3), getVertices().get(0)));
+		
+		double padding = length/25;
+		if (showDiagonalLine) {
+			l.add(Path.createLinePathDashed(getVertices().get(0), getVertices().get(2)));
+			l.add(Path.createLinePathDashed(getVertices().get(1), getVertices().get(3)));
+		}
+		if (showHeightLine) {
+			l.add(Path.createLinePathDashed(new Point2D(shear, 0), new Point2D(shear, height)));
+		}
+		if (showLengthValue) {
+			l.add(Path.createTextPath(Geom.formatMeasurement(this.length), 
+					new Point2D(length/2+shear, 0),Path.SHIFT_UP,Path.SHIFT_NONE));
+		}
+		if (showHeightValue) {
+			l.add(Path.createTextPath(Geom.formatMeasurement(this.height), 
+					new Point2D(shear, height/2),Path.SHIFT_NONE,Path.SHIFT_LEFT));
+		}
+		if (showShearValue) {
+			l.add(Path.createTextPath(Geom.formatMeasurement(this.shear), 
+					new Point2D(shear/2, height),Path.SHIFT_UP,Path.SHIFT_NONE));
+		}
+		if (showVerticeLabel) {
+			l.add(Path.createTextPath(String.valueOf("A"), 
+					getVertices().get(0),
+					Path.SHIFT_UP, Path.SHIFT_LEFT));
+			l.add(Path.createTextPath(String.valueOf("B"),
+				getVertices().get(1),
+				Path.SHIFT_UP, Path.SHIFT_RIGHT));
+			l.add(Path.createTextPath(String.valueOf("C"),
+				getVertices().get(2),
+				Path.SHIFT_DOWN, Path.SHIFT_RIGHT));
+			l.add(Path.createTextPath(String.valueOf("D"),
+				getVertices().get(3),
+				Path.SHIFT_DOWN, Path.SHIFT_LEFT));
+		}
+		
 		return l;
 	}
 	public String toString(){

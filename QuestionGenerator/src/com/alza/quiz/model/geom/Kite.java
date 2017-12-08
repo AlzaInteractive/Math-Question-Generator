@@ -8,6 +8,9 @@ public class Kite implements Shapes2D{
 	private double diagonalHoriz;
 	private double diagonalVert;
 	private double shear;
+	private boolean showVerticeLabel=true;
+	private boolean showDiagonalLine=true;
+	private boolean showDiagonalLength=true;
 	public Kite(){
 		
 	}
@@ -33,6 +36,24 @@ public class Kite implements Shapes2D{
 	}
 	public void setShear(double shear) {
 		this.shear = shear;
+	}
+	public boolean isShowVerticeLabel() {
+		return showVerticeLabel;
+	}
+	public void setShowVerticeLabel(boolean showVerticeLabel) {
+		this.showVerticeLabel = showVerticeLabel;
+	}
+	public boolean isShowDiagonalLine() {
+		return showDiagonalLine;
+	}
+	public void setShowDiagonalLine(boolean showDiagonalLine) {
+		this.showDiagonalLine = showDiagonalLine;
+	}
+	public boolean isShowDiagonalLength() {
+		return showDiagonalLength;
+	}
+	public void setShowDiagonalLength(boolean showDiagonalLength) {
+		this.showDiagonalLength = showDiagonalLength;
 	}
 	@Override
 	public double getArea() {
@@ -88,6 +109,26 @@ public class Kite implements Shapes2D{
 		l.add(Path.createLinePath(getVertices().get(1), getVertices().get(2)));
 		l.add(Path.createLinePath(getVertices().get(2), getVertices().get(3)));
 		l.add(Path.createLinePath(getVertices().get(3), getVertices().get(0)));
+		if (showDiagonalLine) {
+			l.add(Path.createLinePathDashed(getVertices().get(0), getVertices().get(2)));
+			l.add(Path.createLinePathDashed(getVertices().get(1), getVertices().get(3)));
+		}
+		if (showDiagonalLength) {
+			l.add(Path.createTextPath(Geom.formatMeasurement(diagonalHoriz), 
+					new Point2D(diagonalHoriz/3, shear),
+					Path.SHIFT_UP,Path.SHIFT_NONE));
+			l.add(Path.createTextPath(Geom.formatMeasurement(shear), new Point2D(diagonalHoriz/2, shear/2),
+					Path.SHIFT_NONE,Path.SHIFT_RIGHT));
+			l.add(Path.createTextPath(Geom.formatMeasurement(diagonalVert-shear), 
+					new Point2D(diagonalHoriz/2, shear + (diagonalVert-shear)/2),
+					Path.SHIFT_DOWN,Path.SHIFT_NONE));
+		}
+		if (showVerticeLabel) {
+			l.add(Path.createTextPath(String.valueOf("A"), getVertices().get(0), Path.SHIFT_UP,Path.SHIFT_LEFT));
+			l.add(Path.createTextPath(String.valueOf("B"), getVertices().get(1), Path.SHIFT_UP,Path.SHIFT_LEFT));
+			l.add(Path.createTextPath(String.valueOf("C"), getVertices().get(1), Path.SHIFT_UP,Path.SHIFT_RIGHT));
+			l.add(Path.createTextPath(String.valueOf("D"), getVertices().get(1), Path.SHIFT_DOWN,Path.SHIFT_LEFT));
+		}
 		return l;
 	}
 	public String toString(){

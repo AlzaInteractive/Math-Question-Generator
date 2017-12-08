@@ -74,6 +74,10 @@ public class Fraction implements Comparable<Fraction>,Comparator<Fraction>{
 		Fraction divtomult = new Fraction(f.b, f.a);
 		this.multiplyBy(divtomult);
 	}
+	public boolean isProper(){
+		if (this.a<this.b) return true;
+		return false;
+	}
 	
 	@Override
 	public Fraction clone(){
@@ -109,7 +113,9 @@ public class Fraction implements Comparable<Fraction>,Comparator<Fraction>{
 		int x = this.a / this.b;
 		int a = Math.abs(this.a % this.b);
 		int b = this.b;
-		MixedFraction c = new MixedFraction(x,a,b);
+		boolean isNegative = false;
+		if (a<0) isNegative = true;
+		MixedFraction c = new MixedFraction(x,a,b, isNegative);
 		return c;
 		
 	}
@@ -148,6 +154,10 @@ public class Fraction implements Comparable<Fraction>,Comparator<Fraction>{
 		return true;
 	}
 	public String toString(){
+		if (a==0) return String.valueOf(0);
+		if (b==1) return String.valueOf(this.a);
+		if (b==0) return String.valueOf("UNDEFINED");
+		if (a==b) return String.valueOf(1);
 		String s = this.a+"/"+this.b;
 		return s;
 	}
@@ -163,6 +173,13 @@ public class Fraction implements Comparable<Fraction>,Comparator<Fraction>{
 		public int x;
 		public int a;
 		public int b;
+		public boolean isNegative;
+		public MixedFraction(int x, int a, int b, boolean isNegative){
+			this.x = x;
+			this.a = a;
+			this.b = b;
+			this.isNegative = isNegative;
+		}
 		public MixedFraction(int x, int a, int b){
 			this.x = x;
 			this.a = a;
@@ -185,7 +202,9 @@ public class Fraction implements Comparable<Fraction>,Comparator<Fraction>{
 			return s;
 		}
 		public String toHtmlString(){
-			String s = this.x+" "+this.a+"/"+this.b;
+			String prefix="";
+			if (isNegative) prefix ="-";
+			String s = prefix+this.x+" "+this.a+"/"+this.b;
 			return s;
 		}
 		public String toMathJaxString(){
