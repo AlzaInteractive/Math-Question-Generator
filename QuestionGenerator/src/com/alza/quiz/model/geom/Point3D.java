@@ -26,7 +26,7 @@ public class Point3D {
 		return new Point3D(x+xDistance, y+yDistance, z+zDistance);
 	}
 	
-	public static Point3D getMidPoint(Point3D p1, Point3D p2, Point3D p3){
+	public static Point3D getMidPoint(Point3D p1, Point3D p2){
 		double x = p1.x + (p2.x-p1.x)/2;
 		double y = p1.y + (p2.y-p1.y)/2;
 		double z = p1.z + (p2.z-p1.z)/2;

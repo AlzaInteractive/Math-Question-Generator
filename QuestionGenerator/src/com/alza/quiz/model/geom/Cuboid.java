@@ -8,6 +8,11 @@ public class Cuboid implements Shapes3D{
 	private double edgeLength;
 	private double edgeWidth;
 	private double edgeHeight;
+	private boolean showEdgeLength=true;
+	private boolean showEdgeWidth=true;
+	private boolean showEdgeHeight=true;
+	private boolean showVerticeLabel=true;
+	
 	public Cuboid() {
 		
 	}
@@ -19,6 +24,76 @@ public class Cuboid implements Shapes3D{
 		this.edgeWidth = edgeWidth;
 		this.edgeHeight = edgeHeight;
 	}
+
+	public double getEdgeLength() {
+		return edgeLength;
+	}
+
+
+	public void setEdgeLength(double edgeLength) {
+		this.edgeLength = edgeLength;
+	}
+
+
+	public double getEdgeWidth() {
+		return edgeWidth;
+	}
+
+
+	public void setEdgeWidth(double edgeWidth) {
+		this.edgeWidth = edgeWidth;
+	}
+
+
+	public double getEdgeHeight() {
+		return edgeHeight;
+	}
+
+
+	public void setEdgeHeight(double edgeHeight) {
+		this.edgeHeight = edgeHeight;
+	}
+
+
+	public boolean isShowEdgeLength() {
+		return showEdgeLength;
+	}
+
+
+	public void setShowEdgeLength(boolean showEdgeLength) {
+		this.showEdgeLength = showEdgeLength;
+	}
+
+
+	public boolean isShowEdgeWidth() {
+		return showEdgeWidth;
+	}
+
+
+	public void setShowEdgeWidth(boolean showEdgeWidth) {
+		this.showEdgeWidth = showEdgeWidth;
+	}
+
+
+	public boolean isShowEdgeHeight() {
+		return showEdgeHeight;
+	}
+
+
+	public void setShowEdgeHeight(boolean showEdgeHeight) {
+		this.showEdgeHeight = showEdgeHeight;
+	}
+
+
+	public boolean isShowVerticeLabel() {
+		return showVerticeLabel;
+	}
+
+
+	public void setShowVerticeLabel(boolean showVerticeLabel) {
+		this.showVerticeLabel = showVerticeLabel;
+	}
+
 
 	@Override
 	public double getSurfaceArea() {
@@ -111,6 +186,49 @@ public class Cuboid implements Shapes3D{
 		l.add(Path.createLinePath(getVertices().get(1), getVertices().get(5)));
 		l.add(Path.createLinePath(getVertices().get(2), getVertices().get(6)));
 		l.add(Path.createLinePathDotted(getVertices().get(3), getVertices().get(7)));
+		
+		if (showEdgeLength) {
+			l.add(Path.createTextPath(Geom.formatMeasurement(edgeLength), 
+					getVertices().get(3).move(edgeLength/2, 0,0), Path.SHIFT_DOWN,Path.SHIFT_NONE));
+		}
+		if (showEdgeWidth) {
+			l.add(Path.createTextPath(Geom.formatMeasurement(edgeWidth), 
+					Point3D.getMidPoint(getVertices().get(2), getVertices().get(6))
+					, Path.SHIFT_DOWN,Path.SHIFT_RIGHT));
+		}
+		if (showEdgeHeight) {
+			l.add(Path.createTextPath(Geom.formatMeasurement(edgeHeight), 
+					Point3D.getMidPoint(getVertices().get(5), getVertices().get(6))
+					, Path.SHIFT_NONE,Path.SHIFT_RIGHT));
+		}
+
+		if (showVerticeLabel) {
+			l.add(Path.createTextPath(String.valueOf("A"), 
+					getVertices().get(0),
+					Path.SHIFT_UP, Path.SHIFT_LEFT));
+			l.add(Path.createTextPath(String.valueOf("B"),
+					getVertices().get(1),
+					Path.SHIFT_UP, Path.SHIFT_RIGHT));
+			l.add(Path.createTextPath(String.valueOf("C"),
+					getVertices().get(2),
+					Path.SHIFT_DOWN, Path.SHIFT_RIGHT));
+			l.add(Path.createTextPath(String.valueOf("D"),
+					getVertices().get(3),
+					Path.SHIFT_DOWN, Path.SHIFT_LEFT));
+			l.add(Path.createTextPath(String.valueOf("E"), 
+					getVertices().get(4),
+					Path.SHIFT_UP, Path.SHIFT_LEFT));
+			l.add(Path.createTextPath(String.valueOf("F"),
+					getVertices().get(5),
+					Path.SHIFT_UP, Path.SHIFT_RIGHT));
+			l.add(Path.createTextPath(String.valueOf("G"),
+					getVertices().get(6),
+					Path.SHIFT_DOWN, Path.SHIFT_RIGHT));
+			l.add(Path.createTextPath(String.valueOf("H"),
+					getVertices().get(7),
+					Path.SHIFT_DOWN, Path.SHIFT_LEFT));
+		}	
+		
 		return l;
 	}
 }
