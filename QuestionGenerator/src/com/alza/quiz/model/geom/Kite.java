@@ -126,8 +126,8 @@ public class Kite implements Shapes2D{
 		if (showVerticeLabel) {
 			l.add(Path.createTextPath(String.valueOf("A"), getVertices().get(0), Path.SHIFT_UP,Path.SHIFT_LEFT));
 			l.add(Path.createTextPath(String.valueOf("B"), getVertices().get(1), Path.SHIFT_UP,Path.SHIFT_LEFT));
-			l.add(Path.createTextPath(String.valueOf("C"), getVertices().get(1), Path.SHIFT_UP,Path.SHIFT_RIGHT));
-			l.add(Path.createTextPath(String.valueOf("D"), getVertices().get(1), Path.SHIFT_DOWN,Path.SHIFT_LEFT));
+			l.add(Path.createTextPath(String.valueOf("C"), getVertices().get(2), Path.SHIFT_UP,Path.SHIFT_RIGHT));
+			l.add(Path.createTextPath(String.valueOf("D"), getVertices().get(3), Path.SHIFT_DOWN,Path.SHIFT_LEFT));
 		}
 		return l;
 	}
