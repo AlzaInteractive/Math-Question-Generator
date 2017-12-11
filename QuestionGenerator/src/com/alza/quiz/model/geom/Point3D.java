@@ -22,6 +22,17 @@ public class Point3D {
 		return new Point2D((int)newX, (int)newY);
 	}
 	
+	public Point3D move(double xDistance, double yDistance, double zDistance){
+		return new Point3D(x+xDistance, y+yDistance, z+zDistance);
+	}
+	
+	public static Point3D getMidPoint(Point3D p1, Point3D p2, Point3D p3){
+		double x = p1.x + (p2.x-p1.x)/2;
+		double y = p1.y + (p2.y-p1.y)/2;
+		double z = p1.z + (p2.z-p1.z)/2;
+		return new Point3D(x, y, z);
+	}
+	
 	@Override
 	public String toString() {
 		return "("+(int)x+","+(int)y+","+(int)z+")";
