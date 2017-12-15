@@ -111,9 +111,9 @@ public class XXX extends JFrame {
 	}
 	private void showGeom() {
 		MultipleChoiceGeomQuiz mq = (MultipleChoiceGeomQuiz) ql.get(qnum);
-		//List<Path> o = mq.getGeomShape();	
+		List<Path> o = mq.getGeomShape();	
 		//List<Path> o = new Trapezoid().createExample().getPaths();
-		List<Path> o = new Cuboid().createExample().getPaths();
+		//List<Path> o = new Cuboid().createExample().getPaths();
 		drawShape(o);
 		if (qnum==ql.size()-1) {
 			perf();
