@@ -7,6 +7,9 @@ import java.util.concurrent.ThreadLocalRandom;
 public class Cylinder implements Shapes3D{
 	private Circle base;
 	private double height;
+	private boolean showHeightValue=true;
+	private boolean showBaseRadiusValue=true;
+	private boolean showBaseRadius=true;
 	public Cylinder() {
 		
 	}
@@ -26,6 +29,31 @@ public class Cylinder implements Shapes3D{
 	}
 	public void setHeight(double height) {
 		this.height = height;
+	}	
+	public Circle getBase() {
+		return base;
+	}
+	public void setBase(Circle base) {
+		this.base = base;
+	}
+	public boolean isShowHeightValue() {
+		return showHeightValue;
+	}
+	public void setShowHeightValue(boolean showHeightValue) {
+		this.showHeightValue = showHeightValue;
+	}
+	public boolean isShowBaseRadiusValue() {
+		return showBaseRadiusValue;
+	}
+	public void setShowBaseRadiusValue(boolean showBaseRadiusValue) {
+		this.showBaseRadiusValue = showBaseRadiusValue;
+	}
+	
+	public boolean isShowBaseRadius() {
+		return showBaseRadius;
+	}
+	public void setShowBaseRadius(boolean showBaseRadius) {
+		this.showBaseRadius = showBaseRadius;
 	}
 	@Override
 	public double getSurfaceArea() {
@@ -105,6 +133,20 @@ public class Cylinder implements Shapes3D{
 				this.base.getRadius()/2, 0, -180));
 		l.add(Path.createArcPathDashed(centerBottom, this.base.getRadius(), 
 				this.base.getRadius()/2, 0, 180));
+		
+		if (showHeightValue) {
+			l.add(Path.createTextPath(Geom.formatMeasurement(height), 
+					Point3D.getMidPoint(getVertices().get(1), getVertices().get(3))
+					, Path.SHIFT_NONE,Path.SHIFT_RIGHT));
+		}
+		if (showBaseRadius) {
+			l.add(Path.createLinePathDotted(centerBottom, getVertices().get(3)));
+		}
+		if (showBaseRadiusValue) {
+			l.add(Path.createTextPath(Geom.formatMeasurement(base.getRadius()), 
+					Point3D.getMidPoint(centerBottom, getVertices().get(3))
+					, Path.SHIFT_UP,Path.SHIFT_NONE));
+		}
 		
 		return l;
 	}
