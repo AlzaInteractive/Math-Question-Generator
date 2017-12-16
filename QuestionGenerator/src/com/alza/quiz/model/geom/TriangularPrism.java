@@ -7,9 +7,16 @@ import java.util.concurrent.ThreadLocalRandom;
 public class TriangularPrism implements Shapes3D{
 	private Triangle baseTriangle;
 	private double prismHeight;
+	private boolean showPrismHeight = true;
+	private boolean showBaseTriangleHeightLine = true;
+	private boolean showBaseTriangleHeightValue = true;
+	private boolean showBaseTriangleBaselineValue = true;
+	private boolean showBaseTriangleBaseLengthValue = true;
+	private boolean showVerticesLabel = true;
 	public TriangularPrism() {
 		
 	}
+	
 	public TriangularPrism(Triangle baseTriangle, double prismHeight) {
 		super();
 		this.baseTriangle = baseTriangle;
@@ -27,6 +34,62 @@ public class TriangularPrism implements Shapes3D{
 	public void setPrismHeight(double prismHeight) {
 		this.prismHeight = prismHeight;
 	}
+	public boolean isShowPrismHeight() {
+		return showPrismHeight;
+	}
+
+	public void setShowPrismHeight(boolean showPrismHeight) {
+		this.showPrismHeight = showPrismHeight;
+	}
+
+	public boolean isShowBaseTriangleBaselineValue() {
+		return showBaseTriangleBaselineValue;
+	}
+
+	public void setShowBaseTriangleBaselineValue(boolean showBaseTriangleBaselineValue) {
+		this.showBaseTriangleBaselineValue = showBaseTriangleBaselineValue;
+	}
+
+	public boolean isShowVerticesLabel() {
+		return showVerticesLabel;
+	}
+
+	public void setShowVerticesLabel(boolean showVerticesLabel) {
+		this.showVerticesLabel = showVerticesLabel;
+	}
+
+	public boolean isShowPrismHeightLength() {
+		return showPrismHeight;
+	}
+
+	public void setShowPrismHeightLength(boolean showPrismHeightLength) {
+		this.showPrismHeight = showPrismHeightLength;
+	}
+
+	public boolean isShowBaseTriangleHeightLine() {
+		return showBaseTriangleHeightLine;
+	}
+
+	public void setShowBaseTriangleHeightLine(boolean showBaseTriangleHeightLine) {
+		this.showBaseTriangleHeightLine = showBaseTriangleHeightLine;
+	}
+
+	public boolean isShowBaseTriangleHeightValue() {
+		return showBaseTriangleHeightValue;
+	}
+
+	public void setShowBaseTriangleHeightValue(boolean showBaseTriangleHeightValue) {
+		this.showBaseTriangleHeightValue = showBaseTriangleHeightValue;
+	}
+
+	public boolean isShowBaseTriangleBaseLengthValue() {
+		return showBaseTriangleBaseLengthValue;
+	}
+
+	public void setShowBaseTriangleBaseLengthValue(boolean showBaseTriangleBaseLengthValue) {
+		this.showBaseTriangleBaseLengthValue = showBaseTriangleBaseLengthValue;
+	}
+
 	@Override
 	public double getSurfaceArea() {
 		List<Shapes2D> fcs = getFaces();
@@ -105,6 +168,49 @@ public class TriangularPrism implements Shapes3D{
 		l.add(Path.createLinePath(getVertices().get(0), getVertices().get(3)));
 		l.add(Path.createLinePath(getVertices().get(1), getVertices().get(4)));
 		l.add(Path.createLinePathDotted(getVertices().get(2), getVertices().get(5)));
+		
+		Point3D baseTriangleShear = getVertices().get(3).move(baseTriangle.getShear(), 0, 0);
+		
+		if (showBaseTriangleHeightLine) {
+			l.add(Path.createLinePathDotted(getVertices().get(5), 
+					baseTriangleShear));
+		}
+		if (showBaseTriangleHeightValue) {
+			l.add(Path.createTextPath(Geom.formatMeasurement(baseTriangle.getHeight()), 
+					Point3D.getMidPoint(baseTriangleShear, getVertices().get(5))
+					, Path.SHIFT_DOWN,Path.SHIFT_RIGHT));
+		}
+		if (showBaseTriangleBaselineValue) {
+			l.add(Path.createTextPath(Geom.formatMeasurement(baseTriangle.getBaseLine()), 
+					Point3D.getMidPoint(getVertices().get(3), getVertices().get(4))
+					, Path.SHIFT_DOWN,Path.SHIFT_NONE));
+		}
+		if (showPrismHeight) {
+			l.add(Path.createTextPath(Geom.formatMeasurement(prismHeight), 
+					Point3D.getMidPoint(getVertices().get(1), getVertices().get(4))
+					, Path.SHIFT_DOWN,Path.SHIFT_RIGHT));
+		}
+		if (showVerticesLabel) {
+			l.add(Path.createTextPath(String.valueOf("A"), 
+					getVertices().get(0),
+					Path.SHIFT_UP, Path.SHIFT_LEFT));
+			l.add(Path.createTextPath(String.valueOf("B"),
+					getVertices().get(1),
+					Path.SHIFT_UP, Path.SHIFT_RIGHT));
+			l.add(Path.createTextPath(String.valueOf("C"),
+					getVertices().get(2),
+					Path.SHIFT_UP, Path.SHIFT_NONE));
+			l.add(Path.createTextPath(String.valueOf("D"),
+					getVertices().get(3),
+					Path.SHIFT_DOWN, Path.SHIFT_LEFT));
+			l.add(Path.createTextPath(String.valueOf("E"), 
+					getVertices().get(4),
+					Path.SHIFT_DOWN, Path.SHIFT_RIGHT));
+			l.add(Path.createTextPath(String.valueOf("F"),
+					getVertices().get(5),
+					Path.SHIFT_DOWN, Path.SHIFT_NONE));
+		}
+		
 		return l;
 	}
 }

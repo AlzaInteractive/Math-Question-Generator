@@ -16,6 +16,7 @@ import com.alza.quiz.model.geom.Cylinder;
 import com.alza.quiz.model.geom.Pyramid;
 import com.alza.quiz.model.geom.Shapes3D;
 import com.alza.quiz.model.geom.Sphere;
+import com.alza.quiz.model.geom.TriangularPrism;
 import com.alza.quiz.qfactory.IQuestionFactory;
 
 public class WhichGeom3DShapeQuestionFactory implements IQuestionFactory {
@@ -37,6 +38,7 @@ public class WhichGeom3DShapeQuestionFactory implements IQuestionFactory {
 	private void prepareShape(){
 		shapes.add(new Cube());
 		shapes.add(new Cuboid());
+		shapes.add(new TriangularPrism());
 		shapes.add(new Cylinder());
 		shapes.add(new Pyramid());
 		shapes.add(new Cone());

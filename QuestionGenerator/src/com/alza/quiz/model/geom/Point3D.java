@@ -32,6 +32,21 @@ public class Point3D {
 		double z = p1.z + (p2.z-p1.z)/2;
 		return new Point3D(x, y, z);
 	}
+	public static Point3D getMidPoint(Point3D...points){
+		double sx = 0;
+		double sy = 0;
+		double sz = 0;
+		int div = points.length;
+		for (Point3D p : points) {
+			sx = sx + p.x;
+			sy = sy + p.y;
+			sz = sz + p.z;
+		}
+		double x = sx/div;
+		double y = sy/div;
+		double z = sz/div;
+		return new Point3D(x, y, z);
+	}
 	
 	@Override
 	public String toString() {
