@@ -7,17 +7,21 @@ import java.util.concurrent.ThreadLocalRandom;
 public class Pyramid implements Shapes3D{
 	private Rectangle baseRectangle;
 	private double height;
+	private boolean showVerticeLabels = true;
+	private boolean showBaseMeasurements = true;
+	private boolean showHeightLine = true;
+	private boolean showBaseDiagonals = false;
+	private boolean showHeightLength = true;
 	public Pyramid() {
 		
 	}
+	
 	public Pyramid(Rectangle base, double height) {
 		super();
 		this.baseRectangle = base;
 		this.height = height;
 	}
-	public Rectangle getBaseTriangle() {
-		return baseRectangle;
-	}
+
 	public void setBaseRectangle(Rectangle baseTriangle) {
 		this.baseRectangle = baseTriangle;
 	}
@@ -27,6 +31,50 @@ public class Pyramid implements Shapes3D{
 	public void setHeight(double height) {
 		this.height = height;
 	}
+	public boolean isShowVerticeLabels() {
+		return showVerticeLabels;
+	}
+
+	public void setShowVerticeLabels(boolean showVerticeLabels) {
+		this.showVerticeLabels = showVerticeLabels;
+	}
+
+	public boolean isShowBaseMeasure() {
+		return showBaseMeasurements;
+	}
+
+	public void setShowBaseMeasure(boolean showBaseMeasure) {
+		this.showBaseMeasurements = showBaseMeasure;
+	}
+
+	public boolean isShowHeightLine() {
+		return showHeightLine;
+	}
+
+	public void setShowHeightLine(boolean showHeightLine) {
+		this.showHeightLine = showHeightLine;
+	}
+
+	public boolean isShowBaseDiagonals() {
+		return showBaseDiagonals;
+	}
+
+	public void setShowBaseDiagonals(boolean showBaseDiagonals) {
+		this.showBaseDiagonals = showBaseDiagonals;
+	}
+
+	public boolean isShowHeightLength() {
+		return showHeightLength;
+	}
+
+	public void setShowHeightLength(boolean showHeightLength) {
+		this.showHeightLength = showHeightLength;
+	}
+
+	public Rectangle getBaseRectangle() {
+		return baseRectangle;
+	}
+
 	@Override
 	public double getSurfaceArea() {
 		List<Shapes2D> fcs = getFaces();
@@ -102,6 +150,50 @@ public class Pyramid implements Shapes3D{
 		l.add(Path.createLinePathDotted(getVertices().get(1), getVertices().get(4)));
 		l.add(Path.createLinePath(getVertices().get(2), getVertices().get(4)));
 		l.add(Path.createLinePath(getVertices().get(3), getVertices().get(4)));
+		
+		Point3D baseCenter = Point3D.getMidPoint(getVertices().get(1),
+					getVertices().get(3));
+		
+		if (showBaseMeasurements) {
+			l.add(Path.createTextPath(Geom.formatMeasurement(baseRectangle.getLength()), 
+					Point3D.getMidPoint(getVertices().get(0),getVertices().get(3)),
+					Path.SHIFT_DOWN, Path.SHIFT_NONE));
+			l.add(Path.createTextPath(Geom.formatMeasurement(baseRectangle.getWidth()), 
+					Point3D.getMidPoint(getVertices().get(2),getVertices().get(3)),
+					Path.SHIFT_NONE, Path.SHIFT_RIGHT));
+		}
+		if (showBaseDiagonals) {
+			l.add(Path.createLinePathDotted(getVertices().get(1), getVertices().get(3)));
+			l.add(Path.createLinePathDotted(getVertices().get(0), getVertices().get(2)));
+		}
+		if (showHeightLine) {
+			l.add(Path.createLinePathDotted(getVertices().get(4), baseCenter));
+		}
+		if (showHeightLength) {
+			l.add(Path.createTextPath(Geom.formatMeasurement(height), 
+					baseCenter.move(0, -height/3, 0),
+					Path.SHIFT_UP, Path.SHIFT_LEFT));
+		}
+		
+		
+		if (showVerticeLabels) {
+			l.add(Path.createTextPath(String.valueOf("A"), 
+					getVertices().get(0),
+					Path.SHIFT_UP, Path.SHIFT_LEFT));
+			l.add(Path.createTextPath(String.valueOf("B"),
+					getVertices().get(1),
+					Path.SHIFT_UP, Path.SHIFT_RIGHT));
+			l.add(Path.createTextPath(String.valueOf("C"),
+					getVertices().get(2),
+					Path.SHIFT_UP, Path.SHIFT_NONE));
+			l.add(Path.createTextPath(String.valueOf("D"),
+					getVertices().get(3),
+					Path.SHIFT_DOWN, Path.SHIFT_LEFT));
+			l.add(Path.createTextPath(String.valueOf("E"), 
+					getVertices().get(4),
+					Path.SHIFT_DOWN, Path.SHIFT_RIGHT));
+		}
+		
 		return l;
 	}
 }
