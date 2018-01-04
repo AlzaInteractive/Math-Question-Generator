@@ -16,6 +16,12 @@ public class Circle implements Shapes2D{
 	public Circle(double radius){
 		this.radius = radius;
 	}
+	@Override
+	public void hideTextsAndMeasurements() {
+		showRadiusLine = false;
+		showCenterLabel = false;
+		showMeasurements = false;
+	}
 	
 	public double getRadius() {
 		return radius;
@@ -83,7 +89,6 @@ public class Circle implements Shapes2D{
 	}
 	@Override
 	public List<Path> getPaths() {
-		double padding = radius/20;
 		List<Path> l = new ArrayList<Path>();
 		l.add(Path.createCirclePath(new Point2D(radius, radius), radius));
 		if (showCenterLabel) {

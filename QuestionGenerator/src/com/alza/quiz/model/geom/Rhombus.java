@@ -17,6 +17,12 @@ public class Rhombus implements Shapes2D{
 		this.diagonalHoriz = p;
 		this.diagonalVert = q;
 	}
+	@Override
+	public void hideTextsAndMeasurements() {
+		showVerticeLabel = false;
+		showDiagonalLine = false;
+		showDiagonalLength = false;
+	}
 	public double getDiagonalHoriz() {
 		return diagonalHoriz;
 	}

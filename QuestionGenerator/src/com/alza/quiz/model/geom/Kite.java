@@ -14,6 +14,14 @@ public class Kite implements Shapes2D{
 	public Kite(){
 		
 	}
+	
+	@Override
+	public void hideTextsAndMeasurements() {
+		showVerticeLabel = false;
+		showDiagonalLine = false;
+		showDiagonalLength = false;
+	}
+	
 	public Kite(double diagHoriz, double diagVert, double shear){
 		this.diagonalHoriz = diagHoriz;
 		this.diagonalVert = diagVert;

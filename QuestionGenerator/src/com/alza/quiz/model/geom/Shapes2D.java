@@ -14,6 +14,7 @@ public interface Shapes2D {
 	public String getName();
 	public Shapes2D createExample();
 	public List<Path> getPaths();
+	public void hideTextsAndMeasurements();
 	//public List<Path> getPaths(int width, int height, int margin);
 	//public List<Path> getPaths(int width, int height);
 }

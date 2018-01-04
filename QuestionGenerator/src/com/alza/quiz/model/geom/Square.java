@@ -13,6 +13,14 @@ public class Square implements Shapes2D{
 	public Square(){
 		
 	}
+	
+	@Override
+	public void hideTextsAndMeasurements() {
+		showVerticeLabel = false;
+		showDiagonalLine = false;
+		showLengthValue = false;
+	}
+	
 	public Square(double length){
 		this.length = length;
 	}
@@ -121,4 +129,5 @@ public class Square implements Shapes2D{
 	public int getEdgeCount() {
 		return 4;
 	}
+	
 }

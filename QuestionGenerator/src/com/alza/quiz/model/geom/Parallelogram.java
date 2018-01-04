@@ -23,7 +23,15 @@ public class Parallelogram implements Shapes2D{
 		this.height = height;
 		this.shear = shear;
 	}
-	
+	@Override
+	public void hideTextsAndMeasurements() {
+		showVerticeLabel = false;
+		showDiagonalLine = false;
+		showLengthValue = false;
+		showHeightLine = false;
+		showShearValue = false;
+		showHeightValue = false;
+	}
 	public double getLength() {
 		return length;
 	}
@@ -141,7 +149,6 @@ public class Parallelogram implements Shapes2D{
 		l.add(Path.createLinePath(getVertices().get(2), getVertices().get(3)));
 		l.add(Path.createLinePath(getVertices().get(3), getVertices().get(0)));
 		
-		double padding = length/25;
 		if (showDiagonalLine) {
 			l.add(Path.createLinePathDashed(getVertices().get(0), getVertices().get(2)));
 			l.add(Path.createLinePathDashed(getVertices().get(1), getVertices().get(3)));

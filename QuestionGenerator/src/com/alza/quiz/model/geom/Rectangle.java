@@ -18,6 +18,13 @@ public class Rectangle implements Shapes2D{
 		this.length = length;
 		this.width = width;
 	}
+	@Override
+	public void hideTextsAndMeasurements() {
+		showVerticeLabel = false;
+		showDiagonalLine = false;
+		showLengthValue = false;
+		showWidthValue = false;
+	}
 	
 	public double getLength() {
 		return length;

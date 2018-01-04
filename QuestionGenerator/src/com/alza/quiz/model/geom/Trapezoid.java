@@ -26,7 +26,16 @@ public class Trapezoid implements Shapes2D{
 		this.height = height;
 		this.shearLeft = shearLeft;
 	}
-	
+	@Override
+	public void hideTextsAndMeasurements() {
+		showVerticeLabel = false;
+		showDiagonalLine = false;
+		showHeightLine = false;
+		showTopLengthValue = false;
+		showBottomLengthValue = false;
+		showHeightValue = false;
+		showShearLeftValue = false;
+	}
 	public double getTopLength() {
 		return topLength;
 	}

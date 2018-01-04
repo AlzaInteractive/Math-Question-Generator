@@ -34,7 +34,13 @@ public class Triangle implements Shapes2D{
 		this.height = height;
 		this.shear = baseLine/2;
 	}
-	
+	@Override
+	public void hideTextsAndMeasurements() {
+		showVerticeLabel = false;
+		showHeightLine = false;
+		showHeightLength = false;
+		showBaselineLength = false;
+	}
 	public double getBaseLine() {
 		return baseLine;
 	}
