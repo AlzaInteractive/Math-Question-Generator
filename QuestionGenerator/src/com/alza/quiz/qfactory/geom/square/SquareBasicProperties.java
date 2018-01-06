@@ -67,7 +67,7 @@ public class SquareBasicProperties implements IQuestionFactory {
 
 	private Quiz verticeAngle() {
 		MultipleChoiceQuiz q = new MultipleChoiceQuiz();
-		q.setCorrectAnswer(String.valueOf(new Square().getEdgeCount()));
+		q.setCorrectAnswer("90");
 		q.setChoices("45", "90", "180", "100");
 		String question = bundle.getString("geom.shape2d.question.square.angle");
 		q.setQuestion(question);

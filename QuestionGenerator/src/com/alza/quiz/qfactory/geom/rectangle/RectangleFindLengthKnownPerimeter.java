@@ -13,30 +13,30 @@ import com.alza.quiz.model.geom.Geom;
 import com.alza.quiz.model.geom.Rectangle;
 import com.alza.quiz.qfactory.IQuestionFactory;
 
-public class RectangleFindPerimeterKnownLengthWidth implements IQuestionFactory{
+public class RectangleFindLengthKnownPerimeter implements IQuestionFactory {
 	private int numq = 2;
 	Locale loc;
 	ResourceBundle bundle;
-	
-	public RectangleFindPerimeterKnownLengthWidth() {
+
+	public RectangleFindLengthKnownPerimeter() {
 		this.loc = new Locale("in", "ID");
 		initStringFromLocale();
 	}
-	
-	public RectangleFindPerimeterKnownLengthWidth(Locale loc) {
+
+	public RectangleFindLengthKnownPerimeter(Locale loc) {
 		super();
 		this.loc = loc;
 		initStringFromLocale();
 	}
 
-	private void initStringFromLocale(){
+	private void initStringFromLocale() {
 		bundle = ResourceBundle.getBundle("lang.langbundle", loc);
 	}
-	
+
 	@Override
 	public Quiz generateQuiz() {
 		List<Quiz> quizList = generateQuizList();
-		int rnd = new Random().nextInt(quizList.size()); 
+		int rnd = new Random().nextInt(quizList.size());
 		return quizList.get(rnd);
 	}
 
@@ -48,17 +48,15 @@ public class RectangleFindPerimeterKnownLengthWidth implements IQuestionFactory{
 	@Override
 	public List<Quiz> generateQuizList() {
 		List<Quiz> quizList = new ArrayList<Quiz>();
-		for (int i=0;i<numq;i++){
+		for (int i = 0; i < numq; i++) {
 			Rectangle rec = (Rectangle) new Rectangle().createExample();
 			rec.hideTextsAndMeasurements();
-			rec.setShowLengthValue(true);
 			rec.setShowWidthValue(true);
 			GeomQuiz q = new GeomQuiz();
 			q.setGeomShape(rec.getPaths());
-			q.setCorrectAnswer(Geom.formatMeasurement(rec.getPerimeter()));
-			String question = bundle.getString("geom.shape2d.question.findperimeter");
-			question = question.replaceAll("#shape", rec.getName());
-			q.setQuestion(question);
+			q.setCorrectAnswer(Geom.formatMeasurement(rec.getLength()));
+			String question = bundle.getString("geom.shape2d.question.rectangle.length.fromperimeter");
+			q.setQuestion(question + " " + Geom.formatMeasurement(rec.getPerimeter()));
 			q.setDifficultyLevel(QuizLevel.MUDAH);
 			q.setLessonSubcategory(bundle.getString("geom.shape2d.rectangle"));
 			q.setLessonClassifier(bundle.getString("mathelementary"));
@@ -70,11 +68,11 @@ public class RectangleFindPerimeterKnownLengthWidth implements IQuestionFactory{
 		}
 		return quizList;
 	}
-	 @Override
-		public List<Quiz> generateQuizList(int numOfQuestion) {
-			numq = numOfQuestion;
-			return generateQuizList();
-		}
 
+	@Override
+	public List<Quiz> generateQuizList(int numOfQuestion) {
+		numq = numOfQuestion;
+		return generateQuizList();
+	}
 
 }

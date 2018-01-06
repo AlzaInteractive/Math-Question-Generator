@@ -1,42 +1,42 @@
 package com.alza.quiz.qfactory.geom.rectangle;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 import java.util.Random;
 import java.util.ResourceBundle;
 
-import com.alza.quiz.model.MultipleChoiceQuiz;
+import com.alza.quiz.model.GeomQuiz;
 import com.alza.quiz.model.Quiz;
 import com.alza.quiz.model.QuizLevel;
+import com.alza.quiz.model.geom.Geom;
 import com.alza.quiz.model.geom.Rectangle;
 import com.alza.quiz.qfactory.IQuestionFactory;
 
-public class RectangleFindLengthKnownArea implements IQuestionFactory{
+public class RectangleFindLengthKnownArea implements IQuestionFactory {
 	private int numq = 2;
 	Locale loc;
 	ResourceBundle bundle;
-	
+
 	public RectangleFindLengthKnownArea() {
 		this.loc = new Locale("in", "ID");
 		initStringFromLocale();
 	}
-	
+
 	public RectangleFindLengthKnownArea(Locale loc) {
 		super();
 		this.loc = loc;
 		initStringFromLocale();
 	}
 
-	private void initStringFromLocale(){
+	private void initStringFromLocale() {
 		bundle = ResourceBundle.getBundle("lang.langbundle", loc);
 	}
-	
+
 	@Override
 	public Quiz generateQuiz() {
 		List<Quiz> quizList = generateQuizList();
-		int rnd = new Random().nextInt(quizList.size()); 
+		int rnd = new Random().nextInt(quizList.size());
 		return quizList.get(rnd);
 	}
 
@@ -48,42 +48,31 @@ public class RectangleFindLengthKnownArea implements IQuestionFactory{
 	@Override
 	public List<Quiz> generateQuizList() {
 		List<Quiz> quizList = new ArrayList<Quiz>();
-		for (int i=0;i<numq;i++){
-			Rectangle rectangle = (Rectangle) new Rectangle().createExample();
-			List<Double> choices = new ArrayList<Double>();
-			choices.add(rectangle.getPerimeter());
-			choices.add(rectangle.getArea());
-			choices.add((double)rectangle.getLength());
-			choices.add((double)rectangle.getWidth());
-			Collections.shuffle(choices);
-			MultipleChoiceQuiz q = new MultipleChoiceQuiz();
-			q.setChoices(convertChoices(choices));
-			q.setCorrectAnswer(String.valueOf((double)rectangle.getLength()));
-			String question = bundle.getString("fraction.question.rectangle.findlengthfromarea");
-			q.setQuestion(question+" "+rectangle.getArea()+" & "+rectangle.getWidth());
+		for (int i = 0; i < numq; i++) {
+			Rectangle rec = (Rectangle) new Rectangle().createExample();
+			rec.hideTextsAndMeasurements();
+			rec.setShowWidthValue(true);
+			GeomQuiz q = new GeomQuiz();
+			q.setGeomShape(rec.getPaths());
+			q.setCorrectAnswer(Geom.formatMeasurement((rec.getLength())));
+			String question = bundle.getString("geom.shape2d.question.rectangle.length.fromarea");
+			q.setQuestion(question + " " + Geom.formatMeasurement(rec.getArea()));
 			q.setDifficultyLevel(QuizLevel.MUDAH);
-			q.setLessonSubcategory(bundle.getString("geom2d.rectangle"));
+			q.setLessonSubcategory(bundle.getString("geom.shape2d.rectangle"));
 			q.setLessonClassifier(bundle.getString("mathelementary"));
 			q.setLessonGrade(4);
 			q.setSubCategoryOrder(5);
 			q.setLocale(loc);
-			q.setLessonCategory(bundle.getString("geom2d"));
+			q.setLessonCategory(bundle.getString("geom.shape2d"));
 			quizList.add(q);
 		}
 		return quizList;
 	}
-	private List<String> convertChoices(List<Double> ds){
-		List<String> choicesInString = new ArrayList<String>();
-		for (Double double1 : ds) {
-			choicesInString.add(double1.toString());
-		}
-		return choicesInString;
-	}
-	 @Override
-		public List<Quiz> generateQuizList(int numOfQuestion) {
-			numq = numOfQuestion;
-			return generateQuizList();
-		}
 
+	@Override
+	public List<Quiz> generateQuizList(int numOfQuestion) {
+		numq = numOfQuestion;
+		return generateQuizList();
+	}
 
 }

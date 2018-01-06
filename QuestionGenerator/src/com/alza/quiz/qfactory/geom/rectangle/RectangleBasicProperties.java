@@ -11,7 +11,6 @@ import com.alza.quiz.model.MultipleChoiceQuiz;
 import com.alza.quiz.model.Quiz;
 import com.alza.quiz.model.QuizLevel;
 import com.alza.quiz.model.geom.Rectangle;
-import com.alza.quiz.model.geom.Square;
 import com.alza.quiz.qfactory.IQuestionFactory;
 import com.alza.quiz.qfactory.geom.BasicPropertyOfShape2D;
 
@@ -50,7 +49,7 @@ public class RectangleBasicProperties implements IQuestionFactory {
 	@Override
 	public List<Quiz> generateQuizList() {
 		List<Quiz> quizListSrc = new ArrayList<Quiz>();
-		BasicPropertyOfShape2D bp = new BasicPropertyOfShape2D(loc, new Rectangle());
+		BasicPropertyOfShape2D bp = new BasicPropertyOfShape2D(loc, new Rectangle().createExample());
 		quizListSrc.add(bp.numberOfEdges());
 		quizListSrc.add(bp.numberOfReflectionalSymmetry());
 		quizListSrc.add(bp.numberOfRotationalSymmetry());
@@ -68,17 +67,17 @@ public class RectangleBasicProperties implements IQuestionFactory {
 
 	private Quiz verticeAngle() {
 		MultipleChoiceQuiz q = new MultipleChoiceQuiz();
-		q.setCorrectAnswer(String.valueOf(new Square().getEdgeCount()));
+		q.setCorrectAnswer("90");
 		q.setChoices("45", "90", "180", "100");
-		String question = bundle.getString("geom2d.question.rectangle.angle");
+		String question = bundle.getString("geom.shape2d.question.rectangle.angle");
 		q.setQuestion(question);
 		q.setDifficultyLevel(QuizLevel.MUDAH);
-		q.setLessonSubcategory(bundle.getString("geom2d.rectangle"));
+		q.setLessonSubcategory(bundle.getString("geom.shape2d"));
 		q.setLessonClassifier(bundle.getString("mathelementary"));
 		q.setLessonGrade(4);
 		q.setSubCategoryOrder(5);
 		q.setLocale(loc);
-		q.setLessonCategory(bundle.getString("geom2d"));
+		q.setLessonCategory(bundle.getString("geom"));
 		return q;
 	}
 

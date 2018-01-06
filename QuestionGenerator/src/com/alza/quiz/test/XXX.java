@@ -110,7 +110,7 @@ public class XXX extends JFrame {
 	
 	private void perf() {
 		ql = new ArrayList<Quiz>();
-		GameLevel gl = GeomGameLevel.createGameLevels(getLocale()).get(1);
+		GameLevel gl = GeomGameLevel.createGameLevels(getLocale()).get(2);
 		List<GameLevelQuestionFactory> glqf = gl.getLevelQF();
 		for (GameLevelQuestionFactory glq : glqf) {
 			ql.addAll(glq.getqFactory().generateQuizList());
@@ -138,6 +138,7 @@ public class XXX extends JFrame {
 		List<Path> o = mq.getGeomShape();	
 		if (o == null) {
 			System.out.println(mq.getQuestion());
+			qnum++;
 			return;
 		}
 		//List<Path> o = new Trapezoid().createExample().getPaths();
