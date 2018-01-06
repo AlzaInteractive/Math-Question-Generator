@@ -3,11 +3,10 @@ package com.alza.quiz.qfactory.geom;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+import com.alza.quiz.model.GeomQuiz;
 import com.alza.quiz.model.Quiz;
 import com.alza.quiz.model.QuizLevel;
-import com.alza.quiz.model.SimpleQuiz;
 import com.alza.quiz.model.geom.Shapes2D;
-import com.alza.quiz.model.geom.Square;
 
 public class BasicPropertyOfShape2D {
 	Locale loc;
@@ -24,6 +23,7 @@ public class BasicPropertyOfShape2D {
 		this.loc = loc;
 		initStringFromLocale();
 		this.shape = shape;
+		shape.hideTextsAndMeasurements();
 	}
 
 	private void initStringFromLocale(){
@@ -31,47 +31,52 @@ public class BasicPropertyOfShape2D {
 	}
 	
 	public Quiz numberOfEdges(){
-		SimpleQuiz q = new SimpleQuiz();
-		q.setCorrectAnswer(String.valueOf(new Square().getEdgeCount()));
-		String question = bundle.getString("geom2d.question.numofedge");
-		q.setQuestion(question+" "+shape.getName());
+		GeomQuiz q = new GeomQuiz();
+		q.setGeomShape(shape.getPaths());
+		q.setCorrectAnswer(String.valueOf(shape.getEdgeCount()));
+		String question = bundle.getString("geom.shape2d.question.edgecount");
+		question = question.replace("#shape", shape.getName());
+		q.setQuestion(question);
 		q.setDifficultyLevel(QuizLevel.MUDAH);
-		q.setLessonSubcategory(bundle.getString("geom2d."+shape.getName().toLowerCase()));
+		q.setLessonSubcategory(bundle.getString("geom.shape2d."+shape.getName().toLowerCase()));
 		q.setLessonClassifier(bundle.getString("mathelementary"));
 		q.setLessonGrade(4);
 		q.setSubCategoryOrder(5);
 		q.setLocale(loc);
-		q.setLessonCategory(bundle.getString("geom2d"));
+		q.setLessonCategory(bundle.getString("geom.shape2d"));
 		return q;
 	}
 	
 	public Quiz numberOfReflectionalSymmetry(){
-		SimpleQuiz q = new SimpleQuiz();
+		GeomQuiz q = new GeomQuiz();
+		q.setGeomShape(shape.getPaths());
 		q.setCorrectAnswer(String.valueOf(shape.getReflectionalSymmetryCount()));
-		String question = bundle.getString("geom2d.question.numofreflectionalsymmetry");
+		String question = bundle.getString("geom.shape2d.question.reflectionalsymmetrycount");
+		question = question.replace("#shape", shape.getName());
 		q.setQuestion(question);
 		q.setDifficultyLevel(QuizLevel.MUDAH);
-		q.setLessonSubcategory(bundle.getString("geom2d."+shape.getName().toLowerCase()));
+		q.setLessonSubcategory(bundle.getString("geom.shape2d."+shape.getName().toLowerCase()));
 		q.setLessonClassifier(bundle.getString("mathelementary"));
 		q.setLessonGrade(4);
 		q.setSubCategoryOrder(5);
 		q.setLocale(loc);
-		q.setLessonCategory(bundle.getString("geom2d"));
+		q.setLessonCategory(bundle.getString("geom.shape2d"));
 		return q;
 	}
 	
 	public Quiz numberOfRotationalSymmetry(){
-		SimpleQuiz q = new SimpleQuiz();
+		GeomQuiz q = new GeomQuiz();
 		q.setCorrectAnswer(String.valueOf(shape.getRotationalSymmetryCount()));
-		String question = bundle.getString("geom2d.question.numofrotationalsymmetry");
+		String question = bundle.getString("geom.shape2d.question.rotationalsymmetrycount");
+		question = question.replace("#shape", shape.getName());
 		q.setQuestion(question);
 		q.setDifficultyLevel(QuizLevel.MUDAH);
-		q.setLessonSubcategory(bundle.getString("geom2d."+shape.getName().toLowerCase()));
+		q.setLessonSubcategory(bundle.getString("geom.shape2d."+shape.getName().toLowerCase()));
 		q.setLessonClassifier(bundle.getString("mathelementary"));
 		q.setLessonGrade(4);
 		q.setSubCategoryOrder(5);
 		q.setLocale(loc);
-		q.setLessonCategory(bundle.getString("geom2d"));
+		q.setLessonCategory(bundle.getString("geom.shape2d"));
 		return q;
 	}
 

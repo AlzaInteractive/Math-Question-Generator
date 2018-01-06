@@ -69,10 +69,11 @@ public class WhichGeom2DShapeQuestionFactory implements IQuestionFactory {
 			if (st==0) {
 				st = defnumq;
 			}
-			Shapes2D s = shapes.get(st-1);
+			Shapes2D s = shapes.get(st-1).createExample();
+			s.hideTextsAndMeasurements();
 			//System.out.println(s.toString());
 			MultipleChoiceGeomQuiz q = new MultipleChoiceGeomQuiz();
-			q.setGeomShape(s.createExample().getPaths());
+			q.setGeomShape(s.getPaths());
 			q.setQuestion(bundle.getString("geom.whichshape"));
 			q.setCorrectAnswer(bundle.getString("geom."+s.getName()));
 			q.setChoices(getChoices());

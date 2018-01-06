@@ -8,6 +8,7 @@ import java.awt.Stroke;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import java.awt.Canvas;
@@ -21,6 +22,9 @@ import java.util.List;
 
 import javax.swing.JButton;
 
+import com.alza.quiz.model.GameLevel;
+import com.alza.quiz.model.GameLevelQuestionFactory;
+import com.alza.quiz.model.GeomQuiz;
 import com.alza.quiz.model.MultipleChoiceGeomQuiz;
 import com.alza.quiz.model.MultipleChoiceQuiz;
 import com.alza.quiz.model.Quiz;
@@ -45,6 +49,7 @@ import com.alza.quiz.model.geom.Triangle;
 import com.alza.quiz.model.geom.TriangularPrism;
 import com.alza.quiz.qfactory.IQuestionFactory;
 import com.alza.quiz.qfactory.Util;
+import com.alza.quiz.qfactory.geom.GeomGameLevel;
 import com.alza.quiz.qfactory.geom.UtilGeom;
 import com.alza.quiz.test.Shape2DTest;
 
@@ -52,6 +57,7 @@ public class XXX extends JFrame {
 
 	private JPanel contentPane;
 	private JPanel mg;
+	JTextField soal;
 	private List<Quiz> ql;
 	int qnum;
 	private Canvas canvas;
@@ -94,30 +100,53 @@ public class XXX extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				showGeom();
+				showQuestion();
 			}
 		});
+		soal = new JTextField();
+		contentPane.add(soal,BorderLayout.SOUTH);
 		
 	}
 	
 	private void perf() {
-		List<IQuestionFactory> lqf = Util.getAllGeometryQuestionFactory();
 		ql = new ArrayList<Quiz>();
+		GameLevel gl = GeomGameLevel.createGameLevels(getLocale()).get(1);
+		List<GameLevelQuestionFactory> glqf = gl.getLevelQF();
+		for (GameLevelQuestionFactory glq : glqf) {
+			ql.addAll(glq.getqFactory().generateQuizList());
+		}
+		/**
+		List<IQuestionFactory> lqf = GeomGameLevel.createGameLevels(getLocale()).get(0).getLevelQF().;
+		
 		for (IQuestionFactory iQuestionFactory : lqf) {
 			ql.addAll(iQuestionFactory.generateQuizList());
-		}
+		}**/
 		Collections.sort(ql);
+		System.out.println(ql.size());
 		qnum=0;
 	}
-	private void showGeom() {
-		MultipleChoiceGeomQuiz mq = (MultipleChoiceGeomQuiz) ql.get(qnum);
+	private void showQuestion() {
+		GeomQuiz mq;
+		try {
+			mq = (GeomQuiz) ql.get(qnum);
+		} catch (Exception e) {
+			System.out.println(ql.get(qnum).getClass()+" "+ql.get(qnum).getQuestion());
+			qnum++;
+			return;
+		}
+		
 		List<Path> o = mq.getGeomShape();	
+		if (o == null) {
+			System.out.println(mq.getQuestion());
+			return;
+		}
 		//List<Path> o = new Trapezoid().createExample().getPaths();
 		//List<Path> o = new Cuboid().createExample().getPaths();
 		drawShape(o);
 		if (qnum==ql.size()-1) {
 			perf();
 		} else qnum++;
+		soal.setText(mq.getQuestion());
 	}
 
 	private void drawShape(List<Path> paths)  {

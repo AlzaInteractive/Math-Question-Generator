@@ -49,7 +49,7 @@ public class SquareBasicProperties implements IQuestionFactory {
 	@Override
 	public List<Quiz> generateQuizList() {
 		List<Quiz> quizListSrc = new ArrayList<Quiz>();
-		BasicPropertyOfShape2D bp = new BasicPropertyOfShape2D(loc, new Square());
+		BasicPropertyOfShape2D bp = new BasicPropertyOfShape2D(loc, new Square().createExample());
 		quizListSrc.add(bp.numberOfEdges());
 		quizListSrc.add(bp.numberOfReflectionalSymmetry());
 		quizListSrc.add(bp.numberOfRotationalSymmetry());
@@ -69,15 +69,15 @@ public class SquareBasicProperties implements IQuestionFactory {
 		MultipleChoiceQuiz q = new MultipleChoiceQuiz();
 		q.setCorrectAnswer(String.valueOf(new Square().getEdgeCount()));
 		q.setChoices("45", "90", "180", "100");
-		String question = bundle.getString("geom2d.squareangle");
+		String question = bundle.getString("geom.shape2d.question.square.angle");
 		q.setQuestion(question);
 		q.setDifficultyLevel(QuizLevel.MUDAH);
-		q.setLessonSubcategory(bundle.getString("geom2d.square"));
+		q.setLessonSubcategory(bundle.getString("geom.shape2d"));
 		q.setLessonClassifier(bundle.getString("mathelementary"));
 		q.setLessonGrade(4);
 		q.setSubCategoryOrder(5);
 		q.setLocale(loc);
-		q.setLessonCategory(bundle.getString("geom2d"));
+		q.setLessonCategory(bundle.getString("geom"));
 		return q;
 	}
 

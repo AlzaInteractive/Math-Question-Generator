@@ -13,30 +13,30 @@ import com.alza.quiz.model.geom.Geom;
 import com.alza.quiz.model.geom.Square;
 import com.alza.quiz.qfactory.IQuestionFactory;
 
-public class SquareFindPerimeterKnownLength implements IQuestionFactory{
+public class SquareFindLengthKnownPerimeter implements IQuestionFactory {
 	private int numq = 2;
 	Locale loc;
 	ResourceBundle bundle;
-	
-	public SquareFindPerimeterKnownLength() {
+
+	public SquareFindLengthKnownPerimeter() {
 		this.loc = new Locale("in", "ID");
 		initStringFromLocale();
 	}
-	
-	public SquareFindPerimeterKnownLength(Locale loc) {
+
+	public SquareFindLengthKnownPerimeter(Locale loc) {
 		super();
 		this.loc = loc;
 		initStringFromLocale();
 	}
 
-	private void initStringFromLocale(){
+	private void initStringFromLocale() {
 		bundle = ResourceBundle.getBundle("lang.langbundle", loc);
 	}
-	
+
 	@Override
 	public Quiz generateQuiz() {
 		List<Quiz> quizList = generateQuizList();
-		int rnd = new Random().nextInt(quizList.size()); 
+		int rnd = new Random().nextInt(quizList.size());
 		return quizList.get(rnd);
 	}
 
@@ -48,16 +48,14 @@ public class SquareFindPerimeterKnownLength implements IQuestionFactory{
 	@Override
 	public List<Quiz> generateQuizList() {
 		List<Quiz> quizList = new ArrayList<Quiz>();
-		for (int i=0;i<numq;i++){
+		for (int i = 0; i < numq; i++) {
 			Square sq = (Square) new Square().createExample();
 			sq.hideTextsAndMeasurements();
-			sq.setShowLengthValue(true);
 			GeomQuiz q = new GeomQuiz();
 			q.setGeomShape(sq.getPaths());
-			q.setCorrectAnswer(Geom.formatMeasurement(sq.getPerimeter()));
-			String question = bundle.getString("geom.shape2d.question.findperimeter");
-			question = question.replaceAll("#shape", sq.getName());
-			q.setQuestion(question);
+			q.setCorrectAnswer(Geom.formatMeasurement(sq.getLength()));
+			String question = bundle.getString("geom.shape2d.question.square.length.fromperimeter");
+			q.setQuestion(question + " " + Geom.formatMeasurement(sq.getPerimeter()));
 			q.setDifficultyLevel(QuizLevel.MUDAH);
 			q.setLessonSubcategory(bundle.getString("geom.shape2d.square"));
 			q.setLessonClassifier(bundle.getString("mathelementary"));
@@ -69,11 +67,11 @@ public class SquareFindPerimeterKnownLength implements IQuestionFactory{
 		}
 		return quizList;
 	}
-	 @Override
-		public List<Quiz> generateQuizList(int numOfQuestion) {
-			numq = numOfQuestion;
-			return generateQuizList();
-		}
 
+	@Override
+	public List<Quiz> generateQuizList(int numOfQuestion) {
+		numq = numOfQuestion;
+		return generateQuizList();
+	}
 
 }
