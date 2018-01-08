@@ -8,6 +8,7 @@ import java.util.ResourceBundle;
 import com.alza.quiz.model.GameLevel;
 import com.alza.quiz.qfactory.geom.rectangle.RectangleBasicProperties;
 import com.alza.quiz.qfactory.geom.rectangle.RectangleFindAreaKnownLengthWidth;
+import com.alza.quiz.qfactory.geom.rectangle.RectangleFindDiagonalKnownLengthWidth;
 import com.alza.quiz.qfactory.geom.rectangle.RectangleFindLengthKnownArea;
 import com.alza.quiz.qfactory.geom.rectangle.RectangleFindLengthKnownPerimeter;
 import com.alza.quiz.qfactory.geom.rectangle.RectangleFindPerimeterKnownLengthWidth;
@@ -39,7 +40,7 @@ public class GeomGameLevel {
 		// square
 		name = bundle.getString("geom.shape2d.level.square.title");
 		desc = bundle.getString("geom.shape2d.level.square.desc");
-		g = GameLevel.createSingleQF(0, name, desc, new SquareBasicProperties(loc), 6);
+		g = GameLevel.createSingleQF(0, name, desc, new SquareBasicProperties(loc), 4);
 		g.addQuestionFactory(new SquareFindAreaKnownLength(loc), 2);
 		g.addQuestionFactory(new SquareFindPerimeterKnownLength(loc), 2);
 		g.addQuestionFactory(new SquareFindLengthKnownArea(loc), 2);
@@ -54,6 +55,7 @@ public class GeomGameLevel {
 		g.addQuestionFactory(new RectangleFindPerimeterKnownLengthWidth(loc), 2);
 		g.addQuestionFactory(new RectangleFindLengthKnownArea(loc), 2);
 		g.addQuestionFactory(new RectangleFindLengthKnownPerimeter(loc), 2);
+		g.addQuestionFactory(new RectangleFindDiagonalKnownLengthWidth(loc), 2);
 		lgl.add(g);
 
 		return lgl;

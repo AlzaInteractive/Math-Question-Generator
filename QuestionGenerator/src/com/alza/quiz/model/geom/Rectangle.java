@@ -85,6 +85,9 @@ public class Rectangle implements Shapes2D{
 	public String getName() {
 		return "rectangle";
 	}
+	public double getDiagonalLength() {
+		return Math.sqrt((length*length)+(width*width));
+	}
 	@Override
 	public Shapes2D createExample() {
 		int w,l;
