@@ -66,6 +66,7 @@ public class BasicPropertyOfShape2D {
 	
 	public Quiz numberOfRotationalSymmetry(){
 		GeomQuiz q = new GeomQuiz();
+		q.setGeomShape(shape.getPaths());
 		q.setCorrectAnswer(String.valueOf(shape.getRotationalSymmetryCount()));
 		String question = bundle.getString("geom.shape2d.question.rotationalsymmetrycount");
 		question = question.replace("#shape", shape.getName());

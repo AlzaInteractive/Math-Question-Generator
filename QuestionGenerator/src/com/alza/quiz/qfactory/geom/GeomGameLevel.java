@@ -17,6 +17,15 @@ import com.alza.quiz.qfactory.geom.square.SquareFindAreaKnownLength;
 import com.alza.quiz.qfactory.geom.square.SquareFindLengthKnownArea;
 import com.alza.quiz.qfactory.geom.square.SquareFindLengthKnownPerimeter;
 import com.alza.quiz.qfactory.geom.square.SquareFindPerimeterKnownLength;
+import com.alza.quiz.qfactory.geom.triangle.TriangleBasicProperties;
+import com.alza.quiz.qfactory.geom.triangle.TriangleFindAreaKnownBaseHeight;
+import com.alza.quiz.qfactory.geom.triangle.TriangleFindBaseLengthKnownArea;
+import com.alza.quiz.qfactory.geom.triangle.TriangleFindHeightLengthKnownArea;
+import com.alza.quiz.qfactory.geom.triangle.TriangleFindMissingAngle;
+import com.alza.quiz.qfactory.geom.triangle.TrianglePhytagoreanFindArea;
+import com.alza.quiz.qfactory.geom.triangle.TrianglePhytagoreanFindRightEdge;
+import com.alza.quiz.qfactory.geom.triangle.TriangleRightObtuseAcute;
+import com.alza.quiz.qfactory.geom.triangle.TriangleScaleneIscoscelesEquilateral;
 
 /**
  * 
@@ -56,6 +65,20 @@ public class GeomGameLevel {
 		g.addQuestionFactory(new RectangleFindLengthKnownArea(loc), 2);
 		g.addQuestionFactory(new RectangleFindLengthKnownPerimeter(loc), 2);
 		g.addQuestionFactory(new RectangleFindDiagonalKnownLengthWidth(loc), 2);
+		lgl.add(g);
+
+		// triangle
+		name = bundle.getString("geom.shape2d.level.triangle.title");
+		desc = bundle.getString("geom.shape2d.level.triangle.desc");
+		g = GameLevel.createSingleQF(0, name, desc, new TriangleBasicProperties(loc), 1);
+		g.addQuestionFactory(new TriangleScaleneIscoscelesEquilateral(loc), 1);
+		g.addQuestionFactory(new TriangleRightObtuseAcute(loc), 1);
+		g.addQuestionFactory(new TriangleFindMissingAngle(loc), 1);
+		g.addQuestionFactory(new TriangleFindAreaKnownBaseHeight(loc), 1);
+		g.addQuestionFactory(new TriangleFindBaseLengthKnownArea(loc), 1);
+		g.addQuestionFactory(new TriangleFindHeightLengthKnownArea(loc), 1);
+		g.addQuestionFactory(new TrianglePhytagoreanFindArea(loc), 1);
+		g.addQuestionFactory(new TrianglePhytagoreanFindRightEdge(loc), 1);
 		lgl.add(g);
 
 		return lgl;

@@ -15,7 +15,7 @@ import com.alza.quiz.qfactory.IQuestionFactory;
 import com.alza.quiz.qfactory.geom.BasicPropertyOfShape2D;
 
 public class SquareBasicProperties implements IQuestionFactory {
-	private int numq = 2;
+	private int numq = 4;
 	Locale loc;
 	ResourceBundle bundle;
 

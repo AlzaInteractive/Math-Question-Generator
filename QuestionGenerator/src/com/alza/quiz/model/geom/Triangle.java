@@ -1,6 +1,7 @@
 package com.alza.quiz.model.geom;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -10,11 +11,11 @@ public class Triangle implements Shapes2D{
 	private boolean showVerticeLabel=true;
 	private boolean showHeightLength=true;
 	private boolean showBaselineLength=true;
-	public static final int SCALENE = 1;
-	public static final int ISCOSCELES = 2;
-	public static final int EQUILATERAL = 3;
+	private boolean showLeftEdgeLength=true;
+	private boolean showRightEdgeLength=true;
+	
 	public Triangle() {
-		// TODO Auto-generated constructor stub
+		
 	}
 	/**
 	 * 
@@ -34,13 +35,25 @@ public class Triangle implements Shapes2D{
 		this.height = height;
 		this.shear = baseLine/2;
 	}
+	public Triangle(double sideAB, double angleA, double angleB, double angleC) {
+		double ratio = sideAB / Math.sin(Math.toRadians(angleC));
+		//double sideBC = ratio * Math.sin(Math.toRadians(angleA));
+		double sideAC = ratio * Math.sin(Math.toRadians(angleB));
+		this.baseLine = sideAC;
+		this.height = sideAB * Math.sin(Math.toRadians(angleA));
+		this.shear = sideAB * Math.cos(Math.toRadians(angleA));
+	}
+	
 	@Override
 	public void hideTextsAndMeasurements() {
 		showVerticeLabel = false;
 		showHeightLine = false;
 		showHeightLength = false;
 		showBaselineLength = false;
+		showLeftEdgeLength = false;
+		showRightEdgeLength = false;
 	}
+	
 	public double getBaseLine() {
 		return baseLine;
 	}
@@ -58,6 +71,24 @@ public class Triangle implements Shapes2D{
 	}
 	public void setShear(double shear) {
 		this.shear = shear;
+	}
+	public boolean isShowVerticeLabel() {
+		return showVerticeLabel;
+	}
+	public void setShowVerticeLabel(boolean showVerticeLabel) {
+		this.showVerticeLabel = showVerticeLabel;
+	}
+	public boolean isShowLeftEdgeLength() {
+		return showLeftEdgeLength;
+	}
+	public void setShowLeftEdgeLength(boolean showLeftEdgeLength) {
+		this.showLeftEdgeLength = showLeftEdgeLength;
+	}
+	public boolean isShowRightEdgeLength() {
+		return showRightEdgeLength;
+	}
+	public void setShowRightEdgeLength(boolean showRightEdgeLength) {
+		this.showRightEdgeLength = showRightEdgeLength;
 	}
 	public boolean isShowHeightLine() {
 		return showHeightLine;
@@ -96,14 +127,14 @@ public class Triangle implements Shapes2D{
 		return Math.sqrt((height*height)+((baseLine-shear)*(baseLine-shear)));
 	}
 	
-	public int getType() {
+	public EdgeLengthRatio getType() {
 		if (baseLine==getLeftEdge()||baseLine==getRightEdge()) {
 			if (getLeftEdge()==getRightEdge()) {
-				return EQUILATERAL;
+				return EdgeLengthRatio.equilateral;
 			}
-			return ISCOSCELES;
+			return EdgeLengthRatio.iscosceles;
 		}
-		return SCALENE;
+		return EdgeLengthRatio.scalene;
 	}
 	
 
@@ -116,20 +147,29 @@ public class Triangle implements Shapes2D{
 	@Override
 	public int getReflectionalSymmetryCount() {
 		switch (getType()) {
-		case EQUILATERAL:
+		case equilateral:
 			return 3;
-		case ISCOSCELES:
+		case iscosceles:
 			return 1;
 		default:
 			return 0;
 		}
 		
 	}
-
+	public AngleType getAngleType() {
+		double[] edges = {baseLine,getLeftEdge(),getRightEdge()};
+		Arrays.sort(edges);
+		double c = edges[2] * edges[2];
+		double b = edges[1] * edges[1];
+		double a = edges[0] * edges[0];
+		if (c > (a+b)) return AngleType.obtuse;
+		else if (c < (a+b)) return AngleType.acute;
+		else return AngleType.right;
+	}
 	@Override
 	public int getRotationalSymmetryCount() {
 		switch (getType()) {
-		case EQUILATERAL:
+		case equilateral:
 			return 3;
 		default:
 			return 0;
@@ -146,6 +186,23 @@ public class Triangle implements Shapes2D{
 		int ht = ThreadLocalRandom.current().nextInt(5, 26);
 		int sh = ThreadLocalRandom.current().nextInt(0, bs+1);
 		return new Triangle(bs, ht, sh);
+	}
+	public Shapes2D createExample(EdgeLengthRatio type) {
+		Shapes2D tr = null;
+		if(type==EdgeLengthRatio.equilateral) {
+			double bs = ThreadLocalRandom.current().nextInt(5, 26);
+			double shear = bs/2;
+			double height = Math.sqrt(5 * bs * bs /4); 
+			tr = new Triangle(bs, height, shear);
+		} else if (type==EdgeLengthRatio.iscosceles) {
+			double bs = ThreadLocalRandom.current().nextInt(5, 26);
+			double shear = bs/2;
+			double height = ThreadLocalRandom.current().nextInt((int)(bs+1), (int)(bs*2));
+			tr = new Triangle(bs, height, shear);
+		} else {
+			tr = createExample();
+		}
+		return tr;
 	}
 	public String toString(){
 		String s = "Triangle with "+this.baseLine+" base"+this.height+" height"+this.shear+" shear";
@@ -165,6 +222,7 @@ public class Triangle implements Shapes2D{
 	public int getEdgeCount() {
 		return 3;
 	}
+	
 	@Override
 	public List<Path> getPaths() {
 		List<Path> l = new ArrayList<Path>();
@@ -186,8 +244,20 @@ public class Triangle implements Shapes2D{
 		if (showBaselineLength) {
 			l.add(Path.createTextPath(Geom.formatMeasurement(baseLine), getVertices().get(2).move(baseLine/2, 0), Path.SHIFT_DOWN,Path.SHIFT_NONE));
 		}
-		
+		if (showLeftEdgeLength) {
+			l.add(Path.createTextPath(Geom.formatMeasurement(getLeftEdge()),
+					Point2D.getMidPoint(getVertices().get(0),getVertices().get(2)),Path.SHIFT_UP,Path.SHIFT_LEFT));
+		}
+		if (showRightEdgeLength) {
+			l.add(Path.createTextPath(Geom.formatMeasurement(getRightEdge()),
+					Point2D.getMidPoint(getVertices().get(0),getVertices().get(1)),Path.SHIFT_UP,Path.SHIFT_RIGHT));
+		}
 		return l;
 	}
-
+	public enum AngleType{
+		acute, obtuse, right
+	}
+	public enum EdgeLengthRatio{
+		equilateral, iscosceles,scalene 
+	}
 }

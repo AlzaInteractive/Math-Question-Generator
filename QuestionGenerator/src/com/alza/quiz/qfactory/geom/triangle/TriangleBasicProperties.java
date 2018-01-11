@@ -1,4 +1,4 @@
-package com.alza.quiz.qfactory.geom.rectangle;
+package com.alza.quiz.qfactory.geom.triangle;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -6,25 +6,26 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Random;
 import java.util.ResourceBundle;
+import java.util.concurrent.ThreadLocalRandom;
 
-import com.alza.quiz.model.MultipleChoiceQuiz;
 import com.alza.quiz.model.Quiz;
 import com.alza.quiz.model.QuizLevel;
-import com.alza.quiz.model.geom.Rectangle;
+import com.alza.quiz.model.geom.Triangle;
+import com.alza.quiz.model.geom.Triangle.EdgeLengthRatio;
 import com.alza.quiz.qfactory.IQuestionFactory;
 import com.alza.quiz.qfactory.geom.BasicPropertyOfShape2D;
 
-public class RectangleBasicProperties implements IQuestionFactory {
-	private int numq = 4;
+public class TriangleBasicProperties implements IQuestionFactory {
+	private int numq = 2;
 	Locale loc;
 	ResourceBundle bundle;
 
-	public RectangleBasicProperties() {
+	public TriangleBasicProperties() {
 		this.loc = new Locale("in", "ID");
 		initStringFromLocale();
 	}
 
-	public RectangleBasicProperties(Locale loc) {
+	public TriangleBasicProperties(Locale loc) {
 		super();
 		this.loc = loc;
 		initStringFromLocale();
@@ -49,11 +50,29 @@ public class RectangleBasicProperties implements IQuestionFactory {
 	@Override
 	public List<Quiz> generateQuizList() {
 		List<Quiz> quizListSrc = new ArrayList<Quiz>();
-		BasicPropertyOfShape2D bp = new BasicPropertyOfShape2D(loc, new Rectangle().createExample());
+		Triangle tr = new Triangle();
+		int type = ThreadLocalRandom.current().nextInt(0, 2);
+		
+		if (type==0) {
+			tr = (Triangle) tr.createExample(EdgeLengthRatio.equilateral);
+			tr.setShowBaselineLength(true);
+			tr.setShowLeftEdgeLength(true);
+			tr.setShowRightEdgeLength(true);
+		}
+			
+		else {
+			tr = (Triangle) tr.createExample(EdgeLengthRatio.iscosceles);
+			tr.setShowLeftEdgeLength(true);
+			tr.setShowRightEdgeLength(true);
+		}
+			
+		
+		BasicPropertyOfShape2D bp = new BasicPropertyOfShape2D(loc, tr);
+		System.out.println(tr.getBaseLine()+" : "+tr.getHeight());
 		quizListSrc.add(bp.numberOfEdges());
 		quizListSrc.add(bp.numberOfReflectionalSymmetry());
 		quizListSrc.add(bp.numberOfRotationalSymmetry());
-		quizListSrc.add(verticeAngle());
+		//quizListSrc.add(totalAngle());
 		Collections.shuffle(quizListSrc);
 		List<Quiz> ql = new ArrayList<Quiz>();
 		if (numq>quizListSrc.size()) {
@@ -63,22 +82,6 @@ public class RectangleBasicProperties implements IQuestionFactory {
 			ql.add(quizListSrc.get(i));
 		}
 		return ql;
-	}
-
-	private Quiz verticeAngle() {
-		MultipleChoiceQuiz q = new MultipleChoiceQuiz();
-		q.setCorrectAnswer("90");
-		q.setChoices("45", "90", "180", "100");
-		String question = bundle.getString("geom.shape2d.question.rectangle.angle");
-		q.setQuestion(question);
-		q.setDifficultyLevel(QuizLevel.MUDAH);
-		q.setLessonSubcategory(bundle.getString("geom.shape2d"));
-		q.setLessonClassifier(bundle.getString("mathelementary"));
-		q.setLessonGrade(4);
-		q.setSubCategoryOrder(5);
-		q.setLocale(loc);
-		q.setLessonCategory(bundle.getString("geom"));
-		return q;
 	}
 
 	@Override

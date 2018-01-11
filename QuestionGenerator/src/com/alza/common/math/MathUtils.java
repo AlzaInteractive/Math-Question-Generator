@@ -1,5 +1,6 @@
 package com.alza.common.math;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.TreeMap;
 import java.util.concurrent.ThreadLocalRandom;
@@ -110,6 +111,22 @@ public class MathUtils {
 			return f;
 		}
 		return null;
+	}
+	/**
+	 * 
+	 * @param ints
+	 * @return maximum integer from given array
+	 */
+	public static int findMax(int...ints) {
+		int max = ints[0];
+		for (int i = 1; i < ints.length; i++) {
+			if (max<ints[i]) max = ints[i];
+		}
+		return max;
+	}
+	public static int[] sort(int...ints) {
+		Arrays.sort(ints);
+		return ints;
 	}
 	
 	private final static TreeMap<Integer, String> romansMap = new TreeMap<Integer, String>();
