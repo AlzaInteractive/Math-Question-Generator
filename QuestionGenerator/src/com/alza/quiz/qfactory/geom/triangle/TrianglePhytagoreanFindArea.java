@@ -52,7 +52,8 @@ public class TrianglePhytagoreanFindArea implements IQuestionFactory {
 		for (int i = 0; i < numq; i++) {
 			Triangle shp;
 			int phyt[] = MathUtils.generateRandomPhytagoreanTriples(3, 5);
-			shp = new Triangle(phyt[2],phyt[0]);
+			System.out.println(phyt[0]+" "+phyt[1]+" "+phyt[2]);
+			shp = new Triangle(phyt[0],phyt[1],0);
 			shp.hideTextsAndMeasurements();
 			shp.setShowLeftEdgeLength(true);
 			shp.setShowRightEdgeLength(true);

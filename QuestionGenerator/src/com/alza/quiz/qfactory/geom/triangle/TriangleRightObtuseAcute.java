@@ -15,7 +15,7 @@ import com.alza.quiz.model.geom.Triangle;
 import com.alza.quiz.qfactory.IQuestionFactory;
 
 public class TriangleRightObtuseAcute implements IQuestionFactory {
-	private int numq = 2;
+	private int numq = 3;
 	Locale loc;
 	ResourceBundle bundle;
 
@@ -54,14 +54,17 @@ public class TriangleRightObtuseAcute implements IQuestionFactory {
 			//prepare steps of 12 * 15 degrees
 			int a,b,c;
 			a = ThreadLocalRandom.current().nextInt(1,9);
-			b = ThreadLocalRandom.current().nextInt(a,12);
-			c = ThreadLocalRandom.current().nextInt(b,13);
+			b = ThreadLocalRandom.current().nextInt(a+1,12);
+			c = 12-b;
 			//calculate angle 
 			double angleA,angleB,angleC;
 			angleA = 15 * a;
 			angleB = 15 * (b-a);
-			angleC = 15 * (c-b);
+			angleC = 15 * (c);
 			//prepare triangle
+			double totAngle = angleA+angleB+angleC;
+			System.out.println(a+" "+b+" "+c);
+			System.out.println(angleA+" "+angleB+" "+angleC+" "+totAngle);
 			shp = new Triangle(1,angleA,angleB,angleC);
 			shp.hideTextsAndMeasurements();
 			shp.setShowVerticeLabel(true);

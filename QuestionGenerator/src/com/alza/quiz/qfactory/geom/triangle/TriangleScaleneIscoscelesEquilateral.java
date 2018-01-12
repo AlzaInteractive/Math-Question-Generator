@@ -15,7 +15,7 @@ import com.alza.quiz.model.geom.Triangle.EdgeLengthRatio;
 import com.alza.quiz.qfactory.IQuestionFactory;
 
 public class TriangleScaleneIscoscelesEquilateral implements IQuestionFactory {
-	private int numq = 2;
+	private int numq = 3;
 	Locale loc;
 	ResourceBundle bundle;
 
@@ -67,7 +67,7 @@ public class TriangleScaleneIscoscelesEquilateral implements IQuestionFactory {
 			shp.setShowRightEdgeLength(true);
 			MultipleChoiceGeomQuiz q = new MultipleChoiceGeomQuiz();
 			q.setGeomShape(shp.getPaths());
-			q.setCorrectAnswer(shp.getAngleType().toString());
+			q.setCorrectAnswer(shp.getType().toString());
 			String question = bundle.getString("geom.shape2d.question.triangle.angle.equiscoscalene");
 			q.setChoices(Triangle.EdgeLengthRatio.equilateral.toString(),
 					Triangle.EdgeLengthRatio.iscosceles.toString(),

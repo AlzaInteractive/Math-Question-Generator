@@ -1,12 +1,10 @@
 package com.alza.quiz.qfactory.geom.triangle;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 import java.util.Random;
 import java.util.ResourceBundle;
-import java.util.concurrent.ThreadLocalRandom;
 
 import com.alza.quiz.model.Quiz;
 import com.alza.quiz.model.QuizLevel;
@@ -14,9 +12,10 @@ import com.alza.quiz.model.geom.Triangle;
 import com.alza.quiz.model.geom.Triangle.EdgeLengthRatio;
 import com.alza.quiz.qfactory.IQuestionFactory;
 import com.alza.quiz.qfactory.geom.BasicPropertyOfShape2D;
+import com.alza.quiz.util.CommonFunctionAndValues;
 
 public class TriangleBasicProperties implements IQuestionFactory {
-	private int numq = 2;
+	private int numq = 3;
 	Locale loc;
 	ResourceBundle bundle;
 
@@ -50,30 +49,34 @@ public class TriangleBasicProperties implements IQuestionFactory {
 	@Override
 	public List<Quiz> generateQuizList() {
 		List<Quiz> quizListSrc = new ArrayList<Quiz>();
+		Triangle tr1,tr2,tr3;
 		Triangle tr = new Triangle();
-		int type = ThreadLocalRandom.current().nextInt(0, 2);
+		//int type = ThreadLocalRandom.current().nextInt(0, 3);
+		tr1 = (Triangle) tr.createExample(EdgeLengthRatio.equilateral);
+		tr2 = (Triangle) tr.createExample(EdgeLengthRatio.iscosceles);
+		tr3 = (Triangle) tr.createExample(EdgeLengthRatio.scalene);
 		
-		if (type==0) {
-			tr = (Triangle) tr.createExample(EdgeLengthRatio.equilateral);
-			tr.setShowBaselineLength(true);
-			tr.setShowLeftEdgeLength(true);
-			tr.setShowRightEdgeLength(true);
-		}
+		Triangle[] trs = {tr1,tr2,tr3};
+		CommonFunctionAndValues.shuffleArray(trs);
+		for (int i = 0; i < trs.length; i++) {
+			Triangle t = trs[i];
+			t.hideTextsAndMeasurements();
 			
-		else {
-			tr = (Triangle) tr.createExample(EdgeLengthRatio.iscosceles);
-			tr.setShowLeftEdgeLength(true);
-			tr.setShowRightEdgeLength(true);
-		}
-			
-		
-		BasicPropertyOfShape2D bp = new BasicPropertyOfShape2D(loc, tr);
-		System.out.println(tr.getBaseLine()+" : "+tr.getHeight());
-		quizListSrc.add(bp.numberOfEdges());
-		quizListSrc.add(bp.numberOfReflectionalSymmetry());
-		quizListSrc.add(bp.numberOfRotationalSymmetry());
-		//quizListSrc.add(totalAngle());
-		Collections.shuffle(quizListSrc);
+			BasicPropertyOfShape2D bp = new BasicPropertyOfShape2D(loc, t);
+			if (i==0) {
+				quizListSrc.add(bp.numberOfEdges());
+			} else {
+				t.setShowBaselineLength(true);
+				t.setShowLeftEdgeLength(true);
+				t.setShowRightEdgeLength(true);
+				if (i==1) {
+					quizListSrc.add(bp.numberOfReflectionalSymmetry());
+				} else {
+					quizListSrc.add(bp.numberOfRotationalSymmetry());
+				}
+			}
+		}	
+//		Collections.shuffle(quizListSrc);
 		List<Quiz> ql = new ArrayList<Quiz>();
 		if (numq>quizListSrc.size()) {
 			numq = quizListSrc.size();

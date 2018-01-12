@@ -54,13 +54,13 @@ public class TriangleFindMissingAngle implements IQuestionFactory {
 			//prepare steps of 12 * 15 degrees
 			int a,b,c;
 			a = ThreadLocalRandom.current().nextInt(1,9);
-			b = ThreadLocalRandom.current().nextInt(a,12);
-			c = ThreadLocalRandom.current().nextInt(b,13);
+			b = ThreadLocalRandom.current().nextInt(a+1,12);
+			c = 12-b;
 			//calculate angle 
 			double angleA,angleB,angleC;
 			angleA = 15 * a;
 			angleB = 15 * (b-a);
-			angleC = 15 * (c-b);
+			angleC = 15 * c;
 			//prepare triangle
 			shp = new Triangle(1,angleA,angleB,angleC);
 			shp.hideTextsAndMeasurements();

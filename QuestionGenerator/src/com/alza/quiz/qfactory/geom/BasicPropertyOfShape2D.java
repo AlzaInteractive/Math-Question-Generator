@@ -23,7 +23,7 @@ public class BasicPropertyOfShape2D {
 		this.loc = loc;
 		initStringFromLocale();
 		this.shape = shape;
-		shape.hideTextsAndMeasurements();
+		//shape.hideTextsAndMeasurements();
 	}
 
 	private void initStringFromLocale(){

@@ -5,6 +5,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
+import com.alza.common.math.MathUtils;
+
 public class Triangle implements Shapes2D{
 	private double baseLine,height,shear;
 	private boolean showHeightLine=true;
@@ -38,10 +40,10 @@ public class Triangle implements Shapes2D{
 	public Triangle(double sideAB, double angleA, double angleB, double angleC) {
 		double ratio = sideAB / Math.sin(Math.toRadians(angleC));
 		//double sideBC = ratio * Math.sin(Math.toRadians(angleA));
-		double sideAC = ratio * Math.sin(Math.toRadians(angleB));
-		this.baseLine = sideAC;
-		this.height = sideAB * Math.sin(Math.toRadians(angleA));
-		this.shear = sideAB * Math.cos(Math.toRadians(angleA));
+		double sideBC = ratio * Math.sin(Math.toRadians(angleA));
+		this.baseLine = sideBC;
+		this.height = sideAB * Math.sin(Math.toRadians(angleB));
+		this.shear = baseLine - sideAB * Math.cos(Math.toRadians(angleB));
 	}
 	
 	@Override
@@ -128,10 +130,13 @@ public class Triangle implements Shapes2D{
 	}
 	
 	public EdgeLengthRatio getType() {
-		if (baseLine==getLeftEdge()||baseLine==getRightEdge()) {
-			if (getLeftEdge()==getRightEdge()) {
-				return EdgeLengthRatio.equilateral;
-			}
+		double d = 0.000001;	
+		if (Math.abs(baseLine-getLeftEdge())<d
+				&& Math.abs(baseLine-getRightEdge())<d) {
+			return EdgeLengthRatio.equilateral;
+		} else if (Math.abs(baseLine-getLeftEdge())<d
+				||Math.abs(baseLine-getRightEdge())<d
+				||Math.abs(getLeftEdge()-getRightEdge())<d) {
 			return EdgeLengthRatio.iscosceles;
 		}
 		return EdgeLengthRatio.scalene;
@@ -157,14 +162,22 @@ public class Triangle implements Shapes2D{
 		
 	}
 	public AngleType getAngleType() {
+		double d = 0.001;
 		double[] edges = {baseLine,getLeftEdge(),getRightEdge()};
 		Arrays.sort(edges);
 		double c = edges[2] * edges[2];
 		double b = edges[1] * edges[1];
 		double a = edges[0] * edges[0];
-		if (c > (a+b)) return AngleType.obtuse;
-		else if (c < (a+b)) return AngleType.acute;
-		else return AngleType.right;
+		double x = c - (a+b);
+		if (x > d) {
+			return AngleType.obtuse;
+		}
+		else if (x < -d) {
+			return AngleType.acute;
+		}
+		else {
+			return AngleType.right;
+		}
 	}
 	@Override
 	public int getRotationalSymmetryCount() {
@@ -191,13 +204,12 @@ public class Triangle implements Shapes2D{
 		Shapes2D tr = null;
 		if(type==EdgeLengthRatio.equilateral) {
 			double bs = ThreadLocalRandom.current().nextInt(5, 26);
-			double shear = bs/2;
-			double height = Math.sqrt(5 * bs * bs /4); 
-			tr = new Triangle(bs, height, shear);
+			tr = new Triangle(bs, 60, 60, 60);
 		} else if (type==EdgeLengthRatio.iscosceles) {
-			double bs = ThreadLocalRandom.current().nextInt(5, 26);
-			double shear = bs/2;
-			double height = ThreadLocalRandom.current().nextInt((int)(bs+1), (int)(bs*2));
+			int[] pyth = MathUtils.generateRandomPhytagoreanTriples(3, 5);
+			double bs = 2 * pyth[1];
+			double shear = pyth[1];
+			double height = pyth[0];
 			tr = new Triangle(bs, height, shear);
 		} else {
 			tr = createExample();

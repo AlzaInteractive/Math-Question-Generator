@@ -70,15 +70,15 @@ public class GeomGameLevel {
 		// triangle
 		name = bundle.getString("geom.shape2d.level.triangle.title");
 		desc = bundle.getString("geom.shape2d.level.triangle.desc");
-		g = GameLevel.createSingleQF(0, name, desc, new TriangleBasicProperties(loc), 1);
-		g.addQuestionFactory(new TriangleScaleneIscoscelesEquilateral(loc), 1);
-		g.addQuestionFactory(new TriangleRightObtuseAcute(loc), 1);
-		g.addQuestionFactory(new TriangleFindMissingAngle(loc), 1);
-		g.addQuestionFactory(new TriangleFindAreaKnownBaseHeight(loc), 1);
-		g.addQuestionFactory(new TriangleFindBaseLengthKnownArea(loc), 1);
-		g.addQuestionFactory(new TriangleFindHeightLengthKnownArea(loc), 1);
-		g.addQuestionFactory(new TrianglePhytagoreanFindArea(loc), 1);
-		g.addQuestionFactory(new TrianglePhytagoreanFindRightEdge(loc), 1);
+		g = GameLevel.createSingleQF(0, name, desc, new TriangleBasicProperties(loc), 0);
+		//g.addQuestionFactory(new TriangleScaleneIscoscelesEquilateral(loc), 3);
+		//g.addQuestionFactory(new TriangleRightObtuseAcute(loc), 1);
+		//g.addQuestionFactory(new TriangleFindMissingAngle(loc), 1);
+		//g.addQuestionFactory(new TriangleFindAreaKnownBaseHeight(loc), 5);
+		//g.addQuestionFactory(new TriangleFindBaseLengthKnownArea(loc), 5);
+		//g.addQuestionFactory(new TriangleFindHeightLengthKnownArea(loc), 5);
+		//g.addQuestionFactory(new TrianglePhytagoreanFindArea(loc), 5);
+		g.addQuestionFactory(new TrianglePhytagoreanFindRightEdge(loc), 5);
 		lgl.add(g);
 
 		return lgl;

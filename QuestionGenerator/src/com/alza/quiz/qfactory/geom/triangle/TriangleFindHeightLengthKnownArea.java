@@ -55,7 +55,7 @@ public class TriangleFindHeightLengthKnownArea implements IQuestionFactory {
 			shp.setShowBaselineLength(true);
 			GeomQuiz q = new GeomQuiz();
 			q.setGeomShape(shp.getPaths());
-			q.setCorrectAnswer(Geom.formatMeasurement((shp.getBaseLine())));
+			q.setCorrectAnswer(Geom.formatMeasurement((shp.getHeight())));
 			String question = bundle.getString("geom.shape2d.question.triangle.height.fromarea");
 			q.setQuestion(question + " " + Geom.formatMeasurement(shp.getArea()));
 			q.setDifficultyLevel(QuizLevel.MUDAH);

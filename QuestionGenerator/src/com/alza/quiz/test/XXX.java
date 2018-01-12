@@ -2,6 +2,7 @@ package com.alza.quiz.test;
 import java.awt.BasicStroke;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Stroke;
@@ -55,9 +56,9 @@ import com.alza.quiz.test.Shape2DTest;
 
 public class XXX extends JFrame {
 
-	private JPanel contentPane;
+	private JPanel contentPane,downPane;
 	private JPanel mg;
-	JTextField soal;
+	JTextField soal,jawab,pilihan;
 	private List<Quiz> ql;
 	int qnum;
 	private Canvas canvas;
@@ -71,7 +72,9 @@ public class XXX extends JFrame {
 				try {
 					XXX frame = new XXX();
 					frame.setVisible(true);
+					frame.setExtendedState(frame.getExtendedState() | JFrame.MAXIMIZED_BOTH);
 					frame.perf();
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -103,9 +106,15 @@ public class XXX extends JFrame {
 				showQuestion();
 			}
 		});
+		downPane = new JPanel();
+		downPane.setLayout(new FlowLayout());
 		soal = new JTextField();
-		contentPane.add(soal,BorderLayout.SOUTH);
-		
+		contentPane.add(downPane,BorderLayout.SOUTH);
+		downPane.add(soal);
+		jawab = new JTextField();
+		downPane.add(jawab);
+		pilihan = new JTextField();
+		downPane.add(pilihan);
 	}
 	
 	private void perf() {
@@ -113,7 +122,7 @@ public class XXX extends JFrame {
 		GameLevel gl = GeomGameLevel.createGameLevels(getLocale()).get(3);
 		List<GameLevelQuestionFactory> glqf = gl.getLevelQF();
 		for (GameLevelQuestionFactory glq : glqf) {
-			ql.addAll(glq.getqFactory().generateQuizList());
+			ql.addAll(glq.getqFactory().generateQuizList(glq.getqCount()));
 		}
 		/**
 		List<IQuestionFactory> lqf = GeomGameLevel.createGameLevels(getLocale()).get(0).getLevelQF().;
@@ -148,6 +157,11 @@ public class XXX extends JFrame {
 			perf();
 		} else qnum++;
 		soal.setText(mq.getQuestion());
+		jawab.setText(mq.getCorrectAnswer());
+		if (mq instanceof MultipleChoiceGeomQuiz) {
+			pilihan.setText(((MultipleChoiceGeomQuiz) mq).getChoices().toArray().toString());
+		}
+		downPane.layout();
 	}
 
 	private void drawShape(List<Path> paths)  {
@@ -156,7 +170,7 @@ public class XXX extends JFrame {
 		paths = UtilGeom.transformPaths(mg.getWidth(), mg.getHeight(),paths);
 		Stroke dashed = new BasicStroke(1, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 0, new float[]{3}, 0);
 		for (Path path : paths) {
-			System.out.println("Path type:"+path.pathType);
+			//System.out.println("Path type:"+path.pathType);
 			if (path.pathType == Path.PATH_TYPE_LINE) {
 				if (path.stroke.type == Geom.STROKE_LINE) {
 					g.drawLine((int)path.start.x,(int)path.start.y,(int)path.finish.x,(int)path.finish.y);
@@ -215,7 +229,7 @@ public class XXX extends JFrame {
 			if (path.pathType == Path.PATH_TYPE_TEXT) {
 				Graphics2D g2d = (Graphics2D) g.create();
 				g2d.drawString(path.text, (int)path.start.x, (int)path.start.y);
-				System.out.println("draw text!!!!");
+				//System.out.println("draw text!!!!");
 			}
 		}
 		mg.invalidate();
