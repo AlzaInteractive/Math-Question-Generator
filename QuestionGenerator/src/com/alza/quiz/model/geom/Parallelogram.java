@@ -93,6 +93,14 @@ public class Parallelogram implements Shapes2D{
 		slope = Math.sqrt(((length-shear) * (length-shear)) + (height * height)) ; 
 		return slope;
 	}
+	public double getAngleTopLeft() {
+		double ar = Math.acos(height/getSlope());
+		double ad = Math.toDegrees(ar);
+		return ad + 90;
+	}
+	public double getAngleBottomLeft() {
+		return 180.0 - getAngleTopLeft();
+	}
 	@Override
 	public double getArea() {
 		return height * length;
