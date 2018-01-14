@@ -90,7 +90,7 @@ public class Parallelogram implements Shapes2D{
 	}
 	public double getSlope(){
 		double slope;
-		slope = Math.sqrt(((length-shear) * (length-shear)) + (height * height)) ; 
+		slope = Math.sqrt(((shear) * (shear)) + (height * height)) ; 
 		return slope;
 	}
 	public double getAngleTopLeft() {
@@ -126,10 +126,10 @@ public class Parallelogram implements Shapes2D{
 	public Shapes2D createExample() {
 		int l,h,s;
 		do {
-			l = ThreadLocalRandom.current().nextInt(5, 26);
-			h = ThreadLocalRandom.current().nextInt(5, 26);
-			s = ThreadLocalRandom.current().nextInt(5, 10);
-		} while (l==h || s>=l/3);
+			l = ThreadLocalRandom.current().nextInt(5, 16);
+			h = ThreadLocalRandom.current().nextInt(5, 16);
+			s = ThreadLocalRandom.current().nextInt(3, l);
+		} while (l==h);
 		
 		return new Parallelogram(l, h, s);
 	}

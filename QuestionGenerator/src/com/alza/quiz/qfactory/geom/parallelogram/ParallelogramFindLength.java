@@ -56,7 +56,7 @@ public class ParallelogramFindLength implements IQuestionFactory {
 			GeomQuiz q = new GeomQuiz();
 			q.setGeomShape(shp.getPaths());
 			q.setCorrectAnswer(Geom.formatMeasurement((shp.getLength())));
-			String question = bundle.getString("geom.shape2d.question.rectangle.length.fromarea");
+			String question = bundle.getString("geom.shape2d.question.parallelogram.length.fromarea");
 			q.setQuestion(question + " " + Geom.formatMeasurement(shp.getArea()));
 			q.setDifficultyLevel(QuizLevel.MUDAH);
 			q.setLessonSubcategory(bundle.getString("geom.shape2d.parallelogram"));

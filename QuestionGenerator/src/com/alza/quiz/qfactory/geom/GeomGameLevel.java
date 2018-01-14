@@ -6,6 +6,9 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 
 import com.alza.quiz.model.GameLevel;
+import com.alza.quiz.qfactory.geom.parallelogram.ParallelogramFindArea;
+import com.alza.quiz.qfactory.geom.parallelogram.ParallelogramFindLength;
+import com.alza.quiz.qfactory.geom.parallelogram.ParallelogramFindPerimeter;
 import com.alza.quiz.qfactory.geom.rectangle.RectangleBasicProperties;
 import com.alza.quiz.qfactory.geom.rectangle.RectangleFindAreaKnownLengthWidth;
 import com.alza.quiz.qfactory.geom.rectangle.RectangleFindDiagonalKnownLengthWidth;
@@ -80,7 +83,14 @@ public class GeomGameLevel {
 		//g.addQuestionFactory(new TrianglePhytagoreanFindArea(loc), 5);
 		g.addQuestionFactory(new TrianglePhytagoreanFindRightEdge(loc), 5);
 		lgl.add(g);
-
+		
+		//Parallelogram
+		name = bundle.getString("geom.shape2d.level.parallelogram.title");
+		desc = bundle.getString("geom.shape2d.level.parallelogram.desc");
+		g = GameLevel.createSingleQF(0, name, desc, new ParallelogramFindArea(loc), 0);
+		g.addQuestionFactory(new ParallelogramFindLength(loc), 0);
+		g.addQuestionFactory(new ParallelogramFindPerimeter(loc), 5);
+		lgl.add(g);
 		return lgl;
 	}
 
