@@ -20,6 +20,9 @@ import com.alza.quiz.qfactory.geom.square.SquareFindAreaKnownLength;
 import com.alza.quiz.qfactory.geom.square.SquareFindLengthKnownArea;
 import com.alza.quiz.qfactory.geom.square.SquareFindLengthKnownPerimeter;
 import com.alza.quiz.qfactory.geom.square.SquareFindPerimeterKnownLength;
+import com.alza.quiz.qfactory.geom.trapezoid.TrapezoidFindArea;
+import com.alza.quiz.qfactory.geom.trapezoid.TrapezoidFindLength;
+import com.alza.quiz.qfactory.geom.trapezoid.TrapezoidFindPerimeter;
 import com.alza.quiz.qfactory.geom.triangle.TriangleBasicProperties;
 import com.alza.quiz.qfactory.geom.triangle.TriangleFindAreaKnownBaseHeight;
 import com.alza.quiz.qfactory.geom.triangle.TriangleFindBaseLengthKnownArea;
@@ -91,7 +94,17 @@ public class GeomGameLevel {
 		g.addQuestionFactory(new ParallelogramFindLength(loc), 0);
 		g.addQuestionFactory(new ParallelogramFindPerimeter(loc), 5);
 		lgl.add(g);
+		
+		
+		//Trapezoid
+		name = bundle.getString("geom.shape2d.level.trapezoid.title");
+		desc = bundle.getString("geom.shape2d.level.trapezoid.desc");
+		g = GameLevel.createSingleQF(0, name, desc, new TrapezoidFindArea(loc), 0);
+		//g.addQuestionFactory(new TrapezoidFindLength(loc), 5);
+		g.addQuestionFactory(new TrapezoidFindPerimeter(loc), 5);
+		lgl.add(g);
 		return lgl;
+		
 	}
 
 }

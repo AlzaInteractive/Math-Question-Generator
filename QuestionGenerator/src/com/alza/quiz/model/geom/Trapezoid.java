@@ -16,6 +16,8 @@ public class Trapezoid implements Shapes2D{
 	private boolean showBottomLengthValue=true;
 	private boolean showHeightValue=true;
 	private boolean showShearLeftValue=true;
+	private boolean showRightSlopeValue=true;
+	private boolean showLeftSlopeValue=true;
 	
 	public Trapezoid(){
 		
@@ -115,6 +117,18 @@ public class Trapezoid implements Shapes2D{
 	}
 	public void setShowShearLeftValue(boolean showShearLeftValue) {
 		this.showShearLeftValue = showShearLeftValue;
+	}
+	public boolean isShowRightSlopeValue() {
+		return showRightSlopeValue;
+	}
+	public void setShowRightSlopeValue(boolean showRightSlopeValue) {
+		this.showRightSlopeValue = showRightSlopeValue;
+	}
+	public boolean isShowLeftSlopeValue() {
+		return showLeftSlopeValue;
+	}
+	public void setShowLeftSlopeValue(boolean showLeftSlopeValue) {
+		this.showLeftSlopeValue = showLeftSlopeValue;
 	}
 	public double getBottomLength() {
 		return bottomLength;
@@ -229,6 +243,13 @@ public class Trapezoid implements Shapes2D{
 			}
 		}
 		if (showShearLeftValue) {
+			double xpos = shearLeft/2;
+			double ypos = height;
+			Point2D pos = new Point2D(xpos, ypos);
+			l.add(Path.createTextPath(
+					Geom.formatMeasurement(this.shearLeft), 
+					pos,
+					Path.SHIFT_UP,Path.SHIFT_NONE));
 			
 		}
 		if (showVerticeLabel) {
@@ -236,6 +257,16 @@ public class Trapezoid implements Shapes2D{
 			l.add(Path.createTextPath(String.valueOf("B"), getVertices().get(1),Path.SHIFT_UP, Path.SHIFT_RIGHT));
 			l.add(Path.createTextPath(String.valueOf("C"), getVertices().get(2),Path.SHIFT_DOWN, Path.SHIFT_RIGHT));
 			l.add(Path.createTextPath(String.valueOf("D"), getVertices().get(3),Path.SHIFT_DOWN, Path.SHIFT_LEFT));
+		}
+		if (showLeftSlopeValue) {
+			l.add(Path.createTextPath(Geom.formatMeasurement(getLeftSlope()), 
+					Point2D.getMidPoint(getVertices().get(0), 
+							getVertices().get(3)),Path.SHIFT_NONE,Path.SHIFT_LEFT));
+		}
+		if (showRightSlopeValue) {
+			l.add(Path.createTextPath(Geom.formatMeasurement(getRightSlope()), 
+					Point2D.getMidPoint(getVertices().get(1), 
+							getVertices().get(2)),Path.SHIFT_NONE,Path.SHIFT_RIGHT));
 		}
 		
 		return l;

@@ -119,7 +119,7 @@ public class XXX extends JFrame {
 	
 	private void perf() {
 		ql = new ArrayList<Quiz>();
-		GameLevel gl = GeomGameLevel.createGameLevels(getLocale()).get(3);
+		GameLevel gl = GeomGameLevel.createGameLevels(getLocale()).get(5);
 		List<GameLevelQuestionFactory> glqf = gl.getLevelQF();
 		for (GameLevelQuestionFactory glq : glqf) {
 			ql.addAll(glq.getqFactory().generateQuizList(glq.getqCount()));
