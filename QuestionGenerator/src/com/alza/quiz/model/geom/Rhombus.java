@@ -17,6 +17,10 @@ public class Rhombus implements Shapes2D{
 		this.diagonalHoriz = p;
 		this.diagonalVert = q;
 	}
+	public Rhombus(double edge, int angleVertical) {
+		this.diagonalHoriz = 2 * edge * Math.sin(Math.toRadians(angleVertical/2));
+		this.diagonalVert = 2 * edge * Math.cos(Math.toRadians(angleVertical/2));
+	}
 	@Override
 	public void hideTextsAndMeasurements() {
 		showVerticeLabel = false;
@@ -76,11 +80,11 @@ public class Rhombus implements Shapes2D{
 	}
 	@Override
 	public Shapes2D createExample() {
-		int p,q;
+		double p,q;
 		do {
-			p = ThreadLocalRandom.current().nextInt(5, 26);
-			q = ThreadLocalRandom.current().nextInt(5, 26);
-		} while (p==q);
+			p = ThreadLocalRandom.current().nextInt(5, 15);
+			q = ThreadLocalRandom.current().nextInt(5, 15);
+		} while (p==q||p>(2*q)||q>(2*p));
 		Rhombus r = new Rhombus(p, q);
 		return r;
 	}
