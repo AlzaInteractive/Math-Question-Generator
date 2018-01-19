@@ -27,6 +27,13 @@ public class Kite implements Shapes2D{
 		this.diagonalVert = diagVert;
 		this.shear = shear;
 	}
+	public Kite(double bc,int topAngle, int bottomAngle) {
+		this.shear = bc * Math.cos(Math.toRadians(((double)topAngle)/2));
+		this.diagonalHoriz = 2 * bc * Math.sin(Math.toRadians(((double)topAngle)/2));
+		this.diagonalVert = this.shear + 
+				(this.diagonalHoriz/(2 * Math.tan(Math.toRadians(((double) bottomAngle)/2))));
+	}
+	
 	public double getDiagonalHoriz() {
 		return diagonalHoriz;
 	}
@@ -74,7 +81,7 @@ public class Kite implements Shapes2D{
 	}
 	@Override
 	public int getReflectionalSymmetryCount() {
-		return 0;
+		return 1;
 	}
 	@Override
 	public int getRotationalSymmetryCount() {
@@ -86,7 +93,7 @@ public class Kite implements Shapes2D{
 	}
 	@Override
 	public Shapes2D createExample() {
-		int p,q,s;
+		double p,q,s;
 		do {
 			p = ThreadLocalRandom.current().nextInt(5, 26);
 			q = ThreadLocalRandom.current().nextInt(5, 26);
