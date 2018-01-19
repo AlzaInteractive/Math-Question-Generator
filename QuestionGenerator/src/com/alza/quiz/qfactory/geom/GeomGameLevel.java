@@ -17,6 +17,7 @@ import com.alza.quiz.qfactory.geom.rectangle.RectangleFindLengthKnownPerimeter;
 import com.alza.quiz.qfactory.geom.rectangle.RectangleFindPerimeterKnownLengthWidth;
 import com.alza.quiz.qfactory.geom.rhombus.RhombusBasicProperties;
 import com.alza.quiz.qfactory.geom.rhombus.RhombusFindArea;
+import com.alza.quiz.qfactory.geom.rhombus.RhombusFindPerimeter;
 import com.alza.quiz.qfactory.geom.square.SquareBasicProperties;
 import com.alza.quiz.qfactory.geom.square.SquareFindAreaKnownLength;
 import com.alza.quiz.qfactory.geom.square.SquareFindLengthKnownArea;
@@ -111,7 +112,8 @@ public class GeomGameLevel {
 		name = bundle.getString("geom.shape2d.level.rhombus.title");
 		desc = bundle.getString("geom.shape2d.level.rhombus.desc");
 		g = GameLevel.createSingleQF(0, name, desc, new RhombusBasicProperties(loc), 0);
-		g.addQuestionFactory(new RhombusFindArea(loc), 5);
+		g.addQuestionFactory(new RhombusFindArea(loc), 0);
+		g.addQuestionFactory(new RhombusFindPerimeter(loc), 5);
 		lgl.add(g);
 
 		return lgl;
