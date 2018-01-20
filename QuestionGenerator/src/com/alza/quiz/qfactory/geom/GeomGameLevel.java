@@ -6,6 +6,9 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 
 import com.alza.quiz.model.GameLevel;
+import com.alza.quiz.qfactory.geom.kite.KiteBasicProperties;
+import com.alza.quiz.qfactory.geom.kite.KiteFindArea;
+import com.alza.quiz.qfactory.geom.kite.KiteFindPerimeter;
 import com.alza.quiz.qfactory.geom.parallelogram.ParallelogramFindArea;
 import com.alza.quiz.qfactory.geom.parallelogram.ParallelogramFindLength;
 import com.alza.quiz.qfactory.geom.parallelogram.ParallelogramFindPerimeter;
@@ -115,6 +118,16 @@ public class GeomGameLevel {
 		g.addQuestionFactory(new RhombusFindArea(loc), 0);
 		g.addQuestionFactory(new RhombusFindPerimeter(loc), 5);
 		lgl.add(g);
+		
+		//Kite
+		name = bundle.getString("geom.shape2d.level.kite.title");
+		desc = bundle.getString("geom.shape2d.level.kite.desc");
+		g = GameLevel.createSingleQF(0, name, desc, new KiteBasicProperties(loc), 0);
+		g.addQuestionFactory(new KiteFindArea(loc), 0);
+		g.addQuestionFactory(new KiteFindPerimeter(loc), 5);
+		lgl.add(g);
+		
+		
 
 		return lgl;
 

@@ -11,6 +11,8 @@ public class Kite implements Shapes2D{
 	private boolean showVerticeLabel=true;
 	private boolean showDiagonalLine=true;
 	private boolean showDiagonalLength=true;
+	private boolean showTopSlopeLength=true;
+	private boolean showBottomSlopeLength=true;
 	public Kite(){
 		
 	}
@@ -32,6 +34,13 @@ public class Kite implements Shapes2D{
 		this.diagonalHoriz = 2 * bc * Math.sin(Math.toRadians(((double)topAngle)/2));
 		this.diagonalVert = this.shear + 
 				(this.diagonalHoriz/(2 * Math.tan(Math.toRadians(((double) bottomAngle)/2))));
+	}
+	public Kite(double topSlope, double bottomSlope, int topAngle) {
+		System.out.println(topSlope+" "+bottomSlope+" "+topAngle);
+		double co = topSlope * Math.sin(Math.toRadians(((double)topAngle)/2));
+		this.shear = topSlope * Math.cos(Math.toRadians(((double)topAngle)/2));
+		this.diagonalHoriz = 2 * co;
+		this.diagonalVert = this.shear+Math.sqrt(((bottomSlope * bottomSlope) - (co * co)));
 	}
 	
 	public double getDiagonalHoriz() {
@@ -70,6 +79,33 @@ public class Kite implements Shapes2D{
 	public void setShowDiagonalLength(boolean showDiagonalLength) {
 		this.showDiagonalLength = showDiagonalLength;
 	}
+	public boolean isShowTopSlopeLength() {
+		return showTopSlopeLength;
+	}
+
+	public void setShowTopSlopeLength(boolean showTopSlopeLength) {
+		this.showTopSlopeLength = showTopSlopeLength;
+	}
+
+	public boolean isShowBottomSlopeLength() {
+		return showBottomSlopeLength;
+	}
+
+	public void setShowBottomSlopeLength(boolean showBottomSlopeLength) {
+		this.showBottomSlopeLength = showBottomSlopeLength;
+	}
+	
+	public double getTopSlope() {
+		double topSlope = Math.sqrt((this.shear * this.shear) + (this.diagonalHoriz/2) * (this.getDiagonalHoriz()/2));
+		return topSlope;
+	}
+	
+	public double getBottomSlope() {
+		double bs = this.diagonalVert - this.shear;
+		double bottomSlope = Math.sqrt((bs * bs) + (this.diagonalHoriz/2) * (this.getDiagonalHoriz()/2));
+		return bottomSlope;
+	}
+
 	@Override
 	public double getArea() {
 		return diagonalHoriz * diagonalVert / 2;
@@ -144,6 +180,17 @@ public class Kite implements Shapes2D{
 			l.add(Path.createTextPath(String.valueOf("C"), getVertices().get(2), Path.SHIFT_UP,Path.SHIFT_RIGHT));
 			l.add(Path.createTextPath(String.valueOf("D"), getVertices().get(3), Path.SHIFT_DOWN,Path.SHIFT_LEFT));
 		}
+		if (showTopSlopeLength) {
+			l.add(Path.createTextPath(Geom.formatMeasurement(getTopSlope()), 
+					Point2D.getMidPoint(getVertices().get(1), getVertices().get(2)),
+					Path.SHIFT_UP,Path.SHIFT_NONE));
+		}
+		if (showBottomSlopeLength) {
+			l.add(Path.createTextPath(Geom.formatMeasurement(getBottomSlope()), 
+					Point2D.getMidPoint(getVertices().get(2), getVertices().get(3)),
+					Path.SHIFT_DOWN,Path.SHIFT_NONE));
+		}
+		
 		return l;
 	}
 	public String toString(){
