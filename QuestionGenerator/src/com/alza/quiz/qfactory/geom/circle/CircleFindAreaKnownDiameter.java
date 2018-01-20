@@ -1,4 +1,4 @@
-package com.alza.quiz.qfactory.geom.kite;
+package com.alza.quiz.qfactory.geom.circle;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,20 +9,21 @@ import java.util.ResourceBundle;
 import com.alza.quiz.model.GeomQuiz;
 import com.alza.quiz.model.Quiz;
 import com.alza.quiz.model.QuizLevel;
-import com.alza.quiz.model.geom.Kite;
+import com.alza.quiz.model.geom.Circle;
+import com.alza.quiz.model.geom.Geom;
 import com.alza.quiz.qfactory.IQuestionFactory;
 
-public class KiteFindArea implements IQuestionFactory {
+public class CircleFindAreaKnownDiameter implements IQuestionFactory {
 	private int numq = 2;
 	Locale loc;
 	ResourceBundle bundle;
 
-	public KiteFindArea() {
+	public CircleFindAreaKnownDiameter() {
 		this.loc = new Locale("in", "ID");
 		initStringFromLocale();
 	}
 
-	public KiteFindArea(Locale loc) {
+	public CircleFindAreaKnownDiameter(Locale loc) {
 		super();
 		this.loc = loc;
 		initStringFromLocale();
@@ -48,18 +49,18 @@ public class KiteFindArea implements IQuestionFactory {
 	public List<Quiz> generateQuizList() {
 		List<Quiz> quizList = new ArrayList<Quiz>();
 		for (int i = 0; i < numq; i++) {
-			Kite shp = (Kite) new Kite().createExample();
+			Circle shp = (Circle) new Circle().createExample();
 			shp.hideTextsAndMeasurements();
-			shp.setShowDiagonalLine(true);
-			shp.setShowDiagonalLength(true);
+			shp.setShowDiameterLine(true);
+			shp.setShowDiameterLength(true);
 			GeomQuiz q = new GeomQuiz();
 			q.setGeomShape(shp.getPaths());
-			q.setCorrectAnswer(String.valueOf(shp.getArea()));
+			q.setCorrectAnswer(Geom.formatMeasurement(shp.getArea()));
 			String question = bundle.getString("geom.shape2d.question.findarea");
 			question = question.replaceAll("#shape", shp.getName());
 			q.setQuestion(question);
 			q.setDifficultyLevel(QuizLevel.MUDAH);
-			q.setLessonSubcategory(bundle.getString("geom.shape2d.kite"));
+			q.setLessonSubcategory(bundle.getString("geom.shape2d.circle"));
 			q.setLessonClassifier(bundle.getString("mathelementary"));
 			q.setLessonGrade(4);
 			q.setSubCategoryOrder(5);

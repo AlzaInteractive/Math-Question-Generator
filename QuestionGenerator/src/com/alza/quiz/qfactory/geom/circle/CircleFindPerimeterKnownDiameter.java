@@ -1,4 +1,4 @@
-package com.alza.quiz.qfactory.geom.kite;
+package com.alza.quiz.qfactory.geom.circle;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,33 +9,34 @@ import java.util.ResourceBundle;
 import com.alza.quiz.model.GeomQuiz;
 import com.alza.quiz.model.Quiz;
 import com.alza.quiz.model.QuizLevel;
-import com.alza.quiz.model.geom.Kite;
+import com.alza.quiz.model.geom.Circle;
+import com.alza.quiz.model.geom.Geom;
 import com.alza.quiz.qfactory.IQuestionFactory;
 
-public class KiteFindArea implements IQuestionFactory {
+public class CircleFindPerimeterKnownDiameter implements IQuestionFactory{
 	private int numq = 2;
 	Locale loc;
 	ResourceBundle bundle;
-
-	public KiteFindArea() {
+	
+	public CircleFindPerimeterKnownDiameter() {
 		this.loc = new Locale("in", "ID");
 		initStringFromLocale();
 	}
-
-	public KiteFindArea(Locale loc) {
+	
+	public CircleFindPerimeterKnownDiameter(Locale loc) {
 		super();
 		this.loc = loc;
 		initStringFromLocale();
 	}
 
-	private void initStringFromLocale() {
+	private void initStringFromLocale(){
 		bundle = ResourceBundle.getBundle("lang.langbundle", loc);
 	}
-
+	
 	@Override
 	public Quiz generateQuiz() {
 		List<Quiz> quizList = generateQuizList();
-		int rnd = new Random().nextInt(quizList.size());
+		int rnd = new Random().nextInt(quizList.size()); 
 		return quizList.get(rnd);
 	}
 
@@ -47,19 +48,19 @@ public class KiteFindArea implements IQuestionFactory {
 	@Override
 	public List<Quiz> generateQuizList() {
 		List<Quiz> quizList = new ArrayList<Quiz>();
-		for (int i = 0; i < numq; i++) {
-			Kite shp = (Kite) new Kite().createExample();
+		for (int i=0;i<numq;i++){
+			Circle shp = (Circle) new Circle().createExample();
 			shp.hideTextsAndMeasurements();
-			shp.setShowDiagonalLine(true);
-			shp.setShowDiagonalLength(true);
+			shp.setShowDiameterLine(true);
+			shp.setShowDiameterLength(true);
 			GeomQuiz q = new GeomQuiz();
 			q.setGeomShape(shp.getPaths());
-			q.setCorrectAnswer(String.valueOf(shp.getArea()));
-			String question = bundle.getString("geom.shape2d.question.findarea");
+			q.setCorrectAnswer(Geom.formatMeasurement(shp.getPerimeter()));
+			String question = bundle.getString("geom.shape2d.question.findperimeter");
 			question = question.replaceAll("#shape", shp.getName());
 			q.setQuestion(question);
 			q.setDifficultyLevel(QuizLevel.MUDAH);
-			q.setLessonSubcategory(bundle.getString("geom.shape2d.kite"));
+			q.setLessonSubcategory(bundle.getString("geom.shape2d.circle"));
 			q.setLessonClassifier(bundle.getString("mathelementary"));
 			q.setLessonGrade(4);
 			q.setSubCategoryOrder(5);
@@ -69,11 +70,11 @@ public class KiteFindArea implements IQuestionFactory {
 		}
 		return quizList;
 	}
+	 @Override
+		public List<Quiz> generateQuizList(int numOfQuestion) {
+			numq = numOfQuestion;
+			return generateQuizList();
+		}
 
-	@Override
-	public List<Quiz> generateQuizList(int numOfQuestion) {
-		numq = numOfQuestion;
-		return generateQuizList();
-	}
 
 }

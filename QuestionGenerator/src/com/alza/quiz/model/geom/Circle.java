@@ -8,7 +8,10 @@ public class Circle implements Shapes2D{
 	private double radius;
 	private boolean showRadiusLine = true;
 	private boolean showCenterLabel = true;
-	private boolean showMeasurements = true;
+	private boolean showRadiusLength = true;
+	private boolean showDiameterLine = true;
+	private boolean showDiameterLength = true;
+	
 	
 	public Circle(){
 		
@@ -20,7 +23,9 @@ public class Circle implements Shapes2D{
 	public void hideTextsAndMeasurements() {
 		showRadiusLine = false;
 		showCenterLabel = false;
-		showMeasurements = false;
+		showRadiusLength = false;
+		showDiameterLength = false;
+		showDiameterLine = false;
 	}
 	
 	public double getRadius() {
@@ -30,7 +35,11 @@ public class Circle implements Shapes2D{
 	public void setRadius(double radius) {
 		this.radius = radius;
 	}
-
+	
+	public double getDiameter() {
+		return radius * 2;
+	}
+	
 	public boolean isShowRadiusLine() {
 		return showRadiusLine;
 	}
@@ -44,19 +53,31 @@ public class Circle implements Shapes2D{
 		this.showCenterLabel = showCenterLabel;
 	}
 	public boolean isShowRadiusLength() {
-		return showMeasurements;
+		return showRadiusLength;
 	}
 	public void setShowRadiusLength(boolean showRadiusLength) {
-		this.showMeasurements = showRadiusLength;
+		this.showRadiusLength = showRadiusLength;
+	}
+	public boolean isShowDiameterLine() {
+		return showDiameterLine;
+	}
+	public void setShowDiameterLine(boolean showDiameterLine) {
+		this.showDiameterLine = showDiameterLine;
+	}
+	public boolean isShowDiameterLength() {
+		return showDiameterLength;
+	}
+	public void setShowDiameterLength(boolean showDiameterLength) {
+		this.showDiameterLength = showDiameterLength;
 	}
 	@Override
 	public double getArea() {
-		return Math.PI * radius * radius;
+		return Geom.PI * radius * radius;
 	}
 
 	@Override
 	public double getPerimeter() {
-		return Math.PI * radius * 2;
+		return Geom.PI * radius * 2;
 	}
 	@Override
 	public int getReflectionalSymmetryCount() {
@@ -102,12 +123,26 @@ public class Circle implements Shapes2D{
 					new Point2D(radius, radius), 
 					new Point2D(2*radius, radius)));
 		}
-		if (showMeasurements) {
+		if (showRadiusLength) {
 			//System.out.println("show radius length");
 			l.add(Path.createTextPath(Geom.formatMeasurement(radius), 
 					new Point2D(radius + (radius/2), radius),
 						Path.SHIFT_UP,Path.SHIFT_NONE));
 		}
+		if (showDiameterLine) {
+			//System.out.println("show radius line");
+			l.add(Path.createLinePathDashed(
+					new Point2D(0, radius), 
+					new Point2D(2*radius, radius)));
+		}
+		if (showDiameterLength) {
+			//System.out.println("show radius length");
+			l.add(Path.createTextPath(Geom.formatMeasurement(getDiameter()), 
+					new Point2D(radius, radius),
+						Path.SHIFT_UP,Path.SHIFT_NONE));
+		}
+		
+		
 		return l;
 	}
 	

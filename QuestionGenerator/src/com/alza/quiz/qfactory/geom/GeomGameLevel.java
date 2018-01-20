@@ -6,6 +6,14 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 
 import com.alza.quiz.model.GameLevel;
+import com.alza.quiz.qfactory.geom.circle.CircleFindAreaKnownDiameter;
+import com.alza.quiz.qfactory.geom.circle.CircleFindAreaKnownRadius;
+import com.alza.quiz.qfactory.geom.circle.CircleFindDiameterKnownArea;
+import com.alza.quiz.qfactory.geom.circle.CircleFindDiameterKnownPerimeter;
+import com.alza.quiz.qfactory.geom.circle.CircleFindPerimeterKnownDiameter;
+import com.alza.quiz.qfactory.geom.circle.CircleFindPerimeterKnownRadius;
+import com.alza.quiz.qfactory.geom.circle.CircleFindRadiusKnownArea;
+import com.alza.quiz.qfactory.geom.circle.CircleFindRadiusKnownPerimeter;
 import com.alza.quiz.qfactory.geom.kite.KiteBasicProperties;
 import com.alza.quiz.qfactory.geom.kite.KiteFindArea;
 import com.alza.quiz.qfactory.geom.kite.KiteFindPerimeter;
@@ -118,7 +126,7 @@ public class GeomGameLevel {
 		g.addQuestionFactory(new RhombusFindArea(loc), 0);
 		g.addQuestionFactory(new RhombusFindPerimeter(loc), 5);
 		lgl.add(g);
-		
+
 		//Kite
 		name = bundle.getString("geom.shape2d.level.kite.title");
 		desc = bundle.getString("geom.shape2d.level.kite.desc");
@@ -126,8 +134,21 @@ public class GeomGameLevel {
 		g.addQuestionFactory(new KiteFindArea(loc), 0);
 		g.addQuestionFactory(new KiteFindPerimeter(loc), 5);
 		lgl.add(g);
-		
-		
+
+		//Kite
+		name = bundle.getString("geom.shape2d.level.circle.title");
+		desc = bundle.getString("geom.shape2d.level.circle.desc");
+		g = GameLevel.createSingleQF(0, name, desc, new CircleFindAreaKnownRadius(loc), 0);
+		g.addQuestionFactory(new CircleFindPerimeterKnownRadius(loc), 0);
+		g.addQuestionFactory(new CircleFindAreaKnownDiameter(loc), 0);
+		g.addQuestionFactory(new CircleFindPerimeterKnownDiameter(loc), 0);
+		g.addQuestionFactory(new CircleFindRadiusKnownPerimeter(loc), 0);
+		g.addQuestionFactory(new CircleFindRadiusKnownArea(loc), 0);
+		g.addQuestionFactory(new CircleFindDiameterKnownPerimeter(loc), 0);
+		g.addQuestionFactory(new CircleFindDiameterKnownArea(loc), 4);
+		//g.addQuestionFactory(new KiteFindPerimeter(loc), 5);
+		lgl.add(g);
+
 
 		return lgl;
 
