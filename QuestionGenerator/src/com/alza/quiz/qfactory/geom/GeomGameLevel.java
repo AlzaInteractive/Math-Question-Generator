@@ -135,17 +135,17 @@ public class GeomGameLevel {
 		g.addQuestionFactory(new KiteFindPerimeter(loc), 5);
 		lgl.add(g);
 
-		//Kite
+		//Circle
 		name = bundle.getString("geom.shape2d.level.circle.title");
 		desc = bundle.getString("geom.shape2d.level.circle.desc");
-		g = GameLevel.createSingleQF(0, name, desc, new CircleFindAreaKnownRadius(loc), 0);
-		g.addQuestionFactory(new CircleFindPerimeterKnownRadius(loc), 0);
-		g.addQuestionFactory(new CircleFindAreaKnownDiameter(loc), 0);
-		g.addQuestionFactory(new CircleFindPerimeterKnownDiameter(loc), 0);
-		g.addQuestionFactory(new CircleFindRadiusKnownPerimeter(loc), 0);
-		g.addQuestionFactory(new CircleFindRadiusKnownArea(loc), 0);
-		g.addQuestionFactory(new CircleFindDiameterKnownPerimeter(loc), 0);
-		g.addQuestionFactory(new CircleFindDiameterKnownArea(loc), 4);
+		g = GameLevel.createSingleQF(0, name, desc, new CircleFindAreaKnownRadius(loc), 2);
+		g.addQuestionFactory(new CircleFindPerimeterKnownRadius(loc), 2);
+		g.addQuestionFactory(new CircleFindAreaKnownDiameter(loc), 2);
+		g.addQuestionFactory(new CircleFindPerimeterKnownDiameter(loc), 2);
+		g.addQuestionFactory(new CircleFindRadiusKnownPerimeter(loc), 2);
+		g.addQuestionFactory(new CircleFindRadiusKnownArea(loc), 2);
+		g.addQuestionFactory(new CircleFindDiameterKnownPerimeter(loc), 2);
+		g.addQuestionFactory(new CircleFindDiameterKnownArea(loc), 2);
 		//g.addQuestionFactory(new KiteFindPerimeter(loc), 5);
 		lgl.add(g);
 
