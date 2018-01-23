@@ -18,6 +18,7 @@ import com.alza.quiz.qfactory.geom.kite.KiteBasicProperties;
 import com.alza.quiz.qfactory.geom.kite.KiteFindArea;
 import com.alza.quiz.qfactory.geom.kite.KiteFindPerimeter;
 import com.alza.quiz.qfactory.geom.parallelogram.ParallelogramFindArea;
+import com.alza.quiz.qfactory.geom.parallelogram.ParallelogramFindHeight;
 import com.alza.quiz.qfactory.geom.parallelogram.ParallelogramFindLength;
 import com.alza.quiz.qfactory.geom.parallelogram.ParallelogramFindPerimeter;
 import com.alza.quiz.qfactory.geom.rectangle.RectangleBasicProperties;
@@ -35,6 +36,7 @@ import com.alza.quiz.qfactory.geom.square.SquareFindLengthKnownArea;
 import com.alza.quiz.qfactory.geom.square.SquareFindLengthKnownPerimeter;
 import com.alza.quiz.qfactory.geom.square.SquareFindPerimeterKnownLength;
 import com.alza.quiz.qfactory.geom.trapezoid.TrapezoidFindArea;
+import com.alza.quiz.qfactory.geom.trapezoid.TrapezoidFindHeight;
 import com.alza.quiz.qfactory.geom.trapezoid.TrapezoidFindLength;
 import com.alza.quiz.qfactory.geom.trapezoid.TrapezoidFindPerimeter;
 import com.alza.quiz.qfactory.geom.trapezoid.TrapezoidFindPerimeterPhyt;
@@ -64,13 +66,13 @@ public class GeomGameLevel {
 		// identify 2d shapes
 		name = bundle.getString("geom.shape2d.level.identify.title");
 		desc = bundle.getString("geom.shape2d.level.identify.desc");
-		g = GameLevel.createSingleQF(0, name, desc, new WhichGeom2DShapeQuestionFactory(loc), 7);
+		g = GameLevel.createSingleQF(1, name, desc, new WhichGeom2DShapeQuestionFactory(loc), 7);
 		lgl.add(g);
 
 		// square
 		name = bundle.getString("geom.shape2d.level.square.title");
 		desc = bundle.getString("geom.shape2d.level.square.desc");
-		g = GameLevel.createSingleQF(0, name, desc, new SquareBasicProperties(loc), 4);
+		g = GameLevel.createSingleQF(2, name, desc, new SquareBasicProperties(loc), 2);
 		g.addQuestionFactory(new SquareFindAreaKnownLength(loc), 2);
 		g.addQuestionFactory(new SquareFindPerimeterKnownLength(loc), 2);
 		g.addQuestionFactory(new SquareFindLengthKnownArea(loc), 2);
@@ -80,7 +82,7 @@ public class GeomGameLevel {
 		// rectangle
 		name = bundle.getString("geom.shape2d.level.rectangle.title");
 		desc = bundle.getString("geom.shape2d.level.rectangle.desc");
-		g = GameLevel.createSingleQF(0, name, desc, new RectangleBasicProperties(loc), 4);
+		g = GameLevel.createSingleQF(3, name, desc, new RectangleBasicProperties(loc), 2);
 		g.addQuestionFactory(new RectangleFindAreaKnownLengthWidth(loc), 2);
 		g.addQuestionFactory(new RectangleFindPerimeterKnownLengthWidth(loc), 2);
 		g.addQuestionFactory(new RectangleFindLengthKnownArea(loc), 2);
@@ -91,61 +93,63 @@ public class GeomGameLevel {
 		// triangle
 		name = bundle.getString("geom.shape2d.level.triangle.title");
 		desc = bundle.getString("geom.shape2d.level.triangle.desc");
-		g = GameLevel.createSingleQF(0, name, desc, new TriangleBasicProperties(loc), 0);
-		// g.addQuestionFactory(new TriangleScaleneIscoscelesEquilateral(loc), 3);
-		// g.addQuestionFactory(new TriangleRightObtuseAcute(loc), 1);
-		// g.addQuestionFactory(new TriangleFindMissingAngle(loc), 1);
-		// g.addQuestionFactory(new TriangleFindAreaKnownBaseHeight(loc), 5);
-		// g.addQuestionFactory(new TriangleFindBaseLengthKnownArea(loc), 5);
-		// g.addQuestionFactory(new TriangleFindHeightLengthKnownArea(loc), 5);
-		// g.addQuestionFactory(new TrianglePhytagoreanFindArea(loc), 5);
-		g.addQuestionFactory(new TrianglePhytagoreanFindRightEdge(loc), 5);
+		g = GameLevel.createSingleQF(4, name, desc, new TriangleBasicProperties(loc), 2);
+		g.addQuestionFactory(new TriangleScaleneIscoscelesEquilateral(loc), 2);
+		g.addQuestionFactory(new TriangleRightObtuseAcute(loc), 1);
+		g.addQuestionFactory(new TriangleFindMissingAngle(loc), 1);
+		g.addQuestionFactory(new TriangleFindAreaKnownBaseHeight(loc), 2);
+		g.addQuestionFactory(new TriangleFindBaseLengthKnownArea(loc), 1);
+		g.addQuestionFactory(new TriangleFindHeightLengthKnownArea(loc), 1);
+		g.addQuestionFactory(new TrianglePhytagoreanFindArea(loc), 2);
+		g.addQuestionFactory(new TrianglePhytagoreanFindRightEdge(loc), 2);
 		lgl.add(g);
 
 		// Parallelogram
 		name = bundle.getString("geom.shape2d.level.parallelogram.title");
 		desc = bundle.getString("geom.shape2d.level.parallelogram.desc");
-		g = GameLevel.createSingleQF(0, name, desc, new ParallelogramFindArea(loc), 0);
-		g.addQuestionFactory(new ParallelogramFindLength(loc), 0);
-		g.addQuestionFactory(new ParallelogramFindPerimeter(loc), 5);
+		g = GameLevel.createSingleQF(5, name, desc, new ParallelogramFindArea(loc), 2);
+		g.addQuestionFactory(new ParallelogramFindLength(loc), 2);
+		g.addQuestionFactory(new ParallelogramFindHeight(loc), 2);
+		g.addQuestionFactory(new ParallelogramFindPerimeter(loc), 2);
 		lgl.add(g);
 
 		// Trapezoid
 		name = bundle.getString("geom.shape2d.level.trapezoid.title");
 		desc = bundle.getString("geom.shape2d.level.trapezoid.desc");
-		g = GameLevel.createSingleQF(0, name, desc, new TrapezoidFindArea(loc), 0);
-		g.addQuestionFactory(new TrapezoidFindLength(loc), 5);
-		g.addQuestionFactory(new TrapezoidFindPerimeter(loc), 5);
-		g.addQuestionFactory(new TrapezoidFindPerimeterPhyt(loc), 5);
+		g = GameLevel.createSingleQF(6, name, desc, new TrapezoidFindArea(loc), 2);
+		g.addQuestionFactory(new TrapezoidFindLength(loc), 1);
+		g.addQuestionFactory(new TrapezoidFindHeight(loc), 1);
+		g.addQuestionFactory(new TrapezoidFindPerimeter(loc), 1);
+		g.addQuestionFactory(new TrapezoidFindPerimeterPhyt(loc), 2);
 		lgl.add(g);
 
 		// Rhombus
 		name = bundle.getString("geom.shape2d.level.rhombus.title");
 		desc = bundle.getString("geom.shape2d.level.rhombus.desc");
-		g = GameLevel.createSingleQF(0, name, desc, new RhombusBasicProperties(loc), 0);
-		g.addQuestionFactory(new RhombusFindArea(loc), 0);
-		g.addQuestionFactory(new RhombusFindPerimeter(loc), 5);
+		g = GameLevel.createSingleQF(0, name, desc, new RhombusBasicProperties(loc), 2);
+		g.addQuestionFactory(new RhombusFindArea(loc), 2);
+		g.addQuestionFactory(new RhombusFindPerimeter(loc), 2);
 		lgl.add(g);
 
 		//Kite
 		name = bundle.getString("geom.shape2d.level.kite.title");
 		desc = bundle.getString("geom.shape2d.level.kite.desc");
-		g = GameLevel.createSingleQF(0, name, desc, new KiteBasicProperties(loc), 0);
-		g.addQuestionFactory(new KiteFindArea(loc), 0);
-		g.addQuestionFactory(new KiteFindPerimeter(loc), 5);
+		g = GameLevel.createSingleQF(7, name, desc, new KiteBasicProperties(loc), 2);
+		g.addQuestionFactory(new KiteFindArea(loc), 2);
+		g.addQuestionFactory(new KiteFindPerimeter(loc), 2);
 		lgl.add(g);
 
 		//Circle
 		name = bundle.getString("geom.shape2d.level.circle.title");
 		desc = bundle.getString("geom.shape2d.level.circle.desc");
-		g = GameLevel.createSingleQF(0, name, desc, new CircleFindAreaKnownRadius(loc), 2);
-		g.addQuestionFactory(new CircleFindPerimeterKnownRadius(loc), 2);
-		g.addQuestionFactory(new CircleFindAreaKnownDiameter(loc), 2);
-		g.addQuestionFactory(new CircleFindPerimeterKnownDiameter(loc), 2);
-		g.addQuestionFactory(new CircleFindRadiusKnownPerimeter(loc), 2);
-		g.addQuestionFactory(new CircleFindRadiusKnownArea(loc), 2);
-		g.addQuestionFactory(new CircleFindDiameterKnownPerimeter(loc), 2);
-		g.addQuestionFactory(new CircleFindDiameterKnownArea(loc), 2);
+		g = GameLevel.createSingleQF(8, name, desc, new CircleFindAreaKnownRadius(loc), 1);
+		g.addQuestionFactory(new CircleFindPerimeterKnownRadius(loc), 1);
+		g.addQuestionFactory(new CircleFindAreaKnownDiameter(loc), 1);
+		g.addQuestionFactory(new CircleFindPerimeterKnownDiameter(loc), 1);
+		g.addQuestionFactory(new CircleFindRadiusKnownPerimeter(loc), 1);
+		g.addQuestionFactory(new CircleFindRadiusKnownArea(loc), 1);
+		g.addQuestionFactory(new CircleFindDiameterKnownPerimeter(loc), 1);
+		g.addQuestionFactory(new CircleFindDiameterKnownArea(loc), 1);
 		//g.addQuestionFactory(new KiteFindPerimeter(loc), 5);
 		lgl.add(g);
 
