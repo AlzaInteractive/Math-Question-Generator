@@ -37,6 +37,8 @@ public class Trapezoid implements Shapes2D{
 		showBottomLengthValue = false;
 		showHeightValue = false;
 		showShearLeftValue = false;
+		showRightSlopeValue = false;
+		showLeftSlopeValue = false;
 	}
 	public double getTopLength() {
 		return topLength;

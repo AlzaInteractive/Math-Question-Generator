@@ -74,17 +74,16 @@ public class WhichGeom2DShapeQuestionFactory implements IQuestionFactory {
 			//System.out.println(s.toString());
 			MultipleChoiceGeomQuiz q = new MultipleChoiceGeomQuiz();
 			q.setGeomShape(s.getPaths());
-			q.setQuestion(bundle.getString("geom.whichshape"));
-			q.setCorrectAnswer(bundle.getString("geom."+s.getName()));
+			q.setQuestion(bundle.getString("geom.shape2d.question.identify"));
+			q.setCorrectAnswer(bundle.getString("geom.shape2d."+s.getName()));
 			q.setChoices(getChoices());
-			//
 			q.setDifficultyLevel(QuizLevel.MUDAH);
-			q.setLessonSubcategory(bundle.getString("geom.identify2dshape"));
+			q.setLessonSubcategory(bundle.getString("geom.shape2d."+s.getName()));
 			q.setLessonClassifier(bundle.getString("mathelementary"));
 			q.setLessonGrade(4);
 			q.setSubCategoryOrder(3);
 			q.setLocale(loc);
-			q.setLessonCategory(bundle.getString("geom.geom2d"));
+			q.setLessonCategory(bundle.getString("geom.shape2d"));
 			ql.add(q);
 			
 		}
@@ -101,7 +100,7 @@ public class WhichGeom2DShapeQuestionFactory implements IQuestionFactory {
 		String[] s = new String[shapes.size()];
 		int i = 0;
 		for (Shapes2D shapes2d : shapes) {
-			s[i] = bundle.getString("geom."+shapes2d.getName());
+			s[i] = bundle.getString("geom.shape2d."+shapes2d.getName());
 			i++;
 		}
 		return s;

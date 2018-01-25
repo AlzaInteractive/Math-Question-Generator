@@ -22,6 +22,8 @@ public class Kite implements Shapes2D{
 		showVerticeLabel = false;
 		showDiagonalLine = false;
 		showDiagonalLength = false;
+		showTopSlopeLength = false;
+		showBottomSlopeLength = false;
 	}
 	
 	public Kite(double diagHoriz, double diagVert, double shear){
