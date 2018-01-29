@@ -70,13 +70,14 @@ public class TriangleRightObtuseAcute implements IQuestionFactory {
 			shp.setShowVerticeLabel(true);
 			MultipleChoiceGeomQuiz q = new MultipleChoiceGeomQuiz();
 			q.setGeomShape(shp.getPaths());
-			q.setCorrectAnswer(shp.getAngleType().toString());
+			q.setCorrectAnswer(bundle.getString("geom.shape2d.triangle."+shp.getAngleType()).toLowerCase());
+			String obtuse = bundle.getString("geom.shape2d.triangle.obtuse".toLowerCase());
+			String acute = bundle.getString("geom.shape2d.triangle.acute".toLowerCase());
+			String right = bundle.getString("geom.shape2d.triangle.right".toLowerCase());
 			String question = bundle.getString("geom.shape2d.question.triangle.angle.obtuseacuteright");
 			question = question.replace("#angleA", Geom.formatMeasurement(angleA));
 			question = question.replace("#angleB", Geom.formatMeasurement(angleB));
-			q.setChoices(Triangle.AngleType.acute.toString(),
-					Triangle.AngleType.obtuse.toString(),
-					Triangle.AngleType.right.toString());
+			q.setChoices(obtuse,acute,right);
 			q.setQuestion(question);
 			q.setDifficultyLevel(QuizLevel.MUDAH);
 			q.setLessonSubcategory(bundle.getString("geom.shape2d.triangle"));

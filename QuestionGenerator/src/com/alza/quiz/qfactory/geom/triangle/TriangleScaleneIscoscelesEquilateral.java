@@ -66,12 +66,13 @@ public class TriangleScaleneIscoscelesEquilateral implements IQuestionFactory {
 			shp.setShowLeftEdgeLength(true);
 			shp.setShowRightEdgeLength(true);
 			MultipleChoiceGeomQuiz q = new MultipleChoiceGeomQuiz();
+			String iscosceles = bundle.getString("geom.shape2d.triangle.iscosceles".toLowerCase());
+			String equilateral = bundle.getString("geom.shape2d.triangle.equilateral".toLowerCase());
+			String scalene = bundle.getString("geom.shape2d.triangle.scalene".toLowerCase());
 			q.setGeomShape(shp.getPaths());
-			q.setCorrectAnswer(shp.getType().toString());
+			q.setCorrectAnswer((bundle.getString("geom.shape2d.triangle."+shp.getType()).toLowerCase()));
 			String question = bundle.getString("geom.shape2d.question.triangle.angle.equiscoscalene");
-			q.setChoices(Triangle.EdgeLengthRatio.equilateral.toString(),
-					Triangle.EdgeLengthRatio.iscosceles.toString(),
-					Triangle.EdgeLengthRatio.scalene.toString());
+			q.setChoices(iscosceles,equilateral,scalene);
 			q.setQuestion(question);
 			q.setDifficultyLevel(QuizLevel.MUDAH);
 			q.setLessonSubcategory(bundle.getString("geom.shape2d.triangle"));
@@ -90,5 +91,6 @@ public class TriangleScaleneIscoscelesEquilateral implements IQuestionFactory {
 		numq = numOfQuestion;
 		return generateQuizList();
 	}
+	
 
 }
