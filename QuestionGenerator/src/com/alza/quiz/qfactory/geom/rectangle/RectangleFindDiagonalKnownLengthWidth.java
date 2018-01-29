@@ -51,16 +51,17 @@ public class RectangleFindDiagonalKnownLengthWidth implements IQuestionFactory{
 		List<Quiz> quizList = new ArrayList<Quiz>();
 		for (int i=0;i<numq;i++){
 			int[] phyt = MathUtils.generateRandomPhytagoreanTriples(3, 5);
-			Rectangle rec = (Rectangle) new Rectangle(phyt[0],phyt[1]);
-			rec.hideTextsAndMeasurements();
-			rec.setShowDiagonalLine(true);;
-			rec.setShowLengthValue(true);
-			rec.setShowWidthValue(true);
+			Rectangle shp = (Rectangle) new Rectangle(phyt[0],phyt[1]);
+			String shapeName = bundle.getString("geom.shape2d."+shp.getName().toLowerCase());
+			shp.hideTextsAndMeasurements();
+			shp.setShowDiagonalLine(true);;
+			shp.setShowLengthValue(true);
+			shp.setShowWidthValue(true);
 			GeomQuiz q = new GeomQuiz();
-			q.setGeomShape(rec.getPaths());
-			q.setCorrectAnswer(Geom.formatMeasurement(rec.getDiagonalLength()));
-			String question = bundle.getString("geom.shape2d.rectangle.question.finddiagonal");
-			question = question.replaceAll("#shape", rec.getName());
+			q.setGeomShape(shp.getPaths());
+			q.setCorrectAnswer(Geom.formatMeasurement(shp.getDiagonalLength()));
+			String question = bundle.getString("geom.shape2d.question.rectangle.finddiagonal");
+			question = question.replaceAll("#shape", shapeName);
 			q.setQuestion(question);
 			q.setDifficultyLevel(QuizLevel.MUDAH);
 			q.setLessonSubcategory(bundle.getString("geom.shape2d.rectangle"));

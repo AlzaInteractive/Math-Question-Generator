@@ -49,6 +49,7 @@ public class RectangleFindAreaKnownLengthWidth implements IQuestionFactory {
 		List<Quiz> quizList = new ArrayList<Quiz>();
 		for (int i = 0; i < numq; i++) {
 			Rectangle rec = (Rectangle) new Rectangle().createExample();
+			String shapeName = bundle.getString("geom.shape2d."+rec.getName().toLowerCase());
 			rec.hideTextsAndMeasurements();
 			rec.setShowLengthValue(true);
 			rec.setShowWidthValue(true);
@@ -56,7 +57,7 @@ public class RectangleFindAreaKnownLengthWidth implements IQuestionFactory {
 			q.setGeomShape(rec.getPaths());
 			q.setCorrectAnswer(String.valueOf(rec.getArea()));
 			String question = bundle.getString("geom.shape2d.question.findarea");
-			question = question.replaceAll("#shape", rec.getName());
+			question = question.replaceAll("#shape", shapeName);
 			q.setQuestion(question);
 			q.setDifficultyLevel(QuizLevel.MUDAH);
 			q.setLessonSubcategory(bundle.getString("geom.shape2d.rectangle"));

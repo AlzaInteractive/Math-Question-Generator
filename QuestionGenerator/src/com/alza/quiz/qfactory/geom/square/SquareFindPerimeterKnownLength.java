@@ -50,13 +50,14 @@ public class SquareFindPerimeterKnownLength implements IQuestionFactory{
 		List<Quiz> quizList = new ArrayList<Quiz>();
 		for (int i=0;i<numq;i++){
 			Square sq = (Square) new Square().createExample();
+			String shapeName = bundle.getString("geom.shape2d."+sq.getName().toLowerCase());
 			sq.hideTextsAndMeasurements();
 			sq.setShowLengthValue(true);
 			GeomQuiz q = new GeomQuiz();
 			q.setGeomShape(sq.getPaths());
 			q.setCorrectAnswer(Geom.formatMeasurement(sq.getPerimeter()));
 			String question = bundle.getString("geom.shape2d.question.findperimeter");
-			question = question.replaceAll("#shape", sq.getName());
+			question = question.replaceAll("#shape", shapeName);
 			q.setQuestion(question);
 			q.setDifficultyLevel(QuizLevel.MUDAH);
 			q.setLessonSubcategory(bundle.getString("geom.shape2d.square"));

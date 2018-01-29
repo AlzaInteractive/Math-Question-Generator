@@ -9,6 +9,7 @@ import java.util.ResourceBundle;
 import com.alza.quiz.model.GeomQuiz;
 import com.alza.quiz.model.Quiz;
 import com.alza.quiz.model.QuizLevel;
+import com.alza.quiz.model.geom.Geom;
 import com.alza.quiz.model.geom.Square;
 import com.alza.quiz.qfactory.IQuestionFactory;
 
@@ -16,6 +17,7 @@ public class SquareFindAreaKnownLength implements IQuestionFactory {
 	private int numq = 2;
 	Locale loc;
 	ResourceBundle bundle;
+	String shapeName;
 
 	public SquareFindAreaKnownLength() {
 		this.loc = new Locale("in", "ID");
@@ -30,6 +32,7 @@ public class SquareFindAreaKnownLength implements IQuestionFactory {
 
 	private void initStringFromLocale() {
 		bundle = ResourceBundle.getBundle("lang.langbundle", loc);
+		
 	}
 
 	@Override
@@ -49,13 +52,14 @@ public class SquareFindAreaKnownLength implements IQuestionFactory {
 		List<Quiz> quizList = new ArrayList<Quiz>();
 		for (int i = 0; i < numq; i++) {
 			Square sq = (Square) new Square().createExample();
+			String shapeName = bundle.getString("geom.shape2d."+sq.getName().toLowerCase());
 			sq.hideTextsAndMeasurements();
 			sq.setShowLengthValue(true);
 			GeomQuiz q = new GeomQuiz();
 			q.setGeomShape(sq.getPaths());
-			q.setCorrectAnswer(String.valueOf(sq.getArea()));
+			q.setCorrectAnswer(Geom.formatMeasurement(sq.getArea()));
 			String question = bundle.getString("geom.shape2d.question.findarea");
-			question = question.replaceAll("#shape", sq.getName());
+			question = question.replaceAll("#shape", shapeName);
 			q.setQuestion(question);
 			q.setDifficultyLevel(QuizLevel.MUDAH);
 			q.setLessonSubcategory(bundle.getString("geom.shape2d.square"));

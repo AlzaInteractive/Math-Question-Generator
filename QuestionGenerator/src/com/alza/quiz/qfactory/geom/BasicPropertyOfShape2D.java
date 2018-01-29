@@ -12,22 +12,24 @@ public class BasicPropertyOfShape2D {
 	Locale loc;
 	ResourceBundle bundle;
 	Shapes2D shape;
+	String shapeName;
 	public BasicPropertyOfShape2D(Shapes2D shape) {
 		this.loc = new Locale("in", "ID");
-		initStringFromLocale();
 		this.shape = shape;
+		initStringFromLocale();
 	}
 	
 	public BasicPropertyOfShape2D(Locale loc, Shapes2D shape) {
 		super();
 		this.loc = loc;
-		initStringFromLocale();
 		this.shape = shape;
+		initStringFromLocale();
 		//shape.hideTextsAndMeasurements();
 	}
 
 	private void initStringFromLocale(){
 		bundle = ResourceBundle.getBundle("lang.langbundle", loc);
+		shapeName = bundle.getString("geom.shape2d."+shape.getName().toLowerCase());
 	}
 	
 	public Quiz numberOfEdges(){
@@ -35,7 +37,7 @@ public class BasicPropertyOfShape2D {
 		q.setGeomShape(shape.getPaths());
 		q.setCorrectAnswer(String.valueOf(shape.getEdgeCount()));
 		String question = bundle.getString("geom.shape2d.question.edgecount");
-		question = question.replace("#shape", shape.getName());
+		question = question.replace("#shape", shapeName);
 		q.setQuestion(question);
 		q.setDifficultyLevel(QuizLevel.MUDAH);
 		q.setLessonSubcategory(bundle.getString("geom.shape2d."+shape.getName().toLowerCase()));
@@ -52,7 +54,7 @@ public class BasicPropertyOfShape2D {
 		q.setGeomShape(shape.getPaths());
 		q.setCorrectAnswer(String.valueOf(shape.getReflectionalSymmetryCount()));
 		String question = bundle.getString("geom.shape2d.question.reflectionalsymmetrycount");
-		question = question.replace("#shape", shape.getName());
+		question = question.replace("#shape", shapeName);
 		q.setQuestion(question);
 		q.setDifficultyLevel(QuizLevel.MUDAH);
 		q.setLessonSubcategory(bundle.getString("geom.shape2d."+shape.getName().toLowerCase()));
@@ -69,7 +71,7 @@ public class BasicPropertyOfShape2D {
 		q.setGeomShape(shape.getPaths());
 		q.setCorrectAnswer(String.valueOf(shape.getRotationalSymmetryCount()));
 		String question = bundle.getString("geom.shape2d.question.rotationalsymmetrycount");
-		question = question.replace("#shape", shape.getName());
+		question = question.replace("#shape", shapeName);
 		q.setQuestion(question);
 		q.setDifficultyLevel(QuizLevel.MUDAH);
 		q.setLessonSubcategory(bundle.getString("geom.shape2d."+shape.getName().toLowerCase()));

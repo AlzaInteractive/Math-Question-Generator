@@ -50,6 +50,7 @@ public class SquareFindLengthKnownArea implements IQuestionFactory {
 		List<Quiz> quizList = new ArrayList<Quiz>();
 		for (int i = 0; i < numq; i++) {
 			Square sq = (Square) new Square().createExample();
+			String shapeName = bundle.getString("geom.shape2d."+sq.getName().toLowerCase());
 			sq.hideTextsAndMeasurements();
 			GeomQuiz q = new GeomQuiz();
 			q.setGeomShape(sq.getPaths());

@@ -72,12 +72,12 @@ public class RectangleBasicProperties implements IQuestionFactory {
 		String question = bundle.getString("geom.shape2d.question.rectangle.angle");
 		q.setQuestion(question);
 		q.setDifficultyLevel(QuizLevel.MUDAH);
-		q.setLessonSubcategory(bundle.getString("geom.shape2d"));
+		q.setLessonSubcategory(bundle.getString("geom.shape2d.rectangle"));
 		q.setLessonClassifier(bundle.getString("mathelementary"));
 		q.setLessonGrade(4);
 		q.setSubCategoryOrder(5);
 		q.setLocale(loc);
-		q.setLessonCategory(bundle.getString("geom"));
+		q.setLessonCategory(bundle.getString("geom.shape2d"));
 		return q;
 	}
 
