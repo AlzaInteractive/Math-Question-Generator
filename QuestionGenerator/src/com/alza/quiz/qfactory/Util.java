@@ -64,7 +64,7 @@ public class Util {
 	}
 	public static List<IQuestionFactory> getAllRomansQuestionFactory(){
 		List<IQuestionFactory> lqf = new ArrayList<IQuestionFactory>();
-		lqf.add(new RomanNumeralsQuestionFactory());
+		//lqf.add(new RomanNumeralsQuestionFactory());
 		return lqf;
 	}
 	
