@@ -9,6 +9,7 @@ import java.util.ResourceBundle;
 import com.alza.quiz.model.GeomQuiz;
 import com.alza.quiz.model.Quiz;
 import com.alza.quiz.model.QuizLevel;
+import com.alza.quiz.model.geom.Geom;
 import com.alza.quiz.model.geom.Rectangle;
 import com.alza.quiz.qfactory.IQuestionFactory;
 
@@ -55,7 +56,7 @@ public class RectangleFindAreaKnownLengthWidth implements IQuestionFactory {
 			rec.setShowWidthValue(true);
 			GeomQuiz q = new GeomQuiz();
 			q.setGeomShape(rec.getPaths());
-			q.setCorrectAnswer(String.valueOf(rec.getArea()));
+			q.setCorrectAnswer(Geom.formatMeasurement(rec.getArea()));
 			String question = bundle.getString("geom.shape2d.question.findarea");
 			question = question.replaceAll("#shape", shapeName);
 			q.setQuestion(question);

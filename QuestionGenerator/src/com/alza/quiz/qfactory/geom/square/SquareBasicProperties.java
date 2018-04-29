@@ -7,7 +7,7 @@ import java.util.Locale;
 import java.util.Random;
 import java.util.ResourceBundle;
 
-import com.alza.quiz.model.MultipleChoiceQuiz;
+import com.alza.quiz.model.MultipleChoiceGeomQuiz;
 import com.alza.quiz.model.Quiz;
 import com.alza.quiz.model.QuizLevel;
 import com.alza.quiz.model.geom.Square;
@@ -49,7 +49,9 @@ public class SquareBasicProperties implements IQuestionFactory {
 	@Override
 	public List<Quiz> generateQuizList() {
 		List<Quiz> quizListSrc = new ArrayList<Quiz>();
-		BasicPropertyOfShape2D bp = new BasicPropertyOfShape2D(loc, new Square().createExample());
+		Square shp = (Square) new Square().createExample();
+		shp.hideTextsAndMeasurements();
+		BasicPropertyOfShape2D bp = new BasicPropertyOfShape2D(loc, shp);
 		quizListSrc.add(bp.numberOfEdges());
 		quizListSrc.add(bp.numberOfReflectionalSymmetry());
 		quizListSrc.add(bp.numberOfRotationalSymmetry());
@@ -66,7 +68,10 @@ public class SquareBasicProperties implements IQuestionFactory {
 	}
 
 	private Quiz verticeAngle() {
-		MultipleChoiceQuiz q = new MultipleChoiceQuiz();
+		MultipleChoiceGeomQuiz q = new MultipleChoiceGeomQuiz();
+		Square shp = (Square) new Square().createExample();
+		shp.hideTextsAndMeasurements();
+		q.setGeomShape(shp.getPaths());
 		q.setCorrectAnswer("90");
 		q.setChoices("45", "90", "180", "100");
 		String question = bundle.getString("geom.shape2d.question.square.angle");

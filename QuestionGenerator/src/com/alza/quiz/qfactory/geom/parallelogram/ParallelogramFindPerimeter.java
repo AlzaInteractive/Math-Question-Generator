@@ -56,6 +56,7 @@ public class ParallelogramFindPerimeter implements IQuestionFactory{
 			int height = phyt[1];
 			int length = ThreadLocalRandom.current().nextInt(shear+1,shear*3);
 			Parallelogram shp = (Parallelogram) new Parallelogram(length,height,shear);
+			String shapeName = bundle.getString("geom.shape2d."+shp.getName().toLowerCase());
 			shp.hideTextsAndMeasurements();
 			shp.setShowLengthValue(true);
 			shp.setShowShearValue(true);
@@ -65,7 +66,7 @@ public class ParallelogramFindPerimeter implements IQuestionFactory{
 			q.setGeomShape(shp.getPaths());
 			q.setCorrectAnswer(Geom.formatMeasurement(shp.getPerimeter()));
 			String question = bundle.getString("geom.shape2d.question.findperimeter");
-			question = question.replaceAll("#shape", shp.getName());
+			question = question.replaceAll("#shape", shapeName);
 			q.setQuestion(question);
 			q.setDifficultyLevel(QuizLevel.MUDAH);
 			q.setLessonSubcategory(bundle.getString("geom.shape2d.parallelogram"));
