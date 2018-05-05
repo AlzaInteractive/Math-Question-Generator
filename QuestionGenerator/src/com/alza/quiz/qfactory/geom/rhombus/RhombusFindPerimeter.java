@@ -50,7 +50,7 @@ public class RhombusFindPerimeter implements IQuestionFactory{
 	public List<Quiz> generateQuizList() {
 		List<Quiz> quizList = new ArrayList<Quiz>();
 		for (int i=0;i<numq;i++){
-			int[] phyt = MathUtils.generateRandomPhytagoreanTriples(3, 6);
+			int[] phyt = MathUtils.generateRandomPythagoreanTriples(3, 6);
 			double diagHoriz = 2 * phyt[0];
 			double diagVert = 2 * phyt[1];
 			Rhombus shp = (Rhombus) new Rhombus(diagHoriz,diagVert);

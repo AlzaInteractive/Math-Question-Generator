@@ -15,17 +15,17 @@ import com.alza.quiz.model.geom.Geom;
 import com.alza.quiz.model.geom.Trapezoid;
 import com.alza.quiz.qfactory.IQuestionFactory;
 
-public class TrapezoidFindPerimeterPhyt implements IQuestionFactory{
+public class TrapezoidFindPerimeterPyth implements IQuestionFactory{
 	private int numq = 2;
 	Locale loc;
 	ResourceBundle bundle;
 	
-	public TrapezoidFindPerimeterPhyt() {
+	public TrapezoidFindPerimeterPyth() {
 		this.loc = new Locale("in", "ID");
 		initStringFromLocale();
 	}
 	
-	public TrapezoidFindPerimeterPhyt(Locale loc) {
+	public TrapezoidFindPerimeterPyth(Locale loc) {
 		super();
 		this.loc = loc;
 		initStringFromLocale();
@@ -51,12 +51,13 @@ public class TrapezoidFindPerimeterPhyt implements IQuestionFactory{
 	public List<Quiz> generateQuizList() {
 		List<Quiz> quizList = new ArrayList<Quiz>();
 		for (int i=0;i<numq;i++){
-			int[] phyt = MathUtils.generateRandomPhytagoreanTriples(4, 5);
+			int[] phyt = MathUtils.generateRandomPythagoreanTriples(4, 5);
 			int shear = phyt[0];
 			int height = phyt[1];
 			int bottomLength = ThreadLocalRandom.current().nextInt(shear*2+5,shear*3+6);
 			int topLength = bottomLength - (2 * shear);
 			Trapezoid shp = (Trapezoid) new Trapezoid(topLength,bottomLength,height,shear);
+			String shapeName = bundle.getString("geom.shape2d."+shp.getName().toLowerCase());
 			shp.hideTextsAndMeasurements();
 			shp.setShowBottomLengthValue(true);
 			shp.setShowTopLengthValue(true);
@@ -67,7 +68,7 @@ public class TrapezoidFindPerimeterPhyt implements IQuestionFactory{
 			q.setGeomShape(shp.getPaths());
 			q.setCorrectAnswer(Geom.formatMeasurement(shp.getPerimeter()));
 			String question = bundle.getString("geom.shape2d.question.findperimeter");
-			question = question.replaceAll("#shape", shp.getName());
+			question = question.replaceAll("#shape", shapeName);
 			q.setQuestion(question);
 			q.setDifficultyLevel(QuizLevel.MUDAH);
 			q.setLessonSubcategory(bundle.getString("geom.shape2d.trapezoid"));

@@ -6,6 +6,7 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 
 import com.alza.quiz.model.GameLevel;
+import com.alza.quiz.qfactory.IPlayableLevelFactory;
 import com.alza.quiz.qfactory.geom.circle.CircleFindAreaKnownDiameter;
 import com.alza.quiz.qfactory.geom.circle.CircleFindAreaKnownRadius;
 import com.alza.quiz.qfactory.geom.circle.CircleFindDiameterKnownArea;
@@ -39,7 +40,7 @@ import com.alza.quiz.qfactory.geom.trapezoid.TrapezoidFindArea;
 import com.alza.quiz.qfactory.geom.trapezoid.TrapezoidFindHeight;
 import com.alza.quiz.qfactory.geom.trapezoid.TrapezoidFindLength;
 import com.alza.quiz.qfactory.geom.trapezoid.TrapezoidFindPerimeter;
-import com.alza.quiz.qfactory.geom.trapezoid.TrapezoidFindPerimeterPhyt;
+import com.alza.quiz.qfactory.geom.trapezoid.TrapezoidFindPerimeterPyth;
 import com.alza.quiz.qfactory.geom.triangle.TriangleBasicProperties;
 import com.alza.quiz.qfactory.geom.triangle.TriangleFindAreaKnownBaseHeight;
 import com.alza.quiz.qfactory.geom.triangle.TriangleFindBaseLengthKnownArea;
@@ -55,8 +56,8 @@ import com.alza.quiz.qfactory.geom.triangle.TriangleScaleneIscoscelesEquilateral
  * @author ewien Game level factory for geometry problems
  *
  */
-public class GeomGameLevel {
-	public static List<GameLevel> createGameLevels(Locale loc) {
+public class GeomGameLevel implements IPlayableLevelFactory{
+	public List<GameLevel> createGameLevels(Locale loc) {
 		ResourceBundle bundle = ResourceBundle.getBundle("lang.langbundle", loc);
 
 		List<GameLevel> lgl = new ArrayList<GameLevel>();
@@ -120,7 +121,7 @@ public class GeomGameLevel {
 		g.addQuestionFactory(new TrapezoidFindLength(loc), 1);
 		g.addQuestionFactory(new TrapezoidFindHeight(loc), 1);
 		g.addQuestionFactory(new TrapezoidFindPerimeter(loc), 1);
-		g.addQuestionFactory(new TrapezoidFindPerimeterPhyt(loc), 2);
+		g.addQuestionFactory(new TrapezoidFindPerimeterPyth(loc), 2);
 		lgl.add(g);
 
 		// Rhombus
@@ -153,12 +154,10 @@ public class GeomGameLevel {
 		g.addQuestionFactory(new CircleFindDiameterKnownArea(loc), 1);
 		//g.addQuestionFactory(new KiteFindPerimeter(loc), 5);
 		lgl.add(g);
-
-
 		return lgl;
 
 	}
-	public static GameLevel getGameLevel(int order, Locale loc){
+	public GameLevel getGameLevel(int order, Locale loc){
 		List<GameLevel> levels = createGameLevels(loc);
 		for (GameLevel gameLevel : levels) {
 			if (gameLevel.getOrder()==order) {
@@ -166,6 +165,43 @@ public class GeomGameLevel {
 			}
 		}
 		return null;
+	}
+	
+	public GameLevel getExamLevel(Locale loc){
+		ResourceBundle	bundle = ResourceBundle.getBundle("lang.langbundle", loc);
+		String name,desc;
+		name = bundle.getString("exam");
+		desc = bundle.getString("examdesc");
+		GameLevel g = GameLevel.createSingleQF(0, name, desc, new WhichGeom2DShapeQuestionFactory(loc), 2);
+		g.addQuestionFactory(new SquareBasicProperties(loc), 1);
+		g.addQuestionFactory(new SquareFindAreaKnownLength(loc), 1);
+		g.addQuestionFactory(new SquareFindPerimeterKnownLength(loc), 1);
+		g.addQuestionFactory(new RectangleBasicProperties(loc), 1);
+		g.addQuestionFactory(new RectangleFindAreaKnownLengthWidth(loc), 1);
+		g.addQuestionFactory(new RectangleFindPerimeterKnownLengthWidth(loc), 1);
+		g.addQuestionFactory(new TriangleBasicProperties(loc), 1);
+		g.addQuestionFactory(new TriangleFindAreaKnownBaseHeight(loc), 2);
+		g.addQuestionFactory(new TriangleFindMissingAngle(loc), 1);
+		g.addQuestionFactory(new TrianglePhytagoreanFindRightEdge(loc), 1);
+		g.addQuestionFactory(new TriangleRightObtuseAcute(loc), 1);
+		g.addQuestionFactory(new TriangleScaleneIscoscelesEquilateral(loc), 1);
+		g.addQuestionFactory(new CircleFindAreaKnownRadius(loc), 1);
+		g.addQuestionFactory(new CircleFindPerimeterKnownRadius(loc), 1);
+		g.addQuestionFactory(new CircleFindDiameterKnownPerimeter(loc), 1);
+		g.addQuestionFactory(new CircleFindRadiusKnownArea(loc), 1);
+		g.addQuestionFactory(new ParallelogramFindArea(loc), 1);
+		g.addQuestionFactory(new ParallelogramFindPerimeter(loc), 1);
+		g.addQuestionFactory(new ParallelogramFindHeight(loc), 1);
+		g.addQuestionFactory(new TrapezoidFindArea(loc), 1);
+		g.addQuestionFactory(new TrapezoidFindPerimeter(loc), 1);
+		g.addQuestionFactory(new TrapezoidFindHeight(loc), 1);
+		g.addQuestionFactory(new RhombusBasicProperties(loc), 1);
+		g.addQuestionFactory(new RhombusFindPerimeter(loc), 1);
+		g.addQuestionFactory(new RhombusFindArea(loc), 1);
+		g.addQuestionFactory(new KiteBasicProperties(loc), 1);
+		g.addQuestionFactory(new KiteFindArea(loc), 1);
+		g.addQuestionFactory(new KiteFindPerimeter(loc), 1);
+		return g;
 	}
 
 }

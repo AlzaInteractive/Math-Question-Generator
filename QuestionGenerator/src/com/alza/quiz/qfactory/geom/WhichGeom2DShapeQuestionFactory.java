@@ -1,6 +1,7 @@
 package com.alza.quiz.qfactory.geom;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 import java.util.Random;
@@ -45,6 +46,7 @@ public class WhichGeom2DShapeQuestionFactory implements IQuestionFactory {
 		shapes.add(new Kite());
 		shapes.add(new Parallelogram());
 		shapes.add(new Trapezoid());
+		Collections.shuffle(shapes);
 	}
 	private void initStringFromLocale(){
 		bundle = ResourceBundle.getBundle("lang.langbundle", loc);

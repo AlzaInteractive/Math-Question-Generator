@@ -50,7 +50,7 @@ public class RectangleFindDiagonalKnownLengthWidth implements IQuestionFactory{
 	public List<Quiz> generateQuizList() {
 		List<Quiz> quizList = new ArrayList<Quiz>();
 		for (int i=0;i<numq;i++){
-			int[] phyt = MathUtils.generateRandomPhytagoreanTriples(3, 5);
+			int[] phyt = MathUtils.generateRandomPythagoreanTriples(3, 5);
 			Rectangle shp = (Rectangle) new Rectangle(phyt[0],phyt[1]);
 			String shapeName = bundle.getString("geom.shape2d."+shp.getName().toLowerCase());
 			shp.hideTextsAndMeasurements();

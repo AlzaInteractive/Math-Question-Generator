@@ -206,7 +206,7 @@ public class Triangle implements Shapes2D{
 			double bs = ThreadLocalRandom.current().nextInt(5, 26);
 			tr = new Triangle(bs, 60, 60, 60);
 		} else if (type==EdgeLengthRatio.iscosceles) {
-			int[] pyth = MathUtils.generateRandomPhytagoreanTriples(3, 5);
+			int[] pyth = MathUtils.generateRandomPythagoreanTriples(3, 5);
 			double bs = 2 * pyth[1];
 			double shear = pyth[1];
 			double height = pyth[0];

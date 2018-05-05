@@ -9,6 +9,7 @@ import java.util.ResourceBundle;
 import com.alza.quiz.model.GeomQuiz;
 import com.alza.quiz.model.Quiz;
 import com.alza.quiz.model.QuizLevel;
+import com.alza.quiz.model.geom.Geom;
 import com.alza.quiz.model.geom.Trapezoid;
 import com.alza.quiz.qfactory.IQuestionFactory;
 
@@ -49,6 +50,7 @@ public class TrapezoidFindArea implements IQuestionFactory {
 		List<Quiz> quizList = new ArrayList<Quiz>();
 		for (int i = 0; i < numq; i++) {
 			Trapezoid shp = (Trapezoid) new Trapezoid().createExample();
+			String shapeName = bundle.getString("geom.shape2d."+shp.getName().toLowerCase());
 			shp.hideTextsAndMeasurements();
 			shp.setShowHeightLine(true);
 			shp.setShowHeightValue(true);
@@ -56,9 +58,9 @@ public class TrapezoidFindArea implements IQuestionFactory {
 			shp.setShowTopLengthValue(true);
 			GeomQuiz q = new GeomQuiz();
 			q.setGeomShape(shp.getPaths());
-			q.setCorrectAnswer(String.valueOf(shp.getArea()));
+			q.setCorrectAnswer(Geom.formatMeasurement(shp.getArea()));
 			String question = bundle.getString("geom.shape2d.question.findarea");
-			question = question.replaceAll("#shape", shp.getName());
+			question = question.replaceAll("#shape", shapeName);
 			q.setQuestion(question);
 			q.setDifficultyLevel(QuizLevel.MUDAH);
 			q.setLessonSubcategory(bundle.getString("geom.shape2d.trapezoid"));

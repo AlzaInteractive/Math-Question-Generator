@@ -65,12 +65,12 @@ public class RomanNumeralsQuestionFactory implements IQuestionFactory{
 				String romans = MathUtils.toRomanNumeral(num);
 				int[] bound = {lowerBound,upperBound};
 				if (i % 2 == 0){// to romans
-					q.setQuestion(bundle.getString("romans.question.toroman")+": "+num);
+					q.setQuestion(String.valueOf(num));
 					q.setCorrectAnswer(romans);
 					q.setChoices(populateChoices(bound , num, true));
 					q.setLessonSubcategory(bundle.getString("romans.subcategory.toromans"));
 				} else { // from romans
-					q.setQuestion(bundle.getString("romans.question.fromroman")+": "+romans);
+					q.setQuestion(romans);
 					q.setCorrectAnswer(String.valueOf(num));
 					q.setChoices(populateChoices(bound, num, false));
 					q.setLessonSubcategory(bundle.getString("romans.subcategory.fromromans"));

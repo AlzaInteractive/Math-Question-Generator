@@ -6,12 +6,12 @@ import java.util.Locale;
 import com.alza.quiz.model.GameLevel;
 import com.alza.quiz.model.MultipleChoiceQuiz;
 import com.alza.quiz.model.Quiz;
-import com.alza.quiz.qfactory.fraction.FractionGameLevel;
 import com.alza.quiz.qfactory.romans.RomansGameLevel;
 
 public class GameLevelTest {
 	public static void main(String[] args) {
-		List<GameLevel> gls = RomansGameLevel.createGameLevels(new Locale("id","ID"));
+		RomansGameLevel rgl = new RomansGameLevel();
+		List<GameLevel> gls = rgl.createGameLevels(new Locale("id","ID"));
 		for (GameLevel gameLevel : gls) {
 			publishQ(gameLevel);
 		}

@@ -168,7 +168,7 @@ public class MathUtils {
 	 * @param maxM = max value of m
 	 * @param maxDistance = max distance between m and n
 	 * */
-	public static int[] generateRandomPhytagoreanTriples(int maxDistance, int maxM) {
+	public static int[] generateRandomPythagoreanTriples(int maxDistance, int maxM) {
 	    int m, n, a, b, c;
 	    m = ThreadLocalRandom.current().nextInt(1, maxM);
 	    n = ThreadLocalRandom.current().nextInt(m+1, m+maxDistance);		

@@ -51,12 +51,13 @@ public class TrapezoidFindPerimeter implements IQuestionFactory{
 	public List<Quiz> generateQuizList() {
 		List<Quiz> quizList = new ArrayList<Quiz>();
 		for (int i=0;i<numq;i++){
-			int[] phyt = MathUtils.generateRandomPhytagoreanTriples(4, 5);
+			int[] phyt = MathUtils.generateRandomPythagoreanTriples(4, 5);
 			int shear = phyt[0];
 			int height = phyt[1];
 			int bottomLength = ThreadLocalRandom.current().nextInt(shear*2+5,shear*3+6);
 			int topLength = bottomLength - (2 * shear);
 			Trapezoid shp = (Trapezoid) new Trapezoid(topLength,bottomLength,height,shear);
+			String shapeName = bundle.getString("geom.shape2d."+shp.getName().toLowerCase());
 			shp.hideTextsAndMeasurements();
 			shp.setShowBottomLengthValue(true);
 			shp.setShowTopLengthValue(true);
@@ -66,7 +67,7 @@ public class TrapezoidFindPerimeter implements IQuestionFactory{
 			q.setGeomShape(shp.getPaths());
 			q.setCorrectAnswer(Geom.formatMeasurement(shp.getPerimeter()));
 			String question = bundle.getString("geom.shape2d.question.findperimeter");
-			question = question.replaceAll("#shape", shp.getName());
+			question = question.replaceAll("#shape", shapeName);
 			q.setQuestion(question);
 			q.setDifficultyLevel(QuizLevel.MUDAH);
 			q.setLessonSubcategory(bundle.getString("geom.shape2d.trapezoid"));

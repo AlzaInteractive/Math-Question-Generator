@@ -51,7 +51,7 @@ public class ParallelogramFindPerimeter implements IQuestionFactory{
 	public List<Quiz> generateQuizList() {
 		List<Quiz> quizList = new ArrayList<Quiz>();
 		for (int i=0;i<numq;i++){
-			int[] phyt = MathUtils.generateRandomPhytagoreanTriples(4, 5);
+			int[] phyt = MathUtils.generateRandomPythagoreanTriples(4, 5);
 			int shear = phyt[0];
 			int height = phyt[1];
 			int length = ThreadLocalRandom.current().nextInt(shear+1,shear*3);
