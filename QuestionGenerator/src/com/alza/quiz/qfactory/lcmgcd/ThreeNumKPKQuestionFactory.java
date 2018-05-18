@@ -1,4 +1,4 @@
-package com.alza.quiz.qfactory.kpk;
+package com.alza.quiz.qfactory.lcmgcd;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,21 +13,17 @@ import com.alza.quiz.model.Quiz;
 import com.alza.quiz.model.QuizLevel;
 import com.alza.quiz.qfactory.IQuestionFactory;
 
-public class TwoNumGCDQuestionFactory implements IQuestionFactory{
+public class ThreeNumKPKQuestionFactory implements IQuestionFactory{
 	private static int numq = 2;
-	static int[][] bounds = {
-		{12,29},{30,60}
-	};
-	
 	Locale loc;
 	ResourceBundle bundle;
 	
-	public TwoNumGCDQuestionFactory(){
+	public ThreeNumKPKQuestionFactory(){
 		this.loc = new Locale("in", "ID");
 		initStringFromLocale();
 	}
 	
-	public TwoNumGCDQuestionFactory(Locale loc) {
+	public ThreeNumKPKQuestionFactory(Locale loc) {
 		this.loc = loc;
 		initStringFromLocale();
 	}
@@ -35,7 +31,6 @@ public class TwoNumGCDQuestionFactory implements IQuestionFactory{
 	private void initStringFromLocale(){
 		bundle = ResourceBundle.getBundle("lang.langbundle", loc);
 	}
-	
 	@Override
 	public Quiz generateQuiz() {
 		List<Quiz> quizList = generateQuizList();
@@ -50,35 +45,35 @@ public class TwoNumGCDQuestionFactory implements IQuestionFactory{
 
 	@Override
 	public List<Quiz> generateQuizList() {
+		int minBase = 5;
+		int maxBase = 16;
+		int val1,val2,val3;
 		List<Quiz> lq = new ArrayList<Quiz>();
-		for (int i=0;i<numq;i++){
-			int val1,val2,gcd,lcm;
-			int loBo = bounds[0][0];
-			int hiBo = bounds[0][1];
-			if (i > 3) {
-				loBo = bounds[1][0];
-				hiBo = bounds[1][1];
-			}
+		for (int i = 0; i < numq; i++) {
 			do {
-				val1 = ThreadLocalRandom.current().nextInt(loBo, hiBo);
-				val2 = ThreadLocalRandom.current().nextInt(loBo, hiBo);
-				gcd = MathUtils.findGCD(val1,val2);
-				lcm = MathUtils.findLCM(val1, val2);
-			} while (val1==val2 || gcd<3);
+				val1 = ThreadLocalRandom.current().nextInt(minBase, maxBase);
+				val2 = ThreadLocalRandom.current().nextInt(minBase, maxBase);
+				val3 = ThreadLocalRandom.current().nextInt(minBase, maxBase);
+			} while (val1 == val2 || val1 == val3 || val2 == val3 // no duplicate value
+					|| MathUtils.findGCD(val1, val2, val3) == 1); // gcd > 1
+			int lcm = MathUtils.findLCM(val1, val2, val3);
 			MultipleChoiceQuiz q = new MultipleChoiceQuiz();
-			//q.setQuestion("FPB dari bilangan " + val1 + " dan " + val2 + " adalah?");
-			q.setQuestion(bundle.getString("lcmgcd.question.gcdof") +" "+ val1+" & "+val2+" ?");
-			q.setCorrectAnswer(String.valueOf(gcd));
-			q.addChoice(String.valueOf(gcd));
+			//q.setQuestion("KPK dari bilangan " + val1 + ", " + val2 + ", dan "
+			//		+ val3 + " adalah?");
+			q.setQuestion(bundle.getString("lcmgcd.question.lcmof") +" "+ val1+"  "+val2+"  "+val3+" ?");
+			q.setCorrectAnswer(String.valueOf(lcm));
+			//choices
 			q.addChoice(String.valueOf(lcm));
-			q.addChoice(String.valueOf(val1/gcd));
-			q.addChoice(String.valueOf(val2/gcd));
-			q.addChoice(String.valueOf(val1+val2));
-			q.addChoice(String.valueOf(val1*val2));
-			
-			q.setDifficultyLevel(QuizLevel.MUDAH);
+			q.addChoice(String.valueOf(MathUtils.findLCM(val1, val2)));
+			q.addChoice(String.valueOf(MathUtils.findLCM(val2, val3)));
+			q.addChoice(String.valueOf(MathUtils.findLCM(val1, val3)));
+			q.addChoice(String.valueOf(MathUtils.findGCD(val1, val2, val3)));
+			q.addChoice(String.valueOf(val1 + val2 + val3));
+			q.addChoice(String.valueOf(val1 * val2 * val3));
+			//
+			q.setDifficultyLevel(QuizLevel.SEDANG);
 			q.setLessonCategory(bundle.getString("lcmgcd"));
-			q.setLessonSubcategory(bundle.getString("lcmgcd.subcategory.gcd"));
+			q.setLessonSubcategory(bundle.getString("lcmgcd.subcategory.lcm"));
 			q.setLessonClassifier(bundle.getString("mathelementary"));
 			q.setLessonGrade(4);
 			q.setSubCategoryOrder(2);
@@ -91,4 +86,5 @@ public class TwoNumGCDQuestionFactory implements IQuestionFactory{
 		numq = numOfQuestion;
 		return generateQuizList();
 	}
+	
 }

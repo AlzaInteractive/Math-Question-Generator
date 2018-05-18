@@ -21,16 +21,16 @@ import com.alza.quiz.qfactory.integer.Rounding;
 import com.alza.quiz.qfactory.integer.SquareRoot;
 import com.alza.quiz.qfactory.integer.SquareRootPhytagorean;
 import com.alza.quiz.qfactory.integer.SubtractionOfTwoIntegers;
-import com.alza.quiz.qfactory.kpk.TwoNumGCDQuestionFactory;
-import com.alza.quiz.qfactory.kpk.BasicGCDScenarioQuestionFactory;
-import com.alza.quiz.qfactory.kpk.FindFactorsOfQuestionFactory;
-import com.alza.quiz.qfactory.kpk.FindMultiplesOfQuestionFactory;
-import com.alza.quiz.qfactory.kpk.ThreeNumKPKQuestionFactory;
-import com.alza.quiz.qfactory.kpk.TwoNumKPKQuestionFactory;
-import com.alza.quiz.qfactory.kpk.BasicScenarioKPKQuestionFactory;
-import com.alza.quiz.qfactory.kpk.WhichDateScenarioKPKQuestionFactory;
-import com.alza.quiz.qfactory.kpk.WhichDayScenarioKPKQuestionFactory;
-import com.alza.quiz.qfactory.kpk.WhichHourScenarioKPKQuestionFactory;
+import com.alza.quiz.qfactory.lcmgcd.BasicGCDScenarioQuestionFactory;
+import com.alza.quiz.qfactory.lcmgcd.BasicScenarioKPKQuestionFactory;
+import com.alza.quiz.qfactory.lcmgcd.FindFactorsOfQuestionFactory;
+import com.alza.quiz.qfactory.lcmgcd.FindMultiplesOfQuestionFactory;
+import com.alza.quiz.qfactory.lcmgcd.ThreeNumKPKQuestionFactory;
+import com.alza.quiz.qfactory.lcmgcd.TwoNumGCDQuestionFactory;
+import com.alza.quiz.qfactory.lcmgcd.TwoNumKPKQuestionFactory;
+import com.alza.quiz.qfactory.lcmgcd.WhichDateScenarioKPKQuestionFactory;
+import com.alza.quiz.qfactory.lcmgcd.WhichDayScenarioKPKQuestionFactory;
+import com.alza.quiz.qfactory.lcmgcd.WhichHourScenarioKPKQuestionFactory;
 import com.alza.quiz.qfactory.romans.RomanNumeralsQuestionFactory;
 
 public class Util {

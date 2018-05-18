@@ -27,9 +27,9 @@ import com.alza.quiz.qfactory.fraction.FractionRealWorldProblemScale;
 import com.alza.quiz.qfactory.fraction.FractionRealWorldProblemTaxTips;
 import com.alza.quiz.qfactory.fraction.FractionRepresentation;
 import com.alza.quiz.qfactory.fraction.FractionSimplify;
-import com.alza.quiz.qfactory.kpk.TwoNumKPKQuestionFactory;
-import com.alza.quiz.qfactory.kpk.WhichDayScenarioKPKQuestionFactory;
-import com.alza.quiz.qfactory.kpk.WhichHourScenarioKPKQuestionFactory;
+import com.alza.quiz.qfactory.lcmgcd.TwoNumKPKQuestionFactory;
+import com.alza.quiz.qfactory.lcmgcd.WhichDayScenarioKPKQuestionFactory;
+import com.alza.quiz.qfactory.lcmgcd.WhichHourScenarioKPKQuestionFactory;
 
 public class FractionGeneratorTest {
 	public static void main(String[] args) {

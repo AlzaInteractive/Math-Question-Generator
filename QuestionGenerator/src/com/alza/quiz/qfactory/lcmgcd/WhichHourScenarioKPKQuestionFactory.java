@@ -1,4 +1,4 @@
-package com.alza.quiz.qfactory.kpk;
+package com.alza.quiz.qfactory.lcmgcd;
 
 import java.util.ArrayList;
 import java.util.Collections;
