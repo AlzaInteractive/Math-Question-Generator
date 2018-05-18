@@ -12,19 +12,22 @@ import com.alza.quiz.model.MultipleChoiceQuiz;
 import com.alza.quiz.model.Quiz;
 import com.alza.quiz.model.QuizLevel;
 import com.alza.quiz.qfactory.IQuestionFactory;
-import com.alza.quiz.util.StringUtils;
 
-public class FindFactorsOfQuestionFactory implements IQuestionFactory{
-	private static int NUMQ = 2;
+public class TwoNumGCDQuestionFactory implements IQuestionFactory{
+	private static int numq = 2;
+	static int[][] bounds = {
+		{12,29},{30,60}
+	};
+	
 	Locale loc;
 	ResourceBundle bundle;
 	
-	public FindFactorsOfQuestionFactory() {
+	public TwoNumGCDQuestionFactory(){
 		this.loc = new Locale("in", "ID");
 		initStringFromLocale();
 	}
 	
-	public FindFactorsOfQuestionFactory(Locale loc) {
+	public TwoNumGCDQuestionFactory(Locale loc) {
 		this.loc = loc;
 		initStringFromLocale();
 	}
@@ -48,35 +51,44 @@ public class FindFactorsOfQuestionFactory implements IQuestionFactory{
 	@Override
 	public List<Quiz> generateQuizList() {
 		List<Quiz> lq = new ArrayList<Quiz>();
-		int minBase=15,maxBase=41;
-		for (int i=0;i<NUMQ;i++){
-			int base;
-			List<Integer> divs;
+		for (int i=0;i<numq;i++){
+			int val1,val2,gcd,lcm;
+			int loBo = bounds[0][0];
+			int hiBo = bounds[0][1];
+			if (i > 3) {
+				loBo = bounds[1][0];
+				hiBo = bounds[1][1];
+			}
 			do {
-				base = ThreadLocalRandom.current().nextInt(minBase, maxBase);
-				divs = MathUtils.findDivisors(base);
-			} while (divs.size()<3);
+				val1 = ThreadLocalRandom.current().nextInt(loBo, hiBo);
+				val2 = ThreadLocalRandom.current().nextInt(loBo, hiBo);
+				gcd = MathUtils.findGCD(val1,val2);
+				lcm = MathUtils.findLCM(val1, val2);
+			} while (val1==val2 || gcd<3);
 			MultipleChoiceQuiz q = new MultipleChoiceQuiz();
-			q.setQuestion(bundle.getString("lcmgcd.question.factorof")+" "+base+" ?");
-			q.setCorrectAnswer(StringUtils.join(divs, ","));
-			q.addChoice(base+1+","+base+2+","+base +3+","+base +4);
-			q.addChoice(base/2+","+base/3+","+base /4+","+base /5);
-			q.addChoice(base*2+","+base*3+","+base *4);
-			q.addChoice(base+","+base*base+","+base*base*base);
-			q.addChoice(StringUtils.join(divs, ","));
+			//q.setQuestion("FPB dari bilangan " + val1 + " dan " + val2 + " adalah?");
+			q.setQuestion(bundle.getString("lcmgcd.question.gcdof") +" "+ val1+" & "+val2+" ?");
+			q.setCorrectAnswer(String.valueOf(gcd));
+			q.addChoice(String.valueOf(gcd));
+			q.addChoice(String.valueOf(lcm));
+			q.addChoice(String.valueOf(val1/gcd));
+			q.addChoice(String.valueOf(val2/gcd));
+			q.addChoice(String.valueOf(val1+val2));
+			q.addChoice(String.valueOf(val1*val2));
+			
 			q.setDifficultyLevel(QuizLevel.MUDAH);
 			q.setLessonCategory(bundle.getString("lcmgcd"));
-			q.setLessonSubcategory(bundle.getString("lcmgcd.subcategory.factors"));
+			q.setLessonSubcategory(bundle.getString("lcmgcd.subcategory.gcd"));
 			q.setLessonClassifier(bundle.getString("mathelementary"));
 			q.setLessonGrade(4);
-			q.setSubCategoryOrder(1);
+			q.setSubCategoryOrder(2);
 			lq.add(q);
 		}
 		return lq;
 	}
 	@Override
 	public List<Quiz> generateQuizList(int numOfQuestion) {
-		NUMQ = numOfQuestion;
+		numq = numOfQuestion;
 		return generateQuizList();
 	}
 }

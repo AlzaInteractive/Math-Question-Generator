@@ -7,12 +7,12 @@ import java.util.List;
 import com.alza.quiz.model.MultipleChoiceQuiz;
 import com.alza.quiz.model.Quiz;
 import com.alza.quiz.qfactory.IQuestionFactory;
-import com.alza.quiz.qfactory.kpk.BasicGCDQuestionFactory;
+import com.alza.quiz.qfactory.kpk.TwoNumGCDQuestionFactory;
 import com.alza.quiz.qfactory.kpk.BasicGCDScenarioQuestionFactory;
 import com.alza.quiz.qfactory.kpk.BasicScenarioKPKQuestionFactory;
 import com.alza.quiz.qfactory.kpk.FindFactorsOfQuestionFactory;
-import com.alza.quiz.qfactory.kpk.FindMultipleQuestionFactory;
-import com.alza.quiz.qfactory.kpk.TripeNumKPKQuestionFactory;
+import com.alza.quiz.qfactory.kpk.FindMultiplesOfQuestionFactory;
+import com.alza.quiz.qfactory.kpk.ThreeNumKPKQuestionFactory;
 import com.alza.quiz.qfactory.kpk.TwoNumKPKQuestionFactory;
 import com.alza.quiz.qfactory.kpk.WhichDateScenarioKPKQuestionFactory;
 import com.alza.quiz.qfactory.kpk.WhichDayScenarioKPKQuestionFactory;
@@ -33,11 +33,11 @@ public class KPKGeneratorTester {
 	
 	private static void allGenerator(){
 		List<IQuestionFactory> lqf = new ArrayList<IQuestionFactory>();
-		lqf.add(new FindMultipleQuestionFactory());
+		lqf.add(new FindMultiplesOfQuestionFactory());
 		lqf.add(new FindFactorsOfQuestionFactory());
 		lqf.add(new TwoNumKPKQuestionFactory());
-		lqf.add(new TripeNumKPKQuestionFactory());
-		lqf.add(new BasicGCDQuestionFactory());
+		lqf.add(new ThreeNumKPKQuestionFactory());
+		lqf.add(new TwoNumGCDQuestionFactory());
 		lqf.add(new BasicScenarioKPKQuestionFactory());
 		lqf.add(new BasicGCDScenarioQuestionFactory());
 		lqf.add(new WhichDayScenarioKPKQuestionFactory());

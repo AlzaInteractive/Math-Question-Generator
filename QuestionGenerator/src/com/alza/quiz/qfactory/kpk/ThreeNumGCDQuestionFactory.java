@@ -2,7 +2,9 @@ package com.alza.quiz.qfactory.kpk;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Random;
+import java.util.ResourceBundle;
 import java.util.concurrent.ThreadLocalRandom;
 
 import com.alza.common.math.MathUtils;
@@ -11,11 +13,28 @@ import com.alza.quiz.model.Quiz;
 import com.alza.quiz.model.QuizLevel;
 import com.alza.quiz.qfactory.IQuestionFactory;
 
-public class BasicGCDQuestionFactory implements IQuestionFactory{
-	private static int NUM_OF_QUESTIONS = 2;
+public class ThreeNumGCDQuestionFactory implements IQuestionFactory{
+	private static int numq = 2;
 	static int[][] bounds = {
 		{12,29},{30,60}
 	};
+	
+	Locale loc;
+	ResourceBundle bundle;
+	
+	public ThreeNumGCDQuestionFactory(){
+		this.loc = new Locale("in", "ID");
+		initStringFromLocale();
+	}
+	
+	public ThreeNumGCDQuestionFactory(Locale loc) {
+		this.loc = loc;
+		initStringFromLocale();
+	}
+	
+	private void initStringFromLocale(){
+		bundle = ResourceBundle.getBundle("lang.langbundle", loc);
+	}
 	
 	@Override
 	public Quiz generateQuiz() {
@@ -32,43 +51,24 @@ public class BasicGCDQuestionFactory implements IQuestionFactory{
 	@Override
 	public List<Quiz> generateQuizList() {
 		List<Quiz> lq = new ArrayList<Quiz>();
-		for (int[] bound : bounds){
-			int val1,val2,gcd,lcm;
-			do {
-				val1 = ThreadLocalRandom.current().nextInt(bound[0], bound[1]);
-				val2 = ThreadLocalRandom.current().nextInt(bound[0], bound[1]);
-				gcd = MathUtils.findGCD(val1,val2);
-				lcm = MathUtils.findLCM(val1, val2);
-			} while (val1==val2 || gcd<3);
-			MultipleChoiceQuiz q = new MultipleChoiceQuiz();
-			q.setQuestion("FPB dari bilangan " + val1 + " dan " + val2 + " adalah?");
-			q.setCorrectAnswer(String.valueOf(gcd));
-			q.addChoice(String.valueOf(gcd));
-			q.addChoice(String.valueOf(lcm));
-			q.addChoice(String.valueOf(val1/gcd));
-			q.addChoice(String.valueOf(val2/gcd));
-			q.addChoice(String.valueOf(val1+val2));
-			q.addChoice(String.valueOf(val1*val2));
-			
-			q.setDifficultyLevel(QuizLevel.MUDAH);
-			q.setLessonSubcategory("FPB dua bilangan");
-			q.setLessonClassifier("Matematika SD");
-			q.setLessonGrade(4);
-			q.setSubCategoryOrder(2);
-			q.setLessonCategory("KPK & FPB");
-			lq.add(q);
-		}
-		for (int[] bound : bounds){
+		for (int i=0;i<numq;i++){
+			int loBo = bounds[0][0];
+			int hiBo = bounds[0][1];
+			if (i > 3) {
+				loBo = bounds[1][0];
+				hiBo = bounds[1][1];
+			}
 			int val1,val2,val3,gcd,lcm;
 			do {
-				val1 = ThreadLocalRandom.current().nextInt(bound[0], bound[1]);
-				val2 = ThreadLocalRandom.current().nextInt(bound[0], bound[1]);
-				val3 = ThreadLocalRandom.current().nextInt(bound[0], bound[1]);
+				val1 = ThreadLocalRandom.current().nextInt(loBo, hiBo);
+				val2 = ThreadLocalRandom.current().nextInt(loBo, hiBo);
+				val3 = ThreadLocalRandom.current().nextInt(loBo, hiBo);
 				gcd = MathUtils.findGCD(val1,val2,val3);
 				lcm = MathUtils.findLCM(val1, val2,val3);
 			} while (val1==val2 || val1==val3 || val2==val3 || gcd<3);
 			MultipleChoiceQuiz q = new MultipleChoiceQuiz();
-			q.setQuestion("FPB dari bilangan " + val1 + ", "+val2+", dan " + val3 + " adalah?");
+			//q.setQuestion("FPB dari bilangan " + val1 + ", "+val2+", dan " + val3 + " adalah?");
+			q.setQuestion(bundle.getString("lcmgcd.question.gcdof") +" "+ val1+"  "+val2+"  "+val3+" ?");
 			q.setCorrectAnswer(String.valueOf(gcd));
 			q.addChoice(String.valueOf(gcd));
 			q.addChoice(String.valueOf(lcm/val1));
@@ -80,18 +80,18 @@ public class BasicGCDQuestionFactory implements IQuestionFactory{
 			
 			
 			q.setDifficultyLevel(QuizLevel.SEDANG);
-			q.setLessonSubcategory("FPB tiga bilangan");
-			q.setLessonClassifier("Matematika SD");
+			q.setLessonCategory(bundle.getString("lcmgcd"));
+			q.setLessonSubcategory(bundle.getString("lcmgcd.subcategory.gcd"));
+			q.setLessonClassifier(bundle.getString("mathelementary"));
 			q.setLessonGrade(4);
 			q.setSubCategoryOrder(2);
-			q.setLessonCategory("KPK & FPB");
 			lq.add(q);
 		}
 		return lq;
 	}
 	@Override
 	public List<Quiz> generateQuizList(int numOfQuestion) {
-		NUM_OF_QUESTIONS = numOfQuestion;
+		numq = numOfQuestion;
 		return generateQuizList();
 	}
 }

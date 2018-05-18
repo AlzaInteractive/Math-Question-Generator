@@ -1,26 +1,39 @@
 package com.alza.quiz.qfactory.kpk;
 
-import com.alza.common.math.MathUtils;
-
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
+import java.util.ResourceBundle;
 import java.util.Set;
 import java.util.concurrent.ThreadLocalRandom;
 
+import com.alza.common.math.MathUtils;
+import com.alza.quiz.model.MultipleChoiceQuiz;
 import com.alza.quiz.model.Quiz;
 import com.alza.quiz.model.QuizLevel;
-import com.alza.quiz.model.MultipleChoiceQuiz;
 import com.alza.quiz.qfactory.IQuestionFactory;
-import com.alza.quiz.qfactory.fraction.FractionPickGreatest;
 
 public class TwoNumKPKQuestionFactory implements IQuestionFactory {
 	protected QuizLevel quizLevel = QuizLevel.MUDAH;
 	private static int NUM_OF_QUESTIONS = 4;
+	Locale loc;
+	ResourceBundle bundle;
+	
 	public TwoNumKPKQuestionFactory(){
-
+		this.loc = new Locale("in", "ID");
+		initStringFromLocale();
 	}
+	
+	public TwoNumKPKQuestionFactory(Locale loc) {
+		this.loc = loc;
+		initStringFromLocale();
+	}
+	
+	private void initStringFromLocale(){
+		bundle = ResourceBundle.getBundle("lang.langbundle", loc);
+	}
+	
 	public MultipleChoiceQuiz generateQuiz() {
 		return generateQuiz(QuizLevel.MUDAH);
 	}
@@ -34,12 +47,12 @@ public class TwoNumKPKQuestionFactory implements IQuestionFactory {
 		q.addChoice(correctAnswer);
 		q.setLessonGrade(4);
 		q.setDifficultyLevel(quizLevel);
-		q.setQuestion("Kelipatan Persekutuan Terkecil (KPK) dari bilangan " + pairs[0]+" & "+pairs[1]+" adalah?");
+		q.setQuestion(bundle.getString("lcmgcd.question.lcmgcdof") +" "+ pairs[0]+" & "+pairs[1]+" ?");
 		q.setCorrectAnswer(String.valueOf(correctAnswer));
 		q.setChoices(generateChoices(pairs));
-		q.setLessonClassifier("Matematika SD");
-		q.setLessonCategory("KPK & FPB");
-		q.setLessonSubcategory("KPK dua bilangan");
+		q.setLessonCategory(bundle.getString("lcmgcd"));
+		q.setLessonSubcategory(bundle.getString("lcmgcd.subcategory.lcm"));
+		q.setLessonClassifier(bundle.getString("mathelementary"));
 		q.setSubCategoryOrder(2);
 		return q;
 	}
