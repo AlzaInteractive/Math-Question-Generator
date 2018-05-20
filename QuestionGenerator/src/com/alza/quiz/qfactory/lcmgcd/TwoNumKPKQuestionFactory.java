@@ -16,7 +16,7 @@ import com.alza.quiz.qfactory.IQuestionFactory;
 
 public class TwoNumKPKQuestionFactory implements IQuestionFactory {
 	protected QuizLevel quizLevel = QuizLevel.MUDAH;
-	private static int NUM_OF_QUESTIONS = 4;
+	protected static int NUM_OF_QUESTIONS = 4;
 	Locale loc;
 	ResourceBundle bundle;
 	
@@ -62,9 +62,7 @@ public class TwoNumKPKQuestionFactory implements IQuestionFactory {
 		for (int i=0; i <NUM_OF_QUESTIONS; i++){
 			quizList.add(generateQuiz(QuizLevel.MUDAH));
 		}
-		/*for (int i=0; i <2; i++){
-			quizList.add(generateQuiz(QuizLevel.SEDANG));
-		}*/
+		
 		return quizList;
 	}
 
