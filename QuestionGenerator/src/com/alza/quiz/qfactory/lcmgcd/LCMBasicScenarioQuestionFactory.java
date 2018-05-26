@@ -15,17 +15,17 @@ import com.alza.quiz.util.CommonFunctionAndValues;
  * Created by ewin.sutriandi@gmail.com on 24/12/16.
  */
 
-public class BasicScenarioKPKQuestionFactory extends TwoNumKPKQuestionFactory {
+public class LCMBasicScenarioQuestionFactory extends LCMTwoNumQuestionFactory {
     List<String> sces;
 	Locale loc;
 	ResourceBundle bundle,scenarioBundle;
 	private static final int PARAMLENGTH=5;
 	
-	public BasicScenarioKPKQuestionFactory(Locale loc){
+	public LCMBasicScenarioQuestionFactory(Locale loc){
 		this.loc = loc;
 		initStringFromLocale();
 	}
-	public BasicScenarioKPKQuestionFactory(){
+	public LCMBasicScenarioQuestionFactory(){
 		this.loc = new Locale("in", "ID");
 		initStringFromLocale();
 	}
@@ -37,7 +37,7 @@ public class BasicScenarioKPKQuestionFactory extends TwoNumKPKQuestionFactory {
         
     public List<Quiz> generateQuizList(){
         List<Quiz> quizList = new ArrayList<>();
-        for (int i=0;i<NUM_OF_QUESTIONS;i++){
+        for (int i=0;i<numq;i++){
         	
         	int rnd = CommonFunctionAndValues.getRandomInt(0, sces.size());
 			String sce = getRandomScenario(rnd);
@@ -45,7 +45,7 @@ public class BasicScenarioKPKQuestionFactory extends TwoNumKPKQuestionFactory {
 			//int loBo,hiBo,offset;
 			// loBo = Integer.parseInt(param.substring(0, 2));
 			// hiBo = Integer.parseInt(param.substring(2, 4));
-			int offset = Integer.parseInt(param.substring(4, 4));
+			int offset = Integer.parseInt(param.substring(4, 5));
         		
             String[] pairPeople = CommonFunctionAndValues.getPairofPeople();
             int[] pairs = CommonFunctionAndValues.getPairOfIntSimple();

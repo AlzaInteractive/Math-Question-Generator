@@ -27,7 +27,7 @@ import com.alza.quiz.qfactory.fraction.FractionRealWorldProblemScale;
 import com.alza.quiz.qfactory.fraction.FractionRealWorldProblemTaxTips;
 import com.alza.quiz.qfactory.fraction.FractionRepresentation;
 import com.alza.quiz.qfactory.fraction.FractionSimplify;
-import com.alza.quiz.qfactory.lcmgcd.TwoNumKPKQuestionFactory;
+import com.alza.quiz.qfactory.lcmgcd.LCMTwoNumQuestionFactory;
 import com.alza.quiz.qfactory.lcmgcd.WhichDayScenarioKPKQuestionFactory;
 import com.alza.quiz.qfactory.lcmgcd.WhichHourScenarioKPKQuestionFactory;
 
@@ -47,7 +47,7 @@ public class FractionGeneratorTest {
 	}
 
 	protected static void basicGenerator() {
-		TwoNumKPKQuestionFactory f= new TwoNumKPKQuestionFactory();
+		LCMTwoNumQuestionFactory f= new LCMTwoNumQuestionFactory();
 		List<MultipleChoiceQuiz> lq = new ArrayList<MultipleChoiceQuiz>();
 		for (int i = 0; i < 5; i++) {
 			lq.add(f.generateQuiz(QuizLevel.MUDAH));

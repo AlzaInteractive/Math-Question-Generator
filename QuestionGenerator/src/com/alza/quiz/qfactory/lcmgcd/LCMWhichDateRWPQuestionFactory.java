@@ -13,22 +13,43 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Random;
+import java.util.ResourceBundle;
 import java.util.Set;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * Created by ewin.sutriandi@gmail.com on 24/12/16.
  */
 
-public class WhichDateScenarioKPKQuestionFactory extends TwoNumKPKQuestionFactory {
+public class LCMWhichDateRWPQuestionFactory extends LCMTwoNumQuestionFactory {
     private List<String> scenariosWithTwoVal = new ArrayList<String>();
     private List<String> scenariosWithThreeVal = new ArrayList<String>();
     private Date[] refDates;
+    protected static int numq = 4;
+	Locale loc;
+	ResourceBundle bundle;
+	private ResourceBundle scenarioBundle;
+	private List<String> sces;
+	private static final int PARAMLENGTH=5;
+	
+	public LCMWhichDateRWPQuestionFactory(){
+		this.loc = new Locale("in", "ID");
+		initStringFromLocale();
+	}
+	
+	public LCMWhichDateRWPQuestionFactory(Locale loc) {
+		this.loc = loc;
+		initStringFromLocale();
+	}
+	
+	private void initStringFromLocale(){
+		bundle = ResourceBundle.getBundle("lang.langbundle", loc);
+		scenarioBundle = ResourceBundle.getBundle("lang.scenario-lcm", loc);
+		sces = CommonFunctionAndValues.getStringCollection(scenarioBundle, "lcm.rwpdate");
+	}
 
-    public WhichDateScenarioKPKQuestionFactory(){
-        super();
-        prepareScenario();
-    }
     public MultipleChoiceQuiz generateQuiz() {
         //prepareScenario();
         int rnd = new Random().nextInt(scenariosWithTwoVal.size()+scenariosWithThreeVal.size());
@@ -41,21 +62,29 @@ public class WhichDateScenarioKPKQuestionFactory extends TwoNumKPKQuestionFactor
         //prepareScenario();
         List<Quiz> quizList = new ArrayList<>();
         constructRefDates();
-        int[][] numPair = CommonFunctionAndValues.simpleIntPairs;
-        CommonFunctionAndValues.shuffleArray(numPair);
-        int j = 0;
-        
-        int rndSce = CommonFunctionAndValues.getRandomInt(0, scenariosWithTwoVal.size());  
-        for (int i=0;i<1;i++){
-            //prepare question
-            String sce = CommonFunctionAndValues.buildScenario(scenariosWithTwoVal.get(i), numPair[j]);
-            int answerInInt = MathUtils.findLCM(numPair[j]);
-            Date refDate = refDates[j];
+        Collections.shuffle(sces);
+        for (int i=0;i<numq;i++){
+            //prepare question	
+        	String question = getRandomScenario(i);
+			String param =  getParams(i);
+			int loBo,hiBo,numVal,gcd,lcm;
+			loBo = Integer.parseInt(param.substring(0, 2));
+			hiBo = Integer.parseInt(param.substring(2, 4));
+			numVal = Integer.parseInt(param.substring(4, 5));
+			int[] vals = new int[numVal];
+			do {
+				for (int v=1;i<numVal;i++) {
+					vals[v] = ThreadLocalRandom.current().nextInt(loBo, hiBo)+1;
+				}
+				gcd = MathUtils.findGCD(vals);
+				lcm = MathUtils.findLCM(vals);
+			} while (gcd < 3 || lcm == vals[0]);
+            Date refDate = refDates[i%refDates.length];
             Calendar c = Calendar.getInstance();
             c.setTime(refDate);
-            sce = sce.replace("#refdate?",CommonFunctionAndValues.dateToString(refDate));
+            question = question.replace("#refdate?",CommonFunctionAndValues.dateToString(refDate));
             //prepare answer
-            c.add(Calendar.DATE,answerInInt);
+            c.add(Calendar.DATE,lcm);
             Date answerInDate = c.getTime();
             String answerInString = CommonFunctionAndValues.dateToString(answerInDate);
             //prepare choices
@@ -63,47 +92,14 @@ public class WhichDateScenarioKPKQuestionFactory extends TwoNumKPKQuestionFactor
             //Prepare Quiz
             MultipleChoiceQuiz q = new MultipleChoiceQuiz();
             q.setDifficultyLevel(QuizLevel.SULIT);
-            q.setQuestion(sce);
+            q.setQuestion(question);
             q.setChoices(choices);
             q.setCorrectAnswer(answerInString);
             q.setLessonGrade(5);
-            q.setLessonClassifier("Matematika SD");
-            q.setLessonCategory("KPK");
-            q.setLessonSubcategory("Soal cerita melibatkan tanggal");
+			q.setLessonCategory(bundle.getString("lcmgcd.lcmgcd"));
+			q.setLessonSubcategory(bundle.getString("lcmgcd.subcategory.lcm"));
+			q.setLessonClassifier(bundle.getString("mathelementary"));
             quizList.add(q);
-            j++;
-        }
-        j = 0;
-        for (int i=0;i<1;i++){
-            //prepare question
-            int[] arr = CommonFunctionAndValues.simpleInt;
-            CommonFunctionAndValues.shuffleArray(arr);
-            int[] threeNum = {arr[0],arr[1],arr[2]};
-            String ces = CommonFunctionAndValues.buildScenario(
-            		scenariosWithThreeVal.get(i), threeNum);
-            int answerInInt = MathUtils.findLCM(threeNum);
-            Date refDate = refDates[j];
-            Calendar c = Calendar.getInstance();
-            c.setTime(refDate);
-            ces = ces.replace("#refdate?",CommonFunctionAndValues.dateToString(refDate));
-            //prepare answer
-            c.add(Calendar.DATE,answerInInt);
-            Date answerInDate = c.getTime();
-            String answerInString = CommonFunctionAndValues.dateToString(answerInDate);
-            //prepare choices
-            Set<String> choices = prepareChoices(answerInDate);
-            //Prepare Quiz
-            MultipleChoiceQuiz q = new MultipleChoiceQuiz();
-            q.setLessonGrade(5);
-            q.setDifficultyLevel(QuizLevel.SULIT);
-            q.setQuestion(ces);
-            q.setChoices(choices);
-            q.setCorrectAnswer(answerInString);
-            q.setLessonClassifier("Matematika SD");
-            q.setLessonCategory("KPK & FPB");
-            q.setLessonSubcategory("Soal cerita melibatkan tanggal");
-            quizList.add(q);
-            j++;
         }
         return quizList;
     }
@@ -193,4 +189,17 @@ public class WhichDateScenarioKPKQuestionFactory extends TwoNumKPKQuestionFactor
         Collections.shuffle(scenariosWithTwoVal);
         Collections.shuffle(scenariosWithThreeVal);
     }
+    
+    private String getParams(int rnd) {
+		String s = sces.get(rnd);
+		String params = s.substring(s.length()-PARAMLENGTH);
+		//System.out.println(params);
+		return params;
+	}
+	
+	public String getRandomScenario(int rnd){
+		String s = sces.get(rnd);
+		String sce = s.substring(0,s.length()-(PARAMLENGTH));
+		return sce;
+	}
 }

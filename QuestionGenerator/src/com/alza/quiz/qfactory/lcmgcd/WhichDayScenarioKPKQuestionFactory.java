@@ -15,7 +15,7 @@ import java.util.Random;
  * Created by ewin.sutriandi@gmail.com on 24/12/16.
  */
 
-public class WhichDayScenarioKPKQuestionFactory extends TwoNumKPKQuestionFactory {
+public class WhichDayScenarioKPKQuestionFactory extends LCMTwoNumQuestionFactory {
     private List<String> scenarios = new ArrayList<String>();
 
     public WhichDayScenarioKPKQuestionFactory(){

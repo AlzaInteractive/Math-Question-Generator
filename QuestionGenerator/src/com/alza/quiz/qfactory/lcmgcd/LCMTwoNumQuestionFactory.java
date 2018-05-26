@@ -14,18 +14,18 @@ import com.alza.quiz.model.Quiz;
 import com.alza.quiz.model.QuizLevel;
 import com.alza.quiz.qfactory.IQuestionFactory;
 
-public class TwoNumKPKQuestionFactory implements IQuestionFactory {
+public class LCMTwoNumQuestionFactory implements IQuestionFactory {
 	protected QuizLevel quizLevel = QuizLevel.MUDAH;
-	protected static int NUM_OF_QUESTIONS = 4;
+	protected static int numq = 4;
 	Locale loc;
 	ResourceBundle bundle;
 	
-	public TwoNumKPKQuestionFactory(){
+	public LCMTwoNumQuestionFactory(){
 		this.loc = new Locale("in", "ID");
 		initStringFromLocale();
 	}
 	
-	public TwoNumKPKQuestionFactory(Locale loc) {
+	public LCMTwoNumQuestionFactory(Locale loc) {
 		this.loc = loc;
 		initStringFromLocale();
 	}
@@ -59,7 +59,7 @@ public class TwoNumKPKQuestionFactory implements IQuestionFactory {
 
 	public List<Quiz> generateQuizList() {
 		List<Quiz> quizList = new ArrayList<>();
-		for (int i=0; i <NUM_OF_QUESTIONS; i++){
+		for (int i=0; i <numq; i++){
 			quizList.add(generateQuiz(QuizLevel.MUDAH));
 		}
 		
@@ -107,7 +107,7 @@ public class TwoNumKPKQuestionFactory implements IQuestionFactory {
 	}
 	@Override
 	public List<Quiz> generateQuizList(int numOfQuestion) {
-		NUM_OF_QUESTIONS = numOfQuestion;
+		numq = numOfQuestion;
 		return generateQuizList();
 	}
 	

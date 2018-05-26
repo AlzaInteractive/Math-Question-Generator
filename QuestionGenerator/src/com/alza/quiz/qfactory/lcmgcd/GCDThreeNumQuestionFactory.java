@@ -13,7 +13,7 @@ import com.alza.quiz.model.Quiz;
 import com.alza.quiz.model.QuizLevel;
 import com.alza.quiz.qfactory.IQuestionFactory;
 
-public class ThreeNumGCDQuestionFactory implements IQuestionFactory{
+public class GCDThreeNumQuestionFactory implements IQuestionFactory{
 	private static int numq = 2;
 	static int[][] bounds = {
 		{12,29},{30,60}
@@ -22,12 +22,12 @@ public class ThreeNumGCDQuestionFactory implements IQuestionFactory{
 	Locale loc;
 	ResourceBundle bundle;
 	
-	public ThreeNumGCDQuestionFactory(){
+	public GCDThreeNumQuestionFactory(){
 		this.loc = new Locale("in", "ID");
 		initStringFromLocale();
 	}
 	
-	public ThreeNumGCDQuestionFactory(Locale loc) {
+	public GCDThreeNumQuestionFactory(Locale loc) {
 		this.loc = loc;
 		initStringFromLocale();
 	}

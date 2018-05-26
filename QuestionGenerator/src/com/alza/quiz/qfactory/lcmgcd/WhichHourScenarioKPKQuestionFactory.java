@@ -15,7 +15,7 @@ import com.alza.quiz.util.CommonFunctionAndValues;
  * Created by ewin.sutriandi@gmail.com on 24/12/16.
  */
 
-public class WhichHourScenarioKPKQuestionFactory extends TwoNumKPKQuestionFactory {
+public class WhichHourScenarioKPKQuestionFactory extends LCMTwoNumQuestionFactory {
     private List<String> dayScenario = new ArrayList<String>();
     private int[] minutes = {
     		30,45,60,90,120,150,180

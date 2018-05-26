@@ -7,14 +7,14 @@ import java.util.List;
 import com.alza.quiz.model.MultipleChoiceQuiz;
 import com.alza.quiz.model.Quiz;
 import com.alza.quiz.qfactory.IQuestionFactory;
-import com.alza.quiz.qfactory.lcmgcd.BasicGCDScenarioQuestionFactory;
-import com.alza.quiz.qfactory.lcmgcd.BasicScenarioKPKQuestionFactory;
+import com.alza.quiz.qfactory.lcmgcd.GCDBasicScenarioQuestionFactory;
+import com.alza.quiz.qfactory.lcmgcd.LCMBasicScenarioQuestionFactory;
 import com.alza.quiz.qfactory.lcmgcd.FindFactorsOfQuestionFactory;
 import com.alza.quiz.qfactory.lcmgcd.FindMultiplesOfQuestionFactory;
-import com.alza.quiz.qfactory.lcmgcd.ThreeNumKPKQuestionFactory;
-import com.alza.quiz.qfactory.lcmgcd.TwoNumGCDQuestionFactory;
-import com.alza.quiz.qfactory.lcmgcd.TwoNumKPKQuestionFactory;
-import com.alza.quiz.qfactory.lcmgcd.WhichDateScenarioKPKQuestionFactory;
+import com.alza.quiz.qfactory.lcmgcd.LCMThreeNumQuestionFactory;
+import com.alza.quiz.qfactory.lcmgcd.GCDTwoNumQuestionFactory;
+import com.alza.quiz.qfactory.lcmgcd.LCMTwoNumQuestionFactory;
+import com.alza.quiz.qfactory.lcmgcd.LCMWhichDateRWPQuestionFactory;
 import com.alza.quiz.qfactory.lcmgcd.WhichDayScenarioKPKQuestionFactory;
 import com.alza.quiz.qfactory.lcmgcd.WhichHourScenarioKPKQuestionFactory;
 
@@ -35,14 +35,14 @@ public class KPKGeneratorTester {
 		List<IQuestionFactory> lqf = new ArrayList<IQuestionFactory>();
 		lqf.add(new FindMultiplesOfQuestionFactory());
 		lqf.add(new FindFactorsOfQuestionFactory());
-		lqf.add(new TwoNumKPKQuestionFactory());
-		lqf.add(new ThreeNumKPKQuestionFactory());
-		lqf.add(new TwoNumGCDQuestionFactory());
-		lqf.add(new BasicScenarioKPKQuestionFactory());
-		lqf.add(new BasicGCDScenarioQuestionFactory());
+		lqf.add(new LCMTwoNumQuestionFactory());
+		lqf.add(new LCMThreeNumQuestionFactory());
+		lqf.add(new GCDTwoNumQuestionFactory());
+		lqf.add(new LCMBasicScenarioQuestionFactory());
+		lqf.add(new GCDBasicScenarioQuestionFactory());
 		lqf.add(new WhichDayScenarioKPKQuestionFactory());
 		lqf.add(new WhichHourScenarioKPKQuestionFactory());
-		lqf.add(new WhichDateScenarioKPKQuestionFactory());
+		lqf.add(new LCMWhichDateRWPQuestionFactory());
 		
 		
 		List<Quiz> ql = new ArrayList<Quiz>();
