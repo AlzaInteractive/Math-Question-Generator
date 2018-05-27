@@ -3,7 +3,9 @@ package com.alza.quiz.qfactory.lcmgcd;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 import java.util.Random;
+import java.util.ResourceBundle;
 
 import com.alza.common.math.MathUtils;
 import com.alza.quiz.model.MultipleChoiceQuiz;
@@ -15,17 +17,35 @@ import com.alza.quiz.util.CommonFunctionAndValues;
  * Created by ewin.sutriandi@gmail.com on 24/12/16.
  */
 
-public class WhichHourScenarioKPKQuestionFactory extends LCMTwoNumQuestionFactory {
+public class LCMWhichHourRWPQuestionFactory extends LCMTwoNumQuestionFactory {
     private List<String> dayScenario = new ArrayList<String>();
     private int[] minutes = {
     		30,45,60,90,120,150,180
     };
     int refdayInt;
+    protected static int numq = 4;
+	Locale loc;
+	ResourceBundle bundle;
+	private ResourceBundle scenarioBundle;
+	private List<String> sces;
+	private static final int PARAMLENGTH=0;
+	
+	public LCMWhichHourRWPQuestionFactory(){
+		this.loc = new Locale("in", "ID");
+		initStringFromLocale();
+	}
+	
+	public LCMWhichHourRWPQuestionFactory(Locale loc) {
+		this.loc = loc;
+		initStringFromLocale();
+	}
+	
+	private void initStringFromLocale(){
+		bundle = ResourceBundle.getBundle("lang.langbundle", loc);
+		scenarioBundle = ResourceBundle.getBundle("lang.scenario-lcm", loc);
+		dayScenario = CommonFunctionAndValues.getStringCollection(scenarioBundle, "lcm.rwphr");
+	}
 
-    public WhichHourScenarioKPKQuestionFactory(){
-        super();
-        prepareScenario();
-    }
     @Override
     public MultipleChoiceQuiz generateQuiz() {
         int rnd = new Random().nextInt(dayScenario.size());
@@ -37,21 +57,21 @@ public class WhichHourScenarioKPKQuestionFactory extends LCMTwoNumQuestionFactor
         List<Quiz> quizList = new ArrayList<>();
         Collections.shuffle(dayScenario);
         CommonFunctionAndValues.shuffleArray(minutes);
-        for (int i=0;i<2;i++){
-        	int rndSce = CommonFunctionAndValues.getRandomInt(0, dayScenario.size());
+        for (int i=0;i<numq;i++){
         	int rnd1,rnd2,rndOffset;
         	do {
         		rnd1 = CommonFunctionAndValues.getRandomInt(0, minutes.length);
                 rnd2 = CommonFunctionAndValues.getRandomInt(0, minutes.length);
                 rndOffset = CommonFunctionAndValues.getRandomInt(0, minutes.length);
         	} while (rnd1 == rnd2);
-        	String sce = dayScenario.get(rndSce);
+        	String sce = dayScenario.get(i);
+        	sce = sce.substring(0,sce.length()-(PARAMLENGTH));
         	int starthour = 360 + minutes[rndOffset];
         	if (sce.contains("nitestart?")){
         		starthour= 1200+minutes[rndOffset];
         	}
         	starthour = starthour % 1440;
-            String refHour = CommonFunctionAndValues.minutesToHour(starthour);
+            String refHour = CommonFunctionAndValues.minutesToHour(starthour,loc);
             sce = sce.replace("#starthour?",refHour);
             sce = sce.replace("#nitestart?",refHour);
             sce = sce.replace("#num1?",String.valueOf(minutes[rnd1]));
@@ -60,7 +80,7 @@ public class WhichHourScenarioKPKQuestionFactory extends LCMTwoNumQuestionFactor
             if (correctAnswer>=1440) {
             	correctAnswer = correctAnswer-1440;
             }
-            String correctAnswerInHour = CommonFunctionAndValues.minutesToHour(correctAnswer);
+            String correctAnswerInHour = CommonFunctionAndValues.minutesToHour(correctAnswer,loc);
             String[] choices = buildChoices(correctAnswer, 
             		starthour+minutes[rndOffset],
             		starthour+minutes[0],
@@ -72,9 +92,9 @@ public class WhichHourScenarioKPKQuestionFactory extends LCMTwoNumQuestionFactor
             q.setQuestion(sce);
             q.setCorrectAnswer(correctAnswerInHour);
             q.setChoices(choices);
-            q.setLessonClassifier("Matematika SD");
-            q.setLessonCategory("KPK& FPB");
-            q.setLessonSubcategory("Soal cerita melibatkan jam");
+            q.setLessonCategory(bundle.getString("lcmgcd.lcmgcd"));
+			q.setLessonSubcategory(bundle.getString("lcmgcd.subcategory.lcm"));
+			q.setLessonClassifier(bundle.getString("mathelementary"));
             q.setLessonGrade(5);
             quizList.add(q);
         }
@@ -114,8 +134,20 @@ public class WhichHourScenarioKPKQuestionFactory extends LCMTwoNumQuestionFactor
     		if (ints[i]>=1440){
     			ints[i] = ints[i]-1440;
     		}
-			choices[i] = CommonFunctionAndValues.minutesToHour(ints[i]);
+			choices[i] = CommonFunctionAndValues.minutesToHour(ints[i],loc);
 		}
     	return choices;
     }
+    private String getParams(int rnd) {
+		String s = sces.get(rnd);
+		String params = s.substring(s.length()-PARAMLENGTH);
+		//System.out.println(params);
+		return params;
+	}
+	
+	public String getRandomScenario(int rnd){
+		String s = sces.get(rnd);
+		String sce = s.substring(0,s.length()-(PARAMLENGTH));
+		return sce;
+	}
 }

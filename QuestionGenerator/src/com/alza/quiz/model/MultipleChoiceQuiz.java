@@ -7,8 +7,13 @@ import java.util.List;
 import java.util.Set;
 
 public class MultipleChoiceQuiz extends  Quiz{
-	private String correctAnswer;
+	protected String correctAnswer;
+	protected boolean sortedChoices = false; 
 	private List<String> choices = new ArrayList<String>();
+	
+	public void enforceSortedChoices() {
+		sortedChoices = true;
+	}
 	
 	public void setDifficultyLevel(QuizLevel quizLevel) {
 		this.quizLevel = quizLevel;
@@ -26,7 +31,9 @@ public class MultipleChoiceQuiz extends  Quiz{
 		this.correctAnswer = correctAnswer;
 	}
 	public List<String> getChoices() {
-		Collections.shuffle(this.choices);
+		if (!sortedChoices) {
+			Collections.shuffle(this.choices);
+		}
 		return choices;
 	}
 	public void setChoices(List<String> choices) {

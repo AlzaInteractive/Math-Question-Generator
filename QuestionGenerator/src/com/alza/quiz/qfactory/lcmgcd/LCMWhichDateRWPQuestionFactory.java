@@ -65,7 +65,8 @@ public class LCMWhichDateRWPQuestionFactory extends LCMTwoNumQuestionFactory {
         Collections.shuffle(sces);
         for (int i=0;i<numq;i++){
             //prepare question	
-        	String question = getRandomScenario(i);
+        	String question = sces.get(i);
+        	question = question.substring(0,question.length()-(PARAMLENGTH));
 			String param =  getParams(i);
 			int loBo,hiBo,numVal,gcd,lcm;
 			loBo = Integer.parseInt(param.substring(0, 2));
@@ -82,11 +83,15 @@ public class LCMWhichDateRWPQuestionFactory extends LCMTwoNumQuestionFactory {
             Date refDate = refDates[i%refDates.length];
             Calendar c = Calendar.getInstance();
             c.setTime(refDate);
-            question = question.replace("#refdate?",CommonFunctionAndValues.dateToString(refDate));
+            question = question.replace("#refdate?",CommonFunctionAndValues.dateToString(refDate,loc));
+            for (int v=1;i<=numVal;v++) {
+            	String valSym = "#val"+v+"?";
+            	question = question.replace(valSym, String.valueOf(vals[v-1]));
+            }
             //prepare answer
             c.add(Calendar.DATE,lcm);
             Date answerInDate = c.getTime();
-            String answerInString = CommonFunctionAndValues.dateToString(answerInDate);
+            String answerInString = CommonFunctionAndValues.dateToString(answerInDate,loc);
             //prepare choices
             Set<String> choices = prepareChoices(answerInDate);
             //Prepare Quiz
@@ -116,10 +121,10 @@ public class LCMWhichDateRWPQuestionFactory extends LCMTwoNumQuestionFactory {
             } else {
                 c.add(Calendar.DATE,choicesInInt[i]*-1);
             }
-            String s = CommonFunctionAndValues.dateToString(c.getTime());
+            String s = CommonFunctionAndValues.dateToString(c.getTime(),loc);
             choices.add(s);
         }
-        choices.add(CommonFunctionAndValues.dateToString(correctAnswer));
+        choices.add(CommonFunctionAndValues.dateToString(correctAnswer,loc));
         return choices;
     }
 
@@ -157,7 +162,7 @@ public class LCMWhichDateRWPQuestionFactory extends LCMTwoNumQuestionFactory {
         return null;
     }
 
-    void prepareScenario(){
+    private void prepareScenario(){
         scenariosWithTwoVal.add("#elder1? memiliki dua orang anak, #orang1? dan #orang2?. " +
                 "#orang1? mengunjungi #elder1? #val1? hari sekali, sedangkan #orang2? #val2? hari sekali. " +
                 "Hari ini adalah tanggal #refdate? dan kedua anak tersebut mengunjungi #elder1? bersamaan. " +

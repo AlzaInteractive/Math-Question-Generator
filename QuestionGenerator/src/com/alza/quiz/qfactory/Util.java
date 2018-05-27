@@ -29,8 +29,8 @@ import com.alza.quiz.qfactory.lcmgcd.LCMThreeNumQuestionFactory;
 import com.alza.quiz.qfactory.lcmgcd.GCDTwoNumQuestionFactory;
 import com.alza.quiz.qfactory.lcmgcd.LCMTwoNumQuestionFactory;
 import com.alza.quiz.qfactory.lcmgcd.LCMWhichDateRWPQuestionFactory;
-import com.alza.quiz.qfactory.lcmgcd.WhichDayScenarioKPKQuestionFactory;
-import com.alza.quiz.qfactory.lcmgcd.WhichHourScenarioKPKQuestionFactory;
+import com.alza.quiz.qfactory.lcmgcd.LCMWhichDayRWPQuestionFactory;
+import com.alza.quiz.qfactory.lcmgcd.LCMWhichHourRWPQuestionFactory;
 import com.alza.quiz.qfactory.romans.RomanNumeralsQuestionFactory;
 
 public class Util {
@@ -57,8 +57,8 @@ public class Util {
 		lqf.add(new GCDTwoNumQuestionFactory());
 		lqf.add(new LCMBasicScenarioQuestionFactory());
 		lqf.add(new GCDBasicScenarioQuestionFactory());
-		lqf.add(new WhichDayScenarioKPKQuestionFactory());
-		lqf.add(new WhichHourScenarioKPKQuestionFactory());
+		lqf.add(new LCMWhichDayRWPQuestionFactory());
+		lqf.add(new LCMWhichHourRWPQuestionFactory());
 		lqf.add(new LCMWhichDateRWPQuestionFactory());
 		return lqf;
 	}

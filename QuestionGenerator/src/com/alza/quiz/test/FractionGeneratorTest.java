@@ -28,8 +28,8 @@ import com.alza.quiz.qfactory.fraction.FractionRealWorldProblemTaxTips;
 import com.alza.quiz.qfactory.fraction.FractionRepresentation;
 import com.alza.quiz.qfactory.fraction.FractionSimplify;
 import com.alza.quiz.qfactory.lcmgcd.LCMTwoNumQuestionFactory;
-import com.alza.quiz.qfactory.lcmgcd.WhichDayScenarioKPKQuestionFactory;
-import com.alza.quiz.qfactory.lcmgcd.WhichHourScenarioKPKQuestionFactory;
+import com.alza.quiz.qfactory.lcmgcd.LCMWhichDayRWPQuestionFactory;
+import com.alza.quiz.qfactory.lcmgcd.LCMWhichHourRWPQuestionFactory;
 
 public class FractionGeneratorTest {
 	public static void main(String[] args) {
@@ -62,7 +62,7 @@ public class FractionGeneratorTest {
 		}
 	}
 	protected static void whichDayGenerator(){
-		IQuestionFactory qf = new WhichDayScenarioKPKQuestionFactory();
+		IQuestionFactory qf = new LCMWhichDayRWPQuestionFactory();
 		List<Quiz> ql = new ArrayList<>();
 		for (int i=1;i<=4;i++){
 			Quiz q = qf.generateQuiz();
