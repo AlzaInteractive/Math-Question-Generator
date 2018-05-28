@@ -80,7 +80,7 @@ public class MathUtils {
 		return lcm;
 	}
 	/**
-	 * Find divisors of an Integer
+	 * Find divisors of a given Integer
 	 * @param num the number 
 	 * @return divisors in list
 	 */
@@ -95,6 +95,33 @@ public class MathUtils {
 		divisors.add(num);
 		return divisors;
 	}
+	/**
+	 * Find prime factors of a given Integer 
+	 * @param num
+	 * @return prime factors in list
+	 */
+	public static List<Integer> findPrimeFactors(int num){
+		List<Integer> primesF = new ArrayList<>();
+		//divide until it's no longer even
+        while (num%2==0) {
+            num = num / 2;
+            primesF.add(2);
+        }
+        // divide remaining value with odd numbers
+        for (int i = 3; i <= Math.sqrt(num); i+= 2) {
+            // While i divides n, print i and divide n
+            while (num%i == 0)
+            {
+                num = num / i;
+                primesF.add(i);
+            }
+        }
+        // If there's any value remaining, it's a prime number
+        if (num > 2) {
+        	primesF.add(num);
+        }
+        return primesF;
+    }
 	/**
 	 * Find greatest fraction
 	 * @param fracs array of Fraction
