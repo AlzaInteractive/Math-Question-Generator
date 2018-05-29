@@ -54,7 +54,7 @@ public class FindMultiplesOfQuestionFactory implements IQuestionFactory{
 				((i % 2 == 0 && base % 2 ==0)||
 						(i % 2 > 0 && base % 2 >0));
 			MultipleChoiceQuiz q = new MultipleChoiceQuiz();
-			q.setQuestion(bundle.getString("lcmgcd.question.multipleof")+" "+base+" ?");
+			q.setQuestion(bundle.getString("lcmgcd.question.multipleof")+" "+base+"?");
 			q.setCorrectAnswer(base*2+","+base*3+","+base *4);
 			q.addChoice(base*2+","+base*3+","+base *4);
 			q.addChoice((base+1)+","+(base+2)+","+(base+3));
@@ -62,7 +62,7 @@ public class FindMultiplesOfQuestionFactory implements IQuestionFactory{
 			q.addChoice(((base+1)*2)+","+((base+1)*3)+","+((base+1) *4));
 			q.addChoice(((base-1)*2)+","+((base-1)*3)+","+((base-1) *4));
 			q.setDifficultyLevel(QuizLevel.MUDAH);
-			q.setLessonCategory(bundle.getString("lcmgcd.lcmgcd"));
+			q.setLessonCategory(bundle.getString("lcmgcd"));
 			q.setLessonSubcategory(bundle.getString("lcmgcd.subcategory.multiples"));
 			q.setLessonClassifier(bundle.getString("mathelementary"));
 			q.setLessonGrade(4);

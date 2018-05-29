@@ -47,7 +47,7 @@ public class LCMTwoNumQuestionFactory implements IQuestionFactory {
 		q.addChoice(correctAnswer);
 		q.setLessonGrade(4);
 		q.setDifficultyLevel(quizLevel);
-		q.setQuestion(bundle.getString("lcmgcd.question.lcmgcdof") +" "+ pairs[0]+" & "+pairs[1]+" ?");
+		q.setQuestion(bundle.getString("lcmgcd.question.lcmof") +" "+ pairs[0]+" & "+pairs[1]+" ?");
 		q.setCorrectAnswer(String.valueOf(correctAnswer));
 		q.setChoices(generateChoices(pairs));
 		q.setLessonCategory(bundle.getString("lcmgcd"));
@@ -74,8 +74,6 @@ public class LCMTwoNumQuestionFactory implements IQuestionFactory {
 		choices.add(String.valueOf(pairs[1]*2));
 		choices.add(String.valueOf(pairs[0]*3));
 		choices.add(String.valueOf(pairs[1]*3));
-		choices.add(String.valueOf(pairs[0]*4));
-		choices.add(String.valueOf(pairs[1]*4));
 		choices.add(String.valueOf(lcm));
 		choices.add(String.valueOf(gcd));
 		return choices;	

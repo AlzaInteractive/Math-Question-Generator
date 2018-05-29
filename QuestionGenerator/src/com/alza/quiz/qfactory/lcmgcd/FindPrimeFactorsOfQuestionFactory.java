@@ -54,7 +54,7 @@ public class FindPrimeFactorsOfQuestionFactory implements IQuestionFactory{
 			List<Integer> primeF;
 			do {
 				base = ThreadLocalRandom.current().nextInt(minBase, maxBase);
-				primeF = MathUtils.findDivisors(base);
+				primeF = MathUtils.findPrimeFactors(base);
 			} while (primeF.size()<3);
 			MultipleChoiceQuiz q = new MultipleChoiceQuiz();
 			q.setQuestion(bundle.getString("lcmgcd.question.primefactorof")+" "+base+" ?");
@@ -62,7 +62,7 @@ public class FindPrimeFactorsOfQuestionFactory implements IQuestionFactory{
 			q.setCorrectAnswer(ans);
 			Integer[] choice1 = {base+1,base+2,base+3,base+4};
 			Integer[] choice2 = {base/2,base/3,base/4};
-			Integer[] choice3 = {base*2,base*3,base*4};
+			Integer[] choice3 = {base-2,base-3,base-4};
 			q.addChoice(StringUtils.join(choice1,"x"));
 			q.addChoice(StringUtils.join(choice2,"x"));
 			q.addChoice(StringUtils.join(choice3,"x"));
