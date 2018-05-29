@@ -18,8 +18,8 @@ public class GCDBasicScenarioQuestionFactory implements IQuestionFactory{
 	List<String> sces;
 	Locale loc;
 	ResourceBundle bundle,scenarioBundle;
-	private int numq;
-	private static final int PARAMLENGTH=5;
+	private int numq=2;
+	private static final int PARAMLENGTH=6;
 	
 	public GCDBasicScenarioQuestionFactory(Locale loc){
 		this.loc = loc;
@@ -87,7 +87,7 @@ public class GCDBasicScenarioQuestionFactory implements IQuestionFactory{
 			q.addChoice(String.valueOf(gcd));
 			
 			q.setDifficultyLevel(QuizLevel.SEDANG);
-			q.setLessonCategory(bundle.getString("lcmgcd.lcmgcd"));
+			q.setLessonCategory(bundle.getString("lcmgcd"));
 			q.setLessonSubcategory(bundle.getString("lcmgcd.subcategory.gcd"));
 			q.setLessonClassifier(bundle.getString("mathelementary"));
 			q.setLessonGrade(5);
