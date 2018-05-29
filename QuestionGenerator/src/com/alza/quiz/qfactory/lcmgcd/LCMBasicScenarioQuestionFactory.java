@@ -1,6 +1,7 @@
 package com.alza.quiz.qfactory.lcmgcd;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -37,11 +38,11 @@ public class LCMBasicScenarioQuestionFactory extends LCMTwoNumQuestionFactory {
         
     public List<Quiz> generateQuizList(){
         List<Quiz> quizList = new ArrayList<>();
+        Collections.shuffle(sces);
         for (int i=0;i<numq;i++){
-        	
-        	int rnd = CommonFunctionAndValues.getRandomInt(0, sces.size());
-			String sce = getRandomScenario(rnd);
-			String param =  getParams(rnd);
+        	int pos = i % sces.size();
+			String sce = getSceScenario(pos);
+			String param =  getParams(pos);
 			//int loBo,hiBo,offset;
 			// loBo = Integer.parseInt(param.substring(0, 2));
 			// hiBo = Integer.parseInt(param.substring(2, 4));
@@ -58,7 +59,7 @@ public class LCMBasicScenarioQuestionFactory extends LCMTwoNumQuestionFactory {
             q.setCorrectAnswer(String.valueOf(correctAnswer));
             q.setChoices(generateChoices(pairs));
             q.setDifficultyLevel(QuizLevel.MUDAH);
-			q.setLessonCategory(bundle.getString("lcmgcd.lcmgcd"));
+			q.setLessonCategory(bundle.getString("lcmgcd"));
 			q.setLessonSubcategory(bundle.getString("lcmgcd.subcategory.lcm"));
 			q.setLessonClassifier(bundle.getString("mathelementary"));
             quizList.add(q);
@@ -78,8 +79,8 @@ public class LCMBasicScenarioQuestionFactory extends LCMTwoNumQuestionFactory {
 		//System.out.println(params);
 		return params;
 	}
-	public String getRandomScenario(int rnd){
-		String s = sces.get(rnd);
+	public String getSceScenario(int idx){
+		String s = sces.get(idx);
 		String sce = s.substring(0,s.length()-(PARAMLENGTH));
 		return sce;
 	}

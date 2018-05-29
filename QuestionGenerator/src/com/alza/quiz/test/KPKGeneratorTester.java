@@ -48,8 +48,8 @@ public class KPKGeneratorTester {
 		lqf.add(new FindPrimeFactorsOfQuestionFactory(loc));
 		lqf.add(new GCDPrimeFactorQuestionFactory(loc));
 		lqf.add(new LCMPrimeFactorQuestionFactory(loc));
-		/**lqf.add(new LCMBasicScenarioQuestionFactory(loc));
-		lqf.add(new GCDBasicScenarioQuestionFactory(loc));
+		lqf.add(new LCMBasicScenarioQuestionFactory(loc));
+		/**lqf.add(new GCDBasicScenarioQuestionFactory(loc));
 		lqf.add(new LCMWhichDayRWPQuestionFactory(loc));
 		lqf.add(new LCMWhichHourRWPQuestionFactory(loc));
 		lqf.add(new LCMWhichDateRWPQuestionFactory(loc));
