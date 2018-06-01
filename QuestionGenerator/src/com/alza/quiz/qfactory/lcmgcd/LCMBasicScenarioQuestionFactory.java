@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
+import java.util.concurrent.ThreadLocalRandom;
 
 import com.alza.common.math.MathUtils;
 import com.alza.quiz.model.MultipleChoiceQuiz;
@@ -43,15 +44,21 @@ public class LCMBasicScenarioQuestionFactory extends LCMTwoNumQuestionFactory {
         	int pos = i % sces.size();
 			String sce = getSceScenario(pos);
 			String param =  getParams(pos);
-			//int loBo,hiBo,offset;
-			// loBo = Integer.parseInt(param.substring(0, 2));
-			// hiBo = Integer.parseInt(param.substring(2, 4));
-			int offset = Integer.parseInt(param.substring(4, 5));
-        		
+			int loBo,hiBo,offset,val1,val2,gcd,lcm;
+			loBo = Integer.parseInt(param.substring(0, 2));
+			hiBo = Integer.parseInt(param.substring(2, 4));
+			offset = Integer.parseInt(param.substring(4, 5));
+        	
+			do {
+				val1 = ThreadLocalRandom.current().nextInt(loBo, hiBo);
+				val2 = ThreadLocalRandom.current().nextInt(loBo, hiBo);
+				gcd = MathUtils.findGCD(val1,val2);
+				lcm = MathUtils.findLCM(val1,val2);
+			} while (gcd < 3 || val1==val2);
+			int[] pairs = new int[]{val1,val2};
             String[] pairPeople = CommonFunctionAndValues.getPairofPeople();
-            int[] pairs = CommonFunctionAndValues.getPairOfIntSimple();
             sce = CommonFunctionAndValues.buildScenario(sce,pairPeople,pairs);
-            int correctAnswer = MathUtils.findLCM(pairs)-offset;
+            int correctAnswer = lcm-offset;
             
             MultipleChoiceQuiz q = new MultipleChoiceQuiz();
             q.setLessonGrade(4);
