@@ -18,7 +18,7 @@ public class GCDBasicScenarioQuestionFactory implements IQuestionFactory{
 	List<String> sces;
 	Locale loc;
 	ResourceBundle bundle,scenarioBundle;
-	private int numq=2;
+	private int numq=8;
 	private static final int PARAMLENGTH=6;
 	
 	public GCDBasicScenarioQuestionFactory(Locale loc){

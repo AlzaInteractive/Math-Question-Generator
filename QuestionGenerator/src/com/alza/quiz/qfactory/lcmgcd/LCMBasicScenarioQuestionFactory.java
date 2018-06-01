@@ -54,7 +54,7 @@ public class LCMBasicScenarioQuestionFactory extends LCMTwoNumQuestionFactory {
 				val2 = ThreadLocalRandom.current().nextInt(loBo, hiBo);
 				gcd = MathUtils.findGCD(val1,val2);
 				lcm = MathUtils.findLCM(val1,val2);
-			} while (gcd < 3 || val1==val2);
+			} while (val1==val2);
 			int[] pairs = new int[]{val1,val2};
             String[] pairPeople = CommonFunctionAndValues.getPairofPeople();
             sce = CommonFunctionAndValues.buildScenario(sce,pairPeople,pairs);
