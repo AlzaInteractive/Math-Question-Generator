@@ -21,7 +21,7 @@ public class LCMBasicScenarioQuestionFactory extends LCMTwoNumQuestionFactory {
     List<String> sces;
 	Locale loc;
 	ResourceBundle bundle,scenarioBundle;
-	private static final int PARAMLENGTH=5;
+	private static final int PARAMLENGTH=7;
 	
 	public LCMBasicScenarioQuestionFactory(Locale loc){
 		this.loc = loc;
@@ -34,7 +34,7 @@ public class LCMBasicScenarioQuestionFactory extends LCMTwoNumQuestionFactory {
 	private void initStringFromLocale(){
 		bundle = ResourceBundle.getBundle("lang.langbundle", loc);
 		scenarioBundle = ResourceBundle.getBundle("lang.scenario-lcm", loc);
-		sces = CommonFunctionAndValues.getStringCollection(scenarioBundle, "lcm.basic2");
+		sces = CommonFunctionAndValues.getStringCollection(scenarioBundle, "lcm.basic");
 	}
         
     public List<Quiz> generateQuizList(){
@@ -42,30 +42,42 @@ public class LCMBasicScenarioQuestionFactory extends LCMTwoNumQuestionFactory {
         Collections.shuffle(sces);
         for (int i=0;i<numq;i++){
         	int pos = i % sces.size();
-			String sce = getSceScenario(pos);
+			String question = getSceScenario(pos);
 			String param =  getParams(pos);
-			int loBo,hiBo,offset,val1,val2,gcd,lcm;
+			int loBo,hiBo,offset,gcd,lcm,numVal,minGCD;
 			loBo = Integer.parseInt(param.substring(0, 2));
 			hiBo = Integer.parseInt(param.substring(2, 4));
 			offset = Integer.parseInt(param.substring(4, 5));
-        	
+			numVal = Integer.parseInt(param.substring(5, 6));
+			minGCD = Integer.parseInt(param.substring(6, 7));
+			int[] vals = new int[numVal];
 			do {
-				val1 = ThreadLocalRandom.current().nextInt(loBo, hiBo);
-				val2 = ThreadLocalRandom.current().nextInt(loBo, hiBo);
-				gcd = MathUtils.findGCD(val1,val2);
-				lcm = MathUtils.findLCM(val1,val2);
-			} while (val1==val2);
-			int[] pairs = new int[]{val1,val2};
-            String[] pairPeople = CommonFunctionAndValues.getPairofPeople();
-            sce = CommonFunctionAndValues.buildScenario(sce,pairPeople,pairs);
+				for (int j=0 ; j < vals.length; j++){
+					vals[j] = ThreadLocalRandom.current().nextInt(loBo, hiBo);
+				}
+				gcd = MathUtils.findGCD(vals);
+				lcm = MathUtils.findLCM(vals);
+			} while (vals[0]==vals[1]||
+					gcd < minGCD);
+			
+			question = question.replace("#val1?", String.valueOf(vals[0]));
+			question = question.replace("#val2?", String.valueOf(vals[1]));
+			if (vals.length>=3) question = question.replace("#val3?", String.valueOf(vals[2]));
+			if (vals.length>=4) question = question.replace("#val4?", String.valueOf(vals[3]));
+			if (vals.length>=5) question = question.replace("#val5?", String.valueOf(vals[4]));
             int correctAnswer = lcm-offset;
             
             MultipleChoiceQuiz q = new MultipleChoiceQuiz();
-            q.setLessonGrade(4);
-            q.setQuestion(sce);
+            q.setQuestion(question);
             q.setCorrectAnswer(String.valueOf(correctAnswer));
-            q.setChoices(generateChoices(pairs));
-            q.setDifficultyLevel(QuizLevel.MUDAH);
+            
+            q.addChoice(vals);
+			q.addChoice(lcm);
+			q.addChoice(gcd);
+			q.addChoice(correctAnswer);
+                        
+			q.setLessonGrade(4);
+			q.setDifficultyLevel(QuizLevel.MUDAH);
 			q.setLessonCategory(bundle.getString("lcmgcd"));
 			q.setLessonSubcategory(bundle.getString("lcmgcd.subcategory.lcm"));
 			q.setLessonClassifier(bundle.getString("mathelementary"));
