@@ -1,6 +1,7 @@
 package com.alza.quiz.qfactory.lcmgcd;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 import java.util.Random;
@@ -50,10 +51,10 @@ public class GCDBasicScenarioQuestionFactory implements IQuestionFactory{
 	@Override
 	public List<Quiz> generateQuizList() {
 		List<Quiz> lq = new ArrayList<Quiz>();
+		Collections.shuffle(sces);
 		for (int i=1;i<numq;i++){
-			int rnd = CommonFunctionAndValues.getRandomInt(0, sces.size());
-			String question = getRandomScenario(rnd);
-			String param =  getParams(rnd);
+			String question = getRandomScenario(i);
+			String param =  getParams(i);
 			
 			int loBo,hiBo,numVal,minGCD;
 			loBo = Integer.parseInt(param.substring(0, 2));
