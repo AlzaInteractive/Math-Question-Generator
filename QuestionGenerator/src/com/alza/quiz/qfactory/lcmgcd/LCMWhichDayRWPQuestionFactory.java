@@ -27,7 +27,7 @@ public class LCMWhichDayRWPQuestionFactory extends LCMTwoNumQuestionFactory {
 	ResourceBundle bundle;
 	private ResourceBundle scenarioBundle;
 	private List<String> sces;
-	private static final int PARAMLENGTH=5;
+	private static final int PARAMLENGTH=6;
 	
 	public LCMWhichDayRWPQuestionFactory(){
 		this.loc = new Locale("in", "ID");
@@ -57,22 +57,24 @@ public class LCMWhichDayRWPQuestionFactory extends LCMTwoNumQuestionFactory {
         CommonFunctionAndValues.shuffleArray(numPair);
         Collections.shuffle(sces);
         for (int i=0;i<numq;i++){
-        	String question = sces.get(i);
+        	int num = i % sces.size();
+        	String question = sces.get(num);
         	question = question.substring(0,question.length()-(PARAMLENGTH));
-			String param =  getParams(i);
-			int loBo,hiBo,numVal,gcd,lcm;
+			String param =  getParams(num);
+			int loBo,hiBo,numVal,gcd,lcm,minGCD;
 			loBo = Integer.parseInt(param.substring(0, 2));
 			hiBo = Integer.parseInt(param.substring(2, 4));
 			numVal = Integer.parseInt(param.substring(4, 5));
+			minGCD = Integer.parseInt(param.substring(5, 6));
 			int[] vals = new int[numVal];
 			do {
-				for (int v=1;i<numVal;i++) {
+				for (int v=0;v<numVal;v++) {
 					vals[v] = ThreadLocalRandom.current().nextInt(loBo, hiBo)+1;
 				}
 				gcd = MathUtils.findGCD(vals);
 				lcm = MathUtils.findLCM(vals);
-			} while (gcd < 3 || lcm == vals[0]);
-			for (int v=1;i<=numVal;v++) {
+			} while (gcd < minGCD || lcm == vals[0]);
+			for (int v=1;v<=numVal;v++) {
             	String valSym = "#val"+v+"?";
             	question = question.replace(valSym, String.valueOf(vals[v-1]));
             }
@@ -89,12 +91,11 @@ public class LCMWhichDayRWPQuestionFactory extends LCMTwoNumQuestionFactory {
             q.setQuestion(question);
             q.setCorrectAnswer(correctAnswerInDay);
             q.setChoices(choices);
-            q.setLessonCategory(bundle.getString("lcmgcd.lcmgcd"));
+            q.setLessonCategory(bundle.getString("lcmgcd"));
 			q.setLessonSubcategory(bundle.getString("lcmgcd.subcategory.lcm"));
 			q.setLessonClassifier(bundle.getString("mathelementary"));
             q.setLessonGrade(4);
             quizList.add(q);
-            i++;
         }
         return  quizList;
     }

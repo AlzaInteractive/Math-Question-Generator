@@ -251,7 +251,7 @@ public class CommonFunctionAndValues {
 	}
 
 	public static String dateToString(Date dt, Locale loc) {
-		DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT, loc);
+		DateFormat df = DateFormat.getDateInstance(DateFormat.MEDIUM, loc);
 		String formattedDate = df.format(dt);
 		return formattedDate;
 	}

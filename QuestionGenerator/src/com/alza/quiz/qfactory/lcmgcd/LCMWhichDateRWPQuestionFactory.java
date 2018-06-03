@@ -32,7 +32,7 @@ public class LCMWhichDateRWPQuestionFactory extends LCMTwoNumQuestionFactory {
 	ResourceBundle bundle;
 	private ResourceBundle scenarioBundle;
 	private List<String> sces;
-	private static final int PARAMLENGTH=5;
+	private static final int PARAMLENGTH=6;
 	
 	public LCMWhichDateRWPQuestionFactory(){
 		this.loc = new Locale("in", "ID");
@@ -64,27 +64,29 @@ public class LCMWhichDateRWPQuestionFactory extends LCMTwoNumQuestionFactory {
         constructRefDates();
         Collections.shuffle(sces);
         for (int i=0;i<numq;i++){
-            //prepare question	
-        	String question = sces.get(i);
+            //prepare question
+        	int num = i % sces.size();
+        	String question = sces.get(num);
         	question = question.substring(0,question.length()-(PARAMLENGTH));
-			String param =  getParams(i);
-			int loBo,hiBo,numVal,gcd,lcm;
+			String param =  getParams(num);
+			int loBo,hiBo,numVal,gcd,lcm, minGCD;
 			loBo = Integer.parseInt(param.substring(0, 2));
 			hiBo = Integer.parseInt(param.substring(2, 4));
 			numVal = Integer.parseInt(param.substring(4, 5));
+			minGCD = Integer.parseInt(param.substring(5, 6));
 			int[] vals = new int[numVal];
 			do {
-				for (int v=1;i<numVal;i++) {
+				for (int v=0;v<numVal;v++) {
 					vals[v] = ThreadLocalRandom.current().nextInt(loBo, hiBo)+1;
 				}
 				gcd = MathUtils.findGCD(vals);
 				lcm = MathUtils.findLCM(vals);
-			} while (gcd < 3 || lcm == vals[0]);
+			} while (gcd < minGCD || lcm == vals[0]);
             Date refDate = refDates[i%refDates.length];
             Calendar c = Calendar.getInstance();
             c.setTime(refDate);
             question = question.replace("#refdate?",CommonFunctionAndValues.dateToString(refDate,loc));
-            for (int v=1;i<=numVal;v++) {
+            for (int v=1;v<=numVal;v++) {
             	String valSym = "#val"+v+"?";
             	question = question.replace(valSym, String.valueOf(vals[v-1]));
             }
@@ -101,7 +103,7 @@ public class LCMWhichDateRWPQuestionFactory extends LCMTwoNumQuestionFactory {
             q.setChoices(choices);
             q.setCorrectAnswer(answerInString);
             q.setLessonGrade(5);
-			q.setLessonCategory(bundle.getString("lcmgcd.lcmgcd"));
+			q.setLessonCategory(bundle.getString("lcmgcd"));
 			q.setLessonSubcategory(bundle.getString("lcmgcd.subcategory.lcm"));
 			q.setLessonClassifier(bundle.getString("mathelementary"));
             quizList.add(q);

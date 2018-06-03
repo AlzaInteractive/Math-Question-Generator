@@ -53,8 +53,9 @@ public class GCDBasicScenarioQuestionFactory implements IQuestionFactory{
 		List<Quiz> lq = new ArrayList<Quiz>();
 		Collections.shuffle(sces);
 		for (int i=1;i<numq;i++){
-			String question = getRandomScenario(i);
-			String param =  getParams(i);
+			int num = i % sces.size();
+			String question = getRandomScenario(num);
+			String param =  getParams(num);
 			
 			int loBo,hiBo,numVal,minGCD;
 			loBo = Integer.parseInt(param.substring(0, 2));

@@ -37,8 +37,10 @@ public class MultipleChoiceQuiz extends  Quiz{
 		return choices;
 	}
 	public void setChoices(List<String> choices) {
-		Set<String> setChoices = new HashSet<String>(choices);
-		setChoices(setChoices);
+		this.choices = new ArrayList<>();
+		for (String i : choices) {
+			this.choices.add(String.valueOf(i));
+		}
 		//Collections.shuffle(this.choices);
 	}
 	public void setChoices(String...  choices){
