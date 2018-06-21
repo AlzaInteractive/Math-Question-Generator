@@ -46,9 +46,8 @@ public class LCMWhichDayRWPQuestionFactory extends LCMTwoNumQuestionFactory {
 	}
     @Override
     public MultipleChoiceQuiz generateQuiz() {
-        int rnd = new Random().nextInt(scenarios.size());
         MultipleChoiceQuiz q;
-        q = (MultipleChoiceQuiz) generateQuizList().get(rnd);
+        q = (MultipleChoiceQuiz) generateQuizList().get(0);
         return q;
     }
     public List<Quiz> generateQuizList(){
@@ -124,9 +123,5 @@ public class LCMWhichDayRWPQuestionFactory extends LCMTwoNumQuestionFactory {
 		return params;
 	}
 	
-	public String getRandomScenario(int rnd){
-		String s = sces.get(rnd);
-		String sce = s.substring(0,s.length()-(PARAMLENGTH));
-		return sce;
-	}
+	
 }

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
-import java.util.Random;
 import java.util.ResourceBundle;
 
 import com.alza.common.math.MathUtils;
@@ -18,7 +17,6 @@ import com.alza.quiz.util.CommonFunctionAndValues;
  */
 
 public class LCMWhichHourRWPQuestionFactory extends LCMTwoNumQuestionFactory {
-    private List<String> dayScenario = new ArrayList<String>();
     private int[] minutes = {
     		30,45,60,90,120,150,180
     };
@@ -43,28 +41,28 @@ public class LCMWhichHourRWPQuestionFactory extends LCMTwoNumQuestionFactory {
 	private void initStringFromLocale(){
 		bundle = ResourceBundle.getBundle("lang.langbundle", loc);
 		scenarioBundle = ResourceBundle.getBundle("lang.scenario-lcm", loc);
-		dayScenario = CommonFunctionAndValues.getStringCollection(scenarioBundle, "lcm.rwphr");
+		sces = CommonFunctionAndValues.getStringCollection(scenarioBundle, "lcm.rwphour");
 	}
 
     @Override
     public MultipleChoiceQuiz generateQuiz() {
-        int rnd = new Random().nextInt(dayScenario.size());
         MultipleChoiceQuiz q;
-        q = (MultipleChoiceQuiz) generateQuizList().get(rnd);
+        q = (MultipleChoiceQuiz) generateQuizList().get(0);
         return q;
     }
     public List<Quiz> generateQuizList(){
         List<Quiz> quizList = new ArrayList<>();
-        Collections.shuffle(dayScenario);
+        Collections.shuffle(sces);
         CommonFunctionAndValues.shuffleArray(minutes);
         for (int i=0;i<numq;i++){
+        	int num = i % sces.size();
         	int rnd1,rnd2,rndOffset;
         	do {
         		rnd1 = CommonFunctionAndValues.getRandomInt(0, minutes.length);
                 rnd2 = CommonFunctionAndValues.getRandomInt(0, minutes.length);
                 rndOffset = CommonFunctionAndValues.getRandomInt(0, minutes.length);
         	} while (rnd1 == rnd2);
-        	String sce = dayScenario.get(i);
+        	String sce = sces.get(num);
         	sce = sce.substring(0,sce.length()-(PARAMLENGTH));
         	int starthour = 360 + minutes[rndOffset];
         	if (sce.contains("nitestart?")){
@@ -72,10 +70,10 @@ public class LCMWhichHourRWPQuestionFactory extends LCMTwoNumQuestionFactory {
         	}
         	starthour = starthour % 1440;
             String refHour = CommonFunctionAndValues.minutesToHour(starthour,loc);
-            sce = sce.replace("#starthour?",refHour);
+            sce = sce.replace("#refhour?",refHour);
             sce = sce.replace("#nitestart?",refHour);
-            sce = sce.replace("#num1?",String.valueOf(minutes[rnd1]));
-            sce = sce.replace("#num2?",String.valueOf(minutes[rnd2]));
+            sce = sce.replace("#minutes1?",String.valueOf(minutes[rnd1]));
+            sce = sce.replace("#minutes2?",String.valueOf(minutes[rnd2]));
             int correctAnswer = starthour + MathUtils.findLCM(minutes[rnd1],minutes[rnd2]);
             if (correctAnswer>=1440) {
             	correctAnswer = correctAnswer-1440;
@@ -92,7 +90,7 @@ public class LCMWhichHourRWPQuestionFactory extends LCMTwoNumQuestionFactory {
             q.setQuestion(sce);
             q.setCorrectAnswer(correctAnswerInHour);
             q.setChoices(choices);
-            q.setLessonCategory(bundle.getString("lcmgcd.lcmgcd"));
+            q.setLessonCategory(bundle.getString("lcmgcd"));
 			q.setLessonSubcategory(bundle.getString("lcmgcd.subcategory.lcm"));
 			q.setLessonClassifier(bundle.getString("mathelementary"));
             q.setLessonGrade(5);
@@ -105,7 +103,7 @@ public class LCMWhichHourRWPQuestionFactory extends LCMTwoNumQuestionFactory {
     public MultipleChoiceQuiz generateQuiz(QuizLevel quizLevel) {
         return null;
     }
-
+    /**
     void prepareScenario(){
         dayScenario.add("Pesawat dari Lombok ke Jakarta berangkat tiap #num1? menit sekali, "
         		+ "sedangkan pesawat dari Lombok ke Surabaya berangkat tiap #num2? menit sekali. "
@@ -126,7 +124,7 @@ public class LCMWhichHourRWPQuestionFactory extends LCMTwoNumQuestionFactory {
                 "Jika pada pukul #nitestart? petugas kedua RW bertemu di jalan desa, " +
                 "pada pukul berapa kemungkinan mereka akan bertemu lagi di tempat yang sama?");
 
-    }
+    }**/
     
     private String[] buildChoices(int...ints){
     	String[] choices = new String[ints.length];
@@ -145,9 +143,5 @@ public class LCMWhichHourRWPQuestionFactory extends LCMTwoNumQuestionFactory {
 		return params;
 	}
 	
-	public String getRandomScenario(int rnd){
-		String s = sces.get(rnd);
-		String sce = s.substring(0,s.length()-(PARAMLENGTH));
-		return sce;
-	}
+	
 }

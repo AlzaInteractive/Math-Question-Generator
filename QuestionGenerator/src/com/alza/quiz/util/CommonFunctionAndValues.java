@@ -56,8 +56,8 @@ public class CommonFunctionAndValues {
 	public static String minutesToHour(int min, Locale loc) {
 		Calendar c = Calendar.getInstance();
 		c.set(Calendar.MINUTE, min);
-		DateFormat dfStd = new SimpleDateFormat("HH:mi");
-		DateFormat dfStdAMPM = new SimpleDateFormat("hh:mi a");
+		DateFormat dfStd = new SimpleDateFormat("HH:mm");
+		DateFormat dfStdAMPM = new SimpleDateFormat("KK:mm a");
 		if (hasAmPmClock(loc)) {
 			return dfStdAMPM.format(c.getTime());
 		}
