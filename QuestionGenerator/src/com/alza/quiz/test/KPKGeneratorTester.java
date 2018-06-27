@@ -37,7 +37,7 @@ public class KPKGeneratorTester {
 
 	
 	private static void allGenerator(){
-		Locale loc = new Locale("en", "US");
+		Locale loc = new Locale("in", "ID");
 		List<IQuestionFactory> lqf = new ArrayList<IQuestionFactory>();
 		lqf.add(new FindMultiplesOfQuestionFactory(loc));
 		lqf.add(new FindFactorsOfQuestionFactory(loc));
