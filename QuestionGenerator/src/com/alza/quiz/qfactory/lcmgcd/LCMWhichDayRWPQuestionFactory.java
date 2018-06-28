@@ -21,8 +21,6 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class LCMWhichDayRWPQuestionFactory extends LCMTwoNumQuestionFactory {
     private List<String> scenarios = new ArrayList<String>();
-
-    protected static int numq = 4;
 	Locale loc;
 	ResourceBundle bundle;
 	private ResourceBundle scenarioBundle;
@@ -94,6 +92,7 @@ public class LCMWhichDayRWPQuestionFactory extends LCMTwoNumQuestionFactory {
 			q.setLessonSubcategory(bundle.getString("lcmgcd.subcategory.lcm"));
 			q.setLessonClassifier(bundle.getString("mathelementary"));
             q.setLessonGrade(4);
+            q.setLocale(loc);
             quizList.add(q);
         }
         return  quizList;

@@ -75,6 +75,7 @@ public class LCMThreeNumQuestionFactory implements IQuestionFactory{
 			q.setLessonClassifier(bundle.getString("mathelementary"));
 			q.setLessonGrade(4);
 			q.setSubCategoryOrder(2);
+			q.setLocale(loc);
 			lq.add(q);
 		}
 		return lq;

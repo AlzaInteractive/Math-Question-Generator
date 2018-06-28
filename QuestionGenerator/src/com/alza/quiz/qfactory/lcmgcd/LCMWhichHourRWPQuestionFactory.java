@@ -21,7 +21,6 @@ public class LCMWhichHourRWPQuestionFactory extends LCMTwoNumQuestionFactory {
     		30,45,60,90,120,150,180
     };
     int refdayInt;
-    protected static int numq = 4;
 	Locale loc;
 	ResourceBundle bundle;
 	private ResourceBundle scenarioBundle;
@@ -94,6 +93,7 @@ public class LCMWhichHourRWPQuestionFactory extends LCMTwoNumQuestionFactory {
 			q.setLessonSubcategory(bundle.getString("lcmgcd.subcategory.lcm"));
 			q.setLessonClassifier(bundle.getString("mathelementary"));
             q.setLessonGrade(5);
+            q.setLocale(loc);
             quizList.add(q);
         }
         return  quizList;
@@ -136,12 +136,7 @@ public class LCMWhichHourRWPQuestionFactory extends LCMTwoNumQuestionFactory {
 		}
     	return choices;
     }
-    private String getParams(int rnd) {
-		String s = sces.get(rnd);
-		String params = s.substring(s.length()-PARAMLENGTH);
-		//System.out.println(params);
-		return params;
-	}
+    
 	
 	
 }

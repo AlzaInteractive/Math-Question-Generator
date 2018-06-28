@@ -94,6 +94,7 @@ public class GCDBasicScenarioQuestionFactory implements IQuestionFactory{
 			q.setLessonClassifier(bundle.getString("mathelementary"));
 			q.setLessonGrade(5);
 			q.setSubCategoryOrder(5);
+			q.setLocale(loc);
 			lq.add(q);
 		}
 		return lq;

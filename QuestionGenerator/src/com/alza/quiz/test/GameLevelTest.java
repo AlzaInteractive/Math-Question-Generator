@@ -6,12 +6,13 @@ import java.util.Locale;
 import com.alza.quiz.model.GameLevel;
 import com.alza.quiz.model.MultipleChoiceQuiz;
 import com.alza.quiz.model.Quiz;
-import com.alza.quiz.qfactory.romans.RomansGameLevel;
+import com.alza.quiz.qfactory.IPlayableLevelFactory;
+import com.alza.quiz.qfactory.lcmgcd.LCMGCDGameLevel;
 
 public class GameLevelTest {
 	public static void main(String[] args) {
-		RomansGameLevel rgl = new RomansGameLevel();
-		List<GameLevel> gls = rgl.createGameLevels(new Locale("id","ID"));
+		IPlayableLevelFactory rgl = new LCMGCDGameLevel();
+		List<GameLevel> gls = rgl.createGameLevels(new Locale("en","US"));
 		for (GameLevel gameLevel : gls) {
 			publishQ(gameLevel);
 		}

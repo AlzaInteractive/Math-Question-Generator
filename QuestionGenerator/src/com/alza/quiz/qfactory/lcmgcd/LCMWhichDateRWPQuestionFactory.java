@@ -24,10 +24,7 @@ import java.util.concurrent.ThreadLocalRandom;
  */
 
 public class LCMWhichDateRWPQuestionFactory extends LCMTwoNumQuestionFactory {
-    private List<String> scenariosWithTwoVal = new ArrayList<String>();
-    private List<String> scenariosWithThreeVal = new ArrayList<String>();
     private Date[] refDates;
-    protected static int numq = 4;
 	Locale loc;
 	ResourceBundle bundle;
 	private ResourceBundle scenarioBundle;
@@ -51,10 +48,8 @@ public class LCMWhichDateRWPQuestionFactory extends LCMTwoNumQuestionFactory {
 	}
 
     public MultipleChoiceQuiz generateQuiz() {
-        //prepareScenario();
-        int rnd = new Random().nextInt(scenariosWithTwoVal.size()+scenariosWithThreeVal.size());
         MultipleChoiceQuiz q;
-        q = (MultipleChoiceQuiz) generateQuizList().get(rnd);
+        q = (MultipleChoiceQuiz) generateQuizList().get(0);
         return q;
     }
 
@@ -106,6 +101,7 @@ public class LCMWhichDateRWPQuestionFactory extends LCMTwoNumQuestionFactory {
 			q.setLessonCategory(bundle.getString("lcmgcd"));
 			q.setLessonSubcategory(bundle.getString("lcmgcd.subcategory.lcm"));
 			q.setLessonClassifier(bundle.getString("mathelementary"));
+			q.setLocale(loc);
             quizList.add(q);
         }
         return quizList;
@@ -162,39 +158,6 @@ public class LCMWhichDateRWPQuestionFactory extends LCMTwoNumQuestionFactory {
     @Override
     public MultipleChoiceQuiz generateQuiz(QuizLevel quizLevel) {
         return null;
-    }
-
-    private void prepareScenario(){
-        scenariosWithTwoVal.add("#elder1? memiliki dua orang anak, #orang1? dan #orang2?. " +
-                "#orang1? mengunjungi #elder1? #val1? hari sekali, sedangkan #orang2? #val2? hari sekali. " +
-                "Hari ini adalah tanggal #refdate? dan kedua anak tersebut mengunjungi #elder1? bersamaan. " +
-                "Tanggal berapa kemungkinan mereka akan bertemu lagi saat mengunjungi #elder1??");
-        scenariosWithThreeVal.add("Pada tanggal #refdate? #orang1?, #orang2? dan #orang3? bertemu di perpustakaan daerah." +
-                " #orang1? mengunjungi perpustakaan #val1? hari sekali, #orang2? #val2? hari sekali, dan" +
-                " #orang3? #val3? hari sekali. Pada tanggal berapa mereka kemungkinan akan kembali " +
-                "bertemu saat mengunjungi perpustakaan?  ");
-        scenariosWithThreeVal.add("Pada tanggal #refdate? #orang1?, #orang2? dan #orang3? bersepeda bersama-sama." +
-                " #orang1? bersepeda #val1? hari sekali, #orang2? #val2? hari sekali, dan" +
-                " #orang3? #val3? hari sekali. Pada tanggal berapa mereka kemungkinan akan kembali " +
-                "dapat bersepeda bersama?");
-        scenariosWithTwoVal.add("#orang1? berlatih menyanyi #val1? hari sekali sementara #orang2? #val2? hari sekali. " +
-                "Jika hari ini adalah tanggal #refdate? dan mereka berlatih bersama, " +
-                "tanggal berapa mereka akan melakukannya lagi?");
-        scenariosWithTwoVal.add("#bapak1? mengantar roti #val1? hari sekali ke warung #bapak2?, " +
-                "sedangkan #bapak3? mengantar stok telur asin ke tempat yang sama #val2? hari sekali. " +
-                "Jika hari ini tanggal #refdate? dan mereka bertemu di warung #bapak2?, " +
-                "kapan kemungkinan mereka akan bertemu kembali di sana saat mengantar dagangan?");
-        scenariosWithTwoVal.add("Kapal penyeberangan Inaq Tegining melayani pelayaran Lombok - Sumbawa setiap" +
-                " #val1? hari sekali, sedangkan kapal Amaq Teganang #val2? hari sekali. " +
-                "Pada #refdate? kedua kapal itu berlabuh bersama di Pelabuhan Lombok. " +
-                "Pada tanggal berapa kedua kapal tersebut diperkirakan berlabuh di tempat yang sama? ");
-        scenariosWithTwoVal.add("#orang1? memiliki kebun pepaya dan pisang yang sedang dalam masa panen. " +
-                "Ia menjadwalkan panen pepaya #val1? hari sekali di waktu pagi " +
-                "dan panen pisang #val2? hari sekali di waktu sore. " +
-                "Jika tanggal #refdate? ia panen pepaya dan pisang, tanggal berapa " +
-                "kemungkinan ia dapat melakukannya lagi di hari yang sama?");
-        Collections.shuffle(scenariosWithTwoVal);
-        Collections.shuffle(scenariosWithThreeVal);
     }
     
     private String getParams(int rnd) {

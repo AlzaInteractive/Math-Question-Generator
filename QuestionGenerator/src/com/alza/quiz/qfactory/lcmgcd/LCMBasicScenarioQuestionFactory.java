@@ -81,6 +81,7 @@ public class LCMBasicScenarioQuestionFactory extends LCMTwoNumQuestionFactory {
 			q.setLessonCategory(bundle.getString("lcmgcd"));
 			q.setLessonSubcategory(bundle.getString("lcmgcd.subcategory.lcm"));
 			q.setLessonClassifier(bundle.getString("mathelementary"));
+			q.setLocale(loc);
             quizList.add(q);
         }
 

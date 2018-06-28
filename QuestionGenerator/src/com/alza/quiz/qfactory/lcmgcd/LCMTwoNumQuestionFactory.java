@@ -54,6 +54,7 @@ public class LCMTwoNumQuestionFactory implements IQuestionFactory {
 		q.setLessonSubcategory(bundle.getString("lcmgcd.subcategory.lcm"));
 		q.setLessonClassifier(bundle.getString("mathelementary"));
 		q.setSubCategoryOrder(2);
+		q.setLocale(loc);
 		return q;
 	}
 
