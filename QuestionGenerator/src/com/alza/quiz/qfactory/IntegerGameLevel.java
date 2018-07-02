@@ -1,0 +1,167 @@
+package com.alza.quiz.qfactory;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+import java.util.ResourceBundle;
+
+import com.alza.quiz.model.GameLevel;
+import com.alza.quiz.qfactory.IPlayableLevelFactory;
+import com.alza.quiz.qfactory.integer.AdditionOfThreeIntegersSigned;
+import com.alza.quiz.qfactory.integer.AdditionOfThreeIntegersUnsigned;
+import com.alza.quiz.qfactory.integer.AdditionOfTwoIntegers;
+import com.alza.quiz.qfactory.integer.CubeRoot;
+import com.alza.quiz.qfactory.integer.CubicOperation;
+import com.alza.quiz.qfactory.integer.DivisionOfTwoIntegers;
+import com.alza.quiz.qfactory.integer.Estimation;
+import com.alza.quiz.qfactory.integer.MixedOperationOfIntegers;
+import com.alza.quiz.qfactory.integer.MultiplicationOfTwoIntegers;
+import com.alza.quiz.qfactory.integer.QuadraticOperation;
+import com.alza.quiz.qfactory.integer.Rounding;
+import com.alza.quiz.qfactory.integer.SquareRoot;
+import com.alza.quiz.qfactory.integer.SquareRootPhytagorean;
+import com.alza.quiz.qfactory.integer.SubtractionOfTwoIntegers;
+
+/**
+ * 
+ * @author ewien Game level factory for lcmgcd problems
+ *
+ */
+public class IntegerGameLevel implements IPlayableLevelFactory{
+	public List<GameLevel> createGameLevels(Locale loc) {
+		ResourceBundle bundle = ResourceBundle.getBundle("lang.langbundle", loc);
+		/**
+		lqf.add(new AdditionOfTwoIntegers(loc));
+		lqf.add(new SubtractionOfTwoIntegers(loc));
+		lqf.add(new AdditionOfThreeIntegersUnsigned(loc));
+		lqf.add(new AdditionOfThreeIntegersSigned(loc));
+		lqf.add(new MultiplicationOfTwoIntegers(loc));
+		lqf.add(new DivisionOfTwoIntegers(loc));
+		lqf.add(new MixedOperationOfIntegers(loc));
+		lqf.add(new QuadraticOperation(loc));
+		lqf.add(new SquareRoot(loc));
+		lqf.add(new SquareRootPhytagorean(loc));
+		lqf.add(new CubicOperation(loc));
+		lqf.add(new CubeRoot(loc));
+		lqf.add(new Rounding(loc));
+		lqf.add(new Estimation(loc));
+		 **/
+		List<GameLevel> lgl = new ArrayList<GameLevel>();
+		String name, desc;
+		GameLevel g;
+
+		// find multiples of
+		name = bundle.getString("lcmgcd.level.multiple");
+		desc = bundle.getString("lcmgcd.level.multiple.desc");
+		g = GameLevel.createSingleQF(0, name, desc, new AdditionOfTwoIntegers(loc), 3);
+		lgl.add(g);
+
+		// find factors of
+		name = bundle.getString("lcmgcd.level.factor");
+		desc = bundle.getString("lcmgcd.level.factor.desc");
+		g = GameLevel.createSingleQF(1, name, desc, new SubtractionOfTwoIntegers(loc), 3);
+		lgl.add(g);
+
+		// LCM
+		name = bundle.getString("lcmgcd.level.lcm");
+		desc = bundle.getString("lcmgcd.level.lcm.desc");
+		g = GameLevel.createSingleQF(2, name, desc, new AdditionOfThreeIntegersUnsigned(loc), 3);
+		lgl.add(g);
+
+		// GCD
+		name = bundle.getString("lcmgcd.level.gcd");
+		desc = bundle.getString("lcmgcd.level.gcd.desc");
+		g = GameLevel.createSingleQF(3, name, desc, new AdditionOfThreeIntegersSigned(loc), 5);
+
+		lgl.add(g);
+
+		// Prime factor
+		name = bundle.getString("lcmgcd.level.primefactor");
+		desc = bundle.getString("lcmgcd.level.primefactor.desc");
+		g = GameLevel.createSingleQF(4, name, desc, new MultiplicationOfTwoIntegers(loc), 5);
+
+		lgl.add(g);
+
+		// LCM using prime factor
+		name = bundle.getString("lcmgcd.level.primefactor.lcm");
+		desc = bundle.getString("lcmgcd.level.primefactor.lcm.desc");
+		g = GameLevel.createSingleQF(5, name, desc, new DivisionOfTwoIntegers(loc), 5);
+		lgl.add(g);
+
+		// GCD using prime factor
+		name = bundle.getString("lcmgcd.level.primefactor.gcd");
+		desc = bundle.getString("lcmgcd.level.primefactor.gcd.desc");
+		g = GameLevel.createSingleQF(6, name, desc, new MixedOperationOfIntegers(loc), 5);
+		//todo rhombus find diagonal
+		lgl.add(g);
+
+		// LCM Real world problems
+		name = bundle.getString("lcmgcd.level.lcmrwp");
+		desc = bundle.getString("lcmgcd.level.lcmrwp.desc");
+		g = GameLevel.createSingleQF(7, name, desc, new QuadraticOperation(loc), 3);
+		g.addQuestionFactory(new SquareRoot(loc),3 );
+		lgl.add(g);
+
+		// GCD using prime factor
+		name = bundle.getString("lcmgcd.level.primefactor.gcd");
+		desc = bundle.getString("lcmgcd.level.primefactor.gcd.desc");
+		g = GameLevel.createSingleQF(8, name, desc, new SquareRootPhytagorean(loc), 4);
+		//todo rhombus find diagonal
+		lgl.add(g);
+
+		//Circle
+		name = bundle.getString("lcmgcd.level.gcdrwp");
+		desc = bundle.getString("lcmgcd.level.gcdrwp.desc");
+		g = GameLevel.createSingleQF(9, name, desc, new CubicOperation(loc), 3);
+		g.addQuestionFactory(new CubeRoot(loc),3 );
+		lgl.add(g);
+
+		//Circle
+		name = bundle.getString("lcmgcd.level.gcdrwp");
+		desc = bundle.getString("lcmgcd.level.gcdrwp.desc");
+		g = GameLevel.createSingleQF(10, name, desc, new Rounding(loc), 6);
+
+		lgl.add(g);		
+
+		//Circle
+		name = bundle.getString("lcmgcd.level.gcdrwp");
+		desc = bundle.getString("lcmgcd.level.gcdrwp.desc");
+		g = GameLevel.createSingleQF(11, name, desc, new Estimation(loc), 6);
+
+		lgl.add(g);
+		return lgl;
+
+	}
+	public GameLevel getGameLevel(int order, Locale loc){
+		List<GameLevel> levels = createGameLevels(loc);
+		for (GameLevel gameLevel : levels) {
+			if (gameLevel.getOrder()==order) {
+				return gameLevel;
+			}
+		}
+		return null;
+	}
+
+	public GameLevel getExamLevel(Locale loc){
+		ResourceBundle	bundle = ResourceBundle.getBundle("lang.langbundle", loc);
+		String name,desc;
+		name = bundle.getString("exam");
+		desc = bundle.getString("examdesc");
+		GameLevel g = GameLevel.createSingleQF(0, name, desc, new AdditionOfTwoIntegers(loc), 1);
+		g.addQuestionFactory(new SubtractionOfTwoIntegers(loc), 1);
+		g.addQuestionFactory(new AdditionOfThreeIntegersUnsigned(loc), 1);
+		g.addQuestionFactory(new AdditionOfThreeIntegersSigned(loc), 1);
+		g.addQuestionFactory(new MultiplicationOfTwoIntegers(loc), 1);
+		g.addQuestionFactory(new DivisionOfTwoIntegers(loc), 1);
+		g.addQuestionFactory(new MixedOperationOfIntegers(loc), 1);
+		g.addQuestionFactory(new QuadraticOperation(loc), 1);
+		g.addQuestionFactory(new SquareRoot(loc), 1);
+		g.addQuestionFactory(new SquareRootPhytagorean(loc), 1);
+		g.addQuestionFactory(new CubicOperation(loc), 1);
+		g.addQuestionFactory(new CubeRoot(loc), 1);
+		g.addQuestionFactory(new Rounding(loc), 1);
+		g.addQuestionFactory(new Estimation(loc), 1);
+		return g;
+	}
+
+}
