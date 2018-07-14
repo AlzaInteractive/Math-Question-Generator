@@ -30,102 +30,73 @@ import com.alza.quiz.qfactory.integer.SubtractionOfTwoIntegers;
 public class IntegerGameLevel implements IPlayableLevelFactory{
 	public List<GameLevel> createGameLevels(Locale loc) {
 		ResourceBundle bundle = ResourceBundle.getBundle("lang.langbundle", loc);
-		/**
-		lqf.add(new AdditionOfTwoIntegers(loc));
-		lqf.add(new SubtractionOfTwoIntegers(loc));
-		lqf.add(new AdditionOfThreeIntegersUnsigned(loc));
-		lqf.add(new AdditionOfThreeIntegersSigned(loc));
-		lqf.add(new MultiplicationOfTwoIntegers(loc));
-		lqf.add(new DivisionOfTwoIntegers(loc));
-		lqf.add(new MixedOperationOfIntegers(loc));
-		lqf.add(new QuadraticOperation(loc));
-		lqf.add(new SquareRoot(loc));
-		lqf.add(new SquareRootPhytagorean(loc));
-		lqf.add(new CubicOperation(loc));
-		lqf.add(new CubeRoot(loc));
-		lqf.add(new Rounding(loc));
-		lqf.add(new Estimation(loc));
-		 **/
 		List<GameLevel> lgl = new ArrayList<GameLevel>();
 		String name, desc;
 		GameLevel g;
 
-		// find multiples of
-		name = bundle.getString("lcmgcd.level.multiple");
-		desc = bundle.getString("lcmgcd.level.multiple.desc");
+		name = bundle.getString("integer.addtwonum");
+		desc = "";//bundle.getString("");
 		g = GameLevel.createSingleQF(0, name, desc, new AdditionOfTwoIntegers(loc), 3);
 		lgl.add(g);
 
-		// find factors of
-		name = bundle.getString("lcmgcd.level.factor");
-		desc = bundle.getString("lcmgcd.level.factor.desc");
+		name = bundle.getString("integer.subtwonum");
+		//desc = bundle.getString("lcmgcd.level.factor.desc");
 		g = GameLevel.createSingleQF(1, name, desc, new SubtractionOfTwoIntegers(loc), 3);
 		lgl.add(g);
 
-		// LCM
-		name = bundle.getString("lcmgcd.level.lcm");
-		desc = bundle.getString("lcmgcd.level.lcm.desc");
+		name = bundle.getString("integer.addthreenumu");
+		//desc = bundle.getString("lcmgcd.level.lcm.desc");
 		g = GameLevel.createSingleQF(2, name, desc, new AdditionOfThreeIntegersUnsigned(loc), 3);
 		lgl.add(g);
 
-		// GCD
-		name = bundle.getString("lcmgcd.level.gcd");
-		desc = bundle.getString("lcmgcd.level.gcd.desc");
+		name = bundle.getString("integer.addthreenum");
+		//desc = bundle.getString("lcmgcd.level.gcd.desc");
 		g = GameLevel.createSingleQF(3, name, desc, new AdditionOfThreeIntegersSigned(loc), 5);
 
 		lgl.add(g);
 
-		// Prime factor
-		name = bundle.getString("lcmgcd.level.primefactor");
-		desc = bundle.getString("lcmgcd.level.primefactor.desc");
+		name = bundle.getString("integer.multiptwonum");
+		//desc = bundle.getString("lcmgcd.level.primefactor.desc");
 		g = GameLevel.createSingleQF(4, name, desc, new MultiplicationOfTwoIntegers(loc), 5);
 
 		lgl.add(g);
 
-		// LCM using prime factor
-		name = bundle.getString("lcmgcd.level.primefactor.lcm");
-		desc = bundle.getString("lcmgcd.level.primefactor.lcm.desc");
+		name = bundle.getString("integer.divtwonum");
+		//desc = bundle.getString("lcmgcd.level.primefactor.lcm.desc");
 		g = GameLevel.createSingleQF(5, name, desc, new DivisionOfTwoIntegers(loc), 5);
 		lgl.add(g);
 
-		// GCD using prime factor
-		name = bundle.getString("lcmgcd.level.primefactor.gcd");
-		desc = bundle.getString("lcmgcd.level.primefactor.gcd.desc");
+		name = bundle.getString("integer.mixop");
+		//desc = bundle.getString("lcmgcd.level.primefactor.gcd.desc");
 		g = GameLevel.createSingleQF(6, name, desc, new MixedOperationOfIntegers(loc), 5);
 		//todo rhombus find diagonal
 		lgl.add(g);
 
-		// LCM Real world problems
-		name = bundle.getString("lcmgcd.level.lcmrwp");
-		desc = bundle.getString("lcmgcd.level.lcmrwp.desc");
+		name = bundle.getString("integer.quadsquare");
+		//desc = bundle.getString("lcmgcd.level.lcmrwp.desc");
 		g = GameLevel.createSingleQF(7, name, desc, new QuadraticOperation(loc), 3);
 		g.addQuestionFactory(new SquareRoot(loc),3 );
 		lgl.add(g);
 
-		// GCD using prime factor
-		name = bundle.getString("lcmgcd.level.primefactor.gcd");
-		desc = bundle.getString("lcmgcd.level.primefactor.gcd.desc");
+		name = bundle.getString("integer.squarerootphyt");
+		//desc = bundle.getString("lcmgcd.level.primefactor.gcd.desc");
 		g = GameLevel.createSingleQF(8, name, desc, new SquareRootPhytagorean(loc), 4);
 		//todo rhombus find diagonal
 		lgl.add(g);
 
-		//Circle
-		name = bundle.getString("lcmgcd.level.gcdrwp");
-		desc = bundle.getString("lcmgcd.level.gcdrwp.desc");
+		name = bundle.getString("integer.cubic");
+		//desc = bundle.getString("lcmgcd.level.gcdrwp.desc");
 		g = GameLevel.createSingleQF(9, name, desc, new CubicOperation(loc), 3);
 		g.addQuestionFactory(new CubeRoot(loc),3 );
 		lgl.add(g);
 
-		//Circle
-		name = bundle.getString("lcmgcd.level.gcdrwp");
-		desc = bundle.getString("lcmgcd.level.gcdrwp.desc");
+		name = bundle.getString("integer.rounding");
 		g = GameLevel.createSingleQF(10, name, desc, new Rounding(loc), 6);
 
 		lgl.add(g);		
 
-		//Circle
-		name = bundle.getString("lcmgcd.level.gcdrwp");
-		desc = bundle.getString("lcmgcd.level.gcdrwp.desc");
+		name = bundle.getString("integer.estimation");
+		//desc = bundle.getString("lcmgcd.level.gcdrwp.desc");
 		g = GameLevel.createSingleQF(11, name, desc, new Estimation(loc), 6);
 
 		lgl.add(g);

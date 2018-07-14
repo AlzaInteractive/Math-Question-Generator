@@ -1,4 +1,4 @@
-package com.alza.quiz.qfactory.fraction;
+package com.alza.quiz.qfactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,6 +6,29 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 
 import com.alza.quiz.model.GameLevel;
+import com.alza.quiz.qfactory.fraction.FractionAddSubtract;
+import com.alza.quiz.qfactory.fraction.FractionCompareTwo;
+import com.alza.quiz.qfactory.fraction.FractionConvertFromDecimal;
+import com.alza.quiz.qfactory.fraction.FractionConvertFromPercentage;
+import com.alza.quiz.qfactory.fraction.FractionConvertToDecimal;
+import com.alza.quiz.qfactory.fraction.FractionConvertToPercentage;
+import com.alza.quiz.qfactory.fraction.FractionDivide;
+import com.alza.quiz.qfactory.fraction.FractionEqualityTypeA;
+import com.alza.quiz.qfactory.fraction.FractionEqualityTypeB;
+import com.alza.quiz.qfactory.fraction.FractionMixedNumberConversion;
+import com.alza.quiz.qfactory.fraction.FractionMixedNumberOperation;
+import com.alza.quiz.qfactory.fraction.FractionMultiplication;
+import com.alza.quiz.qfactory.fraction.FractionPickGreatest;
+import com.alza.quiz.qfactory.fraction.FractionRealWorldProblemDescribingRatio;
+import com.alza.quiz.qfactory.fraction.FractionRealWorldProblemDiscount;
+import com.alza.quiz.qfactory.fraction.FractionRealWorldProblemFindFromPercentage;
+import com.alza.quiz.qfactory.fraction.FractionRealWorldProblemFindFromRatio;
+import com.alza.quiz.qfactory.fraction.FractionRealWorldProblemLeftover;
+import com.alza.quiz.qfactory.fraction.FractionRealWorldProblemProportions;
+import com.alza.quiz.qfactory.fraction.FractionRealWorldProblemScale;
+import com.alza.quiz.qfactory.fraction.FractionRealWorldProblemTaxTips;
+import com.alza.quiz.qfactory.fraction.FractionRepresentation;
+import com.alza.quiz.qfactory.fraction.FractionSimplify;
 /**
  * 
  * @author ewien

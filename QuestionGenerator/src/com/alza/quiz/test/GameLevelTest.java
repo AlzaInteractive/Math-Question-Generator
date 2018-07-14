@@ -7,12 +7,14 @@ import com.alza.quiz.model.GameLevel;
 import com.alza.quiz.model.MultipleChoiceQuiz;
 import com.alza.quiz.model.Quiz;
 import com.alza.quiz.qfactory.IPlayableLevelFactory;
+import com.alza.quiz.qfactory.IntegerGameLevel;
 import com.alza.quiz.qfactory.lcmgcd.LCMGCDGameLevel;
 
 public class GameLevelTest {
 	public static void main(String[] args) {
-		IPlayableLevelFactory rgl = new LCMGCDGameLevel();
-		List<GameLevel> gls = rgl.createGameLevels(new Locale("en","US"));
+		IPlayableLevelFactory rgl = new IntegerGameLevel();
+		//List<GameLevel> gls = rgl.createGameLevels(new Locale("en","US"));
+		List<GameLevel> gls = rgl.createGameLevels(new Locale("in","ID"));
 		for (GameLevel gameLevel : gls) {
 			publishQ(gameLevel);
 		}
