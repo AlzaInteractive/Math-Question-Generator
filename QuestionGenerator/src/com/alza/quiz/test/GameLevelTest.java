@@ -6,15 +6,16 @@ import java.util.Locale;
 import com.alza.quiz.model.GameLevel;
 import com.alza.quiz.model.MultipleChoiceQuiz;
 import com.alza.quiz.model.Quiz;
+import com.alza.quiz.qfactory.FractionGameLevel;
 import com.alza.quiz.qfactory.IPlayableLevelFactory;
 import com.alza.quiz.qfactory.IntegerGameLevel;
-import com.alza.quiz.qfactory.lcmgcd.LCMGCDGameLevel;
+import com.alza.quiz.qfactory.LCMGCDGameLevel;
 
 public class GameLevelTest {
 	public static void main(String[] args) {
-		IPlayableLevelFactory rgl = new IntegerGameLevel();
-		//List<GameLevel> gls = rgl.createGameLevels(new Locale("en","US"));
-		List<GameLevel> gls = rgl.createGameLevels(new Locale("in","ID"));
+		IPlayableLevelFactory rgl = new FractionGameLevel();
+		List<GameLevel> gls = rgl.createGameLevels(new Locale("en","US"));
+		//List<GameLevel> gls = rgl.createGameLevels(new Locale("in","ID"));
 		for (GameLevel gameLevel : gls) {
 			publishQ(gameLevel);
 		}

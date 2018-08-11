@@ -1,4 +1,4 @@
-package com.alza.quiz.qfactory.lcmgcd;
+package com.alza.quiz.qfactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,7 +6,20 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 
 import com.alza.quiz.model.GameLevel;
-import com.alza.quiz.qfactory.IPlayableLevelFactory;
+import com.alza.quiz.qfactory.lcmgcd.FindFactorsOfQuestionFactory;
+import com.alza.quiz.qfactory.lcmgcd.FindMultiplesOfQuestionFactory;
+import com.alza.quiz.qfactory.lcmgcd.FindPrimeFactorsOfQuestionFactory;
+import com.alza.quiz.qfactory.lcmgcd.GCDBasicScenarioQuestionFactory;
+import com.alza.quiz.qfactory.lcmgcd.GCDPrimeFactorQuestionFactory;
+import com.alza.quiz.qfactory.lcmgcd.GCDThreeNumQuestionFactory;
+import com.alza.quiz.qfactory.lcmgcd.GCDTwoNumQuestionFactory;
+import com.alza.quiz.qfactory.lcmgcd.LCMBasicScenarioQuestionFactory;
+import com.alza.quiz.qfactory.lcmgcd.LCMPrimeFactorQuestionFactory;
+import com.alza.quiz.qfactory.lcmgcd.LCMThreeNumQuestionFactory;
+import com.alza.quiz.qfactory.lcmgcd.LCMTwoNumQuestionFactory;
+import com.alza.quiz.qfactory.lcmgcd.LCMWhichDateRWPQuestionFactory;
+import com.alza.quiz.qfactory.lcmgcd.LCMWhichDayRWPQuestionFactory;
+import com.alza.quiz.qfactory.lcmgcd.LCMWhichHourRWPQuestionFactory;
 
 /**
  * 

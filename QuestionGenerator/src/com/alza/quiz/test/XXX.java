@@ -3,6 +3,7 @@ import java.awt.BasicStroke;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
+import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Stroke;
@@ -13,6 +14,7 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import java.awt.Canvas;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.geom.Arc2D;
@@ -23,6 +25,7 @@ import java.util.List;
 
 import javax.swing.JButton;
 
+import com.alza.common.math.Fraction;
 import com.alza.quiz.model.GameLevel;
 import com.alza.quiz.model.GameLevelQuestionFactory;
 import com.alza.quiz.model.GeomQuiz;
@@ -38,6 +41,7 @@ import com.alza.quiz.model.geom.Geom;
 import com.alza.quiz.model.geom.Kite;
 import com.alza.quiz.model.geom.Parallelogram;
 import com.alza.quiz.model.geom.Path;
+import com.alza.quiz.model.geom.Point2D;
 import com.alza.quiz.model.geom.Pyramid;
 import com.alza.quiz.model.geom.Rectangle;
 import com.alza.quiz.model.geom.Rhombus;
@@ -50,6 +54,7 @@ import com.alza.quiz.model.geom.Triangle;
 import com.alza.quiz.model.geom.TriangularPrism;
 import com.alza.quiz.qfactory.IQuestionFactory;
 import com.alza.quiz.qfactory.Util;
+import com.alza.quiz.qfactory.fraction.FractionRepresentationInAPie;
 import com.alza.quiz.qfactory.geom.GeomGameLevel;
 import com.alza.quiz.qfactory.geom.UtilGeom;
 import com.alza.quiz.test.Shape2DTest;
@@ -103,7 +108,8 @@ public class XXX extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				showQuestion();
+				//showQuestion();
+				drawFractionOnPie();
 			}
 		});
 		downPane = new JPanel();
@@ -228,9 +234,14 @@ public class XXX extends JFrame {
 				}
 			}
 			if (path.pathType == Path.PATH_TYPE_TEXT) {
+				System.out.println("draw text!!!!");
 				Graphics2D g2d = (Graphics2D) g.create();
-				g2d.drawString(path.text, (int)path.start.x, (int)path.start.y);
-				//System.out.println("draw text!!!!");
+				g2d.setColor(Color.CYAN);
+				FontMetrics metrics = g2d.getFontMetrics(g2d.getFont());
+				int hgt = metrics.getHeight();
+				int adv = metrics.stringWidth(path.text);
+				Point2D ps = path.start.move(-adv/2, -hgt/2);
+				g2d.drawString(path.text, (int)ps.x, (int)ps.y);
 			}
 		}
 		mg.invalidate();
@@ -251,5 +262,9 @@ public class XXX extends JFrame {
 		arc.setAngleExtent(-30);
 		g2d.draw(arc);
 		contentPane.invalidate();
+	}
+	private void drawFractionOnPie() {
+		FractionRepresentationInAPie fPie = new FractionRepresentationInAPie(new Fraction(3, 4));
+		drawShape(fPie.getPaths());
 	}
 }

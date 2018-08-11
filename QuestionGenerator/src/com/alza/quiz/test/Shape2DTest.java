@@ -25,6 +25,7 @@ public final class Shape2DTest {
 		//shapeGeneratorTest();
 		allGenerator();
 	}
+	
 
 	private static void shapeGeneratorTest() {
 		List<Shapes2D> l = generateShapes();

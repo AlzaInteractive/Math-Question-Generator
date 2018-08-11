@@ -9,6 +9,7 @@ import com.alza.quiz.model.geom.Point2D;
 
 public class FractionRepresentationInAPie {
 	private Fraction fraction;
+	public boolean showLabel = false;
 
 	public FractionRepresentationInAPie(Fraction fraction) {
 		super();
@@ -68,6 +69,11 @@ public class FractionRepresentationInAPie {
 			p.arcUseCenter=true;
 			paths.add(p);
 			angleStart+=angleSweep;
+		}
+		if (showLabel) {
+			String fs = numerator+"/"+divisor;
+			Path p = Path.createTextPath(fs, center, 0, 0);
+			paths.add(p);
 		}
 		return paths;
 	}

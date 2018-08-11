@@ -27,7 +27,7 @@ public class FractionRealWorldProblemScale implements IQuestionFactory{
 	}
 	private void initStringFromLocale(){
 		bundle = ResourceBundle.getBundle("lang.langbundle", loc);
-		scenarioBundle = ResourceBundle.getBundle("lang.scenario", loc);
+		scenarioBundle = ResourceBundle.getBundle("lang.scenario-fraction", loc);
 		sces = CommonFunctionAndValues.getStringCollection(scenarioBundle, "fraction.rwpscale");
 	}
 

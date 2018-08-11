@@ -35,8 +35,8 @@ import com.alza.quiz.qfactory.fraction.FractionSimplify;
  * Game level factory for fraction problems
  *
  */
-public class FractionGameLevel {
-	public static List<GameLevel> createGameLevels(Locale loc) {
+public class FractionGameLevel implements IPlayableLevelFactory{
+	public List<GameLevel> createGameLevels(Locale loc) {
 		ResourceBundle	bundle = ResourceBundle.getBundle("lang.langbundle", loc);
 		
 		List<GameLevel> lgl = new ArrayList<GameLevel>();
@@ -45,7 +45,7 @@ public class FractionGameLevel {
 		//fraction representation
 		name = bundle.getString("fraction.representation");
 		desc = bundle.getString("fraction.representationdesc");
-		g = GameLevel.createSingleQF(0, name, desc, new FractionRepresentation(loc), 7);
+		g = GameLevel.createSingleQF(0, name, desc, new FractionRepresentation(loc), 5);
 		lgl.add(g);
 		//fraction equality
 		name = bundle.getString("fraction.equality");
@@ -125,7 +125,7 @@ public class FractionGameLevel {
 		lgl.add(g);
 		return lgl;
 	}
-	public static GameLevel getGameLevel(int order, Locale loc){
+	public GameLevel getGameLevel(int order, Locale loc){
 		List<GameLevel> levels = createGameLevels(loc);
 		for (GameLevel gameLevel : levels) {
 			if (gameLevel.getOrder()==order) {
@@ -134,7 +134,7 @@ public class FractionGameLevel {
 		}
 		return null;
 	}
-	public static GameLevel getExamLevel(Locale loc){
+	public GameLevel getExamLevel(Locale loc){
 		ResourceBundle	bundle = ResourceBundle.getBundle("lang.langbundle", loc);
 		String name,desc;
 		name = bundle.getString("exam");

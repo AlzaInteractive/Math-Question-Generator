@@ -49,11 +49,13 @@ public class FractionRepresentation implements IQuestionFactory{
 				divisor = ThreadLocalRandom.current().nextInt(2, 13);
 			} while (divisor % 2 == 1);
 			int numerator;
+			numerator = ThreadLocalRandom.current().nextInt(1, divisor);
+			/**
 			if (i % 2 == 0){
 				numerator = ThreadLocalRandom.current().nextInt(1, divisor);
 			} else {
 				numerator = ThreadLocalRandom.current().nextInt(divisor+1, 2 * divisor);
-			}
+			}**/
 			int remainder = divisor - numerator;
 			Fraction f = new Fraction(numerator, divisor);		
 			MultipleChoiceGeomQuiz q = new MultipleChoiceGeomQuiz();
