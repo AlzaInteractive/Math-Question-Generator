@@ -24,10 +24,8 @@ public class GameLevelDemo {
 		List<Quiz> lq = gl.generateQuiz();
 		for (Quiz q : lq) {
 			System.out.println("------------------------------");
-			System.out.println("Grade : "+q.getLessonGrade());
 			System.out.println("Subcategory :" +q.getLessonSubcategory());
 			System.out.println("Question : " + q.getQuestion());
-			System.out.println("Level : "+q.getQuizLevel());
 			if (q instanceof MultipleChoiceQuiz){
 				MultipleChoiceQuiz mq = (MultipleChoiceQuiz) q;
 				System.out.println("Choices : "+ String.join(" , ", mq.getChoices()));
