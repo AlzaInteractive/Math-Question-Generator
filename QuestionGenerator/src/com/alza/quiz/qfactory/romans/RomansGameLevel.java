@@ -6,14 +6,14 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 
 import com.alza.quiz.model.GameLevel;
-import com.alza.quiz.qfactory.IPlayableLevelFactory;
+import com.alza.quiz.qfactory.IPlayableLevelsGroup;
 
 /**
  * 
  * @author ewien Game level factory for roman number conversion
  *
  */
-public class RomansGameLevel implements IPlayableLevelFactory {
+public class RomansGameLevel implements IPlayableLevelsGroup {
 	int[][] bounds = {
 			{1,10,5},{10,20,5},
 			{20,40,7},{40,50,5},{50,90,7},{90,100,5},

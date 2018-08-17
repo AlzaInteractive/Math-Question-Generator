@@ -6,7 +6,7 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 
 import com.alza.quiz.model.GameLevel;
-import com.alza.quiz.qfactory.IPlayableLevelFactory;
+import com.alza.quiz.qfactory.IPlayableLevelsGroup;
 import com.alza.quiz.qfactory.integer.AdditionOfThreeIntegersSigned;
 import com.alza.quiz.qfactory.integer.AdditionOfThreeIntegersUnsigned;
 import com.alza.quiz.qfactory.integer.AdditionOfTwoIntegers;
@@ -27,7 +27,7 @@ import com.alza.quiz.qfactory.integer.SubtractionOfTwoIntegers;
  * @author ewien Game level factory for lcmgcd problems
  *
  */
-public class IntegerGameLevel implements IPlayableLevelFactory{
+public class IntegerGameLevel implements IPlayableLevelsGroup{
 	public List<GameLevel> createGameLevels(Locale loc) {
 		ResourceBundle bundle = ResourceBundle.getBundle("lang.langbundle", loc);
 		List<GameLevel> lgl = new ArrayList<GameLevel>();

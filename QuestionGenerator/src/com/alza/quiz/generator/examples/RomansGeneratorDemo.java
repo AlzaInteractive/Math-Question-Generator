@@ -1,4 +1,4 @@
-package com.alza.quiz.test;
+package com.alza.quiz.generator.examples;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -9,7 +9,7 @@ import com.alza.quiz.model.Quiz;
 import com.alza.quiz.qfactory.IQuestionFactory;
 import com.alza.quiz.qfactory.Util;
 
-public class RomansGeneratorTest {
+public class RomansGeneratorDemo {
 	public static void main(String[] args) {
 
 		final long startTime = System.currentTimeMillis();

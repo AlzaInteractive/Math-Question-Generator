@@ -1,20 +1,14 @@
-package com.alza.quiz.test;
+package com.alza.quiz.generator.examples;
 import java.awt.BasicStroke;
 import java.awt.BorderLayout;
+import java.awt.Canvas;
+import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Stroke;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.border.EmptyBorder;
-
-import java.awt.Canvas;
-import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.geom.Arc2D;
@@ -24,43 +18,30 @@ import java.util.Collections;
 import java.util.List;
 
 import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
 
 import com.alza.common.math.Fraction;
 import com.alza.quiz.model.GameLevel;
 import com.alza.quiz.model.GameLevelQuestionFactory;
 import com.alza.quiz.model.GeomQuiz;
 import com.alza.quiz.model.MultipleChoiceGeomQuiz;
-import com.alza.quiz.model.MultipleChoiceQuiz;
 import com.alza.quiz.model.Quiz;
-import com.alza.quiz.model.geom.Circle;
-import com.alza.quiz.model.geom.Cone;
-import com.alza.quiz.model.geom.Cube;
-import com.alza.quiz.model.geom.Cuboid;
-import com.alza.quiz.model.geom.Cylinder;
 import com.alza.quiz.model.geom.Geom;
-import com.alza.quiz.model.geom.Kite;
-import com.alza.quiz.model.geom.Parallelogram;
 import com.alza.quiz.model.geom.Path;
 import com.alza.quiz.model.geom.Point2D;
-import com.alza.quiz.model.geom.Pyramid;
-import com.alza.quiz.model.geom.Rectangle;
-import com.alza.quiz.model.geom.Rhombus;
-import com.alza.quiz.model.geom.Shapes2D;
-import com.alza.quiz.model.geom.Shapes3D;
-import com.alza.quiz.model.geom.Sphere;
-import com.alza.quiz.model.geom.Square;
-import com.alza.quiz.model.geom.Trapezoid;
-import com.alza.quiz.model.geom.Triangle;
-import com.alza.quiz.model.geom.TriangularPrism;
-import com.alza.quiz.qfactory.IQuestionFactory;
-import com.alza.quiz.qfactory.Util;
 import com.alza.quiz.qfactory.fraction.FractionRepresentationInAPie;
 import com.alza.quiz.qfactory.geom.GeomGameLevel;
 import com.alza.quiz.qfactory.geom.UtilGeom;
-import com.alza.quiz.test.Shape2DTest;
 
-public class XXX extends JFrame {
+public class GeomDrawingDemo extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane,downPane;
 	private JPanel mg;
 	JTextField soal,jawab,pilihan;
@@ -75,7 +56,7 @@ public class XXX extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					XXX frame = new XXX();
+					GeomDrawingDemo frame = new GeomDrawingDemo();
 					frame.setVisible(true);
 					frame.setExtendedState(frame.getExtendedState() | JFrame.MAXIMIZED_BOTH);
 					frame.perf();
@@ -90,7 +71,7 @@ public class XXX extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public XXX() {
+	public GeomDrawingDemo() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();

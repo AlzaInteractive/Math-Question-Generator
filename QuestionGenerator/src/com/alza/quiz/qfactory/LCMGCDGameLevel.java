@@ -26,7 +26,7 @@ import com.alza.quiz.qfactory.lcmgcd.LCMWhichHourRWPQuestionFactory;
  * @author ewien Game level factory for lcmgcd problems
  *
  */
-public class LCMGCDGameLevel implements IPlayableLevelFactory{
+public class LCMGCDGameLevel implements IPlayableLevelsGroup{
 	public List<GameLevel> createGameLevels(Locale loc) {
 		ResourceBundle bundle = ResourceBundle.getBundle("lang.langbundle", loc);
 

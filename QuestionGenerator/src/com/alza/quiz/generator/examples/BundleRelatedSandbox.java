@@ -1,4 +1,4 @@
-package com.alza.quiz.test;
+package com.alza.quiz.generator.examples;
 
 import java.util.ArrayList;
 import java.util.Enumeration;

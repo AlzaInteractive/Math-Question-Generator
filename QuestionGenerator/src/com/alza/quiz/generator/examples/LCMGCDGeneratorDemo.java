@@ -1,7 +1,6 @@
-package com.alza.quiz.test;
+package com.alza.quiz.generator.examples;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
@@ -23,7 +22,7 @@ import com.alza.quiz.qfactory.lcmgcd.LCMWhichDateRWPQuestionFactory;
 import com.alza.quiz.qfactory.lcmgcd.LCMWhichDayRWPQuestionFactory;
 import com.alza.quiz.qfactory.lcmgcd.LCMWhichHourRWPQuestionFactory;
 
-public class KPKGeneratorTester {
+public class LCMGCDGeneratorDemo {
 	public static void main(String[] args) {
 
 		final long startTime = System.currentTimeMillis();

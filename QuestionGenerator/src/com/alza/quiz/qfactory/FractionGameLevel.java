@@ -35,7 +35,7 @@ import com.alza.quiz.qfactory.fraction.FractionSimplify;
  * Game level factory for fraction problems
  *
  */
-public class FractionGameLevel implements IPlayableLevelFactory{
+public class FractionGameLevel implements IPlayableLevelsGroup{
 	public List<GameLevel> createGameLevels(Locale loc) {
 		ResourceBundle	bundle = ResourceBundle.getBundle("lang.langbundle", loc);
 		

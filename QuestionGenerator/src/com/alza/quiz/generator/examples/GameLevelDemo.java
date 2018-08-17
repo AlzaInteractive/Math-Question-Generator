@@ -1,4 +1,4 @@
-package com.alza.quiz.test;
+package com.alza.quiz.generator.examples;
 
 import java.util.List;
 import java.util.Locale;
@@ -6,21 +6,19 @@ import java.util.Locale;
 import com.alza.quiz.model.GameLevel;
 import com.alza.quiz.model.MultipleChoiceQuiz;
 import com.alza.quiz.model.Quiz;
-import com.alza.quiz.qfactory.FractionGameLevel;
-import com.alza.quiz.qfactory.IPlayableLevelFactory;
-import com.alza.quiz.qfactory.IntegerGameLevel;
-import com.alza.quiz.qfactory.LCMGCDGameLevel;
+import com.alza.quiz.qfactory.*;
 
-public class GameLevelTest {
+
+public class GameLevelDemo {
 	public static void main(String[] args) {
-		IPlayableLevelFactory rgl = new FractionGameLevel();
-		List<GameLevel> gls = rgl.createGameLevels(new Locale("en","US"));
-		//List<GameLevel> gls = rgl.createGameLevels(new Locale("in","ID"));
+		IPlayableLevelsGroup lg = new FractionGameLevel();
+		List<GameLevel> gls = lg.createGameLevels(new Locale("en","US"));
+		// gls = lg.createGameLevels(new Locale("in","ID"));
 		for (GameLevel gameLevel : gls) {
-			publishQ(gameLevel);
+			printQuizzes(gameLevel);
 		}
 	}
-	private static void publishQ(GameLevel gl) {
+	private static void printQuizzes(GameLevel gl) {
 		System.out.println("------------------------");
 		System.out.println("Game Level: " + gl.getOrder()+" "+gl.getName()+": "+gl.getDesc());
 		List<Quiz> lq = gl.generateQuiz();

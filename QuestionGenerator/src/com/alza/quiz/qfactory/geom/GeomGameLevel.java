@@ -6,7 +6,7 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 
 import com.alza.quiz.model.GameLevel;
-import com.alza.quiz.qfactory.IPlayableLevelFactory;
+import com.alza.quiz.qfactory.IPlayableLevelsGroup;
 import com.alza.quiz.qfactory.geom.circle.CircleFindAreaKnownDiameter;
 import com.alza.quiz.qfactory.geom.circle.CircleFindAreaKnownRadius;
 import com.alza.quiz.qfactory.geom.circle.CircleFindDiameterKnownArea;
@@ -56,7 +56,7 @@ import com.alza.quiz.qfactory.geom.triangle.TriangleScaleneIscoscelesEquilateral
  * @author ewien Game level factory for geometry problems
  *
  */
-public class GeomGameLevel implements IPlayableLevelFactory{
+public class GeomGameLevel implements IPlayableLevelsGroup{
 	public List<GameLevel> createGameLevels(Locale loc) {
 		ResourceBundle bundle = ResourceBundle.getBundle("lang.langbundle", loc);
 

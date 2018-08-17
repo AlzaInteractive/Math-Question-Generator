@@ -1,4 +1,4 @@
-package com.alza.quiz.test;
+package com.alza.quiz.generator.examples;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -16,13 +16,14 @@ import com.alza.quiz.model.geom.Rectangle;
 import com.alza.quiz.model.geom.Rhombus;
 import com.alza.quiz.model.geom.Shapes2D;
 import com.alza.quiz.model.geom.Square;
+import com.alza.quiz.model.geom.Triangle;
 import com.alza.quiz.qfactory.IQuestionFactory;
 import com.alza.quiz.qfactory.Util;
 
-public final class Shape2DTest {
+public final class Shape2DDemo {
 	private static List<Shapes2D> lshps;
 	public static void main(String[] args) {
-		//shapeGeneratorTest();
+		shapeGeneratorTest();
 		allGenerator();
 	}
 	
@@ -40,11 +41,12 @@ public final class Shape2DTest {
 	
 	private static List<Shapes2D> generateShapes(){
 		lshps = new ArrayList<Shapes2D>();
-		//lshps.add(new Square().createExample());
-		//lshps.add(new Rectangle().createExample());
-		//lshps.add(new Rhombus().createExample());
-		//lshps.add(new Circle().createExample());
-		//lshps.add(new Kite().createExample());
+		lshps.add(new Square().createExample());
+		lshps.add(new Triangle().createExample());
+		lshps.add(new Rectangle().createExample());
+		lshps.add(new Rhombus().createExample());
+		lshps.add(new Circle().createExample());
+		lshps.add(new Kite().createExample());
 		lshps.add(new Parallelogram().createExample());
 		return lshps;
 	}
