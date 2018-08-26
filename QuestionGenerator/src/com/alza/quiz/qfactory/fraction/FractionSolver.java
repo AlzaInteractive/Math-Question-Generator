@@ -77,6 +77,44 @@ public class FractionSolver {
 		result.add(line6);
 		return result;
 	}
+	public List<String> subtract(Fraction f1,Fraction f2) {
+		List<String> result = new ArrayList<>();
+		int lcm = MathUtils.findLCM(f1.b,f2.b);
+		int div1 = lcm / f1.b ;
+		int div2 = lcm / f2.b;
+		Fraction equi1 = new Fraction(f1.a*div1,lcm);
+		Fraction equi2 = new Fraction(f2.a*div2,lcm);
+		Fraction fresult = new Fraction(equi1.a-equi2.a,lcm);
+		
+		String line1 = bundle.getString("lcmofdivisor")+" "
+				+f1.b +" "+bundle.getString("and")+" "
+				+f2.b +" "+bundle.getString("is")+" "+lcm;
+		//String line2 = bundle.getString("multiplierfor")+" "+f1.toHtmlString()+" "
+		//		+bundle.getString("is")+" "+lcm+":"+f1.b+" = "+div1;
+		String line3 = bundle.getString("equivalent") +" "+ f1.toHtmlString()+" = " 
+				+ "(" +f1.a+" x "+div1+")"
+				+"/"
+				+ "(" +f1.b+" x "+div1+")"
+				+ " = "+equi1.toHtmlString();
+		//String line4 = bundle.getString("multiplierfor")+" "+f2.toHtmlString()+" "
+		//		+bundle.getString("is")+" "+lcm+":"+f2.b+" = "+div2;
+		String line5 = bundle.getString("equivalent") +" "+ f2.toHtmlString()+" = " 
+				+ "(" +f2.a+" x "+div2+")"
+				+"/"
+				+ "(" +f2.b+" x "+div2+")"
+				+ " = "+equi2.toHtmlString();
+		String line6 = bundle.getString("finally")
+				+ " "+f1.toHtmlString()+" - "+ f2.toHtmlString()
+				+ " = " + equi1.toHtmlString()+" - "+equi2.toHtmlString()
+				+ " = " + fresult.toHtmlString();
+		result.add(line1);
+		//result.add(line2);
+		result.add(line3);
+		//result.add(line4);
+		result.add(line5);
+		result.add(line6);
+		return result;
+	}
 	public List<String> multiply(Fraction f1,Fraction f2) {
 		List<String> result = new ArrayList<>();
 		Fraction fresult = new Fraction(f1.a*f2.a,f1.b*f2.b);

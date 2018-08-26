@@ -13,7 +13,7 @@ public class GameLevelDemo {
 	public static void main(String[] args) {
 		IPlayableLevelsGroup lg = new FractionGameLevel();
 		List<GameLevel> gls = lg.createGameLevels(new Locale("en","US"));
-		// gls = lg.createGameLevels(new Locale("in","ID"));
+		gls = lg.createGameLevels(new Locale("in","ID"));
 		for (GameLevel gameLevel : gls) {
 			printQuizzes(gameLevel);
 		}

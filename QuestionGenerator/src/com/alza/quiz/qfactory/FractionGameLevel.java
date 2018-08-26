@@ -15,6 +15,7 @@ import com.alza.quiz.qfactory.fraction.FractionConvertToPercentage;
 import com.alza.quiz.qfactory.fraction.FractionDivide;
 import com.alza.quiz.qfactory.fraction.FractionEqualityTypeA;
 import com.alza.quiz.qfactory.fraction.FractionEqualityTypeB;
+import com.alza.quiz.qfactory.fraction.FractionFindEqualByMultiplyingOrDividing;
 import com.alza.quiz.qfactory.fraction.FractionMixedNumberConversion;
 import com.alza.quiz.qfactory.fraction.FractionMixedNumberOperation;
 import com.alza.quiz.qfactory.fraction.FractionMultiplication;
@@ -50,8 +51,7 @@ public class FractionGameLevel implements IPlayableLevelsGroup{
 		//fraction equality
 		name = bundle.getString("fraction.equality");
 		desc = bundle.getString("fraction.equalitydesc");
-		g = GameLevel.createSingleQF(1, name,desc, new FractionEqualityTypeA(loc), 7);
-		g.addQuestionFactory(new FractionEqualityTypeB(loc), 3);
+		g = GameLevel.createSingleQF(1, name,desc, new FractionFindEqualByMultiplyingOrDividing(loc), 6);
 		lgl.add(g);
 				
 		//fraction simplest fraction

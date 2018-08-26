@@ -14,7 +14,7 @@ import com.alza.quiz.model.QuizLevel;
 import com.alza.quiz.qfactory.IQuestionFactory;
 import com.alza.quiz.util.CommonFunctionAndValues;
 
-public class FractionEqualityTypeA implements IQuestionFactory{
+public class FractionFindEqualByMultiplyingOrDividing implements IQuestionFactory{
 	private int numq = 4;
 	
 	private int[][] simpleMultiplier = {{2,3},{3,5},{4,7},{5,8},{3,7}};
@@ -22,11 +22,11 @@ public class FractionEqualityTypeA implements IQuestionFactory{
 	
 	Locale loc;
 	ResourceBundle bundle;
-	public FractionEqualityTypeA(Locale loc){
+	public FractionFindEqualByMultiplyingOrDividing(Locale loc){
 		this.loc = loc;
 		initStringFromLocale();
 	}
-	public FractionEqualityTypeA(){
+	public FractionFindEqualByMultiplyingOrDividing(){
 		this.loc = new Locale("in", "ID");
 		initStringFromLocale();
 	}
@@ -49,36 +49,51 @@ public class FractionEqualityTypeA implements IQuestionFactory{
 	@Override
 	public List<Quiz> generateQuizList() {
 		List<Quiz> quizList = new ArrayList<Quiz>();
+		int slotSize = numq / 2;
 		for (int i=0;i<numq;i++){
-			MultipleChoiceQuiz q = generateEqualityQuiz();
+			boolean byMultiplying = (i<slotSize);
+			MultipleChoiceQuiz q = generateEqualityQuiz(byMultiplying);
 			quizList.add(q);
 		}
 		return quizList;
 	}
-	private MultipleChoiceQuiz generateEqualityQuiz() {
+	/**
+	 * 
+	 * @param byMultiplying, determine whether answer can be found by multiplying or dividing
+	 * @return
+	 */
+	private MultipleChoiceQuiz generateEqualityQuiz(boolean byMultiplying) {
 		int a,b,multip;
 		do {
-			a = ThreadLocalRandom.current().nextInt(2, 7);
-			b = ThreadLocalRandom.current().nextInt(3, 12);
-			multip =  ThreadLocalRandom.current().nextInt(3, 7);
-		} while (a>=b);
+			a = ThreadLocalRandom.current().nextInt(2, 7); // randomize numerator
+			b = ThreadLocalRandom.current().nextInt(3, 12); // randomize denominator
+			multip =  ThreadLocalRandom.current().nextInt(3, 7); // prepare multiplier
+		} while (a>=b); // make sure that it's a proper fraction, repeat if it's not one
 		
 		Fraction fQuest,fAnswer;
 		fQuest = new Fraction(a, b);
 		fAnswer =  new Fraction(a*multip,b*multip);
-		if (a % 2 == 0){
+		
+		if (!byMultiplying){
 			Fraction temp;
 			temp = fQuest;
 			fQuest=fAnswer;
 			fAnswer=temp;
 		}
+		
 		List<String> choices = buildChoices(fQuest, fAnswer);
 		MultipleChoiceQuiz q = new MultipleChoiceQuiz();
 		q.setDifficultyLevel(QuizLevel.MUDAH);
 		q.setLessonGrade(4);
 		q.setChoices(choices);
 		q.setCorrectAnswer(fAnswer.a+"/"+fAnswer.b);
-		q.setQuestion(bundle.getString("fraction.findequal")+fQuest.toMathJaxString());
+		
+		if (byMultiplying) {
+			q.setQuestion(bundle.getString("fraction.findequalbymultiplying")+fQuest.toMathJaxString());
+		} else {
+			q.setQuestion(bundle.getString("fraction.findequalbydividing")+fQuest.toMathJaxString());
+		}
+		
 		//q.setQuestion(CommonFunctionAndValues.enclosedWithMathJaxExp(q.getQuestion()));
 		q.setLessonSubcategory(bundle.getString("fraction.equality"));
 		q.setLessonClassifier(bundle.getString("mathelementary"));
