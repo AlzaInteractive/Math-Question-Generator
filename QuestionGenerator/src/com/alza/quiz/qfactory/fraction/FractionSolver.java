@@ -143,11 +143,15 @@ public class FractionSolver {
 		}
 
 		Fraction fresult = new Fraction(f1.a*f2.a,f1.b*f2.b);
+		String line1 = bundle.getString("howmultiply.1");
+		String line2 = bundle.getString("howmultiply.2");
 		String line3 = f1.toHtmlString() +" x "+ f2.toHtmlString()+" = " 
 				+ "(" +f1.a+" x "+f2.a+")"
 				+"/"
 				+ "(" +f1.b+" x "+f2.b+")"
 				+ " = "+fresult.toHtmlString();
+		result.add(line1);
+		result.add(line2);
 		result.add(line3);
 		return result;
 	}
@@ -161,10 +165,20 @@ public class FractionSolver {
 		}
 
 		Fraction f2inverse = new Fraction (f2.b,f2.a);
+		Fraction fresult = new Fraction(f1.a*f2.b,f1.b*f2.a);
+		String line1 = bundle.getString("howdivide.1");
+		String line2 = bundle.getString("howdivide.2");
 		String line3 = f1.toHtmlString() +" : "+ f2.toHtmlString()+" = "
 				+ f1.toHtmlString() +" x "+ f2inverse.toHtmlString();
+		String line4 = f1.toHtmlString() +" x "+ f2inverse.toHtmlString()+" = " 
+				+ "(" +f1.a+" x "+f2inverse.a+")"
+				+"/"
+				+ "(" +f1.b+" x "+f2inverse.b+")"
+				+ " = "+fresult.toHtmlString();
+		result.add(line1);
+		result.add(line2);
 		result.add(line3);
-		result.addAll(multiply(f1,f2inverse));
+		result.add(line4);
 		return result;
 	}
 }

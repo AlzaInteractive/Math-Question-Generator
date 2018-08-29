@@ -10,7 +10,7 @@ import com.alza.quiz.qfactory.fraction.FractionSolver;
 public class SolverDemo {
 	public static void main(String[] args) {
 		FractionSolver fs = new FractionSolver();
-		fs = new FractionSolver(new Locale("en", "US"));
+		fs = new FractionSolver(new Locale("in", "ID"));
 		List<List<String>> lls = new ArrayList<List<String>>();
 		lls.add(fs.simplify(new Fraction(0, 8)));
 		lls.add(fs.simplify(new Fraction(12, 14)));
