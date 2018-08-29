@@ -1,5 +1,6 @@
 package com.alza.quiz.generator.examples;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -8,15 +9,24 @@ import com.alza.quiz.qfactory.fraction.FractionSolver;
 
 public class SolverDemo {
 	public static void main(String[] args) {
-		FractionSolver fs = new FractionSolver(new Locale("en", "US"));
-		List<String> l = fs.simplify(new Fraction(4, 8));
-		//l = fs.add(new Fraction(2, 3), new Fraction(1, 5));
-		l = fs.subtract(new Fraction(1, 6), new Fraction(1, 5));
-		//l = fs.multiply(new Fraction(2, 3), new Fraction(1, 5));
-		//l = fs.divide(new Fraction(2, 3), new Fraction(1, 5));
-		for (String string : l) {
-			System.out.println(string);
-		}
+		FractionSolver fs = new FractionSolver();
+		fs = new FractionSolver(new Locale("en", "US"));
+		List<List<String>> lls = new ArrayList<List<String>>();
+		lls.add(fs.simplify(new Fraction(0, 8)));
+		lls.add(fs.simplify(new Fraction(12, 14)));
+		lls.add(fs.add(new Fraction(2, 3), new Fraction(1, 5)));
+		lls.add(fs.add(new Fraction(2, 3), new Fraction(1, 0)));
+		lls.add(fs.subtract(new Fraction(1, 6), new Fraction(1, 5)));
+		lls.add(fs.subtract(new Fraction(1, 6), new Fraction(0, 5)));
+		lls.add(fs.multiply(new Fraction(2, 3), new Fraction(1, 5)));
+		lls.add(fs.multiply(new Fraction(2, 0), new Fraction(1, 5)));
+		lls.add(fs.divide(new Fraction(2, 3), new Fraction(1, 5)));
+		lls.add(fs.divide(new Fraction(0, 3), new Fraction(1, 5)));
+		for (List<String> list : lls) {
+			System.out.println("--------------");
+			for (String string : list) {
+				System.out.println(string);
+			}
+		}	
 	}
-
 }

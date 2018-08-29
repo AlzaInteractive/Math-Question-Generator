@@ -25,6 +25,11 @@ public class FractionSolver {
 	public List<String> simplify(Fraction f) {
 		List<String> result = new ArrayList<>();
 		int gcd = MathUtils.findGCD(f.a,f.b);
+		// check if numerator/denominator equals 0 
+		if (f.a==0 || f.b==0) {
+			result.add(bundle.getString("zeroemptynum"));
+			return result;
+		}
 		String line1 = bundle.getString("gcdof")+" "
 				+f.a +" "+bundle.getString("and")+" "
 				+f.b +" "+bundle.getString("is")+" "+gcd;
@@ -41,13 +46,19 @@ public class FractionSolver {
 	}
 	public List<String> add(Fraction f1,Fraction f2) {
 		List<String> result = new ArrayList<>();
+		// check if numerator/denominator equals 0
+		if (f1.a==0 || f1.b==0 || f2.a==0 || f2.b==0) {
+			result.add(bundle.getString("zeroemptynum"));
+			return result;
+		}
+
 		int lcm = MathUtils.findLCM(f1.b,f2.b);
 		int div1 = lcm / f1.b ;
 		int div2 = lcm / f2.b;
 		Fraction equi1 = new Fraction(f1.a*div1,lcm);
 		Fraction equi2 = new Fraction(f2.a*div2,lcm);
 		Fraction fresult = new Fraction(equi1.a+equi2.a,lcm);
-		
+
 		String line1 = bundle.getString("lcmofdivisor")+" "
 				+f1.b +" "+bundle.getString("and")+" "
 				+f2.b +" "+bundle.getString("is")+" "+lcm;
@@ -79,13 +90,20 @@ public class FractionSolver {
 	}
 	public List<String> subtract(Fraction f1,Fraction f2) {
 		List<String> result = new ArrayList<>();
+		// check if numerator/denominator equals 0
+		if (f1.a==0 || f1.b==0 || f2.a==0 || f2.b==0) {
+			result.add(bundle.getString("zeroemptynum"));
+			return result;
+		}		
+
+
 		int lcm = MathUtils.findLCM(f1.b,f2.b);
 		int div1 = lcm / f1.b ;
 		int div2 = lcm / f2.b;
 		Fraction equi1 = new Fraction(f1.a*div1,lcm);
 		Fraction equi2 = new Fraction(f2.a*div2,lcm);
 		Fraction fresult = new Fraction(equi1.a-equi2.a,lcm);
-		
+
 		String line1 = bundle.getString("lcmofdivisor")+" "
 				+f1.b +" "+bundle.getString("and")+" "
 				+f2.b +" "+bundle.getString("is")+" "+lcm;
@@ -117,6 +135,13 @@ public class FractionSolver {
 	}
 	public List<String> multiply(Fraction f1,Fraction f2) {
 		List<String> result = new ArrayList<>();
+
+		// check if numerator/denominator equals 0
+		if (f1.a==0 || f1.b==0 || f2.a==0 || f2.b==0) {
+			result.add(bundle.getString("zeroemptynum"));
+			return result;
+		}
+
 		Fraction fresult = new Fraction(f1.a*f2.a,f1.b*f2.b);
 		String line3 = f1.toHtmlString() +" x "+ f2.toHtmlString()+" = " 
 				+ "(" +f1.a+" x "+f2.a+")"
@@ -128,6 +153,13 @@ public class FractionSolver {
 	}
 	public List<String> divide(Fraction f1,Fraction f2) {
 		List<String> result = new ArrayList<>();
+
+		// check if numerator/denominator equals 0
+		if (f1.a==0 || f1.b==0 || f2.a==0 || f2.b==0) {
+			result.add(bundle.getString("zeroemptynum"));
+			return result;
+		}
+
 		Fraction f2inverse = new Fraction (f2.b,f2.a);
 		String line3 = f1.toHtmlString() +" : "+ f2.toHtmlString()+" = "
 				+ f1.toHtmlString() +" x "+ f2inverse.toHtmlString();
