@@ -33,8 +33,8 @@ public class FractionSolver {
 		String line1 = bundle.getString("gcdof")+" "
 				+f.a +" "+bundle.getString("and")+" "
 				+f.b +" "+bundle.getString("is")+" "+gcd;
-		String gcdnum = "(" +f.a+":"+gcd+")";
-		String gcddiv = "(" +f.b+":"+gcd+")";
+		String gcdnum = "(" +f.a+"\u00f7"+gcd+")";
+		String gcddiv = "(" +f.b+"\u00f7"+gcd+")";
 		String line2 = f.toHtmlString()+ " = "+ gcdnum +"/"+ gcddiv; 
 		String line3 = f.toHtmlString()+ " = "+ f.getSimplestForm().toHtmlString();
 		String line4 = bundle.getString("simplestformof")+" "+f.toHtmlString()+ " "+ bundle.getString("is") +" "+ f.getSimplestForm().toHtmlString();
@@ -168,7 +168,7 @@ public class FractionSolver {
 		Fraction fresult = new Fraction(f1.a*f2.b,f1.b*f2.a);
 		String line1 = bundle.getString("howdivide.1");
 		String line2 = bundle.getString("howdivide.2");
-		String line3 = f1.toHtmlString() +" : "+ f2.toHtmlString()+" = "
+		String line3 = f1.toHtmlString() +" \u00f7 "+ f2.toHtmlString()+" = "
 				+ f1.toHtmlString() +" x "+ f2inverse.toHtmlString();
 		String line4 = f1.toHtmlString() +" x "+ f2inverse.toHtmlString()+" = " 
 				+ "(" +f1.a+" x "+f2inverse.a+")"

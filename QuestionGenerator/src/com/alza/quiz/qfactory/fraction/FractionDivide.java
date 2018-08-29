@@ -93,7 +93,7 @@ public class FractionDivide implements IQuestionFactory{
 		
 		Fraction result;
 		result = f1.getResultWhenDividedBy(f2);
-		q.setQuestion(f1.toMathJaxString()+" : "+f2.toMathJaxString());
+		q.setQuestion(f1.toMathJaxString()+" \\div "+f2.toMathJaxString());
 		q.setCorrectAnswer(result.toString());
 		q.setChoices(buildChoices(f1,f2,result));
 		return q;
