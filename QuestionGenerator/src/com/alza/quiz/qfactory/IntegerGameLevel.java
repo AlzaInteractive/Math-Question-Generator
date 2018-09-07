@@ -44,15 +44,15 @@ public class IntegerGameLevel implements IPlayableLevelsGroup{
 		g = GameLevel.createSingleQF(1, name, desc, new SubtractionOfTwoIntegers(loc), 3);
 		lgl.add(g);
 
-		name = bundle.getString("integer.addthreenumu");
-		//desc = bundle.getString("lcmgcd.level.lcm.desc");
-		g = GameLevel.createSingleQF(2, name, desc, new AdditionOfThreeIntegersUnsigned(loc), 3);
-		lgl.add(g);
 
 		name = bundle.getString("integer.addthreenum");
 		//desc = bundle.getString("lcmgcd.level.gcd.desc");
-		g = GameLevel.createSingleQF(3, name, desc, new AdditionOfThreeIntegersSigned(loc), 5);
-
+		g = GameLevel.createSingleQF(2, name, desc, new AdditionOfThreeIntegersSigned(loc), 5);
+		lgl.add(g);
+		
+		name = bundle.getString("integer.addthreenumu");
+		//desc = bundle.getString("lcmgcd.level.lcm.desc");
+		g = GameLevel.createSingleQF(3, name, desc, new AdditionOfThreeIntegersUnsigned(loc), 3);
 		lgl.add(g);
 
 		name = bundle.getString("integer.multiptwonum");
