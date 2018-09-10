@@ -104,16 +104,26 @@ public class FractionSolver {
 				+"/"
 				+ "(" +f2.b+" x "+div2+")"
 				+ " = "+equi2.toHtmlString();
-		String line6 = bundle.getString("finally")
-				+ " "+f1.toHtmlString()+" + "+ f2.toHtmlString()
+		String line6 = f1.toHtmlString()+" + "+ f2.toHtmlString()
 				+ " = " + equi1.toHtmlString()+" + "+equi2.toHtmlString()
 				+ " = " + fresult.toHtmlString();
+		
+		String line7="";
+		if (fresult.isSimplest()) {
+			line6 = bundle.getString("finally")+" "+ line6;
+		} else {
+			line7 = bundle.getString("simplifiedversion")+" "+bundle.getString("of")+" "
+					+fresult.toHtmlString()+" "
+					+bundle.getString("is")+" "+fresult.getSimplestForm().toString();
+		}
+		
 		result.add(line1);
 		//result.add(line2);
 		result.add(line3);
 		//result.add(line4);
 		result.add(line5);
 		result.add(line6);
+		if (!line7.isEmpty()) result.add(line7);
 		return result;
 	}
 	public List<String> subtract(Fraction f1,Fraction f2) {

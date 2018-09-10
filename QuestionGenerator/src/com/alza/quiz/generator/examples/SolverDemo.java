@@ -10,13 +10,15 @@ import com.alza.quiz.qfactory.fraction.FractionSolver;
 public class SolverDemo {
 	public static void main(String[] args) {
 		FractionSolver fs = new FractionSolver();
-		fs = new FractionSolver(new Locale("en", "US"));
+		// fs = new FractionSolver(new Locale("en", "US"));
 		List<List<String>> lls = new ArrayList<List<String>>();
 		lls.add(fs.simplifyWithoutMentioningGCD(new Fraction(0, 8)));
 		lls.add(fs.simplifyWithoutMentioningGCD(new Fraction(12, 14)));
 		lls.add(fs.simplifyWithoutMentioningGCD(new Fraction(8, 4)));
 		lls.add(fs.simplifyWithoutMentioningGCD(new Fraction(3, 4)));
 		lls.add(fs.add(new Fraction(2, 3), new Fraction(1, 5)));
+		lls.add(fs.add(new Fraction(2, 3), new Fraction(1, 3)));
+		lls.add(fs.add(new Fraction(2, 4), new Fraction(6, 4)));
 		lls.add(fs.add(new Fraction(2, 3), new Fraction(1, 0)));
 		lls.add(fs.subtract(new Fraction(1, 6), new Fraction(1, 5)));
 		lls.add(fs.subtract(new Fraction(1, 6), new Fraction(0, 5)));
