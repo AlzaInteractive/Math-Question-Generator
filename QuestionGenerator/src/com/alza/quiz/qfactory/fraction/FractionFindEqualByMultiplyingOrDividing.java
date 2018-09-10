@@ -65,9 +65,9 @@ public class FractionFindEqualByMultiplyingOrDividing implements IQuestionFactor
 	private MultipleChoiceQuiz generateEqualityQuiz(boolean byMultiplying) {
 		int a,b,multip;
 		do {
-			a = ThreadLocalRandom.current().nextInt(2, 7); // randomize numerator
-			b = ThreadLocalRandom.current().nextInt(3, 12); // randomize denominator
-			multip =  ThreadLocalRandom.current().nextInt(3, 7); // prepare multiplier
+			a = ThreadLocalRandom.current().nextInt(1, 5); // randomize numerator
+			b = ThreadLocalRandom.current().nextInt(2, 11); // randomize denominator
+			multip =  ThreadLocalRandom.current().nextInt(2, 6); // prepare multiplier
 		} while (a>=b); // make sure that it's a proper fraction, repeat if it's not one
 		
 		Fraction fQuest,fAnswer;
@@ -89,9 +89,9 @@ public class FractionFindEqualByMultiplyingOrDividing implements IQuestionFactor
 		q.setCorrectAnswer(fAnswer.a+"/"+fAnswer.b);
 		
 		if (byMultiplying) {
-			q.setQuestion(bundle.getString("fraction.findequalbymultiplying")+fQuest.toMathJaxString());
+			q.setQuestion(bundle.getString("fraction.findequalbymultiplying")+": "+fQuest.toMathJaxString());
 		} else {
-			q.setQuestion(bundle.getString("fraction.findequalbydividing")+fQuest.toMathJaxString());
+			q.setQuestion(bundle.getString("fraction.findequalbydividing")+": "+fQuest.toMathJaxString());
 		}
 		
 		//q.setQuestion(CommonFunctionAndValues.enclosedWithMathJaxExp(q.getQuestion()));
