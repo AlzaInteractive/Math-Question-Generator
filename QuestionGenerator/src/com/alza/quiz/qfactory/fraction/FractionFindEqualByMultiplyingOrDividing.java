@@ -67,7 +67,7 @@ public class FractionFindEqualByMultiplyingOrDividing implements IQuestionFactor
 		do {
 			a = ThreadLocalRandom.current().nextInt(1, 5); // randomize numerator
 			b = ThreadLocalRandom.current().nextInt(2, 11); // randomize denominator
-			multip =  ThreadLocalRandom.current().nextInt(2, 6); // prepare multiplier
+			multip =  ThreadLocalRandom.current().nextInt(2, 4); // prepare multiplier
 		} while (a>=b); // make sure that it's a proper fraction, repeat if it's not one
 		
 		Fraction fQuest,fAnswer;
