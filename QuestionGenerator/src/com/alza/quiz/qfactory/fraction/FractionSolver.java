@@ -44,6 +44,34 @@ public class FractionSolver {
 		result.add(line4);
 		return result;
 	}
+	public List<String> simplifyWithoutMentioningGCD(Fraction f) {
+		List<String> result = new ArrayList<>();
+		int gcd = MathUtils.findGCD(f.a,f.b);
+		// check if numerator/denominator equals 0 
+		if (f.a==0 || f.b==0) {
+			result.add(bundle.getString("zeroemptynum"));
+			return result;
+		}
+		if (gcd ==1) {
+			String line1 = f.a +" "+bundle.getString("and")+" "+ f.b + " "+ bundle.getString("cantbedivided");
+			String line2 = f.toString()+ " "+bundle.getString("alreadysimplest");
+			result.add(line1);
+			result.add(line2);
+			return result;
+		} else {
+			String line1 = f.a +" "+bundle.getString("and")+" "+ f.b + " "+ bundle.getString("canbedivided")+" "+gcd;
+			String line2 = f.a +" "+bundle.getString("dividedby")+" "+gcd +" "+ bundle.getString("is")+" "+f.getSimplestForm().a+". ";
+			line2 = line2 + f.b +" "+bundle.getString("dividedby")+" "+gcd +" "+ bundle.getString("is")+" "+f.getSimplestForm().b+".";
+			String line3 = bundle.getString("so")+", "+bundle.getString("dividingby")+" "+gcd+" "
+					+ bundle.getString("numandenom")+", "+f.toHtmlString()+"="+f.getSimplestForm().toHtmlString();
+			String line4 = bundle.getString("finally")+" "+bundle.getString("simplestformof")+" "+f.toHtmlString()+ " "+ bundle.getString("is") +" "+ f.getSimplestForm().toString();
+			result.add(line1);
+			result.add(line2);
+			result.add(line3);
+			result.add(line4);
+			return result;
+		}
+	}
 	public List<String> add(Fraction f1,Fraction f2) {
 		List<String> result = new ArrayList<>();
 		// check if numerator/denominator equals 0
