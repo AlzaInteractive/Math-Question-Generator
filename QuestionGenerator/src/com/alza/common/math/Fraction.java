@@ -78,7 +78,9 @@ public class Fraction implements Comparable<Fraction>,Comparator<Fraction>{
 		if (this.a<this.b) return true;
 		return false;
 	}
-	
+	public boolean isSimplest(){
+		return (MathUtils.findGCD(this.a,this.b)==1);
+	}
 	@Override
 	public Fraction clone(){
 		Fraction clone = new Fraction(this.a, this.b);
