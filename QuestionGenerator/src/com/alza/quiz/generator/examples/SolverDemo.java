@@ -10,7 +10,7 @@ import com.alza.quiz.qfactory.fraction.FractionSolver;
 public class SolverDemo {
 	public static void main(String[] args) {
 		FractionSolver fs = new FractionSolver();
-		// fs = new FractionSolver(new Locale("en", "US"));
+		fs = new FractionSolver(new Locale("en", "US"));
 		List<List<String>> lls = new ArrayList<List<String>>();
 		lls.add(fs.simplifyWithoutMentioningGCD(new Fraction(0, 8)));
 		lls.add(fs.simplifyWithoutMentioningGCD(new Fraction(12, 14)));
@@ -21,10 +21,13 @@ public class SolverDemo {
 		lls.add(fs.add(new Fraction(2, 4), new Fraction(6, 4)));
 		lls.add(fs.add(new Fraction(2, 3), new Fraction(1, 0)));
 		lls.add(fs.subtract(new Fraction(1, 6), new Fraction(1, 5)));
+		lls.add(fs.subtract(new Fraction(4, 6), new Fraction(2, 4)));
 		lls.add(fs.subtract(new Fraction(1, 6), new Fraction(0, 5)));
 		lls.add(fs.multiply(new Fraction(2, 3), new Fraction(1, 5)));
+		lls.add(fs.multiply(new Fraction(2, 3), new Fraction(6, 4)));
 		lls.add(fs.multiply(new Fraction(2, 0), new Fraction(1, 5)));
 		lls.add(fs.divide(new Fraction(2, 3), new Fraction(1, 5)));
+		lls.add(fs.divide(new Fraction(2, 3), new Fraction(6, 4)));
 		lls.add(fs.divide(new Fraction(0, 3), new Fraction(1, 5)));
 		for (List<String> list : lls) {
 			System.out.println("--------------");

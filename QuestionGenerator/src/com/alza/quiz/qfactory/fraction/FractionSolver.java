@@ -109,9 +109,7 @@ public class FractionSolver {
 				+ " = " + fresult.toHtmlString();
 		
 		String line7="";
-		if (fresult.isSimplest()) {
-			line6 = bundle.getString("finally")+" "+ line6;
-		} else {
+		if (!fresult.isSimplest()) {
 			line7 = bundle.getString("simplifiedversion")+" "+bundle.getString("of")+" "
 					+fresult.toHtmlString()+" "
 					+bundle.getString("is")+" "+fresult.getSimplestForm().toString();
@@ -159,16 +157,24 @@ public class FractionSolver {
 				+"/"
 				+ "(" +f2.b+" x "+div2+")"
 				+ " = "+equi2.toHtmlString();
-		String line6 = bundle.getString("finally")
-				+ " "+f1.toHtmlString()+" - "+ f2.toHtmlString()
+		String line6 = f1.toHtmlString()+" - "+ f2.toHtmlString()
 				+ " = " + equi1.toHtmlString()+" - "+equi2.toHtmlString()
 				+ " = " + fresult.toHtmlString();
+		
+		String line7="";
+		if (!fresult.isSimplest()) {
+			line7 = bundle.getString("simplifiedversion")+" "+bundle.getString("of")+" "
+					+fresult.toHtmlString()+" "
+					+bundle.getString("is")+" "+fresult.getSimplestForm().toString();
+		}
+		
 		result.add(line1);
 		//result.add(line2);
 		result.add(line3);
 		//result.add(line4);
 		result.add(line5);
 		result.add(line6);
+		if (!line7.isEmpty()) result.add(line7);
 		return result;
 	}
 	public List<String> multiply(Fraction f1,Fraction f2) {
@@ -188,9 +194,18 @@ public class FractionSolver {
 				+"/"
 				+ "(" +f1.b+" x "+f2.b+")"
 				+ " = "+fresult.toHtmlString();
+		
+		String line7="";
+		if (!fresult.isSimplest()) {
+			line7 = bundle.getString("simplifiedversion")+" "+bundle.getString("of")+" "
+					+fresult.toHtmlString()+" "
+					+bundle.getString("is")+" "+fresult.getSimplestForm().toString();
+		} 
+		
 		result.add(line1);
 		result.add(line2);
 		result.add(line3);
+		if (!line7.isEmpty()) result.add(line7);
 		return result;
 	}
 	public List<String> divide(Fraction f1,Fraction f2) {
@@ -213,10 +228,19 @@ public class FractionSolver {
 				+"/"
 				+ "(" +f1.b+" x "+f2inverse.b+")"
 				+ " = "+fresult.toHtmlString();
+		
+		String line7="";
+		if (!fresult.isSimplest()) {
+			line7 = bundle.getString("simplifiedversion")+" "+bundle.getString("of")+" "
+					+fresult.toHtmlString()+" "
+					+bundle.getString("is")+" "+fresult.getSimplestForm().toString();
+		}
+		
 		result.add(line1);
 		result.add(line2);
 		result.add(line3);
 		result.add(line4);
+		if (!line7.isEmpty()) result.add(line7);
 		return result;
 	}
 }
