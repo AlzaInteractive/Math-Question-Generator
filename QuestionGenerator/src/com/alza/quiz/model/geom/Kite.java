@@ -133,9 +133,9 @@ public class Kite implements Shapes2D{
 	public Shapes2D createExample() {
 		double p,q,s;
 		do {
-			p = ThreadLocalRandom.current().nextInt(5, 26);
-			q = ThreadLocalRandom.current().nextInt(5, 26);
-			s = ThreadLocalRandom.current().nextInt(5, 26);
+			p = ThreadLocalRandom.current().nextInt(5, 10);
+			q = ThreadLocalRandom.current().nextInt(5, 10);
+			s = ThreadLocalRandom.current().nextInt(5, 10);
 		} while (s>=q||s==q/2);
 		Kite k = new Kite(p, q, s);
 		return k;

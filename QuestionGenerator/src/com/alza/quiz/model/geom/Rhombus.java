@@ -82,8 +82,8 @@ public class Rhombus implements Shapes2D{
 	public Shapes2D createExample() {
 		double p,q;
 		do {
-			p = ThreadLocalRandom.current().nextInt(5, 15);
-			q = ThreadLocalRandom.current().nextInt(5, 15);
+			p = ThreadLocalRandom.current().nextInt(5, 10);
+			q = ThreadLocalRandom.current().nextInt(5, 10);
 		} while (p==q||p>(2*q)||q>(2*p));
 		Rhombus r = new Rhombus(p, q);
 		return r;

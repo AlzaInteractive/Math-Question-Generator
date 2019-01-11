@@ -74,7 +74,7 @@ public class Square implements Shapes2D{
 	}
 	@Override
 	public Shapes2D createExample() {
-		int i = ThreadLocalRandom.current().nextInt(5, 26);
+		int i = ThreadLocalRandom.current().nextInt(2, 11);
 		Square a = new Square(i);
 		return a;
 	}

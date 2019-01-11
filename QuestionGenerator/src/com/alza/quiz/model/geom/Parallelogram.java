@@ -126,8 +126,8 @@ public class Parallelogram implements Shapes2D{
 	public Shapes2D createExample() {
 		int l,h,s;
 		do {
-			l = ThreadLocalRandom.current().nextInt(5, 16);
-			h = ThreadLocalRandom.current().nextInt(5, 16);
+			l = ThreadLocalRandom.current().nextInt(5, 10);
+			h = ThreadLocalRandom.current().nextInt(5, 10);
 			s = ThreadLocalRandom.current().nextInt(3, l);
 		} while (l==h);
 		

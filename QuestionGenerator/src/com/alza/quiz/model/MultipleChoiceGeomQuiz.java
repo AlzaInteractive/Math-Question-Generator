@@ -10,6 +10,11 @@ import java.util.Set;
 public class MultipleChoiceGeomQuiz extends  GeomQuiz{
 	private String correctAnswer;
 	private List<String> choices = new ArrayList<String>();
+	protected boolean sortedChoices = false; 
+	
+	public void enforceSortedChoices() {
+		sortedChoices = true;
+	}
 	
 	public void setDifficultyLevel(QuizLevel quizLevel) {
 		this.quizLevel = quizLevel;

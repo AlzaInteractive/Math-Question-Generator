@@ -79,6 +79,7 @@ public class WhichGeom2DShapeQuestionFactory implements IQuestionFactory {
 			q.setQuestion(bundle.getString("geom.shape2d.question.identify"));
 			q.setCorrectAnswer(bundle.getString("geom.shape2d."+s.getName()));
 			q.setChoices(getChoices());
+			q.enforceSortedChoices();
 			q.setDifficultyLevel(QuizLevel.MUDAH);
 			q.setLessonSubcategory(bundle.getString("geom.shape2d."+s.getName()));
 			q.setLessonClassifier(bundle.getString("mathelementary"));

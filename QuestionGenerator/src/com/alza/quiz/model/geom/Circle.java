@@ -93,7 +93,7 @@ public class Circle implements Shapes2D{
 	}
 	@Override
 	public Shapes2D createExample() {
-		int r = ThreadLocalRandom.current().nextInt(5, 26);
+		int r = ThreadLocalRandom.current().nextInt(5, 10);
 		return new Circle(r);
 	}
 	public String toString(){

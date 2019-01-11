@@ -163,9 +163,9 @@ public class Trapezoid implements Shapes2D{
 	public Shapes2D createExample() {
 		int tl,h,sl,bl;
 		do {
-			tl = ThreadLocalRandom.current().nextInt(5, 26);
+			tl = ThreadLocalRandom.current().nextInt(5, 10);
 			h = ThreadLocalRandom.current().nextInt(5, 10);
-			bl = ThreadLocalRandom.current().nextInt(5, 26);
+			bl = ThreadLocalRandom.current().nextInt(5, 10);
 			
 		} while (tl==bl);
 		sl = ThreadLocalRandom.current().nextInt(0, Math.abs(bl-tl));

@@ -92,8 +92,8 @@ public class Rectangle implements Shapes2D{
 	public Shapes2D createExample() {
 		int w,l;
 		do {
-			w = ThreadLocalRandom.current().nextInt(5, 26);
-			l = ThreadLocalRandom.current().nextInt(5, 26);
+			w = ThreadLocalRandom.current().nextInt(5, 10);
+			l = ThreadLocalRandom.current().nextInt(5, 10);
 		} while (w==l);
 		Rectangle r = new Rectangle(l, w);
 		return r;

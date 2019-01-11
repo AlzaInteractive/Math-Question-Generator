@@ -195,8 +195,8 @@ public class Triangle implements Shapes2D{
 
 	@Override
 	public Shapes2D createExample() {
-		int bs = ThreadLocalRandom.current().nextInt(5, 26);
-		int ht = ThreadLocalRandom.current().nextInt(5, 26);
+		int bs = ThreadLocalRandom.current().nextInt(5, 10);
+		int ht = ThreadLocalRandom.current().nextInt(5, 10);
 		int sh = ThreadLocalRandom.current().nextInt(0, bs+1);
 		return new Triangle(bs, ht, sh);
 	}
