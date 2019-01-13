@@ -52,7 +52,7 @@ public class KiteFindPerimeter implements IQuestionFactory{
 		for (int i=0;i<numq;i++){
 			int b = ThreadLocalRandom.current().nextInt(1, 5);
 			double topSlope = ThreadLocalRandom.current().nextInt(3, 10);
-			double bottomSlope = ThreadLocalRandom.current().nextInt(3, 17);
+			double bottomSlope = ThreadLocalRandom.current().nextInt((int)topSlope+1, 20);
 			int angleB = b * 30;
 			Kite shp = new Kite(topSlope, bottomSlope, angleB);
 			shp.hideTextsAndMeasurements();

@@ -89,8 +89,8 @@ public class GeomDrawingDemo extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//showQuestion();
-				drawFractionOnPie();
+				showQuestion();
+				//drawFractionOnPie();
 			}
 		});
 		downPane = new JPanel();
@@ -107,7 +107,7 @@ public class GeomDrawingDemo extends JFrame {
 	private void perf() {
 		ql = new ArrayList<Quiz>();
 		GeomGameLevel rgl = new GeomGameLevel();
-		GameLevel gl = rgl.createGameLevels(getLocale()).get(3);
+		GameLevel gl = rgl.createGameLevels(getLocale()).get(7);
 		List<GameLevelQuestionFactory> glqf = gl.getLevelQF();
 		for (GameLevelQuestionFactory glq : glqf) {
 			ql.addAll(glq.getqFactory().generateQuizList(glq.getqCount()));
@@ -119,7 +119,7 @@ public class GeomDrawingDemo extends JFrame {
 			ql.addAll(iQuestionFactory.generateQuizList());
 		}**/
 		Collections.sort(ql);
-		System.out.println(ql.size());
+		// System.out.println(ql.size());
 		qnum=0;
 	}
 	private void showQuestion() {
@@ -127,14 +127,15 @@ public class GeomDrawingDemo extends JFrame {
 		try {
 			mq = (GeomQuiz) ql.get(qnum);
 		} catch (Exception e) {
-			System.out.println(ql.get(qnum).getClass()+" "+ql.get(qnum).getQuestion());
+			// System.out.println(ql.get(qnum).getClass()+" "+ql.get(qnum).getQuestion());
 			qnum++;
 			return;
 		}
 		
-		List<Path> o = mq.getGeomShape();	
+		List<Path> o = mq.getGeomShape();
+		
 		if (o == null) {
-			System.out.println("Null path"+mq.getQuestion());
+			// System.out.println("Null path"+mq.getQuestion());
 			qnum++;
 			return;
 		}
@@ -215,9 +216,9 @@ public class GeomDrawingDemo extends JFrame {
 				}
 			}
 			if (path.pathType == Path.PATH_TYPE_TEXT) {
-				System.out.println("draw text!!!!");
+				// System.out.println("draw text!!!!");
 				Graphics2D g2d = (Graphics2D) g.create();
-				g2d.setColor(Color.CYAN);
+				g2d.setColor(Color.RED);
 				FontMetrics metrics = g2d.getFontMetrics(g2d.getFont());
 				int hgt = metrics.getHeight();
 				int adv = metrics.stringWidth(path.text);

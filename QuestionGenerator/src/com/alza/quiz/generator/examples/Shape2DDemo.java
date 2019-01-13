@@ -24,7 +24,7 @@ public final class Shape2DDemo {
 	private static List<Shapes2D> lshps;
 	public static void main(String[] args) {
 		shapeGeneratorTest();
-		allGenerator();
+		//allGenerator();
 	}
 	
 
@@ -41,13 +41,13 @@ public final class Shape2DDemo {
 	
 	private static List<Shapes2D> generateShapes(){
 		lshps = new ArrayList<Shapes2D>();
-		lshps.add(new Square().createExample());
-		lshps.add(new Triangle().createExample());
-		lshps.add(new Rectangle().createExample());
-		lshps.add(new Rhombus().createExample());
-		lshps.add(new Circle().createExample());
+		//lshps.add(new Square().createExample());
+		//lshps.add(new Triangle().createExample());
+		//lshps.add(new Rectangle().createExample());
+		//lshps.add(new Rhombus().createExample());
+		//lshps.add(new Circle().createExample());
 		lshps.add(new Kite().createExample());
-		lshps.add(new Parallelogram().createExample());
+		//lshps.add(new Parallelogram().createExample());
 		return lshps;
 	}
 	

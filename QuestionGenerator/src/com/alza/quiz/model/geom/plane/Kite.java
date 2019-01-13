@@ -42,7 +42,7 @@ public class Kite implements Shapes2D{
 				(this.diagonalHoriz/(2 * Math.tan(Math.toRadians(((double) bottomAngle)/2))));
 	}
 	public Kite(double topSlope, double bottomSlope, int topAngle) {
-		System.out.println(topSlope+" "+bottomSlope+" "+topAngle);
+		// System.out.println(topSlope+" "+bottomSlope+" "+topAngle);
 		double co = topSlope * Math.sin(Math.toRadians(((double)topAngle)/2));
 		this.shear = topSlope * Math.cos(Math.toRadians(((double)topAngle)/2));
 		this.diagonalHoriz = 2 * co;
@@ -137,10 +137,11 @@ public class Kite implements Shapes2D{
 	public Shapes2D createExample() {
 		double p,q,s;
 		do {
-			p = ThreadLocalRandom.current().nextInt(5, 10);
-			q = ThreadLocalRandom.current().nextInt(5, 10);
-			s = ThreadLocalRandom.current().nextInt(5, 10);
-		} while (s>=q||s==q/2);
+			p = ThreadLocalRandom.current().nextInt(5, 20); // d horiz
+			q = ThreadLocalRandom.current().nextInt(5, 20); // d vert
+			s = ThreadLocalRandom.current().nextInt(2, ((int)q)); // shear
+		} while (s<(q/5)||s==q/2);
+		System.out.println("d hor:"+p+" d vert:"+q+" shear:"+s);
 		Kite k = new Kite(p, q, s);
 		return k;
 	}
