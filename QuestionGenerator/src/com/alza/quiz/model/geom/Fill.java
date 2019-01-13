@@ -1,5 +1,7 @@
 package com.alza.quiz.model.geom;
 
+import com.alza.quiz.model.geom.plane.Geom;
+
 public class Fill {
 	public int color;//refer to Geom ColorPrimary
 	/**

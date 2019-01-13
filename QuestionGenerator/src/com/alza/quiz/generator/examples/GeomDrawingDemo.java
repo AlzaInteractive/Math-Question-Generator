@@ -29,11 +29,11 @@ import com.alza.quiz.model.GameLevelQuestionFactory;
 import com.alza.quiz.model.GeomQuiz;
 import com.alza.quiz.model.MultipleChoiceGeomQuiz;
 import com.alza.quiz.model.Quiz;
-import com.alza.quiz.model.geom.Geom;
 import com.alza.quiz.model.geom.Path;
 import com.alza.quiz.model.geom.Point2D;
+import com.alza.quiz.model.geom.plane.Geom;
+import com.alza.quiz.qfactory.GeomGameLevel;
 import com.alza.quiz.qfactory.fraction.FractionRepresentationInAPie;
-import com.alza.quiz.qfactory.geom.GeomGameLevel;
 import com.alza.quiz.qfactory.geom.UtilGeom;
 
 public class GeomDrawingDemo extends JFrame {

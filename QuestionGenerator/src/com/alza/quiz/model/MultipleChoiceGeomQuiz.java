@@ -32,7 +32,9 @@ public class MultipleChoiceGeomQuiz extends  GeomQuiz{
 		this.correctAnswer = correctAnswer;
 	}
 	public List<String> getChoices() {
-		Collections.shuffle(this.choices);
+		if (!sortedChoices) {
+			Collections.shuffle(this.choices);
+		}
 		return choices;
 	}
 	public void setChoices(List<String> choices) {

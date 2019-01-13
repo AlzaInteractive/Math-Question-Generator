@@ -4,8 +4,8 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import com.alza.quiz.model.geom.Triangle;
-import com.alza.quiz.model.geom.Triangle.EdgeLengthRatio;
+import com.alza.quiz.model.geom.plane.Triangle;
+import com.alza.quiz.model.geom.plane.Triangle.EdgeLengthRatio;
 
 public class TriangleTest {
 	

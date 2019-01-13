@@ -10,15 +10,15 @@ import java.util.ResourceBundle;
 import com.alza.quiz.model.MultipleChoiceGeomQuiz;
 import com.alza.quiz.model.Quiz;
 import com.alza.quiz.model.QuizLevel;
-import com.alza.quiz.model.geom.Circle;
-import com.alza.quiz.model.geom.Kite;
-import com.alza.quiz.model.geom.Parallelogram;
-import com.alza.quiz.model.geom.Rectangle;
-import com.alza.quiz.model.geom.Rhombus;
 import com.alza.quiz.model.geom.Shapes2D;
-import com.alza.quiz.model.geom.Square;
-import com.alza.quiz.model.geom.Trapezoid;
-import com.alza.quiz.model.geom.Triangle;
+import com.alza.quiz.model.geom.plane.Circle;
+import com.alza.quiz.model.geom.plane.Kite;
+import com.alza.quiz.model.geom.plane.Parallelogram;
+import com.alza.quiz.model.geom.plane.Rectangle;
+import com.alza.quiz.model.geom.plane.Rhombus;
+import com.alza.quiz.model.geom.plane.Square;
+import com.alza.quiz.model.geom.plane.Trapezoid;
+import com.alza.quiz.model.geom.plane.Triangle;
 import com.alza.quiz.qfactory.IQuestionFactory;
 
 public class WhichGeom2DShapeQuestionFactory implements IQuestionFactory {

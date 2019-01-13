@@ -1,5 +1,7 @@
 package com.alza.quiz.model.geom;
 
+import com.alza.quiz.model.geom.plane.Geom;
+import com.alza.quiz.model.geom.plane.Stroke;
 
 public class Path {
 	public static final int PATH_TYPE_LINE=11;

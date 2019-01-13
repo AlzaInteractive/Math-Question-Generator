@@ -3,13 +3,13 @@ package com.alza.quiz.qfactory.geom;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.alza.quiz.model.geom.Circle;
-import com.alza.quiz.model.geom.Geom;
 import com.alza.quiz.model.geom.Path;
 import com.alza.quiz.model.geom.Point2D;
 import com.alza.quiz.model.geom.Point3D;
 import com.alza.quiz.model.geom.Shapes2D;
 import com.alza.quiz.model.geom.Shapes3D;
+import com.alza.quiz.model.geom.plane.Circle;
+import com.alza.quiz.model.geom.plane.Geom;
 
 public class UtilGeom {
 	public static Point2D getMaxXY(List<Point2D> points) {
