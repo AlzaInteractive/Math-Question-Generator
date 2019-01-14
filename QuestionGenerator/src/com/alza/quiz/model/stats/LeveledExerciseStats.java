@@ -17,6 +17,7 @@ public class LeveledExerciseStats extends BasicExerciseStats implements Serializ
 		this.levelIndex = levelIndex;
 		
 	}
+    
 	public int getLevelIndex() {
 		return levelIndex;
 	}
@@ -39,6 +40,7 @@ public class LeveledExerciseStats extends BasicExerciseStats implements Serializ
 		}
 		return m;
 	}
+	
 	public Medals getTimePerforManceMedals(){
 		Medals m=null;
 		double perf = timeElapsed/numOfCorrectAnswer;

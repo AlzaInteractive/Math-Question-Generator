@@ -56,6 +56,12 @@ public class BasicExerciseStats{
 	public void setNumOfCorrectAnswer(int numOfCorrectAnswer) {
 		this.numOfCorrectAnswer = numOfCorrectAnswer;
 	}
+	
+	public int getCorrectPercentage() {
+		double corrPct = ((double)numOfCorrectAnswer * 100)/(double)numOfQuestion;
+		return (int)corrPct;
+	}
+	
 	public void addStats(boolean correct, long time, int score){
         this.score = this.score + score;
         if (correct) {

@@ -11,7 +11,7 @@ import com.alza.quiz.qfactory.*;
 
 public class GameLevelDemo {
 	public static void main(String[] args) {
-		IPlayableLevelsGroup lg = new GeomGameLevel();
+		IPlayableLevelsGroup lg = new AlgebraGameLevel();
 		List<GameLevel> gls = lg.createGameLevels(new Locale("en","US"));
 		gls = lg.createGameLevels(new Locale("in","ID"));
 		for (GameLevel gameLevel : gls) {

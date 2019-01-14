@@ -1,6 +1,8 @@
 package com.alza.quiz.model;
 
+import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -17,6 +19,7 @@ public abstract class Quiz implements Comparable<Quiz>, Comparator<Quiz>{
     String lessonClassifier;
     String lessonCategory;
     String lessonSubcategory;
+    List<String> hints = new ArrayList<>();
     int localGeneratorOrder;
     int lessonGrade;
     public boolean isCorrect(Object answer){
@@ -108,7 +111,7 @@ public abstract class Quiz implements Comparable<Quiz>, Comparator<Quiz>{
 	public void setQuizLevel(QuizLevel quizLevel) {
 		this.quizLevel = quizLevel;
 	}
-
+	
 	public void setQuestion(String question) {
 		this.question = question;
 	}
@@ -117,6 +120,14 @@ public abstract class Quiz implements Comparable<Quiz>, Comparator<Quiz>{
 		this.correctAnswer = correctAnswer;
 	}
 	
+	public List<String> getHints() {
+		return hints;
+	}
+
+	public void setHints(List<String> hints) {
+		this.hints = hints;
+	}
+
 	public int compareTo(Quiz o){
 		if (this.lessonGrade!=o.lessonGrade){
 			return this.lessonGrade - o.lessonGrade;
