@@ -7,7 +7,9 @@ import java.util.ResourceBundle;
 
 import com.alza.quiz.model.GameLevel;
 import com.alza.quiz.qfactory.IPlayableLevelsGroup;
-import com.alza.quiz.qfactory.algebra.Level1AddSub;
+import com.alza.quiz.qfactory.algebra.Level0AddSub;
+import com.alza.quiz.qfactory.algebra.Level0Mult;
+import com.alza.quiz.qfactory.algebra.Level0Div;
 import com.alza.quiz.qfactory.integer.AdditionOfThreeIntegersSigned;
 import com.alza.quiz.qfactory.integer.AdditionOfThreeIntegersUnsigned;
 import com.alza.quiz.qfactory.integer.AdditionOfTwoIntegers;
@@ -37,7 +39,7 @@ public class AlgebraGameLevel implements IPlayableLevelsGroup{
 
 		name = bundle.getString("algebra.level.simpleaddsub");
 		desc = "";//bundle.getString("");
-		g = GameLevel.createSingleQF(0, name, desc, new Level1AddSub(loc), 4);
+		g = GameLevel.createSingleQF(0, name, desc, new Level0Div(loc), 10);
 		lgl.add(g);
 
 		//name = bundle.getString("algebra.level.simplemultdiv");

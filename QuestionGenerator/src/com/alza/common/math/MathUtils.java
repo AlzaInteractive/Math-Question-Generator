@@ -205,4 +205,12 @@ public class MathUtils {
 	    int[] triples = {a,b,c};
 	    return triples;
 	}
+	/**
+	 * 
+	 * @return unicode division symbol ÷
+	 */
+	public static String UnicodeDivisionSymbol() {
+		Character c = '\u00F7';
+		return c.toString();
+	}
 }
