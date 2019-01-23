@@ -19,7 +19,7 @@ public class Level0AddSub implements IQuestionFactory{
 	// private final static String MJXTAG ="$$"; 
 	Locale loc;
 	ResourceBundle bundle,bundleAlgebra;
-	private String[] VARSYM = {"X","Y"};
+	private String[] VARSYM = {"x","y"};
 	List<ProblemPattern> lProbs = new ArrayList<>();
 	public Level0AddSub(Locale loc){
 		this.loc = loc;
@@ -100,7 +100,7 @@ public class Level0AddSub implements IQuestionFactory{
 	
 	private void setQuizSecondaryAttributes(int idx, MultipleChoiceQuiz q) {
 		q.setDifficultyLevel(QuizLevel.MUDAH);
-		q.setLessonSubcategory(bundleAlgebra.getString("algebra.level.simpleaddsub"));
+		q.setLessonSubcategory(bundleAlgebra.getString("algebra.level0.addsub"));
 		q.setLessonClassifier(bundle.getString("mathelementary"));
 		q.setLessonGrade(5);
 		q.setSubCategoryOrder(6);

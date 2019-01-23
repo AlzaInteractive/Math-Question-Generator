@@ -10,6 +10,8 @@ import com.alza.quiz.qfactory.IPlayableLevelsGroup;
 import com.alza.quiz.qfactory.algebra.Level0AddSub;
 import com.alza.quiz.qfactory.algebra.Level0Mult;
 import com.alza.quiz.qfactory.algebra.Level1AddSub;
+import com.alza.quiz.qfactory.algebra.Level1Div;
+import com.alza.quiz.qfactory.algebra.Level1Mult;
 import com.alza.quiz.qfactory.algebra.Level0Div;
 import com.alza.quiz.qfactory.integer.AdditionOfThreeIntegersSigned;
 import com.alza.quiz.qfactory.integer.AdditionOfThreeIntegersUnsigned;
@@ -33,14 +35,24 @@ import com.alza.quiz.qfactory.integer.SubtractionOfTwoIntegers;
  */
 public class AlgebraGameLevel implements IPlayableLevelsGroup{
 	public List<GameLevel> createGameLevels(Locale loc) {
-		ResourceBundle bundle = ResourceBundle.getBundle("lang.langbundle", loc);
+		ResourceBundle bundle = ResourceBundle.getBundle("lang.langbundle-algebra", loc);
 		List<GameLevel> lgl = new ArrayList<GameLevel>();
 		String name, desc;
 		GameLevel g;
 
-		name = bundle.getString("algebra.level.simpleaddsub");
+		name = bundle.getString("algebra.level1.addsub");
 		desc = "";//bundle.getString("");
 		g = GameLevel.createSingleQF(0, name, desc, new Level1AddSub(loc), 10);
+		lgl.add(g);
+		
+		name = bundle.getString("algebra.level1.mult");
+		desc = "";//bundle.getString("");
+		g = GameLevel.createSingleQF(0, name, desc, new Level1Mult(loc), 10);
+		lgl.add(g);
+		
+		name = bundle.getString("algebra.level1.div");
+		desc = "";//bundle.getString("");
+		g = GameLevel.createSingleQF(0, name, desc, new Level1Div(loc), 10);
 		lgl.add(g);
 
 		//name = bundle.getString("algebra.level.simplemultdiv");
