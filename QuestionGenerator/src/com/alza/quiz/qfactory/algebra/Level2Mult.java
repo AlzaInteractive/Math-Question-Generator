@@ -15,17 +15,17 @@ import com.alza.quiz.qfactory.IQuestionFactory;
 import net.objecthunter.exp4j.Expression;
 import net.objecthunter.exp4j.ExpressionBuilder;
 
-public class Level1Mult implements IQuestionFactory{
+public class Level2Mult implements IQuestionFactory{
 	// private final static String MJXTAG ="$$"; 
 	Locale loc;
 	ResourceBundle bundle,bundleAlgebra;
 	private String[] VARSYM = {"x","y"};
 	List<ProblemPattern> lProbs = new ArrayList<>();
-	public Level1Mult(Locale loc){
+	public Level2Mult(Locale loc){
 		this.loc = loc;
 		initStringFromLocale();
 	}
-	public Level1Mult(){
+	public Level2Mult(){
 		this.loc = new Locale("in", "ID");
 		initStringFromLocale();
 	}
@@ -41,15 +41,13 @@ public class Level1Mult implements IQuestionFactory{
 
 	public void generateProblemPattern() {
 		String[] choicePattern = {"b", "-b","a","-a + b"}; 
-		ProblemPattern p1 = new ProblemPattern("aVAR = c", "b", choicePattern);
-		ProblemPattern p2 = new ProblemPattern("aVAR = -c", "-b", choicePattern);
-		// ProblemPattern p3 = new ProblemPattern("-aVAR = c", "-b", choicePattern);
-		// ProblemPattern p4 = new ProblemPattern("-aVAR = -c", "b", choicePattern);
+		ProblemPattern p3 = new ProblemPattern("-aVAR = c", "-b", choicePattern);
+		ProblemPattern p4 = new ProblemPattern("-aVAR = -c", "b", choicePattern);
 		
-		lProbs.add(p1);
-		lProbs.add(p2);
-		// lProbs.add(p3);
-		// lProbs.add(p4);
+		// lProbs.add(p1);
+		// lProbs.add(p2);
+		lProbs.add(p3);
+		lProbs.add(p4);
 		
 	}
 	@Override

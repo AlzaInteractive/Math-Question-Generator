@@ -15,17 +15,17 @@ import com.alza.quiz.qfactory.IQuestionFactory;
 import net.objecthunter.exp4j.Expression;
 import net.objecthunter.exp4j.ExpressionBuilder;
 
-public class Level1Mult implements IQuestionFactory{
+public class Level2AddSub implements IQuestionFactory{
 	// private final static String MJXTAG ="$$"; 
 	Locale loc;
 	ResourceBundle bundle,bundleAlgebra;
-	private String[] VARSYM = {"x","y"};
+	private String[] VARSYM = {"X","Y"};
 	List<ProblemPattern> lProbs = new ArrayList<>();
-	public Level1Mult(Locale loc){
+	public Level2AddSub(Locale loc){
 		this.loc = loc;
 		initStringFromLocale();
 	}
-	public Level1Mult(){
+	public Level2AddSub(){
 		this.loc = new Locale("in", "ID");
 		initStringFromLocale();
 	}
@@ -40,17 +40,15 @@ public class Level1Mult implements IQuestionFactory{
 	};
 
 	public void generateProblemPattern() {
-		String[] choicePattern = {"b", "-b","a","-a + b"}; 
-		ProblemPattern p1 = new ProblemPattern("aVAR = c", "b", choicePattern);
-		ProblemPattern p2 = new ProblemPattern("aVAR = -c", "-b", choicePattern);
-		// ProblemPattern p3 = new ProblemPattern("-aVAR = c", "-b", choicePattern);
-		// ProblemPattern p4 = new ProblemPattern("-aVAR = -c", "b", choicePattern);
-		
+		String[] choicePattern = {"a + b", "a - b","b - a","-b - a"}; 
+		ProblemPattern p1 = new ProblemPattern("a - VAR = b", "a - b", choicePattern);
+		ProblemPattern p2 = new ProblemPattern("-a - VAR = b", "-a - b", choicePattern);
+		ProblemPattern p3 = new ProblemPattern("a - VAR = -b", "a + b", choicePattern);
+		ProblemPattern p4 = new ProblemPattern("-a - VAR = -b", "b - a", choicePattern);
 		lProbs.add(p1);
 		lProbs.add(p2);
-		// lProbs.add(p3);
-		// lProbs.add(p4);
-		
+		lProbs.add(p3);
+		lProbs.add(p4);
 	}
 	@Override
 	public Quiz generateQuiz() {
@@ -71,7 +69,7 @@ public class Level1Mult implements IQuestionFactory{
 		for (int i= 0;i<numOfQuestion;i++){
 			int idx; 
 			idx = i % lProbs.size(); 
-			int a=0,b=0,c;
+			int a=0,b=0;
 			do {
 				a = ThreadLocalRandom.current().nextInt(3,10);
 				b = ThreadLocalRandom.current().nextInt(3,8);
@@ -102,7 +100,7 @@ public class Level1Mult implements IQuestionFactory{
 	
 	private void setQuizSecondaryAttributes(int idx, MultipleChoiceQuiz q) {
 		q.setDifficultyLevel(QuizLevel.MUDAH);
-		q.setLessonSubcategory(bundleAlgebra.getString("algebra.level1.mult"));
+		q.setLessonSubcategory(bundleAlgebra.getString("algebra.level2.addsub"));
 		q.setLessonClassifier(bundle.getString("mathelementary"));
 		q.setLessonGrade(5);
 		q.setSubCategoryOrder(6);
@@ -113,10 +111,8 @@ public class Level1Mult implements IQuestionFactory{
 	private String prepareQuestion(int a, int b, ProblemPattern p) {
 		String var = VARSYM[ThreadLocalRandom.current().nextInt(0, VARSYM.length)];
 		String question = p.question;
-		int c = a * b;
 		question = question.replace("a", String.valueOf(a));
 		question = question.replace("b", String.valueOf(b));
-		question = question.replace("c", String.valueOf(c));
 		question = question.replaceAll("VAR", var);
 		question = question + ",\n" + var + "=?";
 		return question;
@@ -126,17 +122,6 @@ public class Level1Mult implements IQuestionFactory{
 	public List<Quiz> generateQuizList(int numOfQuestion) {
 		this.numOfQuestion = numOfQuestion;
 		return generateQuizList();
-	}
-	
-	private void getExpression(int idx) {
-		
-	}
-	private void addHint(Quiz q) {
-		
-	}
-	
-	private void generateConstant() {
-		
 	}
 		
 	private double runExpression(String exp, int a, int b) {
