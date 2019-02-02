@@ -15,17 +15,17 @@ import com.alza.quiz.qfactory.IQuestionFactory;
 import net.objecthunter.exp4j.Expression;
 import net.objecthunter.exp4j.ExpressionBuilder;
 
-public class Level3LinearEquation implements IQuestionFactory{
+public class Level3MixedOperationDiv implements IQuestionFactory{
 	// private final static String MJXTAG ="$$"; 
 	Locale loc;
 	ResourceBundle bundle,bundleAlgebra;
 	private String[] VARSYM = {"X","Y"};
 	List<ProblemPattern> lProbs = new ArrayList<>();
-	public Level3LinearEquation(Locale loc){
+	public Level3MixedOperationDiv(Locale loc){
 		this.loc = loc;
 		initStringFromLocale();
 	}
-	public Level3LinearEquation(){
+	public Level3MixedOperationDiv(){
 		this.loc = new Locale("in", "ID");
 		initStringFromLocale();
 	}
@@ -40,15 +40,23 @@ public class Level3LinearEquation implements IQuestionFactory{
 	};
 
 	public void generateProblemPattern() {
-		String[] choicePattern = {"a + b", "a - b","b - a","-b - a"}; 
-		ProblemPattern p1 = new ProblemPattern("a - VAR = b", "a - b", choicePattern);
-		ProblemPattern p2 = new ProblemPattern("-a - VAR = b", "-a - b", choicePattern);
-		ProblemPattern p3 = new ProblemPattern("a - VAR = -b", "a + b", choicePattern);
-		ProblemPattern p4 = new ProblemPattern("-a - VAR = -b", "b - a", choicePattern);
+		String[] choicePattern = {"(c - b) * a", "(c + b) * a","-(c - b) * a","-(c + b) * a"}; 
+		ProblemPattern p1 = new ProblemPattern("(VAR ÷ a) + b = c", "(c - b) * a", choicePattern);
+		ProblemPattern p2 = new ProblemPattern("(VAR ÷ a) - b = c", "(c + b) * a", choicePattern);
+		ProblemPattern p3 = new ProblemPattern("b - (VAR ÷ a) = c", "-(c - b) * a", choicePattern);
+		ProblemPattern p4 = new ProblemPattern("-b - (VAR ÷ a) = c", "-(c + b) * a", choicePattern);
+		ProblemPattern p5 = new ProblemPattern("(VAR ÷ a) + b = -c", "(-c - b) * a", choicePattern);
+		ProblemPattern p6 = new ProblemPattern("(VAR ÷ a) - b = -c", "(-c + b) * a", choicePattern);
+		ProblemPattern p7 = new ProblemPattern("b - (VAR ÷ a) = -c", "-(-c - b) * a", choicePattern);
+		ProblemPattern p8 = new ProblemPattern("-b - (VAR ÷ a) = -c", "-(-c + b) * a", choicePattern);
 		lProbs.add(p1);
 		lProbs.add(p2);
 		lProbs.add(p3);
 		lProbs.add(p4);
+		lProbs.add(p5);
+		lProbs.add(p6);
+		lProbs.add(p7);
+		lProbs.add(p8);
 	}
 	@Override
 	public Quiz generateQuiz() {
@@ -69,26 +77,27 @@ public class Level3LinearEquation implements IQuestionFactory{
 		for (int i= 0;i<numOfQuestion;i++){
 			int idx; 
 			idx = i % lProbs.size(); 
-			int a=0,b=0;
+			ProblemPattern p = lProbs.get(idx);
+			int a=0,b=0,c=0;
 			do {
-				a = ThreadLocalRandom.current().nextInt(3,10);
-				b = ThreadLocalRandom.current().nextInt(3,8);
-			} while (a<=b);
+				a = ThreadLocalRandom.current().nextInt(2,5);
+				b = ThreadLocalRandom.current().nextInt(3,11);
+				c = ThreadLocalRandom.current().nextInt(3,11);
+			} while (b==c );
 			
 			MultipleChoiceQuiz q = new MultipleChoiceQuiz();
-			ProblemPattern p = lProbs.get(idx); 
-			
+
 			// prepare question
-			String question = prepareQuestion(a, b, p); 
+			String question = prepareQuestion(a, b, c, p); 
 			q.setQuestion(question);
 			// prepare answer
 			String exp = p.expression;			
-			int rslt = (int) runExpression(exp, a, b);
+			int rslt = (int) runExpression(exp, a, b, c);
 			q.setCorrectAnswer(String.valueOf(rslt));
 			// prepare choices
 			String[] choicePattern = p.choicePattern;
 			for (String string : choicePattern) {
-				double choice = runExpression(string, a, b);
+				double choice = runExpression(string, a, b, c);
 				q.addChoice(String.valueOf((int)choice));
 			}
 			setQuizSecondaryAttributes(idx, q);
@@ -100,7 +109,7 @@ public class Level3LinearEquation implements IQuestionFactory{
 	
 	private void setQuizSecondaryAttributes(int idx, MultipleChoiceQuiz q) {
 		q.setDifficultyLevel(QuizLevel.MUDAH);
-		q.setLessonSubcategory(bundleAlgebra.getString("algebra.level2.addsub"));
+		q.setLessonSubcategory(bundleAlgebra.getString("algebra.level3.mixop"));
 		q.setLessonClassifier(bundle.getString("mathelementary"));
 		q.setLessonGrade(5);
 		q.setSubCategoryOrder(6);
@@ -108,11 +117,12 @@ public class Level3LinearEquation implements IQuestionFactory{
 		q.setLessonCategory(bundle.getString("algebra"));
 		q.setLocale(loc);
 	}
-	private String prepareQuestion(int a, int b, ProblemPattern p) {
+	private String prepareQuestion(int a, int b, int c, ProblemPattern p) {
 		String var = VARSYM[ThreadLocalRandom.current().nextInt(0, VARSYM.length)];
 		String question = p.question;
 		question = question.replace("a", String.valueOf(a));
 		question = question.replace("b", String.valueOf(b));
+		question = question.replace("c", String.valueOf(c));
 		question = question.replaceAll("VAR", var);
 		question = question + ",\n" + var + "=?";
 		return question;
@@ -124,12 +134,13 @@ public class Level3LinearEquation implements IQuestionFactory{
 		return generateQuizList();
 	}
 		
-	private double runExpression(String exp, int a, int b) {
+	private double runExpression(String exp, int a, int b, int c) {
 		Expression e = new ExpressionBuilder(exp)
-				.variables("a","b")
+				.variables("a","b","c")
 				.build()
 				.setVariable("a", a)
-				.setVariable("b", b);
+				.setVariable("b", b)
+				.setVariable("c", c);
 		return e.evaluate();
 	}
 	
@@ -138,10 +149,12 @@ public class Level3LinearEquation implements IQuestionFactory{
 		String question;
 		String expression;
 		String[] choicePattern;
+		
 		public ProblemPattern(String question, String expression, String[] choicePattern) {
 			this.question = question;
 			this.expression = expression;
 			this.choicePattern = choicePattern;
+			
 		}
 	}
 }

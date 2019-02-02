@@ -27,7 +27,7 @@ public class MathUtils {
 	}
 	/** 
 	 * Find greatest common denominator of two int
-	 * using euclidean algorithm
+	 * using djikstra's algorithm
 	 * @param a first integer
 	 * @param b second integer
 	 * @return gcd
