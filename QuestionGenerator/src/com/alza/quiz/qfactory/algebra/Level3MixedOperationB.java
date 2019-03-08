@@ -15,17 +15,17 @@ import com.alza.quiz.qfactory.IQuestionFactory;
 import net.objecthunter.exp4j.Expression;
 import net.objecthunter.exp4j.ExpressionBuilder;
 
-public class Level4MixedOperationA implements IQuestionFactory{
+public class Level3MixedOperationB implements IQuestionFactory{
 	// private final static String MJXTAG ="$$"; 
 	Locale loc;
 	ResourceBundle bundle,bundleAlgebra;
 	private String[] VARSYM = {"X","Y"};
 	List<ProblemPattern> lProbs = new ArrayList<>();
-	public Level4MixedOperationA(Locale loc){
+	public Level3MixedOperationB(Locale loc){
 		this.loc = loc;
 		initStringFromLocale();
 	}
-	public Level4MixedOperationA(){
+	public Level3MixedOperationB(){
 		this.loc = new Locale("in", "ID");
 		initStringFromLocale();
 	}
@@ -37,15 +37,15 @@ public class Level4MixedOperationA implements IQuestionFactory{
 	private int numOfQuestion = 5;
 
 	public void generateProblemPattern() {
-		String[] choicePattern = {"(bc+bd)/a", "(bc-bd)/a","(bd-bc)/a","-(bc+bd)/a"}; 
-		ProblemPattern p1 = new ProblemPattern("(aVAR ÷ b) - c = d", "(bc + bd)/a", choicePattern);
-		ProblemPattern p2 = new ProblemPattern("(aVAR ÷ b) + c = d", "(bd - bc)/a", choicePattern);
-		ProblemPattern p3 = new ProblemPattern("(-aVAR ÷ b) + c = d", "(bd - bc)/-a", choicePattern);
-		ProblemPattern p4 = new ProblemPattern("(-aVAR ÷ b) - c = d", "(bd + bc)/-a", choicePattern);
-		ProblemPattern p5 = new ProblemPattern("(aVAR ÷ b) + c = -d", "(-bd - bc)/a", choicePattern);
-		ProblemPattern p6 = new ProblemPattern("(aVAR ÷ b) - c = -d", "(-bd + bc)/a", choicePattern);
-		ProblemPattern p7 = new ProblemPattern("(-aVAR ÷ b) + c = -d", "(-bd - bc)/-a", choicePattern);
-		ProblemPattern p8 = new ProblemPattern("(-aVAR ÷ b) - c = -d", "(-bd + bc)/-a", choicePattern);
+		String[] choicePattern = {"(cd + b)/a", "(cd + b)/-a","(cd - b)/a","(cd - b)/-a"}; 
+		ProblemPattern p1 = new ProblemPattern("(aVAR - b) ÷ c = d", "(cd + b)/a", choicePattern);
+		ProblemPattern p2 = new ProblemPattern("(aVAR + b) ÷ c = d", "(cd - b)/a", choicePattern);
+		ProblemPattern p3 = new ProblemPattern("(b - aVAR) ÷ c = d", "(cd - b)/-a", choicePattern);
+		ProblemPattern p4 = new ProblemPattern("(-aVAR - b) ÷ c = d", "(cd + b)/-a", choicePattern);
+		ProblemPattern p5 = new ProblemPattern("(aVAR - b) ÷ -c = d", "(-cd + b)/a", choicePattern);
+		ProblemPattern p6 = new ProblemPattern("(aVAR + b) ÷ c = -d", "(-cd - b)/a", choicePattern);
+		ProblemPattern p7 = new ProblemPattern("(b - aVAR) ÷ -c = d", "(cd + b)/a", choicePattern);
+		ProblemPattern p8 = new ProblemPattern("(-aVAR - b) ÷ c = -d", "(-cd + b)/-a", choicePattern);
 		lProbs.add(p1);
 		lProbs.add(p2);
 		lProbs.add(p3);
@@ -80,12 +80,12 @@ public class Level4MixedOperationA implements IQuestionFactory{
 			do {
 				a = ThreadLocalRandom.current().nextInt(2,17);
 				b = ThreadLocalRandom.current().nextInt(2,5);
-				c = ThreadLocalRandom.current().nextInt(3,11);
-				d = ThreadLocalRandom.current().nextInt(3,11);
-				boolean cond1 = (c % a == 0) && (d % a == 0);
+				c = ThreadLocalRandom.current().nextInt(2,9);
+				d = ThreadLocalRandom.current().nextInt(2,9);
+				boolean cond1 = (c*d)%a==0;
 				boolean cond2 = b % a == 0;
-				boolean cond3 = a != b;
-				loop = !((cond1 || cond2) && cond3); 
+				boolean cond3 = c != d && b > a;
+				loop = !(cond1 && cond2 && cond3); 
 			} while (loop);
 			
 			MultipleChoiceQuiz q = new MultipleChoiceQuiz();
