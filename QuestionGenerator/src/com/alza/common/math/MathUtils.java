@@ -141,6 +141,22 @@ public class MathUtils {
 	}
 	/**
 	 * 
+	 */
+	public static FactorNode FactorTree(int number) {
+		FactorNode root = new FactorNode(number);
+		List<Integer> primes = findPrimeFactors(number);
+		FactorNode curNode = root;
+		int remainingNumber = number;
+		for (Integer curNum : primes) {
+			remainingNumber = remainingNumber / curNum;
+			curNode.leftNode = new FactorNode(curNum);
+			curNode.rightNode = new FactorNode(remainingNumber);
+			curNode = curNode.rightNode;
+		}
+		return root;
+	}
+	/**
+	 * 
 	 * @param ints
 	 * @return maximum integer from given array
 	 */
