@@ -114,7 +114,7 @@ public class Level0Mult implements IQuestionFactory{
 		question = question.replace("a", String.valueOf(a));
 		question = question.replace("b", String.valueOf(b));
 		question = question.replaceAll("VAR", var);
-		question = question + ",\n" + var + "=?";
+		question = question + "\n " + var + " = ?";
 		return question;
 	}
 
@@ -124,16 +124,6 @@ public class Level0Mult implements IQuestionFactory{
 		return generateQuizList();
 	}
 	
-	private void getExpression(int idx) {
-		
-	}
-	private void addHint(Quiz q) {
-		
-	}
-	
-	private void generateConstant() {
-		
-	}
 		
 	private double runExpression(String exp, int a, int b) {
 		Expression e = new ExpressionBuilder(exp)

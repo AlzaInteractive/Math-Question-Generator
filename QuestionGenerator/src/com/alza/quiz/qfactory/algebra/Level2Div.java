@@ -69,7 +69,7 @@ public class Level2Div implements IQuestionFactory{
 		for (int i= 0;i<numOfQuestion;i++){
 			int idx; 
 			idx = i % lProbs.size(); 
-			int a=0,b=0,c;
+			int a=0,b=0;
 			do {
 				a = ThreadLocalRandom.current().nextInt(3,10);
 				b = ThreadLocalRandom.current().nextInt(3,8);
@@ -116,7 +116,7 @@ public class Level2Div implements IQuestionFactory{
 		question = question.replace("b", String.valueOf(b));
 		question = question.replace("c", String.valueOf(c));
 		question = question.replaceAll("VAR", var);
-		question = question + ",\n" + var + "=?";
+		question = question + "\n" + var + " = ?";
 		return question;
 	}
 
@@ -124,17 +124,6 @@ public class Level2Div implements IQuestionFactory{
 	public List<Quiz> generateQuizList(int numOfQuestion) {
 		this.numOfQuestion = numOfQuestion;
 		return generateQuizList();
-	}
-	
-	private void getExpression(int idx) {
-		
-	}
-	private void addHint(Quiz q) {
-		
-	}
-	
-	private void generateConstant() {
-		
 	}
 		
 	private double runExpression(String exp, int a, int b) {

@@ -124,7 +124,7 @@ public class Level3MixedOperationDiv implements IQuestionFactory{
 		question = question.replace("b", String.valueOf(b));
 		question = question.replace("c", String.valueOf(c));
 		question = question.replaceAll("VAR", var);
-		question = question + ",\n" + var + "=?";
+		question = question + "\n" + var + " = ?";
 		return question;
 	}
 

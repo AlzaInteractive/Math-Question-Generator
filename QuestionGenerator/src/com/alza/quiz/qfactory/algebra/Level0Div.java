@@ -119,7 +119,7 @@ public class Level0Div implements IQuestionFactory{
 		question = question.replace("b", String.valueOf(b));
 		question = question.replace("c", String.valueOf(c));
 		question = question.replaceAll("VAR", var);
-		question = question + ",\n" + var + "=?";
+		question = question + "\n " + var + " = ?";
 		return question;
 	}
 
@@ -127,17 +127,6 @@ public class Level0Div implements IQuestionFactory{
 	public List<Quiz> generateQuizList(int numOfQuestion) {
 		this.numOfQuestion = numOfQuestion;
 		return generateQuizList();
-	}
-	
-	private void getExpression(int idx) {
-		
-	}
-	private void addHint(Quiz q) {
-		
-	}
-	
-	private void generateConstant() {
-		
 	}
 		
 	private double runExpression(String exp, int a, int b, int c) {

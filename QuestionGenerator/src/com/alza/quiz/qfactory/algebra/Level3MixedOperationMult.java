@@ -80,7 +80,7 @@ public class Level3MixedOperationMult implements IQuestionFactory{
 			
 			ProblemPattern p = lProbs.get(idx);
 			
-			int a=0,b=0,c=0,x=0;
+			int a=0,b=0,c=0;
 			boolean rightComb = false;
 			do {
 				a = ThreadLocalRandom.current().nextInt(2,6);
@@ -132,7 +132,7 @@ public class Level3MixedOperationMult implements IQuestionFactory{
 		question = question.replace("b", String.valueOf(b));
 		question = question.replace("c", String.valueOf(c));
 		question = question.replaceAll("VAR", var);
-		question = question + ",\n" + var + "=?";
+		question = question + "\n" + var + " = ?";
 		return question;
 	}
 

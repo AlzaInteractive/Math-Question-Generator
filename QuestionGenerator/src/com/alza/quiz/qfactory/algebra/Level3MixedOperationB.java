@@ -129,7 +129,7 @@ public class Level3MixedOperationB implements IQuestionFactory{
 		question = question.replace("c", String.valueOf(c));
 		question = question.replace("d", String.valueOf(d));
 		question = question.replaceAll("VAR", var);
-		question = question + ",\n" + var + "=?";
+		question = question + "\n" + var + " = ?";
 		return question;
 	}
 
