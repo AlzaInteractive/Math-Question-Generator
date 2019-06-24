@@ -201,6 +201,30 @@ public class MathUtils {
 		return romansMap.get(l) + toRomanNumeral(num -l);
 	}
 	/**
+	 * Find equivalent integer from roman numerals
+	 * @param num
+	 * @return roman numerals of integer num
+	 * @throws Exception 
+	 */
+	public static int fromRoman(String roman) throws Exception{		
+		if (roman.isEmpty()) return 0;
+        if (roman.startsWith("M")) return 1000 + fromRoman(roman.substring(1));
+        if (roman.startsWith("CM")) return 900 + fromRoman(roman.substring(2));
+        if (roman.startsWith("D")) return 500 + fromRoman(roman.substring(1));
+        if (roman.startsWith("CD")) return 400 + fromRoman(roman.substring(2));
+        if (roman.startsWith("C")) return 100 + fromRoman(roman.substring(1));
+        if (roman.startsWith("XC")) return 90 + fromRoman(roman.substring(2));
+        if (roman.startsWith("L")) return 50 + fromRoman(roman.substring(1));
+        if (roman.startsWith("XL")) return 40 + fromRoman(roman.substring(2));
+        if (roman.startsWith("X")) return 10 + fromRoman(roman.substring(1));
+        if (roman.startsWith("IX")) return 9 + fromRoman(roman.substring(2));
+        if (roman.startsWith("V")) return 5 + fromRoman(roman.substring(1));
+        if (roman.startsWith("IV")) return 4 + fromRoman(roman.substring(2));
+        if (roman.startsWith("I")) return 1 + fromRoman(roman.substring(1));
+        throw new Exception("Invalid roman number");
+	}
+	
+	/**
 	 * 
 	 * @return array of phytagorean triples:a,b,c
 	 * using euclidean theorem where

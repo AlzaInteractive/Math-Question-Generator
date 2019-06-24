@@ -64,7 +64,7 @@ public class AlgebraGameLevel implements IPlayableLevelsGroup{
 		
 		name = bundle.getString("algebra.level3.mixop");
 		desc = "";//bundle.getString("");
-		g = GameLevel.createSingleQF(0, name, desc, new Level3MixedOperationB(loc), 10);
+		g = GameLevel.createSingleQF(0, name, desc, new Level3MixedOperationDiv(loc), 10);
 		lgl.add(g);
 
 		//name = bundle.getString("algebra.level.simplemultdiv");
