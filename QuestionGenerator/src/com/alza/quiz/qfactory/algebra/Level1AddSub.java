@@ -73,7 +73,7 @@ public class Level1AddSub implements IQuestionFactory{
 			do {
 				a = ThreadLocalRandom.current().nextInt(3,10);
 				b = ThreadLocalRandom.current().nextInt(3,8);
-			} while (a<=b);
+			} while (a>=b);
 			
 			MultipleChoiceQuiz q = new MultipleChoiceQuiz();
 			ProblemPattern p = lProbs.get(idx); 

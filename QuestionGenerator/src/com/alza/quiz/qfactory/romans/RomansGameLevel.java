@@ -15,11 +15,8 @@ import com.alza.quiz.qfactory.IPlayableLevelsGroup;
  */
 public class RomansGameLevel implements IPlayableLevelsGroup {
 	int[][] bounds = {
-			{1,10,5},{10,20,5},
-			{20,40,7},{40,50,5},{50,90,7},{90,100,5},
-			{100,400,7},{400,500,7},{500,900,7},{900,1000,7},
-			{1000,1400,7},{1400,1500,7},{1500,1900,7},
-			{1900,2000,7},{2000,3000,7}
+			{1,50,7},{50,100,7},
+			{100,500,7},{500,1000,7},{1000,2000,7},{2000,3999,7}
 	};
 	public List<GameLevel> createGameLevels(Locale loc) {
 		ResourceBundle bundle = ResourceBundle.getBundle("lang.langbundle", loc);

@@ -40,11 +40,11 @@ public class Level3MixedOperationB implements IQuestionFactory{
 		String[] choicePattern = {"(cd + b)/a", "(cd + b)/-a","(cd - b)/a","(cd - b)/-a"}; 
 		ProblemPattern p1 = new ProblemPattern("(aVAR - b) ÷ c = d", "(cd + b)/a", choicePattern);
 		ProblemPattern p2 = new ProblemPattern("(aVAR + b) ÷ c = d", "(cd - b)/a", choicePattern);
-		ProblemPattern p3 = new ProblemPattern("(b - aVAR) ÷ c = d", "(cd - b)/-a", choicePattern);
+		ProblemPattern p3 = new ProblemPattern("(b - (aVAR)) ÷ c = d", "(cd - b)/-a", choicePattern);
 		ProblemPattern p4 = new ProblemPattern("(-aVAR - b) ÷ c = d", "(cd + b)/-a", choicePattern);
 		ProblemPattern p5 = new ProblemPattern("(aVAR - b) ÷ -c = d", "(-cd + b)/a", choicePattern);
 		ProblemPattern p6 = new ProblemPattern("(aVAR + b) ÷ c = -d", "(-cd - b)/a", choicePattern);
-		ProblemPattern p7 = new ProblemPattern("(b - aVAR) ÷ -c = d", "(cd + b)/a", choicePattern);
+		ProblemPattern p7 = new ProblemPattern("(b - (aVAR)) ÷ -c = d", "(cd + b)/a", choicePattern);
 		ProblemPattern p8 = new ProblemPattern("(-aVAR - b) ÷ c = -d", "(-cd + b)/-a", choicePattern);
 		lProbs.add(p1);
 		lProbs.add(p2);

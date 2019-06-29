@@ -44,7 +44,7 @@ public class Level1Div implements IQuestionFactory{
 		ProblemPattern p3 = new ProblemPattern("VAR ÷ a = b", "a * b", choicePattern);
 		ProblemPattern p4 = new ProblemPattern("VAR ÷ -a = b", "a * -b", choicePattern);
 		ProblemPattern p5 = new ProblemPattern("VAR ÷ a = -b", "-a * b", choicePattern);
-		ProblemPattern p6 = new ProblemPattern("VAR ÷ -a = -b", "a * -b", choicePattern);
+		ProblemPattern p6 = new ProblemPattern("VAR ÷ -a = -b", "-a * -b", choicePattern);
 		lProbs.add(p3);
 		lProbs.add(p4);
 		lProbs.add(p5);
