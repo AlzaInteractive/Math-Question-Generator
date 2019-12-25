@@ -8,6 +8,7 @@ Question type available so far:
 * Multiple choice 
 
 Topics currently covered & being worked on are:
+* Algebra (basic)
 * Least Common Multiples & Greatest Common Denominator
 * Fraction
 * Integer
@@ -48,9 +49,10 @@ public class GameLevelDemo {
 
 ## Apps using the libray:
 I've built several math quiz apps on android using the library, all available in bilingual mode (English, Indonesian).
+* Algebra for Beginners [Google Play](https://play.google.com/store/apps/details?id=com.alza.quiz.algebra)
 * Fraction Quiz [Google Play](https://play.google.com/store/apps/details?id=com.alza.quiz.fraction)
 * LCM & GCD [Google Play](https://play.google.com/store/apps/details?id=com.alza.quiz.lcmgcd)
 * Integers Quiz [Google Play](https://play.google.com/store/apps/details?id=com.alza.quiz.integer)
-* Plane (2D) Geometry [Google Play](https://play.google.com/store/apps/details?id=com.alza.quiz.geom2d)
+* 2D Geometry [Google Play](https://play.google.com/store/apps/details?id=com.alza.quiz.geom2d)
 * Roman Numerals [Google Play](https://play.google.com/store/apps/details?id=com.alza.quiz.romans)
 
