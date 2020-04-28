@@ -7,13 +7,13 @@ import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.concurrent.ThreadLocalRandom;
 
-import net.objecthunter.exp4j.Expression;
-import net.objecthunter.exp4j.ExpressionBuilder;
-
+import com.alza.quiz.model.MultipleChoiceQuiz;
 import com.alza.quiz.model.Quiz;
 import com.alza.quiz.model.QuizLevel;
-import com.alza.quiz.model.SimpleQuiz;
 import com.alza.quiz.qfactory.IQuestionFactory;
+
+import net.objecthunter.exp4j.Expression;
+import net.objecthunter.exp4j.ExpressionBuilder;
 
 public class QuadraticOperation implements IQuestionFactory{
 	private final static String MJXTAG ="$$"; 
@@ -76,7 +76,7 @@ public class QuadraticOperation implements IQuestionFactory{
 				c = ThreadLocalRandom.current().nextInt(bounds[idx][0], 
 						bounds[idx][1]);
 			} while (a<=b||a<=c||b<=c);
-			SimpleQuiz q = new SimpleQuiz();
+			MultipleChoiceQuiz q = new MultipleChoiceQuiz();
 			
 			Expression e = new ExpressionBuilder(expression[idx][0])
 				.variables("a","b","c")
@@ -85,7 +85,33 @@ public class QuadraticOperation implements IQuestionFactory{
 				.setVariable("b", b)
 				.setVariable("c", c);
 			int rslt = (int) e.evaluate();
-			
+			/**
+			 * {"a^2","a^2"}, 
+			{"a^2 + b^2","a^2 + b^2"},
+			{"a^2 - b^2","a^2 - b^2"},
+			{"(a+b)^2","{(a+b)}^2"},
+			{"(a-b)^2","{(a-b)}^2"},
+			{"a^2 + b^2 + c^2","a^2 + b^2 +c^2"},
+			{"a^2 + (b-c)^2","a^2 + {b-c}^2"},
+			{"(a-b)^2 + c^2","{a-b}^2 + c^2"}
+			 */
+			if (idx == 0) {
+				q.addChoice(c,a+a);
+			} else if (idx == 1) {
+				q.addChoice(c,(a+b)*(a+b));
+			} else if (idx == 2) {
+				q.addChoice(c,(a-b)*(a-b));
+			} else if (idx == 3) {
+				q.addChoice(c,a*a+b*b);
+			} else if (idx == 4) {
+				q.addChoice(c,a*a-b*b);
+			} else if (idx == 5) {
+				q.addChoice(c,(a+b+c)*(a+b+c));
+			} else if (idx == 6) {
+				q.addChoice(c,a*a + b*b - c*c);
+			} else {
+				q.addChoice(c,a*a - b*b + c*c);
+			}
 			String question = MJXTAG+expression[idx][1].replace("*", "x")+MJXTAG;
 			question = question.replace("a", String.valueOf(a));
 			question = question.replace("b", String.valueOf(b));

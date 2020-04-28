@@ -81,7 +81,7 @@ public class IntegerGameLevel implements IPlayableLevelsGroup{
 		name = bundle.getString("integer.squarerootphyt");
 		//desc = bundle.getString("lcmgcd.level.primefactor.gcd.desc");
 		g = GameLevel.createSingleQF(8, name, desc, new SquareRootPhytagorean(loc), 4);
-		//todo rhombus find diagonal
+
 		lgl.add(g);
 
 		name = bundle.getString("integer.cubic");

@@ -7,9 +7,9 @@ import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.concurrent.ThreadLocalRandom;
 
+import com.alza.quiz.model.MultipleChoiceQuiz;
 import com.alza.quiz.model.Quiz;
 import com.alza.quiz.model.QuizLevel;
-import com.alza.quiz.model.SimpleQuiz;
 import com.alza.quiz.qfactory.IQuestionFactory;
 
 public class AdditionOfTwoIntegers implements IQuestionFactory{
@@ -60,10 +60,10 @@ public class AdditionOfTwoIntegers implements IQuestionFactory{
 				b = ThreadLocalRandom.current().nextInt(bounds[idx][0], 
 						bounds[idx][1]);
 			} while (a==b);
-			SimpleQuiz q = new SimpleQuiz();
-			int rslt = a+b;
-			
+			MultipleChoiceQuiz  q = new MultipleChoiceQuiz();
+			int rslt = a+b;			
 			q.setQuestion(a+" + "+b);
+			q.addChoice(rslt,a-b,b-a);
 			q.setCorrectAnswer(String.valueOf(rslt));
 			q.setDifficultyLevel(QuizLevel.MUDAH);
 			q.setLessonSubcategory(bundle.getString("integer.addtwonum"));

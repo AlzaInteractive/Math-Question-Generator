@@ -7,13 +7,13 @@ import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.concurrent.ThreadLocalRandom;
 
-import net.objecthunter.exp4j.Expression;
-import net.objecthunter.exp4j.ExpressionBuilder;
-
+import com.alza.quiz.model.MultipleChoiceQuiz;
 import com.alza.quiz.model.Quiz;
 import com.alza.quiz.model.QuizLevel;
-import com.alza.quiz.model.SimpleQuiz;
 import com.alza.quiz.qfactory.IQuestionFactory;
+
+import net.objecthunter.exp4j.Expression;
+import net.objecthunter.exp4j.ExpressionBuilder;
 
 public class AdditionOfThreeIntegersUnsigned implements IQuestionFactory{
 	Locale loc;
@@ -69,7 +69,7 @@ public class AdditionOfThreeIntegersUnsigned implements IQuestionFactory{
 				c = ThreadLocalRandom.current().nextInt(bounds[idx][0], 
 						bounds[idx][1]);
 			} while (a<=b||a<=c||b<=c);
-			SimpleQuiz q = new SimpleQuiz();
+			MultipleChoiceQuiz q = new MultipleChoiceQuiz();
 			
 			Expression e = new ExpressionBuilder(expression[idx])
 				.variables("a","b","c")
@@ -78,6 +78,11 @@ public class AdditionOfThreeIntegersUnsigned implements IQuestionFactory{
 				.setVariable("b", b)
 				.setVariable("c", c);
 			int rslt = (int) e.evaluate();
+			if (a % 2 ==0 ) {
+				q.addChoice(rslt,a+b+c-100,a+b+c+10);
+			} else {
+				q.addChoice(rslt,a+b+c+100,a+b+c-10);
+			}
 			
 			String question = expression[idx].replace("*", "x");
 			question = question.replace("a", String.valueOf(a));

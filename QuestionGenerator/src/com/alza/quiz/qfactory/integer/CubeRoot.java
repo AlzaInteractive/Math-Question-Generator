@@ -7,13 +7,13 @@ import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.concurrent.ThreadLocalRandom;
 
-import net.objecthunter.exp4j.Expression;
-import net.objecthunter.exp4j.ExpressionBuilder;
-
+import com.alza.quiz.model.MultipleChoiceQuiz;
 import com.alza.quiz.model.Quiz;
 import com.alza.quiz.model.QuizLevel;
-import com.alza.quiz.model.SimpleQuiz;
 import com.alza.quiz.qfactory.IQuestionFactory;
+
+import net.objecthunter.exp4j.Expression;
+import net.objecthunter.exp4j.ExpressionBuilder;
 
 public class CubeRoot implements IQuestionFactory{
 	private final static String MJXTAG ="$$"; 
@@ -71,7 +71,7 @@ public class CubeRoot implements IQuestionFactory{
 				c = ThreadLocalRandom.current().nextInt(bounds[idx][0], 
 						bounds[idx][1]);
 			} while (a==b||a==c||b==c);
-			SimpleQuiz q = new SimpleQuiz();
+			MultipleChoiceQuiz q = new MultipleChoiceQuiz();
 			
 			Expression e = new ExpressionBuilder(expression[idx][0])
 				.variables("a","b","c")
@@ -88,6 +88,11 @@ public class CubeRoot implements IQuestionFactory{
 			question = question.replace("b^3", String.valueOf(b*b*b));
 			question = question.replace("c^3", String.valueOf(c*c*c));
 			q.setQuestion(question);
+			if (idx % 2 == 0) {
+				q.addChoice(rslt,rslt+2+rslt+4);
+			} else {
+				q.addChoice(rslt,rslt-2+rslt+2);
+			}
 			q.setCorrectAnswer(String.valueOf(rslt));
 			q.setDifficultyLevel(QuizLevel.MUDAH);
 			q.setLessonSubcategory(bundle.getString("integer.cuberoot"));

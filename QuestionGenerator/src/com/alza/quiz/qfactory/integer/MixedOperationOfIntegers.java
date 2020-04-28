@@ -7,13 +7,13 @@ import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.concurrent.ThreadLocalRandom;
 
-import net.objecthunter.exp4j.Expression;
-import net.objecthunter.exp4j.ExpressionBuilder;
-
+import com.alza.quiz.model.MultipleChoiceQuiz;
 import com.alza.quiz.model.Quiz;
 import com.alza.quiz.model.QuizLevel;
-import com.alza.quiz.model.SimpleQuiz;
 import com.alza.quiz.qfactory.IQuestionFactory;
+
+import net.objecthunter.exp4j.Expression;
+import net.objecthunter.exp4j.ExpressionBuilder;
 
 public class MixedOperationOfIntegers implements IQuestionFactory{
 	Locale loc;
@@ -71,7 +71,7 @@ public class MixedOperationOfIntegers implements IQuestionFactory{
 				c = ThreadLocalRandom.current().nextInt(bounds[idx][0], 
 						bounds[idx][1]);
 			} while (a<=b||a<=c||b<=c);
-			SimpleQuiz q = new SimpleQuiz();
+			MultipleChoiceQuiz q = new MultipleChoiceQuiz();
 			
 			Expression e = new ExpressionBuilder(expression[idx])
 				.variables("a","b","c")
@@ -86,6 +86,25 @@ public class MixedOperationOfIntegers implements IQuestionFactory{
 			question = question.replace("b", String.valueOf(b));
 			question = question.replace("c", String.valueOf(c));
 			q.setQuestion(question);
+			if (idx == 0) {
+				q.addChoice(rslt,a*b+c);
+			} else if (idx == 1) {
+				q.addChoice(rslt,a*b-c);
+			} else if (idx == 2) {
+				q.addChoice(rslt,a*(b+c));
+			} else if (idx == 3) {
+				q.addChoice(rslt,(a + b)*c);
+			} else if (idx == 4) {
+				q.addChoice(rslt,a + b * c);
+			} else if (idx == 5) {
+				q.addChoice(rslt,a - b * c);
+			} else if (idx == 6) {
+				// "(a * b) + (a * c)","(a * b) - (a * c)"
+				q.addChoice(rslt,a * (b+a) * c);
+			} else {				
+				q.addChoice(rslt,a * (b-a) * c);
+			}
+			
 			q.setCorrectAnswer(String.valueOf(rslt));
 			q.setDifficultyLevel(QuizLevel.MUDAH);
 			q.setLessonSubcategory(bundle.getString("integer.mixop"));

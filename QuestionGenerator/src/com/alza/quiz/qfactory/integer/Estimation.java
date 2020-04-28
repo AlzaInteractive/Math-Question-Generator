@@ -8,9 +8,9 @@ import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.concurrent.ThreadLocalRandom;
 
+import com.alza.quiz.model.MultipleChoiceQuiz;
 import com.alza.quiz.model.Quiz;
 import com.alza.quiz.model.QuizLevel;
-import com.alza.quiz.model.SimpleQuiz;
 import com.alza.quiz.qfactory.IQuestionFactory;
 
 public class Estimation implements IQuestionFactory{
@@ -61,7 +61,7 @@ public class Estimation implements IQuestionFactory{
 					bounds[idx][1]);
 			BigDecimal bda = new BigDecimal(a);
 			BigDecimal bdb = new BigDecimal(b);
-			SimpleQuiz q = new SimpleQuiz();
+			MultipleChoiceQuiz q = new MultipleChoiceQuiz();
 			String roundT="";
 			if (a<100){
 				roundT = bundle.getString("integer.nearestten");
@@ -95,6 +95,10 @@ public class Estimation implements IQuestionFactory{
 			int rslt= estA.toBigInteger().intValue() * estB.toBigInteger().intValue();
 			q.setQuestion(question+" "+roundT+" : "+a+" x "+b);
 			q.setCorrectAnswer(String.valueOf(rslt));
+			for (int j = -1; i >= -3; j-- ) {
+				BigDecimal c = bda.setScale(j, roundMode);
+				q.addChoice(c.toBigInteger().intValue());
+			}
 			q.setDifficultyLevel(QuizLevel.MUDAH);
 			q.setLessonSubcategory(bundle.getString("integer.estimation"));
 			q.setLessonClassifier(bundle.getString("mathelementary"));

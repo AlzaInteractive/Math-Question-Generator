@@ -7,9 +7,9 @@ import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.concurrent.ThreadLocalRandom;
 
+import com.alza.quiz.model.MultipleChoiceQuiz;
 import com.alza.quiz.model.Quiz;
 import com.alza.quiz.model.QuizLevel;
-import com.alza.quiz.model.SimpleQuiz;
 import com.alza.quiz.qfactory.IQuestionFactory;
 
 public class AdditionOfThreeIntegersSigned implements IQuestionFactory{
@@ -105,7 +105,8 @@ public class AdditionOfThreeIntegersSigned implements IQuestionFactory{
 			
 			//System.out.println("index "+idx);
 			
-			SimpleQuiz q = new SimpleQuiz();
+			MultipleChoiceQuiz q = new MultipleChoiceQuiz();
+			q.setChoices(correctAnswer,a+b+c,a-b-c);
 			q.setQuestion(question);
 			q.setCorrectAnswer(String.valueOf(correctAnswer));
 			q.setDifficultyLevel(QuizLevel.MUDAH);

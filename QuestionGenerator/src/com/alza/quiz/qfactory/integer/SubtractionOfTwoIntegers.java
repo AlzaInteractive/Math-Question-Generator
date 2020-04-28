@@ -7,9 +7,9 @@ import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.concurrent.ThreadLocalRandom;
 
+import com.alza.quiz.model.MultipleChoiceQuiz;
 import com.alza.quiz.model.Quiz;
 import com.alza.quiz.model.QuizLevel;
-import com.alza.quiz.model.SimpleQuiz;
 import com.alza.quiz.qfactory.IQuestionFactory;
 
 public class SubtractionOfTwoIntegers implements IQuestionFactory{
@@ -60,9 +60,9 @@ public class SubtractionOfTwoIntegers implements IQuestionFactory{
 				b = ThreadLocalRandom.current().nextInt(bounds[idx][0], 
 						bounds[idx][1]);
 			} while (a<=b||a-b<=10);
-			SimpleQuiz q = new SimpleQuiz();
+			MultipleChoiceQuiz q = new MultipleChoiceQuiz();
 			int rslt = a-b;
-			
+			q.addChoice(rslt,b-a,a+b);
 			q.setQuestion(a+" - "+b);
 			q.setCorrectAnswer(String.valueOf(rslt));
 			q.setDifficultyLevel(QuizLevel.MUDAH);

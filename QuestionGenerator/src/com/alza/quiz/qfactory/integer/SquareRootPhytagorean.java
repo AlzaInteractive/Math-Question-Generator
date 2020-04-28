@@ -10,9 +10,9 @@ import java.util.concurrent.ThreadLocalRandom;
 import net.objecthunter.exp4j.Expression;
 import net.objecthunter.exp4j.ExpressionBuilder;
 
+import com.alza.quiz.model.MultipleChoiceQuiz;
 import com.alza.quiz.model.Quiz;
 import com.alza.quiz.model.QuizLevel;
-import com.alza.quiz.model.SimpleQuiz;
 import com.alza.quiz.qfactory.IQuestionFactory;
 
 public class SquareRootPhytagorean implements IQuestionFactory{
@@ -76,7 +76,7 @@ public class SquareRootPhytagorean implements IQuestionFactory{
 				c = (m*m + n*n);
 				
 			} while (m<=n);
-			SimpleQuiz q = new SimpleQuiz();
+			MultipleChoiceQuiz q = new MultipleChoiceQuiz();
 			
 			Expression e = new ExpressionBuilder(expression[idx][0])
 				.variables("a","b","c")
@@ -91,6 +91,19 @@ public class SquareRootPhytagorean implements IQuestionFactory{
 			question = question.replace("b", String.valueOf(b));
 			question = question.replace("c", String.valueOf(c));
 			//question = question.replace("c^2", String.valueOf(c*c));
+			/**
+			 * {"sqrt(a^2+b^2)","\\sqrt{a^2+b^2}"},
+			{"sqrt(c^2-b^2)","\\sqrt{c^2-b^2}"},
+			{"sqrt(c^2-a^2)","\\sqrt{c^2-a^2}"}
+			 */
+			int idx2 = ThreadLocalRandom.current().nextInt();
+			if (idx2 % 3 == 0) {
+				q.addChoice(rslt,c-1);
+			} else if (idx2 % 3 == 1) {
+				q.addChoice(rslt,c+1);
+			} else {
+				q.addChoice(rslt,c+2);
+			}
 			q.setQuestion(question);
 			q.setCorrectAnswer(String.valueOf(rslt));
 			q.setDifficultyLevel(QuizLevel.MUDAH);

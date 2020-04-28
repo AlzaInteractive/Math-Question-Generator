@@ -8,9 +8,9 @@ import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.concurrent.ThreadLocalRandom;
 
+import com.alza.quiz.model.MultipleChoiceQuiz;
 import com.alza.quiz.model.Quiz;
 import com.alza.quiz.model.QuizLevel;
-import com.alza.quiz.model.SimpleQuiz;
 import com.alza.quiz.qfactory.IQuestionFactory;
 
 public class Rounding implements IQuestionFactory{
@@ -58,7 +58,7 @@ public class Rounding implements IQuestionFactory{
 			a = ThreadLocalRandom.current().nextInt(bounds[idx][0], 
 						bounds[idx][1]);
 			BigDecimal bda = new BigDecimal(a);
-			SimpleQuiz q = new SimpleQuiz();
+			MultipleChoiceQuiz q = new MultipleChoiceQuiz();
 			String roundT="";
 			switch (bounds[idx][2]) {
 			case -1:
@@ -96,6 +96,10 @@ public class Rounding implements IQuestionFactory{
 			BigDecimal rslt = bda.setScale(bounds[idx][2], roundMode);			
 			q.setQuestion(question+" "+roundT+": "+a);
 			q.setCorrectAnswer(String.valueOf(rslt.toBigInteger().intValue()));
+			for (int j = -1; i >= -3; j-- ) {
+				BigDecimal c = bda.setScale(j, roundMode);
+				q.addChoice(c.toBigInteger().intValue());
+			}
 			q.setDifficultyLevel(QuizLevel.MUDAH);
 			q.setLessonSubcategory(bundle.getString("integer.rounding"));
 			q.setLessonClassifier(bundle.getString("mathelementary"));

@@ -7,9 +7,9 @@ import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.concurrent.ThreadLocalRandom;
 
+import com.alza.quiz.model.MultipleChoiceQuiz;
 import com.alza.quiz.model.Quiz;
 import com.alza.quiz.model.QuizLevel;
-import com.alza.quiz.model.SimpleQuiz;
 import com.alza.quiz.qfactory.IQuestionFactory;
 
 public class DivisionOfTwoIntegers implements IQuestionFactory{
@@ -60,8 +60,13 @@ public class DivisionOfTwoIntegers implements IQuestionFactory{
 				b = ThreadLocalRandom.current().nextInt(bounds[idx][0], 
 						bounds[idx][1]);
 			} while (a==b);
-			SimpleQuiz q = new SimpleQuiz();
+			MultipleChoiceQuiz q = new MultipleChoiceQuiz();
 			int rslt = a*b;
+			if (a%2 == 0) {
+				q.setChoices(rslt,rslt-1,rslt+2);
+			} else {
+				q.setChoices(rslt,rslt+1,rslt+2);
+			}
 			
 			q.setQuestion(rslt+" : "+a);
 			q.setCorrectAnswer(String.valueOf(b));

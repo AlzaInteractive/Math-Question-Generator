@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
+import com.alza.quiz.model.GameLevel;
 import com.alza.quiz.model.MultipleChoiceGeomQuiz;
 import com.alza.quiz.model.MultipleChoiceQuiz;
 import com.alza.quiz.model.Quiz;
@@ -17,14 +18,16 @@ import com.alza.quiz.model.geom.plane.Rectangle;
 import com.alza.quiz.model.geom.plane.Rhombus;
 import com.alza.quiz.model.geom.plane.Square;
 import com.alza.quiz.model.geom.plane.Triangle;
+import com.alza.quiz.qfactory.GeomGameLevel;
 import com.alza.quiz.qfactory.IQuestionFactory;
 import com.alza.quiz.qfactory.Util;
 
 public final class Shape2DDemo {
 	private static List<Shapes2D> lshps;
 	public static void main(String[] args) {
-		shapeGeneratorTest();
+		//shapeGeneratorTest();
 		//allGenerator();
+		levelGenerator(7);
 	}
 	
 
@@ -57,6 +60,37 @@ public final class Shape2DDemo {
 		for (IQuestionFactory iQuestionFactory : lqf) {
 			ql.addAll(iQuestionFactory.generateQuizList());
 		}
+		Collections.sort(ql);
+		for (Quiz q : ql) {
+			System.out.println("------------------------------");
+			System.out.println("Grade : "+q.getLessonGrade());
+			System.out.println("Subcategory :" +q.getLessonSubcategory());
+			System.out.println("Question : " + q.getQuestion());
+			System.out.println("Level : "+q.getQuizLevel());
+			if (q instanceof MultipleChoiceQuiz){
+				MultipleChoiceQuiz mq = (MultipleChoiceQuiz) q;
+				System.out.println("Choices : "+ String.join(" , ", mq.getChoices()));
+			}
+			if (q instanceof MultipleChoiceGeomQuiz){
+				MultipleChoiceGeomQuiz mq = (MultipleChoiceGeomQuiz) q;
+				System.out.println("Choices : "+ String.join(" , ", mq.getChoices()));
+				/**Shapes2D shapes2d = mq.getGeomShape();
+				System.out.println(shapes2d.toString());
+				List<Path> ps = shapes2d.getPaths();
+				for (Path path : ps) {
+					System.out.println(path.toString());
+				}**/
+			}
+			System.out.println("Answer : "+ q.getCorrectAnswer());
+		}
+		System.out.println("Jumlah soal : "+ql.size());
+	}
+	
+	private static void levelGenerator(int lvlIdx){
+		GeomGameLevel g = new GeomGameLevel();
+		List<GameLevel> levels = g.createGameLevels(new Locale("en","US"));
+		GameLevel gl = levels.get(lvlIdx);		
+		List<Quiz> ql = gl.generateQuiz();		
 		Collections.sort(ql);
 		for (Quiz q : ql) {
 			System.out.println("------------------------------");
