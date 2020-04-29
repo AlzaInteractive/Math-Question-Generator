@@ -31,7 +31,7 @@ public class AdditionOfThreeIntegersUnsigned implements IQuestionFactory{
 	}
 	int numOfQuestion = 3;
 	int[][] bounds = {
-			{300,450},{3000,4500}
+			{100,150},{150,350},{350,550},{550,650},{650,999}
 	};
 	String[] expression = {
 			"a + b + c" ,"c + b + a"

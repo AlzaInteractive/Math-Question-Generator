@@ -28,7 +28,7 @@ public class AdditionOfTwoIntegers implements IQuestionFactory{
 	}
 	int numOfQuestion = 3;
 	int[][] bounds = {
-			{3,10},{10,25},{25,50},{50,100},{250,500}
+			{3,10},{10,25},{25,50},{50,75},{75,99}
 	};
 	@Override
 	public Quiz generateQuiz() {

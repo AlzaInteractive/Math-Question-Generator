@@ -28,7 +28,7 @@ public class MultiplicationOfTwoIntegers implements IQuestionFactory{
 	}
 	int numOfQuestion = 3;
 	int[][] bounds = {
-			{5,10},{10,15},{15,25},{25,50}
+			{2,7},{5,10},{7,12},{10,15},{10,15},{15,20},{20,50}
 	};
 	@Override
 	public Quiz generateQuiz() {
