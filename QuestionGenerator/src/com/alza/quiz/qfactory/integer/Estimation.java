@@ -95,7 +95,7 @@ public class Estimation implements IQuestionFactory{
 			int rslt= estA.toBigInteger().intValue() * estB.toBigInteger().intValue();
 			q.setQuestion(question+" "+roundT+" : "+a+" x "+b);
 			q.setCorrectAnswer(String.valueOf(rslt));
-			for (int j = -1; i >= -3; j-- ) {
+			for (int j = -1; j >= -3; j-- ) {
 				BigDecimal c = bda.setScale(j, roundMode);
 				q.addChoice(c.toBigInteger().intValue());
 			}

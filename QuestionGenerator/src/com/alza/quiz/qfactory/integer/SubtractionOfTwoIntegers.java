@@ -28,7 +28,7 @@ public class SubtractionOfTwoIntegers implements IQuestionFactory{
 	}
 	int numOfQuestion = 3;
 	int[][] bounds = {
-			{25,40},{40,65},{65,80},{80,90},{80,100}
+			{25,40},{40,65},{65,80},{70,95},{80,100}
 	};
 	@Override
 	public Quiz generateQuiz() {

@@ -34,6 +34,7 @@ public class AdditionOfThreeIntegersSigned implements IQuestionFactory{
 			{true,true,true},{true,true,false},{true,false,true},
 			{true,false,false},{false,false,false}
 	};
+	
 	@Override
 	public Quiz generateQuiz() {
 		List<Quiz> quizList = generateQuizList();
@@ -47,7 +48,7 @@ public class AdditionOfThreeIntegersSigned implements IQuestionFactory{
 	}
 
 	@Override
-	public List<Quiz> generateQuizList() {
+	public List<Quiz> generateQuizList() {		
 		List<Quiz> lq = new ArrayList<Quiz>();
 		for (int i= 0;i<numOfQuestion;i++){
 			
@@ -103,10 +104,8 @@ public class AdditionOfThreeIntegersSigned implements IQuestionFactory{
 				correctAnswer = correctAnswer - c;
 			}
 			
-			//System.out.println("index "+idx);
-			
 			MultipleChoiceQuiz q = new MultipleChoiceQuiz();
-			q.setChoices(correctAnswer,a+b+c,a-b-c);
+			q.addChoice(correctAnswer,a+b+c,a-b-c);
 			q.setQuestion(question);
 			q.setCorrectAnswer(String.valueOf(correctAnswer));
 			q.setDifficultyLevel(QuizLevel.MUDAH);
@@ -118,8 +117,7 @@ public class AdditionOfThreeIntegersSigned implements IQuestionFactory{
 			q.setLocale(loc);
 			q.setLessonCategory(bundle.getString("integer"));
 			lq.add(q);
-		}
-		
+		}		
 		return lq;
 	}
 

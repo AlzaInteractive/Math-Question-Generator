@@ -33,10 +33,7 @@ public class AdditionOfThreeIntegersUnsigned implements IQuestionFactory{
 	int[][] bounds = {
 			{100,150},{150,350},{350,550},{550,650},{650,999}
 	};
-	String[] expression = {
-			"a + b + c" ,"c + b + a"
-			 
-	};
+	
 	@Override
 	public Quiz generateQuiz() {
 		List<Quiz> quizList = generateQuizList();
@@ -50,7 +47,8 @@ public class AdditionOfThreeIntegersUnsigned implements IQuestionFactory{
 	}
 
 	@Override
-	public List<Quiz> generateQuizList() {
+	public List<Quiz> generateQuizList() {		
+		String exp = "a + b + c";
 		List<Quiz> lq = new ArrayList<Quiz>();
 		for (int i= 0;i<numOfQuestion;i++){
 			int idx;
@@ -70,8 +68,8 @@ public class AdditionOfThreeIntegersUnsigned implements IQuestionFactory{
 						bounds[idx][1]);
 			} while (a<=b||a<=c||b<=c);
 			MultipleChoiceQuiz q = new MultipleChoiceQuiz();
-			
-			Expression e = new ExpressionBuilder(expression[idx])
+			//System.out.println(bounds.length+":"+i+":"+idx);
+			Expression e = new ExpressionBuilder(exp)
 				.variables("a","b","c")
 				.build()
 				.setVariable("a", a)
@@ -84,7 +82,7 @@ public class AdditionOfThreeIntegersUnsigned implements IQuestionFactory{
 				q.addChoice(rslt,a+b+c+100,a+b+c-10);
 			}
 			
-			String question = expression[idx].replace("*", "x");
+			String question = exp;
 			question = question.replace("a", String.valueOf(a));
 			question = question.replace("b", String.valueOf(b));
 			question = question.replace("c", String.valueOf(c));
@@ -99,8 +97,7 @@ public class AdditionOfThreeIntegersUnsigned implements IQuestionFactory{
 			q.setLessonCategory(bundle.getString("integer"));
 			q.setLocale(loc);
 			lq.add(q);
-		}
-		
+		}		
 		return lq;
 	}
 

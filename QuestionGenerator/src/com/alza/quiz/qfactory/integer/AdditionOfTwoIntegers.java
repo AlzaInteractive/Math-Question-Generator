@@ -1,6 +1,8 @@
 package com.alza.quiz.qfactory.integer;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 import java.util.Random;
@@ -63,7 +65,19 @@ public class AdditionOfTwoIntegers implements IQuestionFactory{
 			MultipleChoiceQuiz  q = new MultipleChoiceQuiz();
 			int rslt = a+b;			
 			q.setQuestion(a+" + "+b);
-			q.addChoice(rslt,a-b,b-a);
+			q.addChoice(rslt);
+			
+			if (rslt > 10) {
+				if (idx % 2 == 0) {
+					q.addChoice(rslt+10);
+				}
+				else {
+					q.addChoice(rslt-10);
+				}
+			} else {
+				q.addChoice(a*b);
+			}
+			q.addChoice(rslt,a+10,b-a);
 			q.setCorrectAnswer(String.valueOf(rslt));
 			q.setDifficultyLevel(QuizLevel.MUDAH);
 			q.setLessonSubcategory(bundle.getString("integer.addtwonum"));

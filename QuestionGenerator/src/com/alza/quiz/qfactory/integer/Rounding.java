@@ -46,7 +46,7 @@ public class Rounding implements IQuestionFactory{
 	@Override
 	public List<Quiz> generateQuizList() {
 		List<Quiz> lq = new ArrayList<Quiz>();
-		for (int i= 0;i<numOfQuestion;i++){
+		for (int i= 0;i<numOfQuestion;i++){			
 			int idx;
 			if (i<bounds.length){
 				idx = i;
@@ -96,7 +96,7 @@ public class Rounding implements IQuestionFactory{
 			BigDecimal rslt = bda.setScale(bounds[idx][2], roundMode);			
 			q.setQuestion(question+" "+roundT+": "+a);
 			q.setCorrectAnswer(String.valueOf(rslt.toBigInteger().intValue()));
-			for (int j = -1; i >= -3; j-- ) {
+			for (int j = -1; j >= -3; j-- ) {
 				BigDecimal c = bda.setScale(j, roundMode);
 				q.addChoice(c.toBigInteger().intValue());
 			}
