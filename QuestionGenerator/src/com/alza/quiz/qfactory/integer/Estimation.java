@@ -29,7 +29,7 @@ public class Estimation implements IQuestionFactory{
 	}
 	int numOfQuestion = 2;
 	int[][] bounds = {
-			{30,100,-1},{100,1000,-2},{1000,9999,-3}
+			{30,100,-1},{100,500,-2},{1000,5000,-3}
 	};
 	@Override
 	public Quiz generateQuiz() {
