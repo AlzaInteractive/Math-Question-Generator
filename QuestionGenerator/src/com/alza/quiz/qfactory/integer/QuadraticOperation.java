@@ -96,21 +96,21 @@ public class QuadraticOperation implements IQuestionFactory{
 			{"(a-b)^2 + c^2","{a-b}^2 + c^2"}
 			 */
 			if (idx == 0) {
-				q.addChoice(c,a+a);
+				q.addChoice(rslt,a+a);
 			} else if (idx == 1) {
-				q.addChoice(c,(a+b)*(a+b));
+				q.addChoice(rslt,(a+b)*(a+b));
 			} else if (idx == 2) {
-				q.addChoice(c,(a-b)*(a-b));
+				q.addChoice(rslt,(a-b)*(a-b));
 			} else if (idx == 3) {
-				q.addChoice(c,a*a+b*b);
+				q.addChoice(rslt,a*a+b*b);
 			} else if (idx == 4) {
-				q.addChoice(c,a*a-b*b);
+				q.addChoice(rslt,a*a-b*b);
 			} else if (idx == 5) {
-				q.addChoice(c,(a+b+c)*(a+b+c));
+				q.addChoice(rslt,(a+b+c)*(a+b+c));
 			} else if (idx == 6) {
-				q.addChoice(c,a*a + b*b - c*c);
+				q.addChoice(rslt,a*a + b*b - c*c);
 			} else {
-				q.addChoice(c,a*a - b*b + c*c);
+				q.addChoice(rslt,a*a - b*b + c*c);
 			}
 			String question = MJXTAG+expression[idx][1].replace("*", "x")+MJXTAG;
 			question = question.replace("a", String.valueOf(a));

@@ -73,33 +73,30 @@ public class Rounding implements IQuestionFactory{
 			default:
 				break;
 			}
-			int roundRand = ThreadLocalRandom.current().nextInt(0, 3);
-			int roundMode=0;
+			int roundRand = ThreadLocalRandom.current().nextInt(0, 3);			
 			String question="";
-			switch (roundRand) {
-			case 0:
-				question = bundle.getString("integer.roundupquest");
-				roundMode = BigDecimal.ROUND_CEILING;
-				break;
-			case 1:
-				question = bundle.getString("integer.rounddownquest");
-				roundMode = BigDecimal.ROUND_FLOOR;
-				break;
-			case 2:
-				question = bundle.getString("integer.roundnearesthalf");
-				roundMode = BigDecimal.ROUND_HALF_UP;
-				break;
-			default:
-				break;
+			int optCeil = bda.setScale(bounds[idx][2], BigDecimal.ROUND_CEILING).toBigInteger().intValue();
+			int optFloor = bda.setScale(bounds[idx][2], BigDecimal.ROUND_FLOOR).toBigInteger().intValue();
+			int optHalfup = bda.setScale(bounds[idx][2], BigDecimal.ROUND_HALF_UP).toBigInteger().intValue();
+			int rslt;
+			switch (roundRand) {			
+				case 0:
+					question = bundle.getString("integer.roundupquest");
+					rslt = optCeil;				
+					break;
+				case 1:
+					question = bundle.getString("integer.rounddownquest");
+					rslt = optFloor;				
+					break;
+				default :
+					question = bundle.getString("integer.roundnearesthalf");
+					rslt = optHalfup;				
+					break;			
 			}
 			
-			BigDecimal rslt = bda.setScale(bounds[idx][2], roundMode);			
 			q.setQuestion(question+" "+roundT+": "+a);
-			q.setCorrectAnswer(String.valueOf(rslt.toBigInteger().intValue()));
-			for (int j = -1; j >= -3; j-- ) {
-				BigDecimal c = bda.setScale(j, roundMode);
-				q.addChoice(c.toBigInteger().intValue());
-			}
+			q.setCorrectAnswer(String.valueOf(rslt));			
+			q.addChoice(optCeil,optFloor,optHalfup);
 			q.setDifficultyLevel(QuizLevel.MUDAH);
 			q.setLessonSubcategory(bundle.getString("integer.rounding"));
 			q.setLessonClassifier(bundle.getString("mathelementary"));

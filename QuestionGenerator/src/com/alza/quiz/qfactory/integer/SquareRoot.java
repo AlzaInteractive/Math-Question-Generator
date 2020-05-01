@@ -10,9 +10,9 @@ import java.util.concurrent.ThreadLocalRandom;
 import net.objecthunter.exp4j.Expression;
 import net.objecthunter.exp4j.ExpressionBuilder;
 
+import com.alza.quiz.model.MultipleChoiceQuiz;
 import com.alza.quiz.model.Quiz;
 import com.alza.quiz.model.QuizLevel;
-import com.alza.quiz.model.SimpleQuiz;
 import com.alza.quiz.qfactory.IQuestionFactory;
 
 public class SquareRoot implements IQuestionFactory{
@@ -36,8 +36,8 @@ public class SquareRoot implements IQuestionFactory{
 	};
 	String[][] expression = {
 			{"sqrt(a^2)","\\sqrt{a^2}"}, 
-			{"sqrt(a^2+(2*a*b)+b^2)","\\sqrt{a^2+(2*a*b)+b^2}"},
-			{"sqrt(a^2-(2*a*b)+b^2)","\\sqrt{a^2-(2*a*b)+b^2}"},
+			{"sqrt(a^2+(2*a*b)+b^2)","\\sqrt{a^2+2*a*b+b^2}"},
+			{"sqrt(a^2-(2*a*b)+b^2)","\\sqrt{a^2-2*a*b+b^2}"},
 	};
 	@Override
 	public Quiz generateQuiz() {
@@ -71,7 +71,7 @@ public class SquareRoot implements IQuestionFactory{
 				c = ThreadLocalRandom.current().nextInt(bounds[idx][0], 
 						bounds[idx][1]);
 			} while (a==b||a==c||b==c);
-			SimpleQuiz q = new SimpleQuiz();
+			MultipleChoiceQuiz q = new MultipleChoiceQuiz();
 			
 			Expression e = new ExpressionBuilder(expression[idx][0])
 				.variables("a","b","c")
@@ -88,6 +88,19 @@ public class SquareRoot implements IQuestionFactory{
 			question = question.replace("b^2", String.valueOf(b*b));
 			question = question.replace("c^2", String.valueOf(c*c));
 			q.setQuestion(question);
+			/*
+			 * {"sqrt(a^2)","\\sqrt{a^2}"}, 
+			{"sqrt(a^2+(2*a*b)+b^2)","\\sqrt{a^2+(2*a*b)+b^2}"},
+			{"sqrt(a^2-(2*a*b)+b^2)","\\sqrt{a^2-(2*a*b)+b^2}"},
+			 */
+			if (idx == 0) {
+				q.addChoice(rslt,a+2,a-1);
+			} else if (idx == 1) {
+				q.addChoice(rslt,a+a,2*a*b);
+			} else {
+				q.addChoice(rslt,b-a,2*a*b);
+			}
+			
 			q.setCorrectAnswer(String.valueOf(rslt));
 			q.setDifficultyLevel(QuizLevel.MUDAH);
 			q.setLessonSubcategory(bundle.getString("integer.squareroot"));

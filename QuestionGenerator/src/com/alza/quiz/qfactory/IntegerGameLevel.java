@@ -74,8 +74,8 @@ public class IntegerGameLevel implements IPlayableLevelsGroup{
 
 		name = bundle.getString("integer.quadsquare");
 		//desc = bundle.getString("lcmgcd.level.lcmrwp.desc");
-		g = GameLevel.createSingleQF(7, name, desc, new QuadraticOperation(loc), 8);
-		g.addQuestionFactory(new SquareRoot(loc),3 );
+		g = GameLevel.createSingleQF(7, name, desc, new QuadraticOperation(loc), 4);
+		g.addQuestionFactory(new SquareRoot(loc),4 );
 		lgl.add(g);
 
 		name = bundle.getString("integer.squarerootphyt");
@@ -86,8 +86,8 @@ public class IntegerGameLevel implements IPlayableLevelsGroup{
 
 		name = bundle.getString("integer.cubic");
 		//desc = bundle.getString("lcmgcd.level.gcdrwp.desc");
-		g = GameLevel.createSingleQF(9, name, desc, new CubicOperation(loc), 6);
-		g.addQuestionFactory(new CubeRoot(loc),3 );
+		g = GameLevel.createSingleQF(9, name, desc, new CubicOperation(loc), 4);
+		g.addQuestionFactory(new CubeRoot(loc),4 );
 		lgl.add(g);
 
 		name = bundle.getString("integer.rounding");
