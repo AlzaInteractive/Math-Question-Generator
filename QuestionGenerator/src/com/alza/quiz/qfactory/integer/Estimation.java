@@ -73,32 +73,38 @@ public class Estimation implements IQuestionFactory{
 			int roundRand = ThreadLocalRandom.current().nextInt(0, 3);
 			int roundMode=0;
 			String question="";
-			switch (roundRand) {
-			case 0:
-				question = bundle.getString("integer.highestimate");
-				roundMode = BigDecimal.ROUND_CEILING;
-				break;
-			case 1:
-				question = bundle.getString("integer.lowestimate");
-				roundMode = BigDecimal.ROUND_FLOOR;
-				break;
-			case 2:
-				question = bundle.getString("integer.bestestimate");
-				roundMode = BigDecimal.ROUND_HALF_UP;
-				break;
-			default:
-				break;
-			}
 			
-			BigDecimal estA = bda.setScale(bounds[idx][2], roundMode);
-			BigDecimal estB = bdb.setScale(bounds[idx][2], roundMode);
-			int rslt= estA.toBigInteger().intValue() * estB.toBigInteger().intValue();
+			int hiEst,loEst,beEst;
+			hiEst = bda.setScale(bounds[idx][2], BigDecimal.ROUND_CEILING).intValue()
+					* bdb.setScale(bounds[idx][2], BigDecimal.ROUND_CEILING).intValue();
+			loEst = bda.setScale(bounds[idx][2], BigDecimal.ROUND_FLOOR).intValue()
+					* bdb.setScale(bounds[idx][2], BigDecimal.ROUND_FLOOR).intValue();
+			beEst = bda.setScale(bounds[idx][2], BigDecimal.ROUND_HALF_UP).intValue()
+					* bdb.setScale(bounds[idx][2], BigDecimal.ROUND_HALF_UP).intValue();
+			
+			switch (roundRand) {
+				case 0:
+					question = bundle.getString("integer.highestimate");
+					roundMode = BigDecimal.ROUND_CEILING;				
+					break;
+				case 1:
+					question = bundle.getString("integer.lowestimate");
+					roundMode = BigDecimal.ROUND_FLOOR;
+					
+					break;
+				default:
+					question = bundle.getString("integer.bestestimate");
+					roundMode = BigDecimal.ROUND_HALF_UP;
+					break;
+				
+			}			
+			
+			int rslt= bda.setScale(bounds[idx][2], roundMode).intValue()
+					* bdb.setScale(bounds[idx][2], roundMode).intValue();
+			
 			q.setQuestion(question+" "+roundT+" : "+a+" x "+b);
 			q.setCorrectAnswer(String.valueOf(rslt));
-			for (int j = -1; j >= -3; j-- ) {
-				BigDecimal c = bda.setScale(j, roundMode);
-				q.addChoice(c.toBigInteger().intValue());
-			}
+			q.addChoice(hiEst,loEst,beEst);
 			q.setDifficultyLevel(QuizLevel.MUDAH);
 			q.setLessonSubcategory(bundle.getString("integer.estimation"));
 			q.setLessonClassifier(bundle.getString("mathelementary"));
