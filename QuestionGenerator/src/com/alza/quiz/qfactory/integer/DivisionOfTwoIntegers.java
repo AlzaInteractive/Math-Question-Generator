@@ -63,9 +63,9 @@ public class DivisionOfTwoIntegers implements IQuestionFactory{
 			MultipleChoiceQuiz q = new MultipleChoiceQuiz();
 			int rslt = a*b;
 			if (a%2 == 0) {
-				q.setChoices(rslt,rslt-1,rslt+2);
+				q.setChoices(b,b-1,b+2);
 			} else {
-				q.setChoices(rslt,rslt+1,rslt+2);
+				q.setChoices(b,b+1,b+2);
 			}
 			
 			q.setQuestion(rslt+" : "+a);
