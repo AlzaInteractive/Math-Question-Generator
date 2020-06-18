@@ -22,6 +22,14 @@ import java.util.concurrent.ThreadLocalRandom;
 public class CommonFunctionAndValues {
 	public final static String MJXTAG = "$$";
 	public final static DecimalFormat DF2PLC = new DecimalFormat("#.##");
+	
+	public static int hashSimple(String s) {
+		int hash = 7;
+		for (int i = 0; i < s.length(); i++) {
+		    hash = hash*31 + s.charAt(i);
+		}
+		return hash;
+	}
 
 	public static String enclosedWithMathJaxExp(String s) {
 		return MJXTAG + s + MJXTAG;
