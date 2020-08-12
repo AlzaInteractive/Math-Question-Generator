@@ -114,7 +114,8 @@ public class Level0AddSub implements IQuestionFactory{
 		question = question.replace("a", String.valueOf(a));
 		question = question.replace("b", String.valueOf(b));
 		question = question.replaceAll("VAR", var);
-		question = question + "\n " + var + " = ?";
+		question = question + " \\\\ " + var + " = ?";
+		question = "$"+question+"$";
 		return question;
 	}
 
