@@ -48,8 +48,8 @@ public class FractionMixedNumberConversion implements IQuestionFactory{
 		List<Quiz> quizList= new ArrayList<Quiz>();
 		for (int i=0; i<numq; i++){
 			MultipleChoiceQuiz q = null;
-			boolean isOdd = i % 2 > 0; 
-			if (isOdd){
+			int cutoff = Math.round(numq / 2);			
+			if (i >= cutoff){
 				q = generateFromMixedForm();
 				q.setDifficultyLevel(QuizLevel.MUDAH);
 			}
@@ -57,7 +57,6 @@ public class FractionMixedNumberConversion implements IQuestionFactory{
 				q = generateToMixedForm();
 				q.setDifficultyLevel(QuizLevel.MUDAH);
 			} 
-			//q.setQuestion(CommonFunctionAndValues.enclosedWithMathJaxExp(q.getQuestion()));
 			q.setLessonClassifier(bundle.getString("mathelementary"));
 			q.setLessonCategory(bundle.getString("fraction"));
 			q.setLessonGrade(5);
@@ -67,9 +66,7 @@ public class FractionMixedNumberConversion implements IQuestionFactory{
 		}
 		return quizList;
 	}
-
-	
-	
+		
 	private MultipleChoiceQuiz generateFromMixedForm() {
 		MultipleChoiceQuiz q = new MultipleChoiceQuiz();
 		int denomLeft;
@@ -89,6 +86,7 @@ public class FractionMixedNumberConversion implements IQuestionFactory{
 		
 		return q;
 	}
+	
 	private MultipleChoiceQuiz generateToMixedForm() {
 		MultipleChoiceQuiz q = new MultipleChoiceQuiz();
 		int denomLeft;
@@ -108,15 +106,13 @@ public class FractionMixedNumberConversion implements IQuestionFactory{
 		
 		return q;
 	}
+	
 	private Set<String> buildChoices(Fraction f1){
 		MixedFraction m = f1.getMixedFraction();
-		MixedFraction[] choices = new MixedFraction[6];
-		choices[0] = m;
-		choices[1] = f1.new MixedFraction(m.a, m.b, m.x);
-		choices[2] = f1.new MixedFraction(m.a, m.x, m.b);
-		choices[3] = f1.new MixedFraction(m.x, m.b, m.a);
-		choices[4] = f1.new MixedFraction(m.b, m.a, m.x);
-		choices[5] = f1.new MixedFraction(m.b, m.x, m.a);
+		MixedFraction[] choices = new MixedFraction[3];
+		choices[0] = m;		
+		choices[1] = f1.new MixedFraction(m.a, m.x, m.b);
+		choices[2] = f1.new MixedFraction(m.x, m.b, m.a);				
 		Set<String> choicesInString = new HashSet<String>();
 		for (MixedFraction f : choices) {
 			choicesInString.add(f.toString());
@@ -126,12 +122,10 @@ public class FractionMixedNumberConversion implements IQuestionFactory{
 	
 	private Set<String> buildChoicesReg(Fraction f1){
 		MixedFraction m = f1.getMixedFraction();
-		Fraction[] choices = new Fraction[5];
+		Fraction[] choices = new Fraction[3];
 		choices[0] = f1;
-		choices[1] = new Fraction(f1.b, f1.a);
-		choices[2] = new Fraction(m.x, m.b);
-		choices[3] = new Fraction(m.a, m.b);
-		choices[4] = new Fraction(m.x*m.a+m.b, m.a);
+		choices[1] = new Fraction(f1.b, f1.a);		
+		choices[2] = new Fraction(m.x*m.a+m.b, m.a);
 		Set<String> choicesInString = new HashSet<String>();
 		for (Fraction f : choices) {
 			choicesInString.add(f.toString());
