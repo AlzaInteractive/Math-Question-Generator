@@ -60,7 +60,7 @@ public class FractionCompareTwo implements IQuestionFactory {
 				q.setQuizLevel(QuizLevel.MUDAH);
 				q.setLessonGrade(4);
 			}
-			q.setQuestion(bundle.getString("fraction.pickgreatest"));
+			q.setQuestion(bundle.getString("fraction.whichoneislarger"));
 			q.setLessonSubcategory(bundle.getString("fraction.compare"));
 			q.setLessonClassifier(bundle.getString("mathelementary"));
 			q.setLessonCategory(bundle.getString("fraction"));
@@ -90,7 +90,7 @@ public class FractionCompareTwo implements IQuestionFactory {
 		return q;
 	}
 	public MultipleChoiceQuiz generateTypeB(){
-		int choiceSize=3;
+		int choiceSize=2;
 		Fraction[] fracs = new Fraction[choiceSize];
 		long denom = ThreadLocalRandom.current().nextInt(3, 7);
 		for (int i=0; i<choiceSize ; i++){
@@ -114,7 +114,7 @@ public class FractionCompareTwo implements IQuestionFactory {
 		int maxDenom = 25;
 		int minA = 3;
 		int maxA = 16; 
-		int choiceSize=5;
+		int choiceSize=2;
 		Fraction[] fracs = new Fraction[choiceSize];
 		int denom = ThreadLocalRandom.current().nextInt(minDenom, maxDenom);
 		for (int i=0; i<choiceSize ; i++){
