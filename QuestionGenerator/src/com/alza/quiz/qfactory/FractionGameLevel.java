@@ -12,7 +12,7 @@ import com.alza.quiz.qfactory.fraction.FractionConvertFromDecimal;
 import com.alza.quiz.qfactory.fraction.FractionConvertFromPercentage;
 import com.alza.quiz.qfactory.fraction.FractionConvertToDecimal;
 import com.alza.quiz.qfactory.fraction.FractionConvertToPercentage;
-import com.alza.quiz.qfactory.fraction.FractionDivide;
+import com.alza.quiz.qfactory.fraction.FractionDivision;
 import com.alza.quiz.qfactory.fraction.FractionEqualityTypeA;
 import com.alza.quiz.qfactory.fraction.FractionEqualityTypeB;
 import com.alza.quiz.qfactory.fraction.FractionFindEqualByMultiplyingOrDividing;
@@ -82,7 +82,7 @@ public class FractionGameLevel implements IPlayableLevelsGroup{
 		//fraction division
 		name = bundle.getString("fraction.division");
 		desc = bundle.getString("fraction.divisiondesc");
-		g = GameLevel.createSingleQF(6, name, desc, new FractionDivide(loc), 6);
+		g = GameLevel.createSingleQF(6, name, desc, new FractionDivision(loc), 6);
 		lgl.add(g);
 		
 		//mixed number form
@@ -146,7 +146,7 @@ public class FractionGameLevel implements IPlayableLevelsGroup{
 		g.addQuestionFactory(new FractionCompareTwo(loc), 1);
 		g.addQuestionFactory(new FractionAddSubtract(loc), 1);
 		g.addQuestionFactory(new FractionMultiplication(loc), 1);
-		g.addQuestionFactory(new FractionDivide(loc), 1);
+		g.addQuestionFactory(new FractionDivision(loc), 1);
 		g.addQuestionFactory(new FractionMixedNumberConversion(loc), 2);
 		g.addQuestionFactory(new FractionMixedNumberOperation(loc), 2);
 		g.addQuestionFactory(new FractionConvertToDecimal(loc), 1);
