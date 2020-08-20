@@ -18,7 +18,7 @@ public class FractionFindEqualByMultiplyingOrDividing implements IQuestionFactor
 	private int numq = 4;
 	
 	private int[][] simpleMultiplier = {{2,3},{3,5},{4,7},{5,8},{3,7}};
-	private static final int CHOICE_SIZE=4;
+	private static final int CHOICE_SIZE=3;
 	
 	Locale loc;
 	ResourceBundle bundle;
