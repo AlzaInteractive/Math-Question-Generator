@@ -48,11 +48,11 @@ public class FractionAddSubtract implements IQuestionFactory{
 		List<Quiz> quizList= new ArrayList<Quiz>();
 		for (int i=0; i<numq; i++){
 			MultipleChoiceQuiz q = null;
-			if (i >= 5){
+			if (i >= 4){
 				q = generateTypeC(i);
 				q.setDifficultyLevel(QuizLevel.SULIT);
 				q.setLessonGrade(5);
-			} else if (i >= 3){
+			} else if (i >= 2){
 				q = generateTypeB(i);
 				q.setDifficultyLevel(QuizLevel.SEDANG);
 				q.setLessonGrade(5);
