@@ -68,7 +68,7 @@ public class FractionMultiplication implements IQuestionFactory{
 		int denomLeft,denomRight;
 		int gcdL,gcdR;
 		Fraction f1,f2;
-		if (i % 2 == 0) {
+		if (i < 3) {
 			do {
 				denom = CommonFunctionAndValues.getRandomInt(3, 13);
 				a1 = CommonFunctionAndValues.getRandomInt(2, 10);
