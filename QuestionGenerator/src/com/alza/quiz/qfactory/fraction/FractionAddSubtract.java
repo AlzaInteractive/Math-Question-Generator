@@ -74,22 +74,24 @@ public class FractionAddSubtract implements IQuestionFactory{
 
 	private MultipleChoiceQuiz generateTypeA(int i) {
 		MultipleChoiceQuiz q = new MultipleChoiceQuiz();
-		int denom = CommonFunctionAndValues.getRandomInt(11, 36);
+		int denom;
 		int a1,a2;
 		do {
-			a1 = CommonFunctionAndValues.getRandomInt(5, 17);
-			a2 = CommonFunctionAndValues.getRandomInt(5, 17);
+			denom = CommonFunctionAndValues.getRandomInt(4, 10);
+			a1 = CommonFunctionAndValues.getRandomInt(2, 6);
+			a2 = CommonFunctionAndValues.getRandomInt(2, 7);
 		} while (!(denom > a1 && denom > a2 && (a1+a2)<=denom && a1>a2));
 		buildQuestion(i, q, denom, denom, a1, a2);
 		return q;
 	}
 	private MultipleChoiceQuiz generateTypeB(int i) {
 		MultipleChoiceQuiz q = new MultipleChoiceQuiz();
-		int denom = CommonFunctionAndValues.getRandomInt(11, 25);
+		int denom;
 		int a1,a2;
 		do {
-			a1 = CommonFunctionAndValues.getRandomInt(5, 16);
-			a2 = CommonFunctionAndValues.getRandomInt(5, 16);
+			denom = CommonFunctionAndValues.getRandomInt(5, 12);
+			a1 = CommonFunctionAndValues.getRandomInt(2, 10);
+			a2 = CommonFunctionAndValues.getRandomInt(2, 10);
 		} while (!(denom > a1 && denom > a2 && (a1+a2)<=denom && a1>a2));
 		buildQuestion(i, q, denom, denom, a1, a2);
 		return q;
@@ -99,10 +101,10 @@ public class FractionAddSubtract implements IQuestionFactory{
 		int denomLeft,denomRight;
 		int a1,a2,gcd;
 		do {
-			denomLeft = CommonFunctionAndValues.getRandomInt(5, 51);
-			denomRight = CommonFunctionAndValues.getRandomInt(5, 51);
-			a1 = CommonFunctionAndValues.getRandomInt(5, 17);
-			a2 = CommonFunctionAndValues.getRandomInt(5, 17);
+			denomLeft = CommonFunctionAndValues.getRandomInt(4, 12);
+			denomRight = CommonFunctionAndValues.getRandomInt(4, 12);
+			a1 = CommonFunctionAndValues.getRandomInt(2, 10);
+			a2 = CommonFunctionAndValues.getRandomInt(2, 10);
 			gcd = MathUtils.findGCDDjikstra(denomLeft, denomRight);
 		} while (denomLeft==denomRight||denomLeft<a1||denomRight<a2||gcd<2);
 		buildQuestion(i, q, denomLeft, denomRight, a1, a2);
@@ -116,9 +118,11 @@ public class FractionAddSubtract implements IQuestionFactory{
 		if (i % 2 == 0){
 			result = f1.getResultWhenAddedWith(f2);
 			q.setQuestion(f1.toMathJaxString()+" + "+f2.toMathJaxString());
+			q.setProblemString(f1.toString() + "+" + f2.toString());
 		} else{
 			result = f1.getResultWhenSubtractWith(f2);
 			q.setQuestion(f1.toMathJaxString()+" - "+f2.toMathJaxString());
+			q.setProblemString(f1.toString() + "-" + f2.toString());
 		}
 		q.setCorrectAnswer(result.toString());
 		q.setChoices(buildChoices(f1,f2,result));
@@ -132,8 +136,13 @@ public class FractionAddSubtract implements IQuestionFactory{
 			choices[1] = result.inverse();			
 			choices[2] = new Fraction(f1.a + f2.a, f1.b + f2.b);
 		} else {
-			choices[1] = result.inverse();			
-			choices[2] = new Fraction(f1.a - f2.a, f1.b - f2.b);
+			choices[1] = result.inverse();
+			if (f1.a != f2.a && f1.b != f2.b) {
+				choices[2] = new Fraction(f1.a - f2.a, f1.b - f2.b);
+			} else {
+				choices[2] = new Fraction(f1.a - f2.b, f1.b - f2.a);
+			}
+			
 		}
 		Set<String> choicesInString = new HashSet<String>();
 		for (Fraction f : choices) {
