@@ -11,6 +11,7 @@ import com.alza.quiz.model.MultipleChoiceQuiz;
 import com.alza.quiz.model.Quiz;
 import com.alza.quiz.model.QuizLevel;
 import com.alza.quiz.qfactory.IQuestionFactory;
+import com.alza.quiz.util.CommonFunctionAndValues;
 
 import net.objecthunter.exp4j.Expression;
 import net.objecthunter.exp4j.ExpressionBuilder;
@@ -70,36 +71,43 @@ public class Level0Div implements IQuestionFactory{
 	public List<Quiz> generateQuizList() {
 		generateProblemPattern();
 		List<Quiz> lq = new ArrayList<Quiz>();
-		for (int i= 0;i<numOfQuestion;i++){
-			int idx; 
-			idx = i % lProbs.size(); 
-			int a=0,b=0,c;
-			do {
-				a = ThreadLocalRandom.current().nextInt(3,10);
-				b = ThreadLocalRandom.current().nextInt(3,8);
-				c = a * b;
-			} while (a<=b);
-			
-			MultipleChoiceQuiz q = new MultipleChoiceQuiz();
-			ProblemPattern p = lProbs.get(idx); 
-			
-			// prepare question
-			String question = prepareQuestion(a, b, c, p); 
-			q.setQuestion(question);
-			// prepare answer
-			String exp = p.expression;			
-			int rslt = (int) runExpression(exp, a, b, c);
-			q.setCorrectAnswer(String.valueOf(rslt));
-			// prepare choices
-			String[] choicePattern = p.choicePattern;
-			for (String string : choicePattern) {
-				double choice = runExpression(string, a, b, c);
-				q.addChoice(String.valueOf((int)choice));
-			}
-			setQuizSecondaryAttributes(idx, q);
-			lq.add(q);
+		for (int i= 0;i<numOfQuestion;i++){			
+			lq.add(createSingleQuiz(i));
 		}
 		return lq;
+	}
+	
+	private Quiz createSingleQuiz(int i) {
+		int idx; 
+		idx = i % lProbs.size(); 
+		int a=0,b=0,c;
+		do {
+			a = ThreadLocalRandom.current().nextInt(3,10);
+			b = ThreadLocalRandom.current().nextInt(3,8);
+			c = a * b;
+		} while (a<=b);
+		
+		MultipleChoiceQuiz q = new MultipleChoiceQuiz();
+		ProblemPattern p = lProbs.get(idx); 		
+		setQuizPrimaryAttribute(a, b, c, p, q);
+		setAnswer(a, b, c, q, p);
+		setChoices(a, b, c, q, p);
+		setQuizSecondaryAttributes(idx, q);
+		return q;
+	}
+	
+	private void setChoices(int a, int b, int c, MultipleChoiceQuiz q, ProblemPattern p) {
+		String[] choicePattern = p.choicePattern;
+		for (String string : choicePattern) {
+			double choice = runExpression(string, a, b, c);
+			q.addChoice(String.valueOf((int)choice));
+		}
+	}
+	
+	private void setAnswer(int a, int b, int c, MultipleChoiceQuiz q, ProblemPattern p) {
+		String exp = p.expression;			
+		int rslt = (int) runExpression(exp, a, b, c);
+		q.setCorrectAnswer(String.valueOf(rslt));
 	}
 	
 	private void setQuizSecondaryAttributes(int idx, MultipleChoiceQuiz q) {
@@ -112,15 +120,19 @@ public class Level0Div implements IQuestionFactory{
 		q.setLessonCategory(bundle.getString("algebra"));
 		q.setLocale(loc);
 	}
-	private String prepareQuestion(int a, int b, int c, ProblemPattern p) {
+			
+	private void setQuizPrimaryAttribute(int a,int b, int c, ProblemPattern p, Quiz q) {
 		String var = VARSYM[ThreadLocalRandom.current().nextInt(0, VARSYM.length)];
-		String question = p.question;
-		question = question.replace("a", String.valueOf(a));
-		question = question.replace("b", String.valueOf(b));
-		question = question.replace("c", String.valueOf(c));
-		question = question.replaceAll("VAR", var);
-		question = question + "\n " + var + " = ?";
-		return question;
+		String qLine1 = p.question;
+		qLine1 = qLine1.replace("a", String.valueOf(a));
+		qLine1 = qLine1.replace("b", String.valueOf(b));
+		qLine1 = qLine1.replace("c", String.valueOf(c));
+		qLine1 = qLine1.replaceAll("VAR", var);
+		q.setProblemString(qLine1);
+		qLine1 = CommonFunctionAndValues.enclosedWithMathJaxExp(qLine1);
+		String qLine2 = CommonFunctionAndValues.enclosedWithMathJaxExp(var + " = ?");
+		q.setQuestion(qLine1+" "+qLine2);
+		
 	}
 
 	@Override

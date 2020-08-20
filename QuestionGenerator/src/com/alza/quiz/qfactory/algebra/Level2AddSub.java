@@ -11,6 +11,7 @@ import com.alza.quiz.model.MultipleChoiceQuiz;
 import com.alza.quiz.model.Quiz;
 import com.alza.quiz.model.QuizLevel;
 import com.alza.quiz.qfactory.IQuestionFactory;
+import com.alza.quiz.util.CommonFunctionAndValues;
 
 import net.objecthunter.exp4j.Expression;
 import net.objecthunter.exp4j.ExpressionBuilder;
@@ -19,7 +20,7 @@ public class Level2AddSub implements IQuestionFactory{
 	// private final static String MJXTAG ="$$"; 
 	Locale loc;
 	ResourceBundle bundle,bundleAlgebra;
-	private String[] VARSYM = {"X","Y"};
+	private String[] VARSYM = {"x","y"};
 	List<ProblemPattern> lProbs = new ArrayList<>();
 	public Level2AddSub(Locale loc){
 		this.loc = loc;
@@ -67,35 +68,57 @@ public class Level2AddSub implements IQuestionFactory{
 		generateProblemPattern();
 		List<Quiz> lq = new ArrayList<Quiz>();
 		for (int i= 0;i<numOfQuestion;i++){
-			int idx; 
-			idx = i % lProbs.size(); 
-			int a=0,b=0;
-			do {
-				a = ThreadLocalRandom.current().nextInt(3,10);
-				b = ThreadLocalRandom.current().nextInt(3,8);
-			} while (a<=b);
-			
-			MultipleChoiceQuiz q = new MultipleChoiceQuiz();
-			ProblemPattern p = lProbs.get(idx); 
-			
-			// prepare question
-			String question = prepareQuestion(a, b, p); 
-			q.setQuestion(question);
-			// prepare answer
-			String exp = p.expression;			
-			int rslt = (int) runExpression(exp, a, b);
-			q.setCorrectAnswer(String.valueOf(rslt));
-			// prepare choices
-			String[] choicePattern = p.choicePattern;
-			for (String string : choicePattern) {
-				double choice = runExpression(string, a, b);
-				q.addChoice(String.valueOf((int)choice));
-			}
-			setQuizSecondaryAttributes(idx, q);
+			MultipleChoiceQuiz q = createSingleQuiz(i);
 			lq.add(q);
 		}
 		
 		return lq;
+	}
+	
+	private MultipleChoiceQuiz createSingleQuiz(int i) {
+		int idx; 
+		idx = i % lProbs.size(); 
+		int a=0,b=0;
+		do {
+			a = ThreadLocalRandom.current().nextInt(3,10);
+			b = ThreadLocalRandom.current().nextInt(3,8);
+		} while (a<=b);
+		
+		MultipleChoiceQuiz q = new MultipleChoiceQuiz();
+		ProblemPattern p = lProbs.get(idx); 		
+		setQuestion(a, b, q, p);
+		setAnswer(a, b, q, p);
+		setChoices(a, b, q, p);
+		setQuizSecondaryAttributes(idx, q);
+		return q;
+	}
+	
+	private void setChoices(int a, int b, MultipleChoiceQuiz q, ProblemPattern p) {
+		// prepare choices
+		String[] choicePattern = p.choicePattern;
+		for (String string : choicePattern) {
+			double choice = runExpression(string, a, b);
+			q.addChoice(String.valueOf((int)choice));
+		}
+	}
+	
+	private void setAnswer(int a, int b, MultipleChoiceQuiz q, ProblemPattern p) {
+		// prepare answer
+		String exp = p.expression;			
+		int rslt = (int) runExpression(exp, a, b);
+		q.setCorrectAnswer(String.valueOf(rslt));
+	}
+	
+	private void setQuestion(int a, int b, MultipleChoiceQuiz q, ProblemPattern p) {
+		String var = VARSYM[ThreadLocalRandom.current().nextInt(0, VARSYM.length)];
+		String qLine1 = p.question;
+		qLine1 = qLine1.replace("a", String.valueOf(a));
+		qLine1 = qLine1.replace("b", String.valueOf(b));
+		qLine1 = qLine1.replaceAll("VAR", var);
+		q.setProblemString(qLine1);
+		qLine1 = CommonFunctionAndValues.enclosedWithMathJaxExp(qLine1);
+		String qLine2 = CommonFunctionAndValues.enclosedWithMathJaxExp(var + " = ?");
+		q.setQuestion(qLine1+" "+qLine2);
 	}
 	
 	private void setQuizSecondaryAttributes(int idx, MultipleChoiceQuiz q) {
@@ -108,16 +131,7 @@ public class Level2AddSub implements IQuestionFactory{
 		q.setLessonCategory(bundle.getString("algebra"));
 		q.setLocale(loc);
 	}
-	private String prepareQuestion(int a, int b, ProblemPattern p) {
-		String var = VARSYM[ThreadLocalRandom.current().nextInt(0, VARSYM.length)];
-		String question = p.question;
-		question = question.replace("a", String.valueOf(a));
-		question = question.replace("b", String.valueOf(b));
-		question = question.replaceAll("VAR", var);
-		question = question + "\n" + var + " = ?";
-		return question;
-	}
-
+	
 	@Override
 	public List<Quiz> generateQuizList(int numOfQuestion) {
 		this.numOfQuestion = numOfQuestion;

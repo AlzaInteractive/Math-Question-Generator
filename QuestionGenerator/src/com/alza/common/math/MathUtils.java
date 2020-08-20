@@ -1,4 +1,7 @@
 package com.alza.common.math;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -253,4 +256,29 @@ public class MathUtils {
 		Character c = '\u00F7';
 		return c.toString();
 	}
+	
+	public static String getWolframAlphaSolverURL(String mathProblem) {
+		mathProblem = mathProblem.replace(" ", "");
+		String baseUrl = "https://www.wolframalpha.com/input/?i=solve";
+		return baseUrl + encodeValue(" "+mathProblem);
+	}
+	
+	public static String getSymbolabsSolverURL(String mathProblem) {
+		String baseUrl = "https://www.symbolab.com/solver/algebra-calculator/";
+		return baseUrl + encodeValue(mathProblem);
+	}
+	
+	public static String getMicrosoftMathSolverURL(String mathProblem) {		
+		mathProblem = mathProblem.replace(" ", "");
+		String baseUrl = "https://mathsolver.microsoft.com/en/solve-problem/";
+		return baseUrl + encodeValue(mathProblem);
+	}
+	
+	private static String encodeValue(String value) {
+        try {
+            return URLEncoder.encode(value, StandardCharsets.UTF_8.name());
+        } catch (UnsupportedEncodingException ex) {
+            throw new RuntimeException(ex.getCause());
+        }
+    }
 }

@@ -11,6 +11,7 @@ import com.alza.quiz.model.MultipleChoiceQuiz;
 import com.alza.quiz.model.Quiz;
 import com.alza.quiz.model.QuizLevel;
 import com.alza.quiz.qfactory.IQuestionFactory;
+import com.alza.quiz.util.CommonFunctionAndValues;
 
 import net.objecthunter.exp4j.Expression;
 import net.objecthunter.exp4j.ExpressionBuilder;
@@ -19,7 +20,7 @@ public class Level3MixedOperationDiv implements IQuestionFactory{
 	// private final static String MJXTAG ="$$"; 
 	Locale loc;
 	ResourceBundle bundle,bundleAlgebra;
-	private String[] VARSYM = {"X","Y"};
+	private String[] VARSYM = {"x","y"};
 	List<ProblemPattern> lProbs = new ArrayList<>();
 	public Level3MixedOperationDiv(Locale loc){
 		this.loc = loc;
@@ -75,36 +76,56 @@ public class Level3MixedOperationDiv implements IQuestionFactory{
 		generateProblemPattern();
 		List<Quiz> lq = new ArrayList<Quiz>();
 		for (int i= 0;i<numOfQuestion;i++){
-			int idx; 
-			idx = i % lProbs.size(); 
-			ProblemPattern p = lProbs.get(idx);
-			int a=0,b=0,c=0;
-			do {
-				a = ThreadLocalRandom.current().nextInt(2,5);
-				b = ThreadLocalRandom.current().nextInt(3,11);
-				c = ThreadLocalRandom.current().nextInt(3,11);
-			} while (b==c );
-			
-			MultipleChoiceQuiz q = new MultipleChoiceQuiz();
-
-			// prepare question
-			String question = prepareQuestion(a, b, c, p); 
-			q.setQuestion(question);
-			// prepare answer
-			String exp = p.expression;			
-			int rslt = (int) runExpression(exp, a, b, c);
-			q.setCorrectAnswer(String.valueOf(rslt));
-			// prepare choices
-			String[] choicePattern = p.choicePattern;
-			for (String string : choicePattern) {
-				double choice = runExpression(string, a, b, c);
-				q.addChoice(String.valueOf((int)choice));
-			}
-			setQuizSecondaryAttributes(idx, q);
+			MultipleChoiceQuiz q = createSingleQuiz(i);
 			lq.add(q);
 		}
 		
 		return lq;
+	}
+	private MultipleChoiceQuiz createSingleQuiz(int i) {
+		int idx; 
+		idx = i % lProbs.size(); 
+		ProblemPattern p = lProbs.get(idx);
+		int a=0,b=0,c=0;
+		do {
+			a = ThreadLocalRandom.current().nextInt(2,5);
+			b = ThreadLocalRandom.current().nextInt(3,11);
+			c = ThreadLocalRandom.current().nextInt(3,11);
+		} while (b==c );
+		
+		MultipleChoiceQuiz q = new MultipleChoiceQuiz();
+
+		setQuestion(p, a, b, c, q);
+		setAnswer(p, a, b, c, q);
+		setChoices(p, a, b, c, q);
+		setQuizSecondaryAttributes(idx, q);
+		return q;
+	}
+	private void setChoices(ProblemPattern p, int a, int b, int c, MultipleChoiceQuiz q) {
+		// prepare choices
+		String[] choicePattern = p.choicePattern;
+		for (String string : choicePattern) {
+			double choice = runExpression(string, a, b, c);
+			q.addChoice(String.valueOf((int)choice));
+		}
+	}
+	private void setAnswer(ProblemPattern p, int a, int b, int c, MultipleChoiceQuiz q) {
+		// prepare answer
+		String exp = p.expression;			
+		int rslt = (int) runExpression(exp, a, b, c);
+		q.setCorrectAnswer(String.valueOf(rslt));
+	}
+	private void setQuestion(ProblemPattern p, int a, int b, int c, MultipleChoiceQuiz q) {
+		String var = VARSYM[ThreadLocalRandom.current().nextInt(0, VARSYM.length)];
+		String qLine1 = p.question;
+		qLine1 = qLine1.replace("a", String.valueOf(a));
+		qLine1 = qLine1.replace("b", String.valueOf(b));
+		qLine1 = qLine1.replace("c", String.valueOf(c));		
+		qLine1 = qLine1.replaceAll("VAR", var);
+		q.setProblemString(qLine1);
+		qLine1 = CommonFunctionAndValues.enclosedWithMathJaxExp(qLine1);
+		String qLine2 = CommonFunctionAndValues.enclosedWithMathJaxExp(var + " = ?");
+		q.setQuestion(qLine1+" "+qLine2);
 	}
 	
 	private void setQuizSecondaryAttributes(int idx, MultipleChoiceQuiz q) {
@@ -116,17 +137,7 @@ public class Level3MixedOperationDiv implements IQuestionFactory{
 		q.setLocalGeneratorOrder(idx);
 		q.setLessonCategory(bundle.getString("algebra"));
 		q.setLocale(loc);
-	}
-	private String prepareQuestion(int a, int b, int c, ProblemPattern p) {
-		String var = VARSYM[ThreadLocalRandom.current().nextInt(0, VARSYM.length)];
-		String question = p.question;
-		question = question.replace("a", String.valueOf(a));
-		question = question.replace("b", String.valueOf(b));
-		question = question.replace("c", String.valueOf(c));
-		question = question.replaceAll("VAR", var);
-		question = question + "\n" + var + " = ?";
-		return question;
-	}
+	}	
 
 	@Override
 	public List<Quiz> generateQuizList(int numOfQuestion) {

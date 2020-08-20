@@ -31,6 +31,9 @@ public class GameLevelDemo {
 				System.out.println("Choices : "+ String.join(" , ", mq.getChoices()));
 			}
 			System.out.println("Answer : "+ q.getCorrectAnswer());
+			System.out.println("Problem : "+ q.getProblemString());
+			System.out.println("Solver : "+ q.getMicrosoftMathSolverURL());
+			System.out.println("Solver : "+ q.getWolframSolverURL());
 		}
 	}
 }

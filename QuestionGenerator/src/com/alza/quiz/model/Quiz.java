@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+import com.alza.common.math.MathUtils;
+
 /**
  * Created by galuh on 24/12/16.
  */
@@ -15,6 +17,7 @@ public abstract class Quiz implements Comparable<Quiz>, Comparator<Quiz>{
     Locale locale;
     int subCategoryOrder = 99;
     String question;
+    String problemString;
     String correctAnswer;
     String lessonClassifier;
     String lessonCategory;
@@ -116,6 +119,14 @@ public abstract class Quiz implements Comparable<Quiz>, Comparator<Quiz>{
 		this.question = question;
 	}
 
+	public String getProblemString() {
+		return problemString;
+	}
+
+	public void setProblemString(String problemString) {
+		this.problemString = problemString;
+	}
+
 	public void setCorrectAnswer(String correctAnswer) {
 		this.correctAnswer = correctAnswer;
 	}
@@ -126,6 +137,18 @@ public abstract class Quiz implements Comparable<Quiz>, Comparator<Quiz>{
 
 	public void setHints(List<String> hints) {
 		this.hints = hints;
+	}
+	
+	public String getWolframSolverURL() {
+		return MathUtils.getWolframAlphaSolverURL(this.problemString);
+	}
+	
+	public String getSymbolabsSolverURL() {
+		return MathUtils.getSymbolabsSolverURL(this.problemString);
+	}
+	
+	public String getMicrosoftMathSolverURL() {
+		return MathUtils.getMicrosoftMathSolverURL(this.problemString);
 	}
 
 	public int compareTo(Quiz o){
