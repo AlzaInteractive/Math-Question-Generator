@@ -57,39 +57,39 @@ public class FractionGameLevel implements IPlayableLevelsGroup{
 		//fraction simplest fraction
 		name = bundle.getString("fraction.simplify");
 		desc = bundle.getString("fraction.simplifydesc");
-		g = GameLevel.createSingleQF(2, name, desc, new FractionSimplify(loc), 7);
+		g = GameLevel.createSingleQF(2, name, desc, new FractionSimplify(loc), 6);
 		lgl.add(g);
 		
 		//fraction compare simple form
 		name = bundle.getString("fraction.compare");
 		desc = bundle.getString("fraction.comparedesc");
-		g = GameLevel.createSingleQF(3, name, desc, new FractionCompareTwo(loc), 7);
+		g = GameLevel.createSingleQF(3, name, desc, new FractionCompareTwo(loc), 6);
 		//g.addQuestionFactory(new FractionPickGreatest(), 3);
 		lgl.add(g);
 		
 		//fraction addition and subtraction
 		name = bundle.getString("fraction.addsubtract");
 		desc = bundle.getString("fraction.addsubtractdesc");
-		g = GameLevel.createSingleQF(4, name, desc, new FractionAddSubtract(loc), 7);
+		g = GameLevel.createSingleQF(4, name, desc, new FractionAddSubtract(loc), 6);
 		lgl.add(g);		
 		
 		//fraction multiplication
 		name = bundle.getString("fraction.multiplication");
 		desc = bundle.getString("fraction.multiplicationdesc");
-		g = GameLevel.createSingleQF(5, name, desc, new FractionMultiplication(loc), 7);
+		g = GameLevel.createSingleQF(5, name, desc, new FractionMultiplication(loc), 6);
 		lgl.add(g);
 		
 		//fraction division
 		name = bundle.getString("fraction.division");
 		desc = bundle.getString("fraction.divisiondesc");
-		g = GameLevel.createSingleQF(6, name, desc, new FractionDivide(loc), 7);
+		g = GameLevel.createSingleQF(6, name, desc, new FractionDivide(loc), 6);
 		lgl.add(g);
 		
 		//mixed number form
 		name = bundle.getString("fraction.mixednumber");
 		desc = bundle.getString("fraction.mixednumberdesc");
-		g = GameLevel.createSingleQF(7, name, desc, new FractionMixedNumberConversion(loc), 4);
-		g.addQuestionFactory(new FractionMixedNumberOperation(loc),4);
+		g = GameLevel.createSingleQF(7, name, desc, new FractionMixedNumberConversion(loc), 3);
+		g.addQuestionFactory(new FractionMixedNumberOperation(loc),3);
 		lgl.add(g);
 		
 		//decimal form
