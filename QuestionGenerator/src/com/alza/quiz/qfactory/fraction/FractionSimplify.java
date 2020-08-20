@@ -63,11 +63,11 @@ public class FractionSimplify implements IQuestionFactory {
 			Fraction fAns = fQuest.getSimplestForm();
 			List<Fraction> choices = new ArrayList<Fraction>();
 			choices.add(fAns);
-			choices.add(new Fraction(c/2, d/2));
-			choices.add(new Fraction(c/3, d/3));
+			choices.add(new Fraction(a, c));
+			choices.add(new Fraction(b, d));
 			if (c>10 && d>10){
-				choices.add(new Fraction(c/4, d/4));
-				choices.add(new Fraction(c/5, d/5));
+				//choices.add(new Fraction(c/4, d/4));
+				//choices.add(new Fraction(c/5, d/5));
 			}
 			Collections.shuffle(choices);
 			MultipleChoiceQuiz q = new MultipleChoiceQuiz();
