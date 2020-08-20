@@ -48,11 +48,11 @@ public class FractionAddSubtract implements IQuestionFactory{
 		List<Quiz> quizList= new ArrayList<Quiz>();
 		for (int i=0; i<numq; i++){
 			MultipleChoiceQuiz q = null;
-			if (i % 3 == 2){
+			if (i >= 5){
 				q = generateTypeC(i);
 				q.setDifficultyLevel(QuizLevel.SULIT);
 				q.setLessonGrade(5);
-			} else if (i % 3 == 1){
+			} else if (i >= 3){
 				q = generateTypeB(i);
 				q.setDifficultyLevel(QuizLevel.SEDANG);
 				q.setLessonGrade(5);
@@ -124,22 +124,16 @@ public class FractionAddSubtract implements IQuestionFactory{
 		q.setChoices(buildChoices(f1,f2,result));
 	}
 	private Set<String> buildChoices(Fraction f1,Fraction f2,Fraction result){
-		Fraction[] choices = new Fraction[6];
+		Fraction[] choices = new Fraction[3];
 		choices[0] = result;
 		boolean isAddition=false;
 		isAddition = (result.equals(f1.getResultWhenAddedWith(f2)));
 		if (isAddition){
-			choices[1] = result.inverse();
-			choices[2] = f1.getResultWhenAddedWith(f2.inverse());
-			choices[3] = f2.getResultWhenAddedWith(f1.inverse());
-			choices[4] = f1.inverse().getResultWhenAddedWith(f2.inverse());
-			choices[5] = new Fraction(f1.a + f2.a, f1.b + f2.b);
+			choices[1] = result.inverse();			
+			choices[2] = new Fraction(f1.a + f2.a, f1.b + f2.b);
 		} else {
-			choices[1] = result.inverse();
-			choices[2] = f1.getResultWhenAddedWith(f2.inverse());
-			choices[3] = f2.getResultWhenAddedWith(f1.inverse());
-			choices[4] = f1.inverse().getResultWhenAddedWith(f2.inverse());
-			choices[5] = new Fraction(f1.a - f2.a, f1.b - f2.b);
+			choices[1] = result.inverse();			
+			choices[2] = new Fraction(f1.a - f2.a, f1.b - f2.b);
 		}
 		Set<String> choicesInString = new HashSet<String>();
 		for (Fraction f : choices) {
