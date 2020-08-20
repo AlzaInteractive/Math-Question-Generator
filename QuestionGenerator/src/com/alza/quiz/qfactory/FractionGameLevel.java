@@ -88,7 +88,7 @@ public class FractionGameLevel implements IPlayableLevelsGroup{
 		//mixed number form
 		name = bundle.getString("fraction.mixednumber");
 		desc = bundle.getString("fraction.mixednumberdesc");
-		g = GameLevel.createSingleQF(7, name, desc, new FractionMixedNumberConversion(loc), 3);
+		g = GameLevel.createSingleQF(7, name, desc, new FractionMixedNumberConversion(loc), 4);
 		g.addQuestionFactory(new FractionMixedNumberOperation(loc),3);
 		lgl.add(g);
 		
