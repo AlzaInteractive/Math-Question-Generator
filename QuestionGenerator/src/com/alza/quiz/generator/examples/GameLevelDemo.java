@@ -1,5 +1,6 @@
 package com.alza.quiz.generator.examples;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
 
@@ -11,7 +12,7 @@ import com.alza.quiz.qfactory.*;
 
 public class GameLevelDemo {
 	public static void main(String[] args) {
-		IPlayableLevelsGroup lg = new AlgebraGameLevel();
+		IPlayableLevelsGroup lg = new FractionGameLevel();
 		List<GameLevel> gls = lg.createGameLevels(new Locale("en","US"));
 		gls = lg.createGameLevels(new Locale("in","ID"));
 		for (GameLevel gameLevel : gls) {
@@ -22,6 +23,13 @@ public class GameLevelDemo {
 		System.out.println("------------------------");
 		System.out.println("Game Level: " + gl.getOrder()+" "+gl.getName()+": "+gl.getDesc());
 		List<Quiz> lq = gl.generateQuiz();
+		lq.sort(new Comparator<Quiz>(
+				) {
+			@Override
+		    public int compare(Quiz o1, Quiz o2) {
+		        return o1.getQuizLevel().compareTo(o2.getQuizLevel());
+		    }
+		});
 		for (Quiz q : lq) {
 			System.out.println("------------------------------");
 			//System.out.println("Subcategory :" +q.getLessonSubcategory());
@@ -31,9 +39,9 @@ public class GameLevelDemo {
 				System.out.println("Choices : "+ String.join(" , ", mq.getChoices()));
 			}
 			System.out.println("Answer : "+ q.getCorrectAnswer());
-			System.out.println("Problem : "+ q.getProblemString());
-			System.out.println("Solver : "+ q.getMicrosoftMathSolverURL());
-			System.out.println("Solver : "+ q.getWolframSolverURL());
+			//System.out.println("Problem : "+ q.getProblemString());
+			//System.out.println("Solver : "+ q.getMicrosoftMathSolverURL());
+			//System.out.println("Solver : "+ q.getWolframSolverURL());
 		}
 	}
 }
