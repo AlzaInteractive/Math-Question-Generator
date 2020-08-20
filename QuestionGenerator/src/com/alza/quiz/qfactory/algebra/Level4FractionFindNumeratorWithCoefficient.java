@@ -109,13 +109,7 @@ public class Level4FractionFindNumeratorWithCoefficient implements IQuestionFact
 			return (CommonFunctionAndValues.hashSimple(s));
 		}
 		
-		int[] getChoices() {
-			int c;
-			if (a>b) {
-				c = a / b;
-			} else {
-				c = b / a;
-			}
+		int[] getChoices() {			
 			int[] choices = {a*coeff/b,a+b,a*b/coeff};
 			return choices;
 		}
