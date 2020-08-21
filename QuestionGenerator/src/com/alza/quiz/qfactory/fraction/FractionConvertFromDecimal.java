@@ -50,27 +50,26 @@ public class FractionConvertFromDecimal implements IQuestionFactory {
 
 	private void generateDecimalToFraction(List<Quiz> quizList){
 		for (int i=0;i<numq;i++){
+			int cutoff = Math.round(numq/2);
 			MultipleChoiceQuiz q = new MultipleChoiceQuiz();
 			int a,denom;
-			if (i % 2 == 1){
+			if (i >=cutoff ){
 				do {
-					a = CommonFunctionAndValues.getRandomInt(2, 10);
-					denom = CommonFunctionAndValues.getRandomInt(2, 11);
-				} while (denom>=a || (a%denom==0) || 1000 % denom >0);
+					a = CommonFunctionAndValues.getRandomInt(2, 21);
+					denom = CommonFunctionAndValues.getRandomInt(2, 21);
+				} while (denom>=a || (a%denom==0) || 1000 % denom > 0);
 			} else {
 				do {
-					a = CommonFunctionAndValues.getRandomInt(2, 23);
-					denom = CommonFunctionAndValues.getRandomInt(2, 10);
-				} while (denom<=a || 1000 % denom >0);
+					a = CommonFunctionAndValues.getRandomInt(2, 21);
+					denom = CommonFunctionAndValues.getRandomInt(2, 21);
+				} while (denom<=a || 1000 % denom > 0);
 			}
 			Fraction fQuest = new Fraction(a,denom);
 			//String correctAnswer = fQuest.getTwoDigitDecimalForm();
 			Fraction f1 = fQuest.getResultWhenMultipliedBy(new Fraction(10,1));
-			Fraction f2 = fQuest.getResultWhenMultipliedBy(new Fraction(1,10));
-			Fraction f3 = fQuest.getResultWhenMultipliedBy(new Fraction(1,5));
-			Fraction f4 = fQuest.getResultWhenMultipliedBy(new Fraction(2,1));
+			Fraction f2 = fQuest.getResultWhenMultipliedBy(new Fraction(1,10));			
 			List<Fraction> choices = new ArrayList<Fraction>();
-			choices.add(f1);choices.add(f2);choices.add(f3);choices.add(f4);choices.add(fQuest);
+			choices.add(f1);choices.add(f2);choices.add(fQuest);
 			Collections.shuffle(choices);
 			q.setQuestion(bundle.getString("fraction.fractionvalueof")
 					+" "+fQuest.getThreeDigitDecimalForm()

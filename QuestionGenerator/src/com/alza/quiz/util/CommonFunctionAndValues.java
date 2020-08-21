@@ -126,6 +126,10 @@ public class CommonFunctionAndValues {
 		int rnd = new Random().nextInt(array.length);
 		return array[rnd];
 	}
+	
+	public static int getRandomInt(int min, int max) {
+		return ThreadLocalRandom.current().nextInt(min, max);
+	}
 
 	public static String buildScenario(String base, String[] people, int[] values) {
 		String[] peopleExp = { "#orang1?", "#orang2?", "#orang3?", "#orang4?", "#orang5?" };
@@ -274,9 +278,7 @@ public class CommonFunctionAndValues {
 		return simpleIntLarger;
 	}
 
-	public static int getRandomInt(int min, int max) {
-		return ThreadLocalRandom.current().nextInt(min, max);
-	}
+	
 
 	public static List<String> getStringCollection(ResourceBundle bundle, String key) {
 		Enumeration<String> a = bundle.getKeys();

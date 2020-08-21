@@ -8,6 +8,7 @@ import java.util.Random;
 import java.util.ResourceBundle;
 
 import com.alza.common.math.Fraction;
+import com.alza.common.math.MathUtils;
 import com.alza.quiz.model.MultipleChoiceQuiz;
 import com.alza.quiz.model.Quiz;
 import com.alza.quiz.model.QuizLevel;
@@ -16,6 +17,7 @@ import com.alza.quiz.util.CommonFunctionAndValues;
 
 public class FractionConvertToDecimal implements IQuestionFactory {
 	private static int numq = 4;
+	private final int[] GOOD_DECS = {2,4,5,8,12}; 
 	Locale loc;
 	ResourceBundle bundle;
 	public FractionConvertToDecimal(Locale loc){
@@ -52,25 +54,24 @@ public class FractionConvertToDecimal implements IQuestionFactory {
 		for (int i=0;i<numq;i++){
 			MultipleChoiceQuiz q = new MultipleChoiceQuiz();
 			int a,denom;
-			if (i % 2 == 1){
+			int cutoff = Math.round(numq/2);
+			if (i >= cutoff){
 				do {
-					a = CommonFunctionAndValues.getRandomInt(2, 10);
-					denom = CommonFunctionAndValues.getRandomInt(2, 11);					
+					a = CommonFunctionAndValues.getRandomInt(2, 11);									   
+					denom = CommonFunctionAndValues.getRandom(GOOD_DECS);					
 				} while (denom>=a || (a%denom==0));
 			} else {
 				do {
-					a = CommonFunctionAndValues.getRandomInt(2, 23);
-					denom = CommonFunctionAndValues.getRandomInt(2, 10);
+					a = CommonFunctionAndValues.getRandomInt(2, 11);
+					denom = CommonFunctionAndValues.getRandom(GOOD_DECS);
 				} while (denom<=a);
 			}
 			Fraction fQuest = new Fraction(a,denom);
 			String correctAnswer = fQuest.getThreeDigitDecimalForm();
 			Fraction f1 = fQuest.getResultWhenMultipliedBy(new Fraction(10,1));
-			Fraction f2 = fQuest.getResultWhenMultipliedBy(new Fraction(1,10));
-			Fraction f3 = fQuest.getResultWhenMultipliedBy(new Fraction(1,5));
-			Fraction f4 = fQuest.getResultWhenMultipliedBy(new Fraction(2,1));
+			Fraction f2 = fQuest.getResultWhenMultipliedBy(new Fraction(1,10));			
 			List<Fraction> choices = new ArrayList<Fraction>();
-			choices.add(f1);choices.add(f2);choices.add(f3);choices.add(f4);choices.add(fQuest);
+			choices.add(f1);choices.add(f2);choices.add(fQuest);
 			Collections.shuffle(choices);
 			
 			q.setDifficultyLevel(QuizLevel.MUDAH);
