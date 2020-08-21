@@ -47,8 +47,9 @@ public class FractionMixedNumberOperation implements IQuestionFactory{
 	public List<Quiz> generateQuizList() {
 		List<Quiz> quizList= new ArrayList<Quiz>();
 		for (int i=0; i<numq; i++){
+			int cutoff = Math.round(numq/2);
 			MultipleChoiceQuiz q = null;
-			if (i>2){
+			if (i>=cutoff){
 				q = generateTypeMultiDivide(i);
 				q.setDifficultyLevel(QuizLevel.SULIT);
 			}
@@ -69,15 +70,17 @@ public class FractionMixedNumberOperation implements IQuestionFactory{
 
 	private MultipleChoiceQuiz generateTypeMultiDivide(int i) {
 		MultipleChoiceQuiz q = new MultipleChoiceQuiz();
-		int denom = CommonFunctionAndValues.getRandomInt(6, 13);
+		int denomL,denomR = CommonFunctionAndValues.getRandomInt(6, 13);
 		int a1,a2;
 		do {
-			a1 = CommonFunctionAndValues.getRandomInt(5, 23);
-			a2 = CommonFunctionAndValues.getRandomInt(5, 23);
-		} while (denom > a1 || denom > a2 || 
-				a1%denom==0||a2%denom==0);//ensure that none of the numerators can be divided by divisor
-		Fraction f1 = new Fraction(a1, denom);
-		Fraction f2 = new Fraction(a2, denom);
+			denomL = CommonFunctionAndValues.getRandomInt(5, 10);
+			denomR = CommonFunctionAndValues.getRandomInt(5, 10);
+			a1 = CommonFunctionAndValues.getRandomInt(5, 13);
+			a2 = CommonFunctionAndValues.getRandomInt(5, 13);
+		} while (denomL > a1 || denomR > a2 || denomL==denomR ||
+				a1%denomL==0||a2%denomR==0);//ensure that none of the numerators can be divided by divisor
+		Fraction f1 = new Fraction(a1, denomL);
+		Fraction f2 = new Fraction(a2, denomR);
 		Fraction result;
 		if (i % 2 == 0){
 			result = f1.getResultWhenMultipliedBy(f2);
@@ -130,11 +133,9 @@ public class FractionMixedNumberOperation implements IQuestionFactory{
 	
 	private Set<String> buildChoices(Fraction f1){
 		MixedFraction m = f1.getMixedFraction();
-		MixedFraction[] choices = new MixedFraction[4];
-		choices[0] = f1.new MixedFraction(m.b, m.a, m.x);
-		choices[1] = f1.new MixedFraction(m.a, m.b, m.x);
-		choices[2] = f1.new MixedFraction(m.a, m.x, m.b);
-		choices[3] = f1.new MixedFraction(m.x, m.b, m.a);
+		MixedFraction[] choices = new MixedFraction[2];		
+		choices[0] = f1.new MixedFraction(m.a, m.x, m.b);
+		choices[1] = f1.new MixedFraction(m.x, m.b, m.a);
 		Set<String> choicesInString = new HashSet<String>();
 		for (MixedFraction f : choices) {
 			choicesInString.add(f.toString());
