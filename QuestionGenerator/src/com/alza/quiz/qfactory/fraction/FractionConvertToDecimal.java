@@ -8,7 +8,6 @@ import java.util.Random;
 import java.util.ResourceBundle;
 
 import com.alza.common.math.Fraction;
-import com.alza.common.math.MathUtils;
 import com.alza.quiz.model.MultipleChoiceQuiz;
 import com.alza.quiz.model.Quiz;
 import com.alza.quiz.model.QuizLevel;
