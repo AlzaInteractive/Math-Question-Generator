@@ -49,28 +49,28 @@ public class FractionConvertToPercentage implements IQuestionFactory {
 	}
 
 	private void generateToPct(List<Quiz> quizList) {
+		int[] denoms = {2,4,5,8,10,20,25,40};
 		for (int i=0;i<numq;i++){
 			MultipleChoiceQuiz q = new MultipleChoiceQuiz();
+			int cutoff = Math.round(numq/2);
 			int a,denom=100;
-			if (i % 2 == 1){
+			if (i >= cutoff){
 				do {
 					a = CommonFunctionAndValues.getRandomInt(2, 10);
-					denom = CommonFunctionAndValues.getRandomInt(2, 11);					
-				} while (denom>=a || (a%denom==0));
+					denom = CommonFunctionAndValues.getRandom(denoms);					
+				} while (denom>=a);
 			} else {
 				do {
 					a = CommonFunctionAndValues.getRandomInt(2, 23);
-					denom = CommonFunctionAndValues.getRandomInt(2, 10);
+					denom = CommonFunctionAndValues.getRandom(denoms);
 				} while (denom<=a);
 			}
 			Fraction fQuest = new Fraction(a,denom);
 			String correctAnswer = fQuest.getPercentageNoDecimal();
 			Fraction f1 = fQuest.getResultWhenMultipliedBy(new Fraction(10,1));
-			Fraction f2 = fQuest.getResultWhenMultipliedBy(new Fraction(1,10));
-			Fraction f3 = fQuest.getResultWhenMultipliedBy(new Fraction(1,5));
-			Fraction f4 = fQuest.getResultWhenMultipliedBy(new Fraction(2,1));
+			Fraction f2 = fQuest.getResultWhenMultipliedBy(new Fraction(1,10));			
 			List<Fraction> choices = new ArrayList<Fraction>();
-			choices.add(f1);choices.add(f2);choices.add(f3);choices.add(f4);choices.add(fQuest);
+			choices.add(f1);choices.add(f2);choices.add(fQuest);
 			Collections.shuffle(choices);
 			q.setDifficultyLevel(QuizLevel.MUDAH);
 			q.setChoices(convertChoices(choices,true));
