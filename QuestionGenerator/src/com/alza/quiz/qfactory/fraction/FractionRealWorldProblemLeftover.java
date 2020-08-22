@@ -50,47 +50,49 @@ public class FractionRealWorldProblemLeftover implements IQuestionFactory{
 		List<Quiz> ql = new ArrayList<Quiz>();
 		for (int i=0;i<numq;i++){
 			MultipleChoiceQuiz q = new MultipleChoiceQuiz();
-			
-			q.setLessonClassifier(bundle.getString("mathelementary"));
-			q.setLessonGrade(5);
-			q.setLessonCategory(bundle.getString("fraction"));
-			q.setLessonSubcategory(bundle.getString("fraction.rwp"));
-			q.setDifficultyLevel(QuizLevel.MUDAH);
-			
-						
-			int rnd = CommonFunctionAndValues.getRandomInt(0, sces.size());
-			String sce = getRandomScenario(rnd);
-			// prepare lower and upper bound 0020082070, 002 lobo 008 hibo, 20 low pct, hi pct
-			int denom1,denom2,denom3, gcd;
-			Fraction frac1,frac2,frac3,tot, leftover;
-			
-			do {
-				denom1 = CommonFunctionAndValues.getRandomInt(2,11);
-				denom2 = CommonFunctionAndValues.getRandomInt(2,11);
-				denom3 = CommonFunctionAndValues.getRandomInt(2,11);
-				frac1 = new Fraction(1, denom1);
-				frac2 = new Fraction(1, denom2);
-				frac3 = new Fraction(1, denom3);
-				tot = frac1.getResultWhenAddedWith(frac2).getResultWhenAddedWith(frac3);
-				gcd = MathUtils.findGCD(denom1,denom2,denom3);
-				System.out.println("gcd "+gcd);
-			} while (gcd<2||!tot.isLessThan(new Fraction(1, 1)));
-			
-			leftover = new Fraction(1, 1).getResultWhenSubtractWith(tot);
-			
-			String corrAns = leftover.toString();
-			sce = sce.replace("#frac1?", frac1.toMathJaxString());
-			sce = sce.replace("#frac2?", frac2.toMathJaxString());
-			sce = sce.replace("#frac3?", frac3.toMathJaxString());
-			sce = CommonFunctionAndValues.buildScenario(sce);
-			//sce = CommonFunctionAndValues.enclosedWithMathJaxExp(sce);
-			q.setQuestion(sce);
-			q.setCorrectAnswer(corrAns);
-			q.setChoices(buildChoices(frac1, frac2, frac3, leftover));
-			q.setLocale(loc);
+			generateSingleQuiz(q);
+			setSecondaryAttributes(q);
 			ql.add(q);
 		}	
 		return ql;
+	}
+	private void generateSingleQuiz(MultipleChoiceQuiz q) {
+		int rnd = CommonFunctionAndValues.getRandomInt(0, sces.size());
+		String sce = getRandomScenario(rnd);
+		// prepare lower and upper bound 0020082070, 002 lobo 008 hibo, 20 low pct, hi pct
+		int denom1,denom2,denom3, gcd;
+		Fraction frac1,frac2,frac3,tot, leftover;
+		
+		do {
+			denom1 = CommonFunctionAndValues.getRandomInt(2,11);
+			denom2 = CommonFunctionAndValues.getRandomInt(2,11);
+			denom3 = CommonFunctionAndValues.getRandomInt(2,11);
+			frac1 = new Fraction(1, denom1);
+			frac2 = new Fraction(1, denom2);
+			frac3 = new Fraction(1, denom3);
+			tot = frac1.getResultWhenAddedWith(frac2).getResultWhenAddedWith(frac3);
+			gcd = MathUtils.findGCD(denom1,denom2,denom3);			
+		} while (gcd<2||!tot.isLessThan(new Fraction(1, 1)));
+		
+		leftover = new Fraction(1, 1).getResultWhenSubtractWith(tot);
+		
+		String corrAns = leftover.toString();
+		sce = sce.replace("#frac1?", frac1.toMathJaxString());
+		sce = sce.replace("#frac2?", frac2.toMathJaxString());
+		sce = sce.replace("#frac3?", frac3.toMathJaxString());
+		sce = CommonFunctionAndValues.buildScenario(sce);
+		//sce = CommonFunctionAndValues.enclosedWithMathJaxExp(sce);
+		q.setQuestion(sce);
+		q.setCorrectAnswer(corrAns);
+		q.setChoices(buildChoices(frac1, frac2, frac3, leftover));
+	}
+	private void setSecondaryAttributes(MultipleChoiceQuiz q) {
+		q.setLessonClassifier(bundle.getString("mathelementary"));
+		q.setLessonGrade(5);
+		q.setLessonCategory(bundle.getString("fraction"));
+		q.setLessonSubcategory(bundle.getString("fraction.rwp"));
+		q.setDifficultyLevel(QuizLevel.MUDAH);
+		q.setLocale(loc);
 	}
 
 	public String getRandomScenario(int rnd){
@@ -107,9 +109,7 @@ public class FractionRealWorldProblemLeftover implements IQuestionFactory{
 		List<String> cs = new ArrayList<String>();
 		Fraction one = new Fraction(1, 1);
 		cs.add(lo.toString());
-		cs.add(one.getResultWhenSubtractWith(f1).toString());
-		cs.add(one.getResultWhenSubtractWith(f2).toString());
-		cs.add(one.getResultWhenSubtractWith(f3).toString());
+		cs.add(one.getResultWhenSubtractWith(f1).toString());		
 		cs.add(f1.getResultWhenAddedWith(f2).getResultWhenAddedWith(f3).toString());
 		return cs;
 	}
