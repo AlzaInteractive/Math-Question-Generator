@@ -114,12 +114,12 @@ public class FractionGameLevel implements IPlayableLevelsGroup{
 		//Real world problems
 		name = bundle.getString("fraction.rwp");
 		desc = bundle.getString("fraction.rwpdesc");
-		g = GameLevel.createSingleQF(11, name, desc,new FractionRealWorldProblemDescribingRatio(loc), 2);
+		g = GameLevel.createSingleQF(11, name, desc,new FractionRealWorldProblemDescribingRatio(loc), 1);
 		g.addQuestionFactory(new FractionRealWorldProblemFindFromRatio(loc), 1);
-		g.addQuestionFactory(new FractionRealWorldProblemFindFromPercentage(loc), 2);
+		g.addQuestionFactory(new FractionRealWorldProblemFindFromPercentage(loc), 1);
 		g.addQuestionFactory(new FractionRealWorldProblemLeftover(loc), 1);
-		g.addQuestionFactory(new FractionRealWorldProblemProportions(loc), 2);
-		g.addQuestionFactory(new FractionRealWorldProblemScale(loc), 2);
+		g.addQuestionFactory(new FractionRealWorldProblemProportions(loc), 1);
+		g.addQuestionFactory(new FractionRealWorldProblemScale(loc), 1);
 		g.addQuestionFactory(new FractionRealWorldProblemDiscount(loc), 1);
 		g.addQuestionFactory(new FractionRealWorldProblemTaxTips(loc), 1);
 		lgl.add(g);
