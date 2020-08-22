@@ -48,51 +48,52 @@ public class FractionRealWorldProblemDescribingRatio implements IQuestionFactory
 	public List<Quiz> generateQuizList() {
 		List<Quiz> ql = new ArrayList<Quiz>();
 		for (int i=0;i<numq;i++){
-			MultipleChoiceQuiz q = new MultipleChoiceQuiz();
-			
-			q.setLessonClassifier(bundle.getString("mathelementary"));
-			q.setLessonGrade(5);
-			q.setLessonCategory(bundle.getString("fraction"));
-			q.setLessonSubcategory(bundle.getString("fraction.describeratio"));
-			q.setDifficultyLevel(QuizLevel.MUDAH);
-			
-						
-			int rnd = CommonFunctionAndValues.getRandomInt(0, sces.size());
-			String sce = getRandomScenario(rnd);
-			String param =  getParams(rnd);
-			// prepare lower and upper bound 0020082070, 002 lobo 008 hibo, 20 low pct, hi pct
-			int loTot, hiTot;
-			int leftVal, rightVal, leftRat,rightRat;
-			int tot,limit,gcd;
-			loTot = Integer.parseInt(param.substring(0, 3));
-			hiTot = Integer.parseInt(param.substring(3, 6));
-			limit = Integer.parseInt(param.substring(6, 8));
-			
-			do {
-				tot = CommonFunctionAndValues.getRandomInt(loTot, hiTot+1);
-				leftVal = CommonFunctionAndValues.getRandomInt(tot*limit/100, tot * (100-limit)/100);
-				rightVal = tot - leftVal;
-				gcd = MathUtils.findGCD(leftVal,rightVal);
-			} while (gcd<2||leftVal==rightVal);
-			leftRat = leftVal / gcd;
-			rightRat = rightVal / gcd;
-			
-			String corrAns = leftRat+":"+rightRat;
-			sce = sce.replace("#total?", String.valueOf(tot));
-			sce = sce.replace("#pop1?", String.valueOf(leftVal));
-			sce = sce.replace("#pop2?", String.valueOf(rightVal));
-			sce = CommonFunctionAndValues.buildScenario(sce);
-			q.setQuestion(sce);
-			q.setCorrectAnswer(corrAns);
-			q.setChoices(corrAns,
-					leftVal+":"+rightVal,
-					rightVal+":"+leftVal,
-					rightRat+":"+leftRat,
-					rightRat+":"+rightVal);
-			q.setLocale(loc);
+			MultipleChoiceQuiz q = new MultipleChoiceQuiz();			
+			constructPrimaryAttributes(q);
+			setSecondaryAttributes(q);						
 			ql.add(q);
 		}	
 		return ql;
+	}
+	private void constructPrimaryAttributes(MultipleChoiceQuiz q) {
+		int rnd = CommonFunctionAndValues.getRandomInt(0, sces.size());
+		String sce = getRandomScenario(rnd);
+		String param =  getParams(rnd);
+		// prepare lower and upper bound 0020082070, 002 lobo 008 hibo, 20 low pct, hi pct
+		int loTot, hiTot;
+		int leftVal, rightVal, leftRat,rightRat;
+		int tot,limit,gcd;
+		loTot = Integer.parseInt(param.substring(0, 3));
+		hiTot = Integer.parseInt(param.substring(3, 6));
+		limit = Integer.parseInt(param.substring(6, 8));
+		
+		do {
+			tot = CommonFunctionAndValues.getRandomInt(loTot, hiTot+1);
+			leftVal = CommonFunctionAndValues.getRandomInt(tot*limit/100, tot * (100-limit)/100);
+			rightVal = tot - leftVal;
+			gcd = MathUtils.findGCD(leftVal,rightVal);
+		} while (gcd<2||leftVal==rightVal);
+		leftRat = leftVal / gcd;
+		rightRat = rightVal / gcd;
+		
+		String corrAns = leftRat+":"+rightRat;
+		sce = sce.replace("#total?", String.valueOf(tot));
+		sce = sce.replace("#pop1?", String.valueOf(leftVal));
+		sce = sce.replace("#pop2?", String.valueOf(rightVal));
+		sce = CommonFunctionAndValues.buildScenario(sce);
+		q.setQuestion(sce);
+		q.setCorrectAnswer(corrAns);
+		q.setChoices(corrAns,
+				leftVal+":"+rightVal,				
+				rightRat+":"+leftRat);
+	}
+	private void setSecondaryAttributes(MultipleChoiceQuiz q) {
+		q.setLessonClassifier(bundle.getString("mathelementary"));
+		q.setLessonGrade(5);
+		q.setLessonCategory(bundle.getString("fraction"));
+		q.setLessonSubcategory(bundle.getString("fraction.describeratio"));
+		q.setLocale(loc);
+		q.setDifficultyLevel(QuizLevel.MUDAH);
 	}
 
 	private String getParams(int rnd) {
