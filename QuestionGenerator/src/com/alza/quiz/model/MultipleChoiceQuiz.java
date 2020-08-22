@@ -38,35 +38,35 @@ public class MultipleChoiceQuiz extends  Quiz{
 	public void setChoices(List<String> choices) {
 		this.choices = new ArrayList<>();
 		for (String i : choices) {
-			this.choices.add(String.valueOf(i));
+			addChoice(String.valueOf(i));
 		}
 		//Collections.shuffle(this.choices);
 	}
 	public void setChoices(String...  choices){
 		this.choices = new ArrayList<>();
 		for (String c:choices  ) {
-			this.choices.add(c);
+			addChoice(c);
 		}
 		//Collections.shuffle(this.choices);
 	}
 	public void setChoices(Set<String>  choices){
 		this.choices = new ArrayList<>();
 		for (String c:choices  ) {
-			this.choices.add(c);
+			addChoice(c);
 		}
 		//Collections.shuffle(this.choices);
 	}
 	public void setChoices(int... choices){
 		this.choices = new ArrayList<>();
 		for (int i : choices) {
-			this.choices.add(String.valueOf(i));
+			addChoice(String.valueOf(i));
 		}
 		//Collections.shuffle(this.choices);
 	}
 	public void setChoices(double... choices){
 		this.choices = new ArrayList<>();
 		for (double i : choices) {
-			this.choices.add(String.valueOf(i));
+			addChoice(String.valueOf(i));
 		}
 		//Collections.shuffle(this.choices);
 	}
