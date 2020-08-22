@@ -127,6 +127,11 @@ public class CommonFunctionAndValues {
 		return array[rnd];
 	}
 	
+	public static double getRandom(double[] array) {
+		int rnd = new Random().nextInt(array.length);
+		return array[rnd];
+	}
+	
 	public static int getRandomInt(int min, int max) {
 		return ThreadLocalRandom.current().nextInt(min, max);
 	}
