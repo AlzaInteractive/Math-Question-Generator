@@ -48,63 +48,71 @@ public class FractionRealWorldProblemTaxTips implements IQuestionFactory{
 	public List<Quiz> generateQuizList() {
 		List<Quiz> ql = new ArrayList<Quiz>();
 		for (int i=0;i<numq;i++){
-			MultipleChoiceQuiz q = new MultipleChoiceQuiz();
-			
-			q.setLessonClassifier(bundle.getString("mathelementary"));
-			q.setLessonGrade(5);
-			q.setLessonCategory(bundle.getString("fraction"));
-			q.setLessonSubcategory(bundle.getString("fraction.findtaxprice"));
-			q.setDifficultyLevel(QuizLevel.SEDANG);
-			
-			int rnd = CommonFunctionAndValues.getRandomInt(0, sces.size());
-			String sce = getRandomScenario(rnd);
-			String param =  getParams(rnd);
-			// prepare lower and upper bound 0020082070, 002 lobo 008 hibo, 20 low pct, hi pct
-			int loVal, hiVal;
-			int loPct, hiPct;
-			loVal = Integer.parseInt(param.substring(0, 4));
-			hiVal = Integer.parseInt(param.substring(4, 8));
-			loPct = Integer.parseInt(param.substring(8, 10));
-			hiPct = Integer.parseInt(param.substring(10, 12));
-			//calculate ratio r1 : r2
-			double orival, taxPct;
-			do {
-				orival = CommonFunctionAndValues.getRandomInt(loVal, hiVal+1);
-				taxPct = CommonFunctionAndValues.getRandomInt(loPct, hiPct+1);
-			} while (false); 
-			double delta = orival * taxPct / 100;
-			double newVal = orival + delta;
-			double wrongval = orival - delta;
-			double wrongval2 = orival + (delta/2);
-			String valDelta = new Fraction((int)taxPct,100).getPercentageNoDecimal();
-			String corrAns = CommonFunctionAndValues.DF2PLC.format(newVal);
-			sce = sce.replace("#orival?", String.valueOf(orival));
-			sce = sce.replace("#taxpct?", String.valueOf(valDelta));
-			sce = CommonFunctionAndValues.buildScenario(sce);
-			q.setQuestion(sce);
-			q.setCorrectAnswer(corrAns);
-			q.setChoices(corrAns,
-					CommonFunctionAndValues.DF2PLC.format(orival),
-					CommonFunctionAndValues.DF2PLC.format(wrongval),
-					CommonFunctionAndValues.DF2PLC.format(wrongval2),
-					CommonFunctionAndValues.DF2PLC.format(delta));
+			MultipleChoiceQuiz q;
+			q = new MultipleChoiceQuiz();
+			createSingleQuiz(q);
+			setSecondaryAttributes(q);
 			ql.add(q);
-			q.setLocale(loc);
 		}	
 		return ql;
+	}
+
+	private void createSingleQuiz(MultipleChoiceQuiz q) {
+		int rnd = CommonFunctionAndValues.getRandomInt(0, sces.size());
+		String sce = getRandomScenario(rnd);
+		String param =  getParams(rnd);
+		// prepare lower and upper bound 0020082070, 002 lobo 008 hibo, 20 low pct, hi pct
+		int loVal, hiVal;
+		int loPct, hiPct;
+		loVal = Integer.parseInt(param.substring(0, 4));
+		hiVal = Integer.parseInt(param.substring(4, 8));
+		loPct = Integer.parseInt(param.substring(8, 10));
+		hiPct = Integer.parseInt(param.substring(10, 12));
+		//calculate ratio r1 : r2
+		double orival, taxPct;
+		do {
+			orival = CommonFunctionAndValues.getRandomInt(loVal, hiVal+1);
+			taxPct = CommonFunctionAndValues.getRandomInt(loPct, hiPct+1);
+		} while (false); 
+		double delta = orival * taxPct / 100;
+		double newVal = orival + delta;
+		double wrongval = orival - delta;
+		double wrongval2 = orival + (delta/2);
+		String valDelta = new Fraction((int)taxPct,100).getPercentageNoDecimal();
+		String corrAns = CommonFunctionAndValues.DF2PLC.format(newVal);
+		sce = sce.replace("#orival?", String.valueOf(orival));
+		sce = sce.replace("#taxpct?", String.valueOf(valDelta));
+		sce = CommonFunctionAndValues.buildScenario(sce);
+		q.setQuestion(sce);
+		q.setCorrectAnswer(corrAns);
+		double[] wrongVals = {orival,wrongval,wrongval2,delta}; 
+		q.setChoices(corrAns,
+				CommonFunctionAndValues.DF2PLC.format(CommonFunctionAndValues.getRandom(wrongVals)),
+				CommonFunctionAndValues.DF2PLC.format(CommonFunctionAndValues.getRandom(wrongVals))
+			);
+	}
+	
+	private void setSecondaryAttributes(MultipleChoiceQuiz q) {
+		q.setLocale(loc);
+		q.setLessonClassifier(bundle.getString("mathelementary"));
+		q.setLessonGrade(5);
+		q.setLessonCategory(bundle.getString("fraction"));
+		q.setLessonSubcategory(bundle.getString("fraction.findtaxprice"));
+		q.setDifficultyLevel(QuizLevel.SEDANG);
 	}
 
 	private String getParams(int rnd) {
 		String s = sces.get(rnd);
 		String params = s.substring(s.length()-PARAMLENGTH);
-		//System.out.println(params);
 		return params;
 	}
+
 	public String getRandomScenario(int rnd){
 		String s = sces.get(rnd);
 		String sce = s.substring(0,s.length()-(PARAMLENGTH));
 		return sce;
 	}
+	
 	@Override
 	public List<Quiz> generateQuizList(int numOfQuestion) {
 		numq = numOfQuestion;
