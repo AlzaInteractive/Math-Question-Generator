@@ -47,45 +47,56 @@ public class FractionPickGreatest implements IQuestionFactory {
 		List<Quiz> quizList = new ArrayList<Quiz>();
 		for (int i=0;i<numq;i++){
 			MultipleChoiceQuiz q = new MultipleChoiceQuiz();
-
-			q = generateTypeC();
-			q.setQuizLevel(QuizLevel.SULIT);
-			q.setLessonGrade(4);
-
-			q.setQuestion(bundle.getString("fraction.pickgreatest"));
-			q.setLessonSubcategory(bundle.getString("fraction.compare"));
-			q.setLessonClassifier(bundle.getString("mathelementary"));
-			q.setLessonCategory(bundle.getString("fraction"));
-			q.setSubCategoryOrder(2);
-			q.setLocale(loc);
+			q = generateSingleQuiz(i);
+			setSecondaryAttributes(q);
 			quizList.add(q);
 		}
 		return quizList;
 	}
-	public MultipleChoiceQuiz generateTypeC(){
-		int choiceSize=4;
-		Fraction[] fracs = new Fraction[choiceSize];
-		for (int i=0; i<choiceSize ; i++){
+	
+	private void setSecondaryAttributes(MultipleChoiceQuiz q) {
+		q.setQuizLevel(QuizLevel.SULIT);
+		q.setLessonGrade(4);
+		q.setQuestion(bundle.getString("fraction.pickgreatest"));
+		q.setLessonSubcategory(bundle.getString("fraction.compare"));
+		q.setLessonClassifier(bundle.getString("mathelementary"));
+		q.setLessonCategory(bundle.getString("fraction"));
+		q.setSubCategoryOrder(2);
+		q.setLocale(loc);
+	}
+	
+	public MultipleChoiceQuiz generateSingleQuiz(int idx){
+		Fraction[] fracs = generateRandomFractions();
+		Fraction fAnswer = MathUtils.findGreatest(fracs);
+		MultipleChoiceQuiz q = new MultipleChoiceQuiz();
+		q.setChoices(convertChoices(fracs,q,fAnswer,idx));		
+		return q;
+	}
+	
+	private Fraction[] generateRandomFractions() {
+		int[] denoms = {2,4,5,8,10,15,16,20,24,25,40};
+		int sz=3;
+		Fraction[] fracs = new Fraction[sz];
+		for (int i=0; i<sz ; i++){
 			int a,b;
-			a = ThreadLocalRandom.current().nextInt(5, 17);
-			b = ThreadLocalRandom.current().nextInt(7, 19);
+			do {
+				a = ThreadLocalRandom.current().nextInt(5, 17);
+				b = CommonFunctionAndValues.getRandom(denoms);
+			} while (a % b == 0);			
 			Fraction f = new Fraction(a, b);
 			fracs[i] = f;
 		}
 		CommonFunctionAndValues.shuffleArray(fracs);
-		Fraction fAnswer = MathUtils.findGreatest(fracs);
-		MultipleChoiceQuiz q = new MultipleChoiceQuiz();
-		q.setChoices(convertChoices(fracs,q,fAnswer));
-		//q.setCorrectAnswer(fAnswer.a+"/"+fAnswer.b);
-		return q;
+		return fracs;
 	}
 
-	private List<String> convertChoices(Fraction[] fracs, Quiz q, Fraction fAns){
+	private List<String> convertChoices(Fraction[] fracs, Quiz q, Fraction fAns, int startIdx){		
 		List<String> choicesInString = new ArrayList<String>();
 		for (int i = 0; i < fracs.length; i++) {
 			Fraction f = fracs[i];
 			String s;
-			switch (i) {
+			int type = (i + startIdx ) % 4; 
+			switch (type) {
 			case 0:
 				s = f.a+"/"+f.b;
 				if (f.equals(fAns)) {
