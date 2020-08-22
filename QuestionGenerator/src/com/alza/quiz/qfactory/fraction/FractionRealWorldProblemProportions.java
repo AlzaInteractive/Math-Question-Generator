@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 
 import com.alza.common.math.Fraction;
 import com.alza.common.math.MathUtils;
+import com.alza.quiz.model.MultipleChoiceQuiz;
 import com.alza.quiz.model.Quiz;
 import com.alza.quiz.model.QuizLevel;
 import com.alza.quiz.model.SimpleQuiz;
@@ -49,45 +50,48 @@ public class FractionRealWorldProblemProportions implements IQuestionFactory{
 	public List<Quiz> generateQuizList() {
 		List<Quiz> ql = new ArrayList<Quiz>();
 		for (int i=0;i<numq;i++){
-			SimpleQuiz q = new SimpleQuiz();
-			
-			q.setLessonClassifier(bundle.getString("mathelementary"));
-			q.setLessonGrade(5);
-			q.setLessonCategory(bundle.getString("fraction"));
-			q.setLessonSubcategory(bundle.getString("fraction.proportion"));
-			q.setDifficultyLevel(QuizLevel.MUDAH);
-			
-						
-			int rnd = CommonFunctionAndValues.getRandomInt(0, sces.size());
-			String sce = getRandomScenario(rnd);
-			String param =  getParams(rnd);
-			// prepare lower and upper bound 0020082070, 002 lobo 008 hibo, 20 low pct, hi pct
-			int loTot, hiTot;
-			int leftVal, rightVal;
-			int tot,limit,gcd;
-			loTot = Integer.parseInt(param.substring(0, 3));
-			hiTot = Integer.parseInt(param.substring(3, 6));
-			limit = Integer.parseInt(param.substring(6, 8));
-			
-			do {
-				tot = CommonFunctionAndValues.getRandomInt(loTot, hiTot+1);
-				leftVal = CommonFunctionAndValues.getRandomInt(tot*limit/100, tot * (100-limit)/100);
-				rightVal = tot - leftVal;
-				gcd = MathUtils.findGCD(leftVal,rightVal);
-			} while (gcd<2);
-			
-			String corrAns = String.valueOf(rightVal);
-			sce = sce.replace("#tot?", String.valueOf(tot));
-			Fraction f1 = new Fraction(leftVal,tot);
-			sce = sce.replace("#frac?", String.valueOf(f1.getSimplestForm().toMathJaxString()));
-			sce = CommonFunctionAndValues.buildScenario(sce);
-			//sce = CommonFunctionAndValues.enclosedWithMathJaxExp(sce);
-			q.setQuestion(sce);
-			q.setCorrectAnswer(corrAns);
-			q.setLocale(loc);
+			Quiz q = createSingleQuestion();						
+			setSecondaryAttributes(q);								
 			ql.add(q);
 		}	
 		return ql;
+	}
+	private Quiz createSingleQuestion() {
+		MultipleChoiceQuiz q = new MultipleChoiceQuiz();
+		int rnd = CommonFunctionAndValues.getRandomInt(0, sces.size());
+		String sce = getRandomScenario(rnd);
+		String param =  getParams(rnd);
+		// prepare lower and upper bound 0020082070, 002 lobo 008 hibo, 20 low pct, hi pct
+		int loTot, hiTot;
+		int leftVal, rightVal;
+		int tot,limit,gcd;
+		loTot = Integer.parseInt(param.substring(0, 3));
+		hiTot = Integer.parseInt(param.substring(3, 6));
+		limit = Integer.parseInt(param.substring(6, 8));		
+		do {
+			tot = CommonFunctionAndValues.getRandomInt(loTot, hiTot+1);
+			leftVal = CommonFunctionAndValues.getRandomInt(tot*limit/100, tot * (100-limit)/100);
+			rightVal = tot - leftVal;
+			gcd = MathUtils.findGCD(leftVal,rightVal);
+		} while (gcd<2);
+		
+		String corrAns = String.valueOf(rightVal);
+		sce = sce.replace("#tot?", String.valueOf(tot));
+		Fraction f1 = new Fraction(leftVal,tot);
+		sce = sce.replace("#frac?", String.valueOf(f1.getSimplestForm().toMathJaxString()));
+		sce = CommonFunctionAndValues.buildScenario(sce);
+		q.setQuestion(sce);
+		q.setCorrectAnswer(corrAns);
+		q.setChoices(corrAns,String.valueOf(leftVal),String.valueOf(Math.abs(rightVal-leftVal)));
+		return q;
+	}
+	private void setSecondaryAttributes(Quiz q) {
+		q.setLessonClassifier(bundle.getString("mathelementary"));
+		q.setLessonGrade(5);
+		q.setLessonCategory(bundle.getString("fraction"));
+		q.setLessonSubcategory(bundle.getString("fraction.proportion"));
+		q.setDifficultyLevel(QuizLevel.MUDAH);
+		q.setLocale(loc);
 	}
 
 	private String getParams(int rnd) {
