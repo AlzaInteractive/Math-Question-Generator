@@ -79,7 +79,7 @@ public class Level4FractionFindDivisorSimple implements IQuestionFactory{
 			
 	private void setQuizSecondaryAttributes(Quiz q) {
 		q.setDifficultyLevel(QuizLevel.MUDAH);
-		q.setLessonSubcategory(bundleAlgebra.getString("algebra.level3.mixop"));
+		q.setLessonSubcategory(bundleAlgebra.getString("algebra.level4.fraction"));
 		q.setLessonClassifier(bundle.getString("mathelementary"));
 		q.setLessonGrade(5);
 		q.setSubCategoryOrder(6);		
