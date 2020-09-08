@@ -147,7 +147,7 @@ public class Level4FractionFindDivisorWithCoefficientAndConstant implements IQue
 		@Override
 		public String generateQuestionMathjax() {
 			String s = "v1 = \\frac{v2}{vcoeffVAR} + vconst";
-			if (constant < 0) {
+			if (even) {
 				s = "v1 = \\frac{v2}{vcoeffVAR} - vconst";
 			}
 			s = replaceAllSymbols(s);

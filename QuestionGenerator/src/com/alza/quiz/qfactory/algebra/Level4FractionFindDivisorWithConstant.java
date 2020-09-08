@@ -142,7 +142,7 @@ public class Level4FractionFindDivisorWithConstant implements IQuestionFactory{
 		@Override
 		public String generateQuestionMathjax() {
 			String s = "v1 = \\frac{v2}{VAR} + vconst";
-			if (constant < 0) {
+			if (even) {
 				s = "v1 = \\frac{v2}{VAR} - vconst";
 			}
 			s = replaceAllSymbols(s);
