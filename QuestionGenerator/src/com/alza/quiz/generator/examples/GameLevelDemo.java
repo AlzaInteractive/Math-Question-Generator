@@ -12,7 +12,7 @@ import com.alza.quiz.qfactory.*;
 
 public class GameLevelDemo {
 	public static void main(String[] args) {
-		IPlayableLevelsGroup lg = new FractionGameLevel();
+		IPlayableLevelsGroup lg = new AlgebraGameLevel();
 		List<GameLevel> gls = lg.createGameLevels(new Locale("en","US"));
 		gls = lg.createGameLevels(new Locale("in","ID"));
 		for (GameLevel gameLevel : gls) {
@@ -39,8 +39,8 @@ public class GameLevelDemo {
 				System.out.println("Choices : "+ String.join(" , ", mq.getChoices()));
 			}
 			System.out.println("Answer : "+ q.getCorrectAnswer());
-			//System.out.println("Problem : "+ q.getProblemString());
-			//System.out.println("Solver : "+ q.getMicrosoftMathSolverURL());
+			System.out.println("Problem : "+ q.getProblemString());
+			System.out.println("Solver : "+ q.getMicrosoftMathSolverURL());
 			//System.out.println("Solver : "+ q.getWolframSolverURL());
 		}
 	}

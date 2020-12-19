@@ -31,8 +31,8 @@ public class MathUtils {
 	/** 
 	 * Find greatest common denominator of two int
 	 * using djikstra's algorithm
-	 * @param a first integer
-	 * @param b second integer
+	 * @param unsignedRoot first integer
+	 * @param rightVal second integer
 	 * @return gcd
 	 */
 	public static int findGCDDjikstra(int m, int n) {
