@@ -25,7 +25,9 @@ import com.alza.quiz.qfactory.algebra.Level4FractionFindNumeratorWithCoefficient
 import com.alza.quiz.qfactory.algebra.Level4FractionFindNumeratorWithCoefficientAndConstant;
 import com.alza.quiz.qfactory.algebra.Level4FractionFindNumeratorWithConstant;
 import com.alza.quiz.qfactory.algebra.Level5SimpleQuadraticPlain;
+import com.alza.quiz.qfactory.algebra.Level5SimpleQuadraticWithCoeff;
 import com.alza.quiz.qfactory.algebra.Level5SimpleQuadraticWithConstant;
+import com.alza.quiz.qfactory.algebra.Level5SimpleQuadraticWithDivisor;
 import com.alza.quiz.qfactory.algebra.Level3MixedOperationA;
 import com.alza.quiz.qfactory.algebra.Level3MixedOperationB;
 import com.alza.quiz.qfactory.algebra.Level0Div;
@@ -81,7 +83,9 @@ public class AlgebraGameLevel implements IPlayableLevelsGroup{
 		name = bundle.getString("algebra.level3.mixop");
 		desc = "";//bundle.getString("");
 		g = GameLevel.createSingleQF(0, name, desc, new Level5SimpleQuadraticPlain(loc), 2);
-		g.addQuestionFactory(new Level5SimpleQuadraticWithConstant(loc), 4);
+		g.addQuestionFactory(new Level5SimpleQuadraticWithConstant(loc), 2);
+		g.addQuestionFactory(new Level5SimpleQuadraticWithCoeff(loc), 2);
+		g.addQuestionFactory(new Level5SimpleQuadraticWithDivisor(loc), 2);
 		lgl.add(g);
 
 		return lgl;
