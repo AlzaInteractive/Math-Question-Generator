@@ -5,6 +5,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 import java.util.TreeMap;
 import java.util.concurrent.ThreadLocalRandom;
 /**
@@ -271,6 +272,12 @@ public class MathUtils {
 	public static String getMicrosoftMathSolverURL(String mathProblem) {		
 		mathProblem = mathProblem.replace(" ", "");
 		String baseUrl = "https://mathsolver.microsoft.com/en/solve-problem/";
+		return baseUrl + encodeValue(mathProblem);
+	}
+	
+	public static String getMicrosoftMathSolverURL(String mathProblem, Locale loc) {		
+		mathProblem = mathProblem.replace(" ", "");
+		String baseUrl = "https://mathsolver.microsoft.com/"+loc.getCountry().toLowerCase()+"/solve-problem/";
 		return baseUrl + encodeValue(mathProblem);
 	}
 	

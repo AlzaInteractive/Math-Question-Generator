@@ -150,6 +150,10 @@ public abstract class Quiz implements Comparable<Quiz>, Comparator<Quiz>{
 	public String getMicrosoftMathSolverURL() {
 		return MathUtils.getMicrosoftMathSolverURL(this.problemString);
 	}
+	
+	public String getMicrosoftMathSolverURL(Locale loc) {
+		return MathUtils.getMicrosoftMathSolverURL(this.problemString,loc);
+	}
 
 	public int compareTo(Quiz o){
 		if (this.lessonGrade!=o.lessonGrade){

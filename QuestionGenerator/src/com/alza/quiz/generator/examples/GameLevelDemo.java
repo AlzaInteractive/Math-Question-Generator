@@ -14,12 +14,13 @@ public class GameLevelDemo {
 	public static void main(String[] args) {
 		IPlayableLevelsGroup lg = new AlgebraGameLevel();
 		List<GameLevel> gls = lg.createGameLevels(new Locale("en","US"));
-		gls = lg.createGameLevels(new Locale("in","ID"));
+		Locale loc = new Locale("in","ID");
+		gls = lg.createGameLevels(loc);
 		for (GameLevel gameLevel : gls) {
-			printQuizzes(gameLevel);
+			printQuizzes(gameLevel,loc);
 		}
 	}
-	private static void printQuizzes(GameLevel gl) {
+	private static void printQuizzes(GameLevel gl,Locale loc) {
 		System.out.println("------------------------");
 		System.out.println("Game Level: " + gl.getOrder()+" "+gl.getName()+": "+gl.getDesc());
 		List<Quiz> lq = gl.generateQuiz();
@@ -40,7 +41,7 @@ public class GameLevelDemo {
 			}
 			System.out.println("Answer : "+ q.getCorrectAnswer());
 			System.out.println("Problem : "+ q.getProblemString());
-			System.out.println("Solver : "+ q.getMicrosoftMathSolverURL());
+			System.out.println("Solver : "+ q.getMicrosoftMathSolverURL(loc));
 			//System.out.println("Solver : "+ q.getWolframSolverURL());
 		}
 	}
