@@ -102,56 +102,62 @@ public class Level5SimpleQuadraticCombo implements IQuestionFactory {
 		final String[] VARSYM = { "x", "y", "z" };
 
 		ProblemSkeleton(int idx) {
+			int mod = 1;
 			if (idx % 2 == 0) {
 				even = true;
 			}
 			var = VARSYM[ThreadLocalRandom.current().nextInt(0, VARSYM.length)];
 			do {
 				unsignedRoot = ThreadLocalRandom.current().nextInt(2, 9);
-				constant = ThreadLocalRandom.current().nextInt(2, 9);
-				divisor = ThreadLocalRandom.current().nextInt(2, 9);
-				if (even) {
-					coeff = ThreadLocalRandom.current().nextInt(2, 6);
-				} else {
-					coeff = ThreadLocalRandom.current().nextInt(-5, -1);
-				}
-				rightVal = coeff * unsignedRoot * unsignedRoot;
-
-			} while (unsignedRoot == coeff || rightVal >= 100);
+				constant = ThreadLocalRandom.current().nextInt(2, 17);
+				constant = constant * CommonFunctionAndValues.getRandom(new int[] {1,-1});
+				divisor = ThreadLocalRandom.current().nextInt(2, 10);
+				divisor = divisor * CommonFunctionAndValues.getRandom(new int[] {1,-1});
+				coeff = ThreadLocalRandom.current().nextInt(2, 10);
+				coeff = coeff * CommonFunctionAndValues.getRandom(new int[] {1,-1});				
+				rightVal = constant + (coeff * unsignedRoot * unsignedRoot/divisor);
+				mod = (coeff * unsignedRoot * unsignedRoot) % divisor;
+			} while (unsignedRoot == coeff || rightVal >= 100 || mod !=0 ||divisor == constant || divisor == coeff);
 		}
 
 		int hash() {
-			String s = unsignedRoot + " " + " " + coeff;
+			String s = unsignedRoot + " " +divisor+" "+constant+ " " + coeff;
 			return (CommonFunctionAndValues.hashSimple(s));
 		}
 
 		private String replaceAllSymbols(String s) {
 			s = s.replace("rightval", String.valueOf(this.rightVal));
-			// s = s.replace("constant", String.valueOf(this.constant));
+			s = s.replace("constant", String.valueOf(this.constant));
 			s = s.replace("coeff", String.valueOf(this.coeff));
+			s = s.replace("divisor", String.valueOf(this.divisor));
 			s = s.replace("VAR", String.valueOf(var));
 			return s;
 		}
 
 		private String[] wrongChoices() {
-			String[] choices = { (coeff) + ",-" + (this.unsignedRoot), (-coeff) + "," + (this.unsignedRoot),
+			String[] choices = { 
+					(coeff) + ",-" + (this.unsignedRoot), 
+					(-coeff) + "," + (this.unsignedRoot),
+					(-constant) + "," + (constant),
+					(-divisor) + "," + (divisor),
 					this.unsignedRoot + "" };
 			return choices;
 		}
 
 		@Override
 		public String generateQuestion() {
-			String s = "coeffVAR^2 = rightval";
-			/**
-			 * if (even) { s = "coeffVAR^2 - constant = rightval"; }
-			 */
+			String s = "coeffVAR^2/divisor + constant = rightval";
+			if (constant<0) { s = "coeffVAR^2 constant = rightval"; }			
 			s = replaceAllSymbols(s);
 			return s;
 		}
 
 		@Override
 		public String generateQuestionMathjax() {
-			String s = generateQuestion();
+			String s = "\frac{coeffVAR^2}{divisor} + constant = rightval";
+			if (constant<0) {
+				s = "\frac{coeffVAR^2}{divisor} constant = rightval";
+			}
 			s = replaceAllSymbols(s);
 			s = CommonFunctionAndValues.enclosedWithMathJaxExp(s);
 			String s2 = var + "=?";
