@@ -26,6 +26,9 @@ import com.alza.quiz.qfactory.algebra.Level4FractionFindNumeratorWithCoefficient
 import com.alza.quiz.qfactory.algebra.Level4FractionFindNumeratorWithConstant;
 import com.alza.quiz.qfactory.algebra.Level5SimpleQuadraticPlain;
 import com.alza.quiz.qfactory.algebra.Level5SimpleQuadraticWithCoeff;
+import com.alza.quiz.qfactory.algebra.Level5SimpleQuadraticWithCoeffConst;
+import com.alza.quiz.qfactory.algebra.Level5SimpleQuadraticWithCoeffDiv;
+import com.alza.quiz.qfactory.algebra.Level5SimpleQuadraticWithConstDiv;
 import com.alza.quiz.qfactory.algebra.Level5SimpleQuadraticWithConstant;
 import com.alza.quiz.qfactory.algebra.Level5SimpleQuadraticWithDivisor;
 import com.alza.quiz.qfactory.algebra.Level3MixedOperationA;
@@ -86,6 +89,9 @@ public class AlgebraGameLevel implements IPlayableLevelsGroup{
 		g.addQuestionFactory(new Level5SimpleQuadraticWithConstant(loc), 2);
 		g.addQuestionFactory(new Level5SimpleQuadraticWithCoeff(loc), 2);
 		g.addQuestionFactory(new Level5SimpleQuadraticWithDivisor(loc), 2);
+		g.addQuestionFactory(new Level5SimpleQuadraticWithCoeffConst(loc), 4);
+		g.addQuestionFactory(new Level5SimpleQuadraticWithCoeffDiv(loc), 4);
+		g.addQuestionFactory(new Level5SimpleQuadraticWithConstDiv(loc), 4);
 		lgl.add(g);
 
 		return lgl;
