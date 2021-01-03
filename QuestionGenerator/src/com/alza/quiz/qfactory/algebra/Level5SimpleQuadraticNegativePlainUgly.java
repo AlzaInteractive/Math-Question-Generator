@@ -18,19 +18,19 @@ import com.alza.quiz.model.QuizLevel;
 import com.alza.quiz.qfactory.IQuestionFactory;
 import com.alza.quiz.util.CommonFunctionAndValues;
 
-public class Level5SimpleQuadraticPlainUgly implements IQuestionFactory{
+public class Level5SimpleQuadraticNegativePlainUgly implements IQuestionFactory{
 
 	private int numOfQuestion = 5;
-	private Map<Integer, ProblemSkeleton> qMap = new HashMap<Integer, Level5SimpleQuadraticPlainUgly.ProblemSkeleton>();
+	private Map<Integer, ProblemSkeleton> qMap = new HashMap<Integer, Level5SimpleQuadraticNegativePlainUgly.ProblemSkeleton>();
 	private Locale loc;
 	private ResourceBundle bundle;
 	private ResourceBundle bundleAlgebra;
 	
-	public Level5SimpleQuadraticPlainUgly(Locale loc){
+	public Level5SimpleQuadraticNegativePlainUgly(Locale loc){
 		this.loc = loc;
 		initStringFromLocale();
 	}
-	public Level5SimpleQuadraticPlainUgly(){
+	public Level5SimpleQuadraticNegativePlainUgly(){
 		this.loc = new Locale("in", "ID");
 		initStringFromLocale();
 	}
@@ -131,7 +131,7 @@ public class Level5SimpleQuadraticPlainUgly implements IQuestionFactory{
 
 		@Override
 		public String generateQuestion() {
-			String s = "VAR^2 = v1";			
+			String s = "-VAR^2 = -v1";			
 			s = replaceAllSymbols(s);
 			return s;
 		}
@@ -176,7 +176,7 @@ public class Level5SimpleQuadraticPlainUgly implements IQuestionFactory{
 			}
 			int insideRoot = square / sqDiv;
 			int outsideRoot = (int) Math.sqrt(sqDiv);
-			if (outsideRoot > 1) {
+			if (outsideRoot > 1) { // outside root exist
 				return String.valueOf(outsideRoot+"√"+insideRoot+",-"+outsideRoot+"√"+insideRoot);
 			}
 			return String.valueOf("√"+this.square+",-"+"√"+this.square);
