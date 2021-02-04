@@ -18,20 +18,20 @@ import com.alza.quiz.model.QuizLevel;
 import com.alza.quiz.qfactory.IQuestionFactory;
 import com.alza.quiz.util.CommonFunctionAndValues;
 
-public class Level5SimpleQuadraticWithCoeffDiv implements IQuestionFactory {
+public class Level6QuadraticSolveByFactoringANotOne implements IQuestionFactory {
 
 	private int numOfQuestion = 5;
-	private Map<Integer, ProblemSkeleton> qMap = new HashMap<Integer, Level5SimpleQuadraticWithCoeffDiv.ProblemSkeleton>();
+	private Map<Integer, ProblemSkeleton> qMap = new HashMap<Integer, Level6QuadraticSolveByFactoringANotOne.ProblemSkeleton>();
 	private Locale loc;
 	private ResourceBundle bundle;
 	private ResourceBundle bundleAlgebra;
 
-	public Level5SimpleQuadraticWithCoeffDiv(Locale loc) {
+	public Level6QuadraticSolveByFactoringANotOne(Locale loc) {
 		this.loc = loc;
 		initStringFromLocale();
 	}
 
-	public Level5SimpleQuadraticWithCoeffDiv() {
+	public Level6QuadraticSolveByFactoringANotOne() {
 		this.loc = new Locale("in", "ID");
 		initStringFromLocale();
 	}
@@ -92,70 +92,86 @@ public class Level5SimpleQuadraticWithCoeffDiv implements IQuestionFactory {
 	}
 
 	protected class ProblemSkeleton implements ISingleQuizPrimaryAttributeGenerator {
-		int unsignedRoot;
-		int rightVal;
-		int divisor;
-		int coeff;
-		String var;
-		boolean even = false;
+		int a,b,c;			
+		int num1;
+		int num2;
+		String var;		
 		final String[] VARSYM = { "x", "y", "z" };
-
-		ProblemSkeleton(int idx) {
-			if (idx % 2 == 0) {
-				even = true;
-			}
-			int mod=1;
+		ProblemSkeleton(int idx) {			
+			int modA,modB; 
 			var = VARSYM[ThreadLocalRandom.current().nextInt(0, VARSYM.length)];
 			do {
-				unsignedRoot = ThreadLocalRandom.current().nextInt(2, 9);
-				divisor = ThreadLocalRandom.current().nextInt(2, 9);
-				divisor = divisor * CommonFunctionAndValues.getRandom(new int[] {1,-1});
-				if (even) {
-					coeff = ThreadLocalRandom.current().nextInt(2, 6);
-				} else {
-					coeff = ThreadLocalRandom.current().nextInt(-5, -1);
+				// default positive pair
+				num1 = ThreadLocalRandom.current().nextInt(2, 9);
+				num2 = ThreadLocalRandom.current().nextInt(2, 9);
+				int mod = idx % 3;
+				if (mod==1) {
+					// positive and negative pair
+					num1 = num1 * CommonFunctionAndValues.getRandom(new int[] {1,-1});
+					if (num1 > 0) {
+						num2 = num2 * -1;
+					}
+				} else if (mod==2) {
+					// negative pair
+					num1 = num1 * -1;
+					num2 = num2 * -1;					
 				}
-				mod = (coeff * unsignedRoot * unsignedRoot) % divisor ;
-				rightVal = coeff * unsignedRoot * unsignedRoot / divisor;
-				//System.out.println(coeff+" "+unsignedRoot+" "+divisor+" "+mod);
-			} while (unsignedRoot == divisor || mod != 0
-					|| divisor == rightVal || coeff == divisor ||coeff == -divisor
-					|| rightVal==1 || rightVal == -1 || rightVal==0);
+				a = ThreadLocalRandom.current().nextInt(2, 6);
+				modA = num1 % a;
+				modB = a % num1;
+			} while (num1 == num2 || num1 + num2 == 0 || modA==0 || modB==0);			
+			b = num1 + a*num2;
+			c = num1 * num2;
 		}
 
 		int hash() {
-			String s = unsignedRoot + " " +divisor+ " " + coeff;
+			String s = a + " " +b+" "+c;
 			return (CommonFunctionAndValues.hashSimple(s));
 		}
 
 		private String replaceAllSymbols(String s) {
-			s = s.replace("rightval", String.valueOf(this.rightVal));
-			s = s.replace("divisor", String.valueOf(this.divisor));
-			s = s.replace("coeff", String.valueOf(this.coeff));
+			s = s.replace("avar", String.valueOf(this.a));
+			s = s.replace("bvar", String.valueOf(this.b));
+			s = s.replace("cvar", String.valueOf(this.c));			
 			s = s.replace("VAR", String.valueOf(var));
 			return s;
 		}
 
 		private String[] wrongChoices() {
+			int ans1 = num1 * -1;
+			int ans2 = num2 * -1;
+			
+			String wrongAns1a = num1+"/"+this.a;			
+			
 			String[] choices = { 
-					(coeff) + ",-" + (this.unsignedRoot), 
-					(-coeff) + "," + (this.unsignedRoot),
-					(divisor) + "," + (-coeff),
-					(divisor) + "," + (-this.unsignedRoot),
-					this.unsignedRoot + "" };
+					wrongAns1a+","+num2, 
+					wrongAns1a+","+ans2,
+					ans1+","+num2,					
+					};			
 			return choices;
 		}
 
 		@Override
 		public String generateQuestion() {
-			String s = "coeffVAR^2/divisor = rightval";						
+			String s = "avarVAR^2";
+			if (b > 0) {
+				s += "+bvarVAR";
+			} else {
+				s += "bvarVAR";
+			}
+			if (c > 0) {
+				s += "+cvar";
+			} else {
+				s += "cvar";
+			}
+			s += "=0";
 			s = replaceAllSymbols(s);
 			return s;
 		}
 
 		@Override
 		public String generateQuestionMathjax() {
-			String s = "\\frac{coeffVAR^2}{divisor} = rightval";
+			String s = generateQuestion();
 			s = replaceAllSymbols(s);
 			s = CommonFunctionAndValues.enclosedWithMathJaxExp(s);
 			String s2 = var + "=?";
@@ -184,7 +200,7 @@ public class Level5SimpleQuadraticWithCoeffDiv implements IQuestionFactory {
 
 		@Override
 		public String generateAnswer() {
-			return this.unsignedRoot + ",-" + this.unsignedRoot;
+			return (num1*-1)+"/"+this.a+","+(num2*-1);
 		}
 
 		@Override

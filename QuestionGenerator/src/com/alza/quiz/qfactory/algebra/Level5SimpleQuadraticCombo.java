@@ -154,9 +154,9 @@ public class Level5SimpleQuadraticCombo implements IQuestionFactory {
 
 		@Override
 		public String generateQuestionMathjax() {
-			String s = "\frac{coeffVAR^2}{divisor} + constant = rightval";
+			String s = "\\frac{coeffVAR^2}{divisor} + constant = rightval";
 			if (constant<0) {
-				s = "\frac{coeffVAR^2}{divisor} constant = rightval";
+				s = "\\frac{coeffVAR^2}{divisor} constant = rightval";
 			}
 			s = replaceAllSymbols(s);
 			s = CommonFunctionAndValues.enclosedWithMathJaxExp(s);

@@ -156,7 +156,7 @@ public class Level5SimpleQuadraticWithDivisor implements IQuestionFactory{
 
 		@Override
 		public String generateQuestionMathjax() {
-			String s = "\frac{VAR^2}{divisor} = rightval";			
+			String s = "\\frac{VAR^2}{divisor} = rightval";			
 			s = replaceAllSymbols(s);
 			s = CommonFunctionAndValues.enclosedWithMathJaxExp(s);
 			String s2 = var +"=?";

@@ -18,20 +18,20 @@ import com.alza.quiz.model.QuizLevel;
 import com.alza.quiz.qfactory.IQuestionFactory;
 import com.alza.quiz.util.CommonFunctionAndValues;
 
-public class Level6QuadraticFactorize implements IQuestionFactory {
+public class Level6QuadraticFactorAOne implements IQuestionFactory {
 
 	private int numOfQuestion = 5;
-	private Map<Integer, ProblemSkeleton> qMap = new HashMap<Integer, Level6QuadraticFactorize.ProblemSkeleton>();
+	private Map<Integer, ProblemSkeleton> qMap = new HashMap<Integer, Level6QuadraticFactorAOne.ProblemSkeleton>();
 	private Locale loc;
 	private ResourceBundle bundle;
 	private ResourceBundle bundleAlgebra;
 
-	public Level6QuadraticFactorize(Locale loc) {
+	public Level6QuadraticFactorAOne(Locale loc) {
 		this.loc = loc;
 		initStringFromLocale();
 	}
 
-	public Level6QuadraticFactorize() {
+	public Level6QuadraticFactorAOne() {
 		this.loc = new Locale("in", "ID");
 		initStringFromLocale();
 	}
@@ -93,23 +93,34 @@ public class Level6QuadraticFactorize implements IQuestionFactory {
 
 	protected class ProblemSkeleton implements ISingleQuizPrimaryAttributeGenerator {
 		int a,b,c;	
-		int firstFactorConst;
-		int secondFactorConst;
+		int num1;
+		int num2;
 		String var;		
 		final String[] VARSYM = { "x", "y", "z" };
 		ProblemSkeleton(int idx) {			
 			
 			var = VARSYM[ThreadLocalRandom.current().nextInt(0, VARSYM.length)];
 			do {
-				firstFactorConst = ThreadLocalRandom.current().nextInt(2, 9);
-				firstFactorConst = firstFactorConst * CommonFunctionAndValues.getRandom(new int[] {1,-1});
-				secondFactorConst = ThreadLocalRandom.current().nextInt(2, 9);
-				secondFactorConst = secondFactorConst * CommonFunctionAndValues.getRandom(new int[] {1,-1});
+				// default positive pair
+				num1 = ThreadLocalRandom.current().nextInt(2, 9);
+				num2 = ThreadLocalRandom.current().nextInt(2, 9);
+				int mod = idx % 3;
+				if (mod==1) {
+					// positive and negative pair
+					num1 = num1 * CommonFunctionAndValues.getRandom(new int[] {1,-1});					
+					if (num1 > 0) {
+						num2 = num2 * -1;
+					}
+				} else if (mod==2) {
+					// negative pair
+					num1 = num1 * -1;
+					num2 = num2 * -1;					
+				}
 				
-			} while (firstFactorConst == secondFactorConst || firstFactorConst + secondFactorConst == 0);
+			} while (num1 == num2 || num1 + num2 == 0);
 			a = 1;
-			b = firstFactorConst + secondFactorConst;
-			c = firstFactorConst * secondFactorConst;
+			b = num1 + num2;
+			c = num1 * num2;
 		}
 
 		int hash() {
@@ -126,11 +137,34 @@ public class Level6QuadraticFactorize implements IQuestionFactory {
 		}
 
 		private String[] wrongChoices() {
+			String firstFactor,secondFactor;
+			if (num1>0) {
+				firstFactor = "("+var+"+"+num1+")";
+			} else {
+				firstFactor = "("+var+num1+")";
+			}
+			if (num2>0) {
+				secondFactor = "("+var+"+"+num2+")";
+			} else {
+				secondFactor = "("+var+num2+")";
+			}
+			
+			String firstFactorWrong,secondFactorWrong;
+			if (num1>0) {
+				firstFactorWrong = "("+var+"-"+num1+")";
+			} else {
+				firstFactorWrong = "("+var+"+"+(-num1)+")";
+			}
+			if (num2>0) {
+				secondFactorWrong = "("+var+"-"+num2+")";
+			} else {
+				secondFactorWrong = "("+var+"+"+(-num2)+")";
+			}
 			String[] choices = { 
-					(this.firstFactorConst) + "," + (this.secondFactorConst), 
-					(this.firstFactorConst) + "," + (-this.secondFactorConst),
-					(-this.firstFactorConst) + "," + (this.secondFactorConst),
-					(this.a) + "," + (this.b)};
+					firstFactorWrong+secondFactorWrong, 
+					firstFactor+secondFactorWrong,
+					firstFactorWrong+secondFactor,					
+					};
 			return choices;
 		}
 
@@ -146,8 +180,7 @@ public class Level6QuadraticFactorize implements IQuestionFactory {
 				s += "+cvar";
 			} else {
 				s += "cvar";
-			}
-			s += "=0";
+			}			
 			s = replaceAllSymbols(s);
 			return s;
 		}
@@ -157,9 +190,8 @@ public class Level6QuadraticFactorize implements IQuestionFactory {
 			String s = generateQuestion();
 			s = replaceAllSymbols(s);
 			s = CommonFunctionAndValues.enclosedWithMathJaxExp(s);
-			String s2 = var + "=?";
-			s2 = CommonFunctionAndValues.enclosedWithMathJaxExp(s2);
-			s = s + " " + s2;
+			
+			s = "Factor "+ s;
 			return s;
 		}
 
@@ -183,7 +215,18 @@ public class Level6QuadraticFactorize implements IQuestionFactory {
 
 		@Override
 		public String generateAnswer() {
-			return (-this.firstFactorConst) + "," + (-this.secondFactorConst);
+			String firstFactor,secondFactor;
+			if (num1>0) {
+				firstFactor = "("+var+"+"+num1+")";
+			} else {
+				firstFactor = "("+var+num1+")";
+			}
+			if (num2>0) {
+				secondFactor = "("+var+"+"+num2+")";
+			} else {
+				secondFactor = "("+var+num2+")";
+			}
+			return firstFactor+secondFactor;
 		}
 
 		@Override
