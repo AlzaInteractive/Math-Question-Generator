@@ -106,15 +106,18 @@ public class Level7QuadraticUglyNumberSimple implements IQuestionFactory {
 			var = VARSYM[ThreadLocalRandom.current().nextInt(0, VARSYM.length)];
 			int bmod2a,b4acmod4asq;
 			do {
-				a = ThreadLocalRandom.current().nextInt(2, 9);
+				a = ThreadLocalRandom.current().nextInt(2, 13);
 				a = a * CommonFunctionAndValues.getRandom(new int[] {1,-1});
-				b = CommonFunctionAndValues.getRandom(new int[] {2,4,6,8});
+				b = CommonFunctionAndValues.getRandom(new int[] {2,4,6,8,12});
 				b = b * CommonFunctionAndValues.getRandom(new int[] {1,-1});
-				c = a * CommonFunctionAndValues.getRandom(new int[] {2,3,4,5,6,7});
+				c = a * CommonFunctionAndValues.getRandom(new int[] {2,3,4,5,6,7,8,9});
 				c = c * CommonFunctionAndValues.getRandom(new int[] {1,-1});
 				bmod2a = -b % (2*a);
 				b4acmod4asq = b4ac() % (4*a*a);
-			} while (b4ac() <= 1 || b4ac() > rootLimit * rootLimit || bmod2a !=0 || b4acmod4asq != 0);
+			} while (b4ac() <= 1 || b4ac() > rootLimit * rootLimit 
+					|| bmod2a !=0 
+					|| b4acmod4asq != 0
+					|| b4acinsquares());
 			
 		}
 		
@@ -122,7 +125,12 @@ public class Level7QuadraticUglyNumberSimple implements IQuestionFactory {
 			return  b*b - (4*a*c);
 		}
 		
-		
+		boolean b4acinsquares() {
+			for (int i=0;i<squares.size();i++) {
+				if (b4ac() == squares.get(i)) return true;
+			}
+			return false;
+		}
 
 		int hash() {
 			String s = a + " " +b+" "+c;
@@ -138,13 +146,28 @@ public class Level7QuadraticUglyNumberSimple implements IQuestionFactory {
 		}
 
 		private String[] wrongChoices() {
+			int[] alior = answerLeftInsideOutsideRoot();			
+			
+			int leftSideWrong1 = alior[1];
+			int leftSideWrong2 = alior[2];
+			
+			int insideRootWrong1 = Math.abs(alior[0]);
+			if (insideRootWrong1==1) insideRootWrong1 = ThreadLocalRandom.current().nextInt(3,8);
+			int insideRootWrong2 = Math.abs(alior[2]);
+			if (insideRootWrong2==1) insideRootWrong2 = ThreadLocalRandom.current().nextInt(3,8);
+			
+			int outsideRootWrong1 = Math.abs(alior[0]);
+			if (outsideRootWrong1==1) outsideRootWrong1 = ThreadLocalRandom.current().nextInt(3,8);
+			int outsideRootWrong2 = Math.abs(alior[1]);
+			if (outsideRootWrong2==1) outsideRootWrong2 = ThreadLocalRandom.current().nextInt(3,8);
+			
+			String rightSideWrong1 = outsideRootWrong1 + "√" + insideRootWrong1;
+			String rightSideWrong2 = outsideRootWrong2 + "√" + insideRootWrong2;
+			
+			
 			String[] choices = { 
-					(this.a) + "," + (-this.a), 
-					(this.b) + "," + (-this.b),
-					(this.a) + "," + (-this.b), 
-					(this.b) + "," + (-this.c),
-					(this.c) + "," + (-this.c), 
-					(this.a) + "," + (-this.c),
+					String.valueOf(leftSideWrong1+"±"+rightSideWrong1),
+					String.valueOf(leftSideWrong2+"±"+rightSideWrong2),					
 			};
 			return choices;
 		}
@@ -195,9 +218,8 @@ public class Level7QuadraticUglyNumberSimple implements IQuestionFactory {
 			finalChoices[choiceSize - 1] = generateAnswer();
 			return finalChoices;
 		}
-
-		@Override
-		public String generateAnswer() {
+		
+		private int[] answerLeftInsideOutsideRoot() {
 			int sqDiv = 1;
 			int b24acdiv2a = b4ac()/(4*a*a);
 			for (int i = squares.size()-1;i>=0;i--) {
@@ -212,11 +234,22 @@ public class Level7QuadraticUglyNumberSimple implements IQuestionFactory {
 			int leftSide = -b/(2*a);
 			int insideRoot = b4ac() / (sqDiv*4*a*a);
 			int outsideRoot = (int) Math.sqrt(sqDiv);
+			int[] alior = {leftSide,insideRoot,outsideRoot};
+			return alior;
+		}
+		
+
+		@Override
+		public String generateAnswer() {
+			int[] alior = answerLeftInsideOutsideRoot();			
+			int leftSide = alior[0];
+			int insideRoot = alior[1];
+			int outsideRoot = alior[2];
 			String rightSide = outsideRoot + "√" + insideRoot;
 			if (outsideRoot == 1) {
 				rightSide = "√" + insideRoot;
-			}					
-			return String.valueOf(leftSide+"+"+rightSide+","+leftSide+"-"+rightSide);
+			}
+			return String.valueOf(leftSide+"±"+rightSide);
 			
 		}
 

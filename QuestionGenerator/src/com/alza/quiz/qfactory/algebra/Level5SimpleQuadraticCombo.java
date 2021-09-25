@@ -147,7 +147,7 @@ public class Level5SimpleQuadraticCombo implements IQuestionFactory {
 		@Override
 		public String generateQuestion() {
 			String s = "coeffVAR^2/divisor + constant = rightval";
-			if (constant<0) { s = "coeffVAR^2 constant = rightval"; }			
+			if (constant<0) { s = "coeffVAR^2/divisor constant = rightval"; }			
 			s = replaceAllSymbols(s);
 			return s;
 		}

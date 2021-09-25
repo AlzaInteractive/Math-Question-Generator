@@ -16,7 +16,9 @@ public class GameLevelDemo {
 		List<GameLevel> gls = lg.createGameLevels(new Locale("en","US"));
 		Locale loc = new Locale("in","ID");
 		gls = lg.createGameLevels(loc);
+		System.out.println("Game levels: "+gls.size());
 		for (GameLevel gameLevel : gls) {
+			System.out.println("---");
 			printQuizzes(gameLevel,loc);
 		}
 	}

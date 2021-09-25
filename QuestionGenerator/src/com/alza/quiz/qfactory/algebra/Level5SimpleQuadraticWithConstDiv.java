@@ -119,7 +119,8 @@ public class Level5SimpleQuadraticWithConstDiv implements IQuestionFactory {
 				rightVal = constant + (unsignedRoot * unsignedRoot / divisor);
 				//System.out.println(coeff+" "+unsignedRoot+" "+divisor+" "+mod);
 			} while (unsignedRoot == divisor || mod != 0
-					|| divisor == rightVal || constant == divisor ||constant == -divisor
+					|| divisor == rightVal || divisor == -rightVal 
+					|| constant == divisor || constant == -divisor
 					|| rightVal==1 || rightVal == -1 || rightVal==0);
 		}
 

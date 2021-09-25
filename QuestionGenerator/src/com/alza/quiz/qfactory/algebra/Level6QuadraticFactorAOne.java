@@ -187,12 +187,12 @@ public class Level6QuadraticFactorAOne implements IQuestionFactory {
 
 		@Override
 		public String generateQuestionMathjax() {
+			String factorString = bundleAlgebra.getString("algebra.factor.imperative");
+			factorString = CommonFunctionAndValues.enclosedWithMathJaxExp(factorString);
 			String s = generateQuestion();
 			s = replaceAllSymbols(s);
-			s = CommonFunctionAndValues.enclosedWithMathJaxExp(s);
-			
-			s = "Factor "+ s;
-			return s;
+			s = CommonFunctionAndValues.enclosedWithMathJaxExp(s);				
+			return factorString +" "+s;
 		}
 
 		@Override
