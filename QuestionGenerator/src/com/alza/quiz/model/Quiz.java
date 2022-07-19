@@ -23,6 +23,7 @@ public abstract class Quiz implements Comparable<Quiz>, Comparator<Quiz>{
     String lessonCategory;
     String lessonSubcategory;
     List<String> hints = new ArrayList<>();
+    List<SolutionStep> solutionSteps = new ArrayList<>();
     int localGeneratorOrder;
     int lessonGrade;
     public boolean isCorrect(Object answer){
@@ -142,7 +143,15 @@ public abstract class Quiz implements Comparable<Quiz>, Comparator<Quiz>{
 	public String getWolframSolverURL() {
 		return MathUtils.getWolframAlphaSolverURL(this.problemString);
 	}
-	
+			
+	public List<SolutionStep> getSolutionSteps() {
+		return solutionSteps;
+	}
+
+	public void setSolutionSteps(List<SolutionStep> solutionSteps) {
+		this.solutionSteps = solutionSteps;
+	}
+
 	public String getSymbolabsSolverURL() {
 		return MathUtils.getSymbolabsSolverURL(this.problemString);
 	}

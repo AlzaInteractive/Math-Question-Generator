@@ -6,6 +6,7 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 
 import com.alza.quiz.model.GameLevel;
+import com.alza.quiz.qfactory.algebra.Level1AddSub;
 import com.alza.quiz.qfactory.algebra.Level5SimpleQuadraticCombo;
 import com.alza.quiz.qfactory.algebra.Level5SimpleQuadraticNegativePlainUgly;
 import com.alza.quiz.qfactory.algebra.Level5SimpleQuadraticPlain;
@@ -53,35 +54,14 @@ public class AlgebraGameLevel implements IPlayableLevelsGroup{
 		List<GameLevel> lgl = new ArrayList<GameLevel>();
 		String name, desc;
 		GameLevel g;
-
-		/*
-		 * name = bundle.getString("algebra.level2.addsub"); desc =
-		 * "";//bundle.getString(""); g = GameLevel.createSingleQF(0, name, desc, new
-		 * Level2AddSub(loc), 10); lgl.add(g);
-		 * 
-		 * // name = bundle.getString("algebra.level1.mult"); // desc =
-		 * "";//bundle.getString(""); // g = GameLevel.createSingleQF(0, name, desc, new
-		 * Level2Mult(loc), 10); // lgl.add(g);
-		 * 
-		 * name = bundle.getString("algebra.level1.div"); desc =
-		 * "";//bundle.getString(""); g = GameLevel.createSingleQF(0, name, desc, new
-		 * Level2Div(loc), 10); lgl.add(g);
-		 * 
-		 * // name = bundle.getString("algebra.level3.mixop"); // desc =
-		 * "";//bundle.getString(""); // g = GameLevel.createSingleQF(0, name, desc, new
-		 * Level3MixedOperationDiv(loc), 10); // lgl.add(g);
-		 * 
-		 * // name = bundle.getString("algebra.level.simplemultdiv"); // desc =
-		 * bundle.getString("lcmgcd.level.factor.desc"); // g =
-		 * GameLevel.createSingleQF(1, name, desc, new SimpleMultDiv(loc), 6); //
-		 * lgl.add(g);
-		 */		
+		g = GameLevel.createSingleQF(0, "Exp", new Level1AddSub(loc), 4);
+		/*		
 		name = bundle.getString("algebra.level3.mixop");
 		desc = "";//bundle.getString("");
 		// Level 5.1
 		g = GameLevel.createSingleQF(0, name, desc, new Level5SimpleQuadraticPlain(loc), 0);
-		/**
-		 * 
+		
+		 
 		g.addQuestionFactory(new Level5SimpleQuadraticPlainNegative(loc), 1);
 		g.addQuestionFactory(new Level5SimpleQuadraticPlainUgly(loc), 1);
 		g.addQuestionFactory(new Level5SimpleQuadraticNegativePlainUgly(), 1);
@@ -92,23 +72,19 @@ public class AlgebraGameLevel implements IPlayableLevelsGroup{
 		g.addQuestionFactory(new Level5SimpleQuadraticWithCoeff(loc), 1);
 		g.addQuestionFactory(new Level5SimpleQuadraticWithDivisor(loc), 1);
 
-		
-		
 		//level 5.3 		
 		g.addQuestionFactory(new Level5SimpleQuadraticWithCoeffConst(loc), 2);
 		g.addQuestionFactory(new Level5SimpleQuadraticWithConstDiv(loc), 1);
 		g.addQuestionFactory(new Level5SimpleQuadraticWithCoeffDiv(loc), 1);		
 		g.addQuestionFactory(new Level5SimpleQuadraticCombo(loc), 1);
-		
-		
-		//Level 6.1				
 				
-		*/
+		//Level 6.1				
+						
 		g.addQuestionFactory(new Level6QuadraticFactorAOne(loc), 3);
 		g.addQuestionFactory(new Level6QuadraticFactorANotOne(loc), 3);
 		
 		// Level 6.2
-		/**
+		
 		g.addQuestionFactory(new Level6QuadraticSolveByFactoringAOne(loc), 3);							
 		g.addQuestionFactory(new Level6QuadraticFactorizeNegativeCoeff(loc), 2);
 		

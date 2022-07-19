@@ -7,6 +7,7 @@ import java.util.Locale;
 import com.alza.quiz.model.GameLevel;
 import com.alza.quiz.model.MultipleChoiceQuiz;
 import com.alza.quiz.model.Quiz;
+import com.alza.quiz.model.SolutionStep;
 import com.alza.quiz.qfactory.*;
 
 
@@ -44,6 +45,11 @@ public class GameLevelDemo {
 			System.out.println("Answer : "+ q.getCorrectAnswer());
 			System.out.println("Problem : "+ q.getProblemString());
 			System.out.println("Solver : "+ q.getMicrosoftMathSolverURL(loc));
+			if (q.getSolutionSteps().size()>0) {
+				for (SolutionStep step: q.getSolutionSteps()) {
+					System.out.println((step.getExpression()+" | "+step.getExplanation()));
+				}
+			}
 			//System.out.println("Solver : "+ q.getWolframSolverURL());
 		}
 	}

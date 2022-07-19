@@ -113,6 +113,7 @@ public class Level1AddSub implements IQuestionFactory{
 		qLine1 = qLine1.replace("b", String.valueOf(b));
 		qLine1 = qLine1.replaceAll("VAR", var);
 		q.setProblemString(qLine1);
+		q.setSolutionSteps(Level1AddSubSolution.getSolutionSteps(a, b, var, p));
 		qLine1 = CommonFunctionAndValues.enclosedWithMathJaxExp(qLine1);
 		String qLine2 = CommonFunctionAndValues.enclosedWithMathJaxExp(var + " = ?");
 		q.setQuestion(qLine1+" "+qLine2);
@@ -143,9 +144,8 @@ public class Level1AddSub implements IQuestionFactory{
 				.setVariable("b", b);
 		return e.evaluate();
 	}
-	
-	
-	private class ProblemPattern {
+				
+	protected class ProblemPattern {
 		String question;
 		String expression;
 		String[] choicePattern;
@@ -154,5 +154,7 @@ public class Level1AddSub implements IQuestionFactory{
 			this.expression = expression;
 			this.choicePattern = choicePattern;
 		}
+		
 	}
+
 }
