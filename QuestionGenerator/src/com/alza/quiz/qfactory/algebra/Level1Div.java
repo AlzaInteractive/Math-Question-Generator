@@ -8,6 +8,7 @@ import java.util.ResourceBundle;
 import java.util.concurrent.ThreadLocalRandom;
 
 import com.alza.quiz.model.MultipleChoiceQuiz;
+import com.alza.quiz.model.ProblemPattern;
 import com.alza.quiz.model.Quiz;
 import com.alza.quiz.model.QuizLevel;
 import com.alza.quiz.qfactory.IQuestionFactory;
@@ -144,16 +145,5 @@ public class Level1Div implements IQuestionFactory{
 				.setVariable("b", b);
 		return e.evaluate();
 	}
-	
-	
-	protected class ProblemPattern {
-		String question;
-		String expression;
-		String[] choicePattern;
-		public ProblemPattern(String question, String expression, String[] choicePattern) {
-			this.question = question;
-			this.expression = expression;
-			this.choicePattern = choicePattern;
-		}
-	}
+		
 }

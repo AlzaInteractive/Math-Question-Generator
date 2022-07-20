@@ -8,6 +8,7 @@ import java.util.ResourceBundle;
 import java.util.concurrent.ThreadLocalRandom;
 
 import com.alza.quiz.model.MultipleChoiceQuiz;
+import com.alza.quiz.model.ProblemPattern;
 import com.alza.quiz.model.Quiz;
 import com.alza.quiz.model.QuizLevel;
 import com.alza.quiz.qfactory.IQuestionFactory;
@@ -92,6 +93,7 @@ public class Level2Div implements IQuestionFactory{
 		setQuizSecondaryAttributes(idx, q);
 		return q;
 	}
+	
 	private void setChoices(int a, int b, MultipleChoiceQuiz q, ProblemPattern p) {
 		// prepare choices
 		String[] choicePattern = p.choicePattern;
@@ -100,12 +102,14 @@ public class Level2Div implements IQuestionFactory{
 			q.addChoice(String.valueOf((int)choice));
 		}
 	}
+	
 	private void setAnswer(int a, int b, MultipleChoiceQuiz q, ProblemPattern p) {
 		// prepare answer
 		String exp = p.expression;			
 		int rslt = (int) runExpression(exp, a, b);
 		q.setCorrectAnswer(String.valueOf(rslt));
 	}
+	
 	private void setQuestion(int a, int b, MultipleChoiceQuiz q, ProblemPattern p) {
 		String var = VARSYM[ThreadLocalRandom.current().nextInt(0, VARSYM.length)];
 		String qLine1 = p.question;
@@ -118,6 +122,7 @@ public class Level2Div implements IQuestionFactory{
 		qLine1 = CommonFunctionAndValues.enclosedWithMathJaxExp(qLine1);
 		String qLine2 = CommonFunctionAndValues.enclosedWithMathJaxExp(var + " = ?");
 		q.setQuestion(qLine1+" "+qLine2);
+		q.setSolutionSteps(Level2DivSolution.getSolutionSteps(a, b, var, p));
 	}
 	
 	private void setQuizSecondaryAttributes(int idx, MultipleChoiceQuiz q) {
@@ -145,16 +150,5 @@ public class Level2Div implements IQuestionFactory{
 				.setVariable("b", b);
 		return e.evaluate();
 	}
-	
-	
-	private class ProblemPattern {
-		String question;
-		String expression;
-		String[] choicePattern;
-		public ProblemPattern(String question, String expression, String[] choicePattern) {
-			this.question = question;
-			this.expression = expression;
-			this.choicePattern = choicePattern;
-		}
-	}
+			
 }

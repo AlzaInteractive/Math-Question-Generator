@@ -3,8 +3,8 @@ package com.alza.quiz.qfactory.algebra;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.alza.quiz.model.ProblemPattern;
 import com.alza.quiz.model.SolutionStep;
-import com.alza.quiz.qfactory.algebra.Level1AddSub.ProblemPattern;
 import com.alza.quiz.util.CommonFunctionAndValues;
 
 public class Level1AddSubSolution {

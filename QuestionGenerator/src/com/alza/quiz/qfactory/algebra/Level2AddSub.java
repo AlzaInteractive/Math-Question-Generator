@@ -8,6 +8,7 @@ import java.util.ResourceBundle;
 import java.util.concurrent.ThreadLocalRandom;
 
 import com.alza.quiz.model.MultipleChoiceQuiz;
+import com.alza.quiz.model.ProblemPattern;
 import com.alza.quiz.model.Quiz;
 import com.alza.quiz.model.QuizLevel;
 import com.alza.quiz.qfactory.IQuestionFactory;
@@ -119,6 +120,7 @@ public class Level2AddSub implements IQuestionFactory{
 		qLine1 = CommonFunctionAndValues.enclosedWithMathJaxExp(qLine1);
 		String qLine2 = CommonFunctionAndValues.enclosedWithMathJaxExp(var + " = ?");
 		q.setQuestion(qLine1+" "+qLine2);
+		q.setSolutionSteps(Level2AddSubSolution.getSolutionSteps(a, b, var, p));
 	}
 	
 	private void setQuizSecondaryAttributes(int idx, MultipleChoiceQuiz q) {
@@ -147,15 +149,4 @@ public class Level2AddSub implements IQuestionFactory{
 		return e.evaluate();
 	}
 	
-	
-	private class ProblemPattern {
-		String question;
-		String expression;
-		String[] choicePattern;
-		public ProblemPattern(String question, String expression, String[] choicePattern) {
-			this.question = question;
-			this.expression = expression;
-			this.choicePattern = choicePattern;
-		}
-	}
 }
