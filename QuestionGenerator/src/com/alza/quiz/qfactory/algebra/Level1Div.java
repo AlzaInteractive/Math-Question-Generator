@@ -88,7 +88,7 @@ public class Level1Div implements IQuestionFactory{
 		setQuestion(a, b, q, p);
 		setAnswer(a, b, q, p);
 		setChoices(a, b, q, p);
-		setQuizSecondaryAttributes(idx, q);
+		setQuizSecondaryAttributes(idx, q);		
 		return q;
 	}
 	
@@ -116,6 +116,7 @@ public class Level1Div implements IQuestionFactory{
 		qLine1 = CommonFunctionAndValues.enclosedWithMathJaxExp(qLine1);
 		String qLine2 = CommonFunctionAndValues.enclosedWithMathJaxExp(var + " = ?");
 		q.setQuestion(qLine1+" "+qLine2);
+		q.setSolutionSteps(Level1DivSolution.getSolutionSteps(a, b, var, p));
 	}
 	
 	private void setQuizSecondaryAttributes(int idx, MultipleChoiceQuiz q) {
@@ -145,7 +146,7 @@ public class Level1Div implements IQuestionFactory{
 	}
 	
 	
-	private class ProblemPattern {
+	protected class ProblemPattern {
 		String question;
 		String expression;
 		String[] choicePattern;

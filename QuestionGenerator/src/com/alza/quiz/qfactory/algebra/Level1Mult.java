@@ -88,7 +88,7 @@ public class Level1Mult implements IQuestionFactory{
 		
 		MultipleChoiceQuiz q = new MultipleChoiceQuiz();
 		ProblemPattern p = lProbs.get(idx); 		
-		setQuestion(a, b, q, p);
+		setQuestion(a, b, q, p);		
 		setAnswer(a, b, q, p);
 		setChoices(a, b, q, p);
 		setQuizSecondaryAttributes(idx, q);
@@ -121,6 +121,7 @@ public class Level1Mult implements IQuestionFactory{
 		qLine1 = CommonFunctionAndValues.enclosedWithMathJaxExp(qLine1);
 		String qLine2 = CommonFunctionAndValues.enclosedWithMathJaxExp(var + " = ?");
 		q.setQuestion(qLine1+" "+qLine2);
+		q.setSolutionSteps(Level1MultSolution.getSolutionSteps(a, b, c, var, p));
 	}
 	
 	private void setQuizSecondaryAttributes(int idx, MultipleChoiceQuiz q) {
@@ -150,7 +151,7 @@ public class Level1Mult implements IQuestionFactory{
 	}
 	
 	
-	private class ProblemPattern {
+	protected class ProblemPattern {
 		String question;
 		String expression;
 		String[] choicePattern;

@@ -7,6 +7,8 @@ import java.util.ResourceBundle;
 
 import com.alza.quiz.model.GameLevel;
 import com.alza.quiz.qfactory.algebra.Level1AddSub;
+import com.alza.quiz.qfactory.algebra.Level1Div;
+import com.alza.quiz.qfactory.algebra.Level1Mult;
 import com.alza.quiz.qfactory.algebra.Level5SimpleQuadraticCombo;
 import com.alza.quiz.qfactory.algebra.Level5SimpleQuadraticNegativePlainUgly;
 import com.alza.quiz.qfactory.algebra.Level5SimpleQuadraticPlain;
@@ -55,6 +57,8 @@ public class AlgebraGameLevel implements IPlayableLevelsGroup{
 		String name, desc;
 		GameLevel g;
 		g = GameLevel.createSingleQF(0, "Exp", new Level1AddSub(loc), 4);
+		g.addQuestionFactory(new Level1Mult(loc), 4);
+		//g.addQuestionFactory(new Level1Div(loc), 4);
 		/*		
 		name = bundle.getString("algebra.level3.mixop");
 		desc = "";//bundle.getString("");
