@@ -8,6 +8,7 @@ import java.util.ResourceBundle;
 import java.util.concurrent.ThreadLocalRandom;
 
 import com.alza.quiz.model.MultipleChoiceQuiz;
+import com.alza.quiz.model.ProblemPattern;
 import com.alza.quiz.model.Quiz;
 import com.alza.quiz.model.QuizLevel;
 import com.alza.quiz.qfactory.IQuestionFactory;
@@ -93,7 +94,8 @@ public class Level3MixedOperationA implements IQuestionFactory{
 			boolean cond1 = (c % a == 0) && (d % a == 0);
 			boolean cond2 = b % a == 0;
 			boolean cond3 = a != b;
-			loop = !((cond1 || cond2) && cond3); 
+			boolean cond4 = c != d;
+			loop = !((cond1 || cond2) && cond3 && cond4); 
 		} while (loop);		
 		MultipleChoiceQuiz q = new MultipleChoiceQuiz();
 		setQuestion(p, a, b, c, d, q);
@@ -131,6 +133,7 @@ public class Level3MixedOperationA implements IQuestionFactory{
 		qLine1 = CommonFunctionAndValues.enclosedWithMathJaxExp(qLine1);
 		String qLine2 = CommonFunctionAndValues.enclosedWithMathJaxExp(var + " = ?");
 		q.setQuestion(qLine1+" "+qLine2);
+		q.setSolutionSteps(Level3MixedOperationASolution.getSolutionSteps(a, b, c, d, var, p));
 	}
 	
 	private void setQuizSecondaryAttributes(int idx, MultipleChoiceQuiz q) {
@@ -162,17 +165,4 @@ public class Level3MixedOperationA implements IQuestionFactory{
 		return e.evaluate();
 	}
 	
-	
-	private class ProblemPattern {
-		String question;
-		String expression;
-		String[] choicePattern;
-		
-		public ProblemPattern(String question, String expression, String[] choicePattern) {
-			this.question = question;
-			this.expression = expression;
-			this.choicePattern = choicePattern;
-			
-		}
-	}
 }
