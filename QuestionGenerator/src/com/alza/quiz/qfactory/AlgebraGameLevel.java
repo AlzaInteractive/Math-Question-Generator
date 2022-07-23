@@ -13,6 +13,8 @@ import com.alza.quiz.qfactory.algebra.Level2AddSub;
 import com.alza.quiz.qfactory.algebra.Level2Div;
 import com.alza.quiz.qfactory.algebra.Level2Mult;
 import com.alza.quiz.qfactory.algebra.Level3MixedOperationA;
+import com.alza.quiz.qfactory.algebra.Level4FractionFindDivisorSimple;
+import com.alza.quiz.qfactory.algebra.Level4FractionFindNumeratorSimple;
 import com.alza.quiz.qfactory.algebra.Level5SimpleQuadraticCombo;
 import com.alza.quiz.qfactory.algebra.Level5SimpleQuadraticNegativePlainUgly;
 import com.alza.quiz.qfactory.algebra.Level5SimpleQuadraticPlain;
@@ -66,7 +68,9 @@ public class AlgebraGameLevel implements IPlayableLevelsGroup{
 		//g.addQuestionFactory(new Level2AddSub(loc), 4);
 		//g.addQuestionFactory(new Level2Div(loc), 4);
 		//g.addQuestionFactory(new Level2Mult(loc), 4);
-		g.addQuestionFactory(new Level3MixedOperationA(loc), 8);
+		//g.addQuestionFactory(new Level3MixedOperationA(loc), 8);
+		g.addQuestionFactory(new Level4FractionFindNumeratorSimple(loc), 2);
+		g.addQuestionFactory(new Level4FractionFindDivisorSimple(loc), 2);
 		/*		
 		name = bundle.getString("algebra.level3.mixop");
 		desc = "";//bundle.getString("");

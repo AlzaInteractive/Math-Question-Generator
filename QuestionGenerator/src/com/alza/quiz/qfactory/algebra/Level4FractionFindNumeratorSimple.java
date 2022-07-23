@@ -13,6 +13,7 @@ import com.alza.quiz.model.ISingleQuizPrimaryAttributeGenerator;
 import com.alza.quiz.model.MultipleChoiceQuiz;
 import com.alza.quiz.model.Quiz;
 import com.alza.quiz.model.QuizLevel;
+import com.alza.quiz.model.SolutionStep;
 import com.alza.quiz.qfactory.IQuestionFactory;
 import com.alza.quiz.util.CommonFunctionAndValues;
 
@@ -57,6 +58,7 @@ public class Level4FractionFindNumeratorSimple implements IQuestionFactory{
 			ProblemSkeleton p = generateUniqueProblem();
 			Quiz q = p.generateSingleQuiz();
 			setQuizSecondaryAttributes(q);
+			q.setSolutionSteps(p.generateSolutionSteps());
 			lq.add(q);
 		}
 		return lq;
@@ -131,6 +133,29 @@ public class Level4FractionFindNumeratorSimple implements IQuestionFactory{
 			s = s.replace("v2", String.valueOf(this.b));
 			s = s.replace("VAR", String.valueOf(var));
 			return s;
+		}
+		
+		public List<SolutionStep> generateSolutionSteps(){
+			List<SolutionStep> steps = new ArrayList<>();					
+			int ans = this.b * this.a; 			
+			SolutionStep step1 = new SolutionStep();
+			String exp = "v1 \\times v2 = \\frac{VAR}{v2} \\times v2";
+			exp = replaceAllSymbols(exp);
+			exp = CommonFunctionAndValues.enclosedWithMathJaxExp(exp);
+			step1.setExpression(exp);
+			step1.setExplanation("multiply by "+this.b);
+			steps.add(step1);
+			
+			SolutionStep step2 = new SolutionStep();
+			
+			exp = ans +" = VAR";
+			exp = replaceAllSymbols(exp);
+			exp = CommonFunctionAndValues.enclosedWithMathJaxExp(exp);
+			step2.setExpression(exp);
+			step2.setExplanation("Simplify, solved");
+			steps.add(step2);
+									
+			return steps;
 		}
 
 		@Override

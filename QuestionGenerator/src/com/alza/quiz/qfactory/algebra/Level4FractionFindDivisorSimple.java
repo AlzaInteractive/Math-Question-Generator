@@ -9,10 +9,13 @@ import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.concurrent.ThreadLocalRandom;
 
+import org.junit.experimental.runners.Enclosed;
+
 import com.alza.quiz.model.ISingleQuizPrimaryAttributeGenerator;
 import com.alza.quiz.model.MultipleChoiceQuiz;
 import com.alza.quiz.model.Quiz;
 import com.alza.quiz.model.QuizLevel;
+import com.alza.quiz.model.SolutionStep;
 import com.alza.quiz.qfactory.IQuestionFactory;
 import com.alza.quiz.util.CommonFunctionAndValues;
 
@@ -57,6 +60,7 @@ public class Level4FractionFindDivisorSimple implements IQuestionFactory{
 			ProblemSkeleton p = generateUniqueProblem();
 			Quiz q = p.generateSingleQuiz();
 			setQuizSecondaryAttributes(q);
+			q.setSolutionSteps(p.generateSolutionSteps());
 			lq.add(q);
 		}
 		return lq;
@@ -83,7 +87,7 @@ public class Level4FractionFindDivisorSimple implements IQuestionFactory{
 		q.setLessonClassifier(bundle.getString("mathelementary"));
 		q.setLessonGrade(5);
 		q.setSubCategoryOrder(6);		
-		q.setLessonCategory(bundle.getString("algebra"));
+		q.setLessonCategory(bundle.getString("algebra"));		
 		q.setLocale(loc);
 	}
 	
@@ -93,6 +97,7 @@ public class Level4FractionFindDivisorSimple implements IQuestionFactory{
 		int c;
 		String var;
 		final String[] VARSYM = {"x","y"};
+		private String questionString = "v1 = v2 / VAR";
 		ProblemSkeleton() {
 			var = VARSYM[ThreadLocalRandom.current().nextInt(0, VARSYM.length)];			
 			do {
@@ -118,12 +123,42 @@ public class Level4FractionFindDivisorSimple implements IQuestionFactory{
 			s = s.replace("VAR", String.valueOf(var));
 			return s;
 		}
+		
+		public List<SolutionStep> generateSolutionSteps(){
+			List<SolutionStep> steps = new ArrayList<>();					
+			int ans = this.b; 
+
+			SolutionStep step1 = new SolutionStep();
+			String exp = "v1 \\times VAR = \\frac{v2}{VAR} \\times VAR";
+			exp = replaceAllSymbols(exp);
+			exp = CommonFunctionAndValues.enclosedWithMathJaxExp(exp);
+			step1.setExpression(exp);
+			step1.setExplanation("multiply by "+var);
+			steps.add(step1);
+			
+			SolutionStep step2 = new SolutionStep();
+			exp = "v1VAR = v2";
+			exp = replaceAllSymbols(exp);
+			exp = CommonFunctionAndValues.enclosedWithMathJaxExp(exp);
+			step2.setExpression(exp);
+			step2.setExplanation("Simplify");
+			steps.add(step2);
+			
+			SolutionStep step3 = new SolutionStep();
+			exp = "VAR = " + ans;
+			exp = replaceAllSymbols(exp);
+			exp = CommonFunctionAndValues.enclosedWithMathJaxExp(exp);
+			step3.setExpression(exp);
+			step3.setExplanation("Divide by coefficient, solved");
+			steps.add(step3);
+			
+			return steps;
+		}
 
 		@Override
-		public String generateQuestion() {
-			String s = "v1 = v2 / VAR";
-			s = replaceAllSymbols(s);
-			return s;
+		public String generateQuestion() {			
+			questionString = replaceAllSymbols(questionString);
+			return questionString;
 		}
 
 		@Override
