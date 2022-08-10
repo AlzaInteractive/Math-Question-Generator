@@ -34,7 +34,7 @@ public class Level2MultSolution {
 		exp = "-VAR * -1 = "+(-ans)+ " * -1";
 		exp = injectValsAndEnclosedWithMathJax(a, b, c, var, exp);
 		step3.setExpression(exp);
-		step3.setExplanation("");
+		step3.setExplanation("Multiply by -1 to remove minus sign");
 		steps.add(step3);
 		
 		SolutionStep step4 = new SolutionStep();

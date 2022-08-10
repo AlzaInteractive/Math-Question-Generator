@@ -32,7 +32,7 @@ public class Level2AddSubSolution {
 			exp = "-VAR * -1 = "+(-ans)+ " * -1";
 			exp = injectValsAndEnclosedWithMathJax(a, b, var, exp);
 			step3.setExpression(exp);
-			step3.setExplanation("");
+			step3.setExplanation("Multiply by -1 to remove minus sign");
 			steps.add(step3);
 			
 			SolutionStep step4 = new SolutionStep();
@@ -63,7 +63,7 @@ public class Level2AddSubSolution {
 			exp = "-VAR * -1 = "+(-ans)+ " * -1";
 			exp = injectValsAndEnclosedWithMathJax(a, b, var, exp);
 			step3.setExpression(exp);
-			step3.setExplanation("");
+			step3.setExplanation("Multiply by -1 to remove minus sign");
 			steps.add(step3);
 			
 			SolutionStep step4 = new SolutionStep();
@@ -94,7 +94,7 @@ public class Level2AddSubSolution {
 			exp = "-VAR * -1 = "+(-ans)+ " * -1";
 			exp = injectValsAndEnclosedWithMathJax(a, b, var, exp);
 			step3.setExpression(exp);
-			step3.setExplanation("");
+			step3.setExplanation("Multiply by -1 to remove minus sign");
 			steps.add(step3);
 			
 			SolutionStep step4 = new SolutionStep();
@@ -125,7 +125,7 @@ public class Level2AddSubSolution {
 			exp = "-VAR * -1 = "+(-ans)+ " * -1";
 			exp = injectValsAndEnclosedWithMathJax(a, b, var, exp);
 			step3.setExpression(exp);
-			step3.setExplanation("");
+			step3.setExplanation("Multiply by -1 to remove minus sign");
 			steps.add(step3);
 			
 			SolutionStep step4 = new SolutionStep();
