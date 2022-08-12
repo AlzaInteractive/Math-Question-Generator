@@ -9,8 +9,6 @@ import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.concurrent.ThreadLocalRandom;
 
-import org.junit.experimental.runners.Enclosed;
-
 import com.alza.quiz.model.ISingleQuizPrimaryAttributeGenerator;
 import com.alza.quiz.model.MultipleChoiceQuiz;
 import com.alza.quiz.model.Quiz;
@@ -133,7 +131,7 @@ public class Level4FractionFindDivisorSimple implements IQuestionFactory{
 			exp = replaceAllSymbols(exp);
 			exp = CommonFunctionAndValues.enclosedWithMathJaxExp(exp);
 			step1.setExpression(exp);
-			step1.setExplanation("multiply by "+var);
+			step1.setExplanation("multiply to remove divisor");
 			steps.add(step1);
 			
 			SolutionStep step2 = new SolutionStep();
@@ -145,12 +143,20 @@ public class Level4FractionFindDivisorSimple implements IQuestionFactory{
 			steps.add(step2);
 			
 			SolutionStep step3 = new SolutionStep();
-			exp = "VAR = " + ans;
+			exp = "v1VAR ÷ v1 = v2 ÷ v1";
 			exp = replaceAllSymbols(exp);
 			exp = CommonFunctionAndValues.enclosedWithMathJaxExp(exp);
 			step3.setExpression(exp);
-			step3.setExplanation("Divide by coefficient, solved");
+			step3.setExplanation("Divide by multiplier/coefficient");
 			steps.add(step3);
+			
+			SolutionStep step4 = new SolutionStep();
+			exp = "VAR = " + ans;
+			exp = replaceAllSymbols(exp);
+			exp = CommonFunctionAndValues.enclosedWithMathJaxExp(exp);
+			step4.setExpression(exp);
+			step4.setExplanation("Solved");
+			steps.add(step4);
 			
 			return steps;
 		}

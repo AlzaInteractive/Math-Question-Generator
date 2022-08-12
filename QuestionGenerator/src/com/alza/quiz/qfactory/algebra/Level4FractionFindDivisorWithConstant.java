@@ -13,6 +13,7 @@ import com.alza.quiz.model.ISingleQuizPrimaryAttributeGenerator;
 import com.alza.quiz.model.MultipleChoiceQuiz;
 import com.alza.quiz.model.Quiz;
 import com.alza.quiz.model.QuizLevel;
+import com.alza.quiz.model.SolutionStep;
 import com.alza.quiz.qfactory.IQuestionFactory;
 import com.alza.quiz.util.CommonFunctionAndValues;
 
@@ -57,6 +58,7 @@ public class Level4FractionFindDivisorWithConstant implements IQuestionFactory{
 			ProblemSkeleton p = generateUniqueProblem(i);
 			Quiz q = p.generateSingleQuiz();
 			setQuizSecondaryAttributes(q);
+			q.setSolutionSteps(p.generateSolutionSteps());
 			lq.add(q);
 		}
 		return lq;
@@ -108,7 +110,8 @@ public class Level4FractionFindDivisorWithConstant implements IQuestionFactory{
 				if (even) {
 					numerator = (a+constant) * b;
 				}
-			} while (a == b || a<=constant || constant==0);						
+			} while (a == b || a<=constant || constant==0 
+					|| (a-constant==1&&!even) || (a+constant==1&&even) );						
 		}
 		
 		int hash() {
@@ -127,6 +130,67 @@ public class Level4FractionFindDivisorWithConstant implements IQuestionFactory{
 			s = s.replace("vconst", String.valueOf(this.constant));
 			s = s.replace("VAR", String.valueOf(var));
 			return s;
+		}
+		
+		public List<SolutionStep> generateSolutionSteps(){
+			List<SolutionStep> steps = new ArrayList<>();								 		
+			
+			int left = this.a - this.constant;
+			
+			SolutionStep step1 = new SolutionStep();
+			step1.setExplanation("Subtract to remove constant");
+			String exp = "v1 - vconst = \\frac{v2}{VAR} + vconst - vconst";
+			if (even) {
+				exp = "v1 + vconst = \\frac{v2}{VAR} - vconst + vconst";
+				step1.setExplanation("Add to remove constant");
+				left = this.a + this.constant;
+			}
+			exp = replaceAllSymbols(exp);
+			exp = CommonFunctionAndValues.enclosedWithMathJaxExp(exp);
+			step1.setExpression(exp);			
+			steps.add(step1);
+									
+			SolutionStep step2 = new SolutionStep();			
+			exp = left+" = \\frac{v2}{VAR}";
+			exp = replaceAllSymbols(exp);
+			exp = CommonFunctionAndValues.enclosedWithMathJaxExp(exp);
+			step2.setExpression(exp);
+			step2.setExplanation("Simplify");
+			steps.add(step2);
+			
+			SolutionStep step3 = new SolutionStep();
+			exp = left+" \\times VAR = \\frac{v2}{VAR} \\times VAR";			
+			exp = replaceAllSymbols(exp);
+			exp = CommonFunctionAndValues.enclosedWithMathJaxExp(exp);
+			step3.setExpression(exp);
+			step3.setExplanation("Multiply to remove divisor");			
+			steps.add(step3);						
+			
+			SolutionStep step4 = new SolutionStep();
+			exp = left+"VAR = v2";
+			exp = replaceAllSymbols(exp);
+			exp = CommonFunctionAndValues.enclosedWithMathJaxExp(exp);
+			step4.setExpression(exp);
+			step4.setExplanation("Simplify");
+			steps.add(step4);
+			
+			SolutionStep step5 = new SolutionStep();
+			exp = left+"VAR ÷ "+left +" = v2 ÷ "+left;
+			exp = replaceAllSymbols(exp);
+			exp = CommonFunctionAndValues.enclosedWithMathJaxExp(exp);
+			step5.setExpression(exp);
+			step5.setExplanation("Simplify, solved");
+			steps.add(step5);
+			
+			SolutionStep step6 = new SolutionStep();
+			exp = "VAR = "+generateAnswer();
+			exp = replaceAllSymbols(exp);
+			exp = CommonFunctionAndValues.enclosedWithMathJaxExp(exp);
+			step6.setExpression(exp);
+			step6.setExplanation("Simplify, solved");
+			steps.add(step6);
+									
+			return steps;
 		}
 
 		@Override

@@ -13,6 +13,7 @@ import com.alza.quiz.model.ISingleQuizPrimaryAttributeGenerator;
 import com.alza.quiz.model.MultipleChoiceQuiz;
 import com.alza.quiz.model.Quiz;
 import com.alza.quiz.model.QuizLevel;
+import com.alza.quiz.model.SolutionStep;
 import com.alza.quiz.qfactory.IQuestionFactory;
 import com.alza.quiz.util.CommonFunctionAndValues;
 
@@ -57,6 +58,7 @@ public class Level4FractionFindDivisorWithCoefficientAndConstant implements IQue
 			ProblemSkeleton p = generateUniqueProblem(i);
 			Quiz q = p.generateSingleQuiz();
 			setQuizSecondaryAttributes(q);
+			q.setSolutionSteps(p.generateSolutionSteps());
 			lq.add(q);
 		}
 		return lq;
@@ -103,15 +105,15 @@ public class Level4FractionFindDivisorWithCoefficientAndConstant implements IQue
 			}
 			var = VARSYM[ThreadLocalRandom.current().nextInt(0, VARSYM.length)];			
 			do {
-				a = ThreadLocalRandom.current().nextInt(2, 10);
-				b = ThreadLocalRandom.current().nextInt(2, 10);
+				a = ThreadLocalRandom.current().nextInt(2, 7);
+				b = ThreadLocalRandom.current().nextInt(2, 4);
 				coefficient = ThreadLocalRandom.current().nextInt(2, 6);
-				constant = ThreadLocalRandom.current().nextInt(1, 5);
+				constant = ThreadLocalRandom.current().nextInt(1, 9);
 				numerator = (a-constant) * b * coefficient;
 				if (even) {
 					numerator = (a+constant) * b * coefficient;
 				}				
-			} while (a == b || a <= constant);
+			} while (a == b || a <= constant || numerator >= 45);
 			
 		}
 		
@@ -132,6 +134,69 @@ public class Level4FractionFindDivisorWithCoefficientAndConstant implements IQue
 			s = s.replace("vcoeff", String.valueOf(this.coefficient));
 			s = s.replace("VAR", String.valueOf(var));
 			return s;
+		}
+		
+		public List<SolutionStep> generateSolutionSteps(){
+			List<SolutionStep> steps = new ArrayList<>();								 		
+			
+			int left = this.a - this.constant;
+			
+			SolutionStep step1 = new SolutionStep();
+			step1.setExplanation("Subtract to remove constant");
+			String exp = "v1 - vconst = \\frac{v2}{vcoeffVAR} + vconst - vconst";
+			if (even) {
+				exp = "v1 + vconst = \\frac{v2}{vcoeffVAR} - vconst + vconst";
+				step1.setExplanation("Add to remove constant");
+				left = this.a + this.constant;
+			}
+			exp = replaceAllSymbols(exp);
+			exp = CommonFunctionAndValues.enclosedWithMathJaxExp(exp);
+			step1.setExpression(exp);			
+			steps.add(step1);
+									
+			SolutionStep step2 = new SolutionStep();			
+			exp = left+" = \\frac{v2}{vcoeffVAR}";
+			exp = replaceAllSymbols(exp);
+			exp = CommonFunctionAndValues.enclosedWithMathJaxExp(exp);
+			step2.setExpression(exp);
+			step2.setExplanation("Simplify");
+			steps.add(step2);
+			
+			SolutionStep step3 = new SolutionStep();
+			exp = left+" \\times vcoeffVAR = \\frac{v2}{vcoeffVAR} \\times vcoeffVAR";			
+			exp = replaceAllSymbols(exp);
+			exp = CommonFunctionAndValues.enclosedWithMathJaxExp(exp);
+			step3.setExpression(exp);
+			step3.setExplanation("Multiply to remove divisor");			
+			steps.add(step3);
+						
+			
+			SolutionStep step4 = new SolutionStep();
+			left = left * this.coefficient;
+			exp = left +"VAR = v2";
+			exp = replaceAllSymbols(exp);
+			exp = CommonFunctionAndValues.enclosedWithMathJaxExp(exp);
+			step4.setExpression(exp);
+			step4.setExplanation("Simplify");
+			steps.add(step4);
+			
+			SolutionStep step5 = new SolutionStep();
+			exp = left +"VAR ÷ " +left+" = v2 ÷ "+left;
+			exp = replaceAllSymbols(exp);
+			exp = CommonFunctionAndValues.enclosedWithMathJaxExp(exp);
+			step5.setExpression(exp);
+			step5.setExplanation("Divide to remove multiplier/coefficient");
+			steps.add(step5);
+			
+			SolutionStep step6 = new SolutionStep();
+			exp = "VAR = "+generateAnswer();
+			exp = replaceAllSymbols(exp);
+			exp = CommonFunctionAndValues.enclosedWithMathJaxExp(exp);
+			step6.setExpression(exp);
+			step6.setExplanation("Simplify, solved");
+			steps.add(step6);
+									
+			return steps;
 		}
 
 		@Override

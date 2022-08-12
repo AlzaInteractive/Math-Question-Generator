@@ -13,6 +13,7 @@ import com.alza.quiz.model.ISingleQuizPrimaryAttributeGenerator;///
 import com.alza.quiz.model.MultipleChoiceQuiz;
 import com.alza.quiz.model.Quiz;
 import com.alza.quiz.model.QuizLevel;
+import com.alza.quiz.model.SolutionStep;
 import com.alza.quiz.qfactory.IQuestionFactory;
 import com.alza.quiz.util.CommonFunctionAndValues;
 
@@ -57,6 +58,7 @@ public class Level4FractionFindDivisorWithCoefficient implements IQuestionFactor
 			ProblemSkeleton p = generateUniqueProblem();
 			Quiz q = p.generateSingleQuiz();
 			setQuizSecondaryAttributes(q);
+			q.setSolutionSteps(p.generateSolutionSteps());
 			lq.add(q);
 		}
 		return lq;
@@ -97,8 +99,8 @@ public class Level4FractionFindDivisorWithCoefficient implements IQuestionFactor
 		ProblemSkeleton() {
 			var = VARSYM[ThreadLocalRandom.current().nextInt(0, VARSYM.length)];
 			do {
-				a = ThreadLocalRandom.current().nextInt(2, 10);
-				b = ThreadLocalRandom.current().nextInt(2, 10);
+				a = ThreadLocalRandom.current().nextInt(2, 7);
+				b = ThreadLocalRandom.current().nextInt(2, 7);
 				coeff = ThreadLocalRandom.current().nextInt(2, 5);
 				c = a * b * coeff;				
 			} while (a == b ||  a == coeff || b == coeff);						
@@ -126,6 +128,45 @@ public class Level4FractionFindDivisorWithCoefficient implements IQuestionFactor
 			s = s.replace("coeff", String.valueOf(this.coeff));
 			s = s.replace("VAR", String.valueOf(var));
 			return s;
+		}
+		
+		public List<SolutionStep> generateSolutionSteps(){
+			List<SolutionStep> steps = new ArrayList<>();								 		
+						 		
+			SolutionStep step1 = new SolutionStep();
+			String exp = "v1 \\times coeffVAR = \\frac{v2}{coeffVAR} \\times coeffVAR";
+			exp = replaceAllSymbols(exp);
+			exp = CommonFunctionAndValues.enclosedWithMathJaxExp(exp);
+			step1.setExpression(exp);
+			step1.setExplanation("Multiply to remove divisor");
+			steps.add(step1);
+			
+			SolutionStep step2 = new SolutionStep();
+			int nucoeff= this.a * this.coeff;
+			exp = nucoeff +"VAR = v2";
+			exp = replaceAllSymbols(exp);
+			exp = CommonFunctionAndValues.enclosedWithMathJaxExp(exp);
+			step2.setExpression(exp);
+			step2.setExplanation("Simplify");
+			steps.add(step2);
+			
+			SolutionStep step3 = new SolutionStep();			
+			exp = nucoeff +"VAR ÷ "+nucoeff+"= v2 ÷ "+nucoeff;
+			exp = replaceAllSymbols(exp);
+			exp = CommonFunctionAndValues.enclosedWithMathJaxExp(exp);
+			step3.setExpression(exp);
+			step3.setExplanation("Divide to remove multiplier/coefficient");
+			steps.add(step3);
+			
+			SolutionStep step4 = new SolutionStep();
+			exp = "VAR = "+generateAnswer();
+			exp = replaceAllSymbols(exp);
+			exp = CommonFunctionAndValues.enclosedWithMathJaxExp(exp);
+			step4.setExpression(exp);
+			step4.setExplanation("Simplify, solved");
+			steps.add(step4);
+									
+			return steps;
 		}
 
 		@Override

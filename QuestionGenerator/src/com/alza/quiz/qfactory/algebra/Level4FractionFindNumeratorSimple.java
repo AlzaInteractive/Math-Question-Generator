@@ -143,7 +143,7 @@ public class Level4FractionFindNumeratorSimple implements IQuestionFactory{
 			exp = replaceAllSymbols(exp);
 			exp = CommonFunctionAndValues.enclosedWithMathJaxExp(exp);
 			step1.setExpression(exp);
-			step1.setExplanation("multiply by "+this.b);
+			step1.setExplanation("Multiply to remove divisor");
 			steps.add(step1);
 			
 			SolutionStep step2 = new SolutionStep();
