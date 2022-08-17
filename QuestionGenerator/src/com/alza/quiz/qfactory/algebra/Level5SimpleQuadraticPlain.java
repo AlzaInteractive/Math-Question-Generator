@@ -13,6 +13,7 @@ import com.alza.quiz.model.ISingleQuizPrimaryAttributeGenerator;
 import com.alza.quiz.model.MultipleChoiceQuiz;
 import com.alza.quiz.model.Quiz;
 import com.alza.quiz.model.QuizLevel;
+import com.alza.quiz.model.SolutionStep;
 import com.alza.quiz.qfactory.IQuestionFactory;
 import com.alza.quiz.util.CommonFunctionAndValues;
 
@@ -57,6 +58,7 @@ public class Level5SimpleQuadraticPlain implements IQuestionFactory{
 			ProblemSkeleton p = generateUniqueProblem(i);
 			Quiz q = p.generateSingleQuiz();
 			setQuizSecondaryAttributes(q);
+			q.setSolutionSteps(p.generateSolutionSteps());
 			lq.add(q);
 		}
 		return lq;
@@ -106,6 +108,28 @@ public class Level5SimpleQuadraticPlain implements IQuestionFactory{
 			s = s.replace("v1", String.valueOf(this.a*this.a));		
 			s = s.replace("VAR", String.valueOf(var));
 			return s;
+		}
+		
+		public List<SolutionStep> generateSolutionSteps(){
+			List<SolutionStep> steps = new ArrayList<>();		
+			
+			SolutionStep step1 = new SolutionStep();
+			step1.setExplanation("Take square root on both sides");
+			String exp = "VAR = ± \\sqrtv1";		
+			exp = replaceAllSymbols(exp);
+			exp = CommonFunctionAndValues.enclosedWithMathJaxExp(exp);
+			step1.setExpression(exp);			
+			steps.add(step1);
+									
+			SolutionStep step2 = new SolutionStep();			
+			exp = "VAR = " +this.a +" and VAR = "+-this.a;
+			exp = replaceAllSymbols(exp);
+			exp = CommonFunctionAndValues.enclosedWithMathJaxExp(exp);
+			step2.setExpression(exp);
+			step2.setExplanation("Simplify");
+			steps.add(step2);						
+									
+			return steps;
 		}
 
 		@Override

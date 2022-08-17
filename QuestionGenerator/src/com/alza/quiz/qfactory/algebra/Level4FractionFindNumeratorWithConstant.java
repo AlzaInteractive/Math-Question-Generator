@@ -144,9 +144,9 @@ public class Level4FractionFindNumeratorWithConstant implements IQuestionFactory
 			
 			SolutionStep step1 = new SolutionStep();
 			step1.setExplanation("Subtract to remove constant");
-			String exp = "v1 - constant = \\\\frac{VAR}{v2} + constant - constant";
+			String exp = "v1 - constant = \\frac{VAR}{v2} + constant - constant";
 			if (even) {
-				exp = "v1 + constant = \\\\frac{VAR}{v2} - constant + constant";
+				exp = "v1 + constant = \\frac{VAR}{v2} - constant + constant";
 				step1.setExplanation("Add to remove constant");
 				left = this.a + this.constant;
 			}
@@ -156,7 +156,7 @@ public class Level4FractionFindNumeratorWithConstant implements IQuestionFactory
 			steps.add(step1);
 									
 			SolutionStep step2 = new SolutionStep();			
-			exp = left+" = \\\\frac{VAR}{v2}";
+			exp = left+" = \\frac{VAR}{v2}";
 			exp = replaceAllSymbols(exp);
 			exp = CommonFunctionAndValues.enclosedWithMathJaxExp(exp);
 			step2.setExpression(exp);

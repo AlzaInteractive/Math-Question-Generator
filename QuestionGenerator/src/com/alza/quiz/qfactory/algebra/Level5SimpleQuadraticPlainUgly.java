@@ -15,6 +15,7 @@ import com.alza.quiz.model.ISingleQuizPrimaryAttributeGenerator;
 import com.alza.quiz.model.MultipleChoiceQuiz;
 import com.alza.quiz.model.Quiz;
 import com.alza.quiz.model.QuizLevel;
+import com.alza.quiz.model.SolutionStep;
 import com.alza.quiz.qfactory.IQuestionFactory;
 import com.alza.quiz.util.CommonFunctionAndValues;
 
@@ -59,6 +60,7 @@ public class Level5SimpleQuadraticPlainUgly implements IQuestionFactory{
 			ProblemSkeleton p = generateUniqueProblem(i);
 			Quiz q = p.generateSingleQuiz();
 			setQuizSecondaryAttributes(q);
+			q.setSolutionSteps(p.generateSolutionSteps());
 			lq.add(q);
 		}
 		return lq;
@@ -116,6 +118,37 @@ public class Level5SimpleQuadraticPlainUgly implements IQuestionFactory{
 			s = s.replace("v1", String.valueOf(square));		
 			s = s.replace("VAR", String.valueOf(var));
 			return s;
+		}
+		
+		public List<SolutionStep> generateSolutionSteps(){
+			List<SolutionStep> steps = new ArrayList<>();		
+			
+			SolutionStep step1 = new SolutionStep();
+			step1.setExplanation("Take square root on both sides");
+			String exp = "-VAR^2 \\times -1 = ± v1 \\times -1";		
+			exp = replaceAllSymbols(exp);
+			exp = CommonFunctionAndValues.enclosedWithMathJaxExp(exp);
+			step1.setExpression(exp);			
+			steps.add(step1);
+									
+			SolutionStep step2 = new SolutionStep();			
+			exp = "VAR^2 = v1";
+			exp = replaceAllSymbols(exp);
+			exp = CommonFunctionAndValues.enclosedWithMathJaxExp(exp);
+			step2.setExpression(exp);
+			step2.setExplanation("Multiply by -1");
+			steps.add(step2);
+			
+			SolutionStep step3 = new SolutionStep();
+			step3.setExplanation("Take square root on both sides");
+			exp = "VAR = ± \\sqrtv1";		
+			exp = replaceAllSymbols(exp);
+			exp = CommonFunctionAndValues.enclosedWithMathJaxExp(exp);
+			step3.setExpression(exp);			
+			steps.add(step3);
+							
+									
+			return steps;
 		}
 		
 		private String[] wrongChoices() {

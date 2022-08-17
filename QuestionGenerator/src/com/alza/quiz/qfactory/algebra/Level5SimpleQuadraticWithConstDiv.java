@@ -15,6 +15,7 @@ import com.alza.quiz.model.ISingleQuizPrimaryAttributeGenerator;
 import com.alza.quiz.model.MultipleChoiceQuiz;
 import com.alza.quiz.model.Quiz;
 import com.alza.quiz.model.QuizLevel;
+import com.alza.quiz.model.SolutionStep;
 import com.alza.quiz.qfactory.IQuestionFactory;
 import com.alza.quiz.util.CommonFunctionAndValues;
 
@@ -61,6 +62,7 @@ public class Level5SimpleQuadraticWithConstDiv implements IQuestionFactory {
 			ProblemSkeleton p = generateUniqueProblem(i);
 			Quiz q = p.generateSingleQuiz();
 			setQuizSecondaryAttributes(q);
+			q.setSolutionSteps(p.generateSolutionSteps());
 			lq.add(q);
 		}
 		return lq;
@@ -110,13 +112,12 @@ public class Level5SimpleQuadraticWithConstDiv implements IQuestionFactory {
 				unsignedRoot = ThreadLocalRandom.current().nextInt(2, 9);
 				divisor = ThreadLocalRandom.current().nextInt(2, 9);
 				divisor = divisor * CommonFunctionAndValues.getRandom(new int[] {1,-1});
-				if (even) {
-					constant = ThreadLocalRandom.current().nextInt(2, 6);
-				} else {
-					constant = ThreadLocalRandom.current().nextInt(-5, -1);
-				}
-				mod = (unsignedRoot * unsignedRoot) % divisor ;
+				constant = ThreadLocalRandom.current().nextInt(2, 6);				
+				mod = (unsignedRoot * unsignedRoot) % divisor ;				
 				rightVal = constant + (unsignedRoot * unsignedRoot / divisor);
+				if (even) {
+					rightVal = -constant + (unsignedRoot * unsignedRoot / divisor);
+				}
 				//System.out.println(coeff+" "+unsignedRoot+" "+divisor+" "+mod);
 			} while (unsignedRoot == divisor || mod != 0
 					|| divisor == rightVal || divisor == -rightVal 
@@ -136,6 +137,69 @@ public class Level5SimpleQuadraticWithConstDiv implements IQuestionFactory {
 			s = s.replace("VAR", String.valueOf(var));
 			return s;
 		}
+		
+		public List<SolutionStep> generateSolutionSteps(){
+			List<SolutionStep> steps = new ArrayList<>();		
+				
+			SolutionStep step1 = new SolutionStep();
+			step1.setExplanation("Remove constant on the left");
+			String exp = "\\frac{VAR^2}{divisor} + constant - constant = rightval - constant";
+			if (even) {
+				exp = "\\frac{VAR^2}{divisor} - constant + constant = rightval + constant";
+			}
+			exp = replaceAllSymbols(exp);
+			exp = CommonFunctionAndValues.enclosedWithMathJaxExp(exp);
+			step1.setExpression(exp);			
+			steps.add(step1);
+									
+			SolutionStep step2 = new SolutionStep();			
+			exp = "\\frac{VAR^2}{divisor} = "+(this.rightVal-this.constant);
+			if (even) {
+				exp = "\\frac{VAR^2}{divisor} = "+(this.rightVal+this.constant);
+			}
+			exp = replaceAllSymbols(exp);
+			exp = CommonFunctionAndValues.enclosedWithMathJaxExp(exp);
+			step2.setExpression(exp);
+			step2.setExplanation("Simplify");
+			steps.add(step2);
+			
+			SolutionStep step3 = new SolutionStep();
+			step3.setExplanation("Multiply to remove divisor");
+			exp = "\\frac{VAR^2}{divisor} \\ times divisor = "+(this.rightVal-this.constant)+" \\times divisor";
+			if (even) {
+				exp = "\\frac{VAR^2}{divisor} \\ times divisor = "+(this.rightVal+this.constant)+" \\times divisor";
+			}			
+			exp = replaceAllSymbols(exp);
+			exp = CommonFunctionAndValues.enclosedWithMathJaxExp(exp);
+			step3.setExpression(exp);			
+			steps.add(step3);
+									
+			SolutionStep step4 = new SolutionStep();			
+			exp = "VAR^2 = "+(unsignedRoot * unsignedRoot);			
+			exp = replaceAllSymbols(exp);
+			exp = CommonFunctionAndValues.enclosedWithMathJaxExp(exp);
+			step4.setExpression(exp);
+			step4.setExplanation("Simplify");
+			steps.add(step4);
+			
+			SolutionStep step5 = new SolutionStep();
+			step5.setExplanation("Take square root on both sides");
+			exp = "VAR = ± \\sqrt"+(unsignedRoot * unsignedRoot);			
+			exp = replaceAllSymbols(exp);
+			exp = CommonFunctionAndValues.enclosedWithMathJaxExp(exp);
+			step5.setExpression(exp);			
+			steps.add(step5);
+									
+			SolutionStep step6 = new SolutionStep();			
+			exp = "VAR = " +this.unsignedRoot +" and VAR = "+-this.unsignedRoot;
+			exp = replaceAllSymbols(exp);
+			exp = CommonFunctionAndValues.enclosedWithMathJaxExp(exp);
+			step6.setExpression(exp);
+			step6.setExplanation("Simplify, solved");
+			steps.add(step6);
+									
+			return steps;
+		}
 
 		private String[] wrongChoices() {
 			String[] choices = { 
@@ -149,16 +213,20 @@ public class Level5SimpleQuadraticWithConstDiv implements IQuestionFactory {
 
 		@Override
 		public String generateQuestion() {
-			String s = "VAR^2/divisor + constant= rightval";
-			if (constant < 0 ) { s = "VAR^2/divisor constant = rightval"; }
+			String s = "VAR^2/divisor + constant = rightval";
+			if (even ) { 
+				s = "VAR^2/divisor - constant = rightval"; 
+			}
 			s = replaceAllSymbols(s);
 			return s;
 		}
 
 		@Override
 		public String generateQuestionMathjax() {
-			String s = "\\frac{VAR^2}{divisor} + constant= rightval";
-			if (constant < 0 ) { s = "\\frac{VAR^2}{divisor} constant= rightval"; }
+			String s = "\\frac{VAR^2}{divisor} + constant = rightval";
+			if (even ) { 
+				s = "\\frac{VAR^2}{divisor} - constant = rightval"; 
+			}
 			s = replaceAllSymbols(s);
 			s = CommonFunctionAndValues.enclosedWithMathJaxExp(s);
 			String s2 = var + "=?";

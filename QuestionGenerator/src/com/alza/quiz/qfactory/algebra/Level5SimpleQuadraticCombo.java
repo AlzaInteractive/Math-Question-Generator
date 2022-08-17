@@ -15,6 +15,7 @@ import com.alza.quiz.model.ISingleQuizPrimaryAttributeGenerator;
 import com.alza.quiz.model.MultipleChoiceQuiz;
 import com.alza.quiz.model.Quiz;
 import com.alza.quiz.model.QuizLevel;
+import com.alza.quiz.model.SolutionStep;
 import com.alza.quiz.qfactory.IQuestionFactory;
 import com.alza.quiz.util.CommonFunctionAndValues;
 
@@ -61,6 +62,7 @@ public class Level5SimpleQuadraticCombo implements IQuestionFactory {
 			ProblemSkeleton p = generateUniqueProblem(i);
 			Quiz q = p.generateSingleQuiz();
 			setQuizSecondaryAttributes(q);
+			q.setSolutionSteps(p.generateSolutionSteps());
 			lq.add(q);
 		}
 		return lq;
@@ -117,7 +119,7 @@ public class Level5SimpleQuadraticCombo implements IQuestionFactory {
 				coeff = coeff * CommonFunctionAndValues.getRandom(new int[] {1,-1});				
 				rightVal = constant + (coeff * unsignedRoot * unsignedRoot/divisor);
 				mod = (coeff * unsignedRoot * unsignedRoot) % divisor;
-			} while (unsignedRoot == coeff || rightVal >= 100 || mod !=0 ||divisor == constant || divisor == coeff);
+			} while (unsignedRoot == coeff || rightVal >= 100 || mod !=0 ||divisor == constant || divisor == coeff || divisor == -coeff);
 		}
 
 		int hash() {
@@ -133,6 +135,65 @@ public class Level5SimpleQuadraticCombo implements IQuestionFactory {
 			s = s.replace("VAR", String.valueOf(var));
 			return s;
 		}
+		
+		public List<SolutionStep> generateSolutionSteps(){
+			List<SolutionStep> steps = new ArrayList<>();		
+				
+			SolutionStep step1 = new SolutionStep();
+			step1.setExplanation("Remove constant on the left");
+			String exp = "\\frac{coeffVAR^2}{divisor} + constant - constant = rightval - constant";
+			if (constant<0) {
+				int invconst = - this.constant;
+				exp = "\\frac{coeffVAR^2}{divisor} - "+invconst+" + "+ invconst +" = rightval + "+ invconst;
+			}
+			exp = replaceAllSymbols(exp);
+			exp = CommonFunctionAndValues.enclosedWithMathJaxExp(exp);
+			step1.setExpression(exp);			
+			steps.add(step1);
+									
+			int right = this.rightVal-this.constant;
+			SolutionStep step2 = new SolutionStep();			
+			exp = "\\frac{coeffVAR^2}{divisor} = "+right;			
+			exp = replaceAllSymbols(exp);
+			exp = CommonFunctionAndValues.enclosedWithMathJaxExp(exp);
+			step2.setExpression(exp);
+			step2.setExplanation("Simplify");
+			steps.add(step2);
+			
+			SolutionStep step3 = new SolutionStep();			
+			exp = "\\frac{coeffVAR^2}{divisor} \\times \\frac{divisor}{coeff} = "+ right +" \\times \\frac{divisor}{coeff}";			
+			exp = replaceAllSymbols(exp);
+			exp = CommonFunctionAndValues.enclosedWithMathJaxExp(exp);
+			step3.setExpression(exp);
+			step3.setExplanation("Remove both multiplier and divisor simultaneously");
+			steps.add(step3);
+									
+			SolutionStep step4 = new SolutionStep();			
+			exp = "VAR^2 = "+(unsignedRoot * unsignedRoot);			
+			exp = replaceAllSymbols(exp);
+			exp = CommonFunctionAndValues.enclosedWithMathJaxExp(exp);
+			step4.setExpression(exp);
+			step4.setExplanation("Simplify");
+			steps.add(step4);
+			
+			SolutionStep step5 = new SolutionStep();
+			step5.setExplanation("Take square root on both sides");
+			exp = "VAR = ± \\sqrt"+(unsignedRoot * unsignedRoot);			
+			exp = replaceAllSymbols(exp);
+			exp = CommonFunctionAndValues.enclosedWithMathJaxExp(exp);
+			step5.setExpression(exp);			
+			steps.add(step5);
+									
+			SolutionStep step6 = new SolutionStep();			
+			exp = "VAR = " +this.unsignedRoot +" and VAR = "+-this.unsignedRoot;
+			exp = replaceAllSymbols(exp);
+			exp = CommonFunctionAndValues.enclosedWithMathJaxExp(exp);
+			step6.setExpression(exp);
+			step6.setExplanation("Simplify, solved");
+			steps.add(step6);
+									
+			return steps;
+		}
 
 		private String[] wrongChoices() {
 			String[] choices = { 
@@ -147,7 +208,9 @@ public class Level5SimpleQuadraticCombo implements IQuestionFactory {
 		@Override
 		public String generateQuestion() {
 			String s = "coeffVAR^2/divisor + constant = rightval";
-			if (constant<0) { s = "coeffVAR^2/divisor constant = rightval"; }			
+			if (constant<0) { 
+				s = "coeffVAR^2/divisor -"+-this.constant+" = rightval"; 
+			}			
 			s = replaceAllSymbols(s);
 			return s;
 		}
@@ -156,7 +219,7 @@ public class Level5SimpleQuadraticCombo implements IQuestionFactory {
 		public String generateQuestionMathjax() {
 			String s = "\\frac{coeffVAR^2}{divisor} + constant = rightval";
 			if (constant<0) {
-				s = "\\frac{coeffVAR^2}{divisor} constant = rightval";
+				s = "\\frac{coeffVAR^2}{divisor} - "+-this.constant+" = rightval";
 			}
 			s = replaceAllSymbols(s);
 			s = CommonFunctionAndValues.enclosedWithMathJaxExp(s);

@@ -15,6 +15,7 @@ import com.alza.quiz.model.ISingleQuizPrimaryAttributeGenerator;
 import com.alza.quiz.model.MultipleChoiceQuiz;
 import com.alza.quiz.model.Quiz;
 import com.alza.quiz.model.QuizLevel;
+import com.alza.quiz.model.SolutionStep;
 import com.alza.quiz.qfactory.IQuestionFactory;
 import com.alza.quiz.util.CommonFunctionAndValues;
 
@@ -61,6 +62,7 @@ public class Level5SimpleQuadraticWithCoeffDiv implements IQuestionFactory {
 			ProblemSkeleton p = generateUniqueProblem(i);
 			Quiz q = p.generateSingleQuiz();
 			setQuizSecondaryAttributes(q);
+			q.setSolutionSteps(p.generateSolutionSteps());
 			lq.add(q);
 		}
 		return lq;
@@ -134,6 +136,44 @@ public class Level5SimpleQuadraticWithCoeffDiv implements IQuestionFactory {
 			s = s.replace("coeff", String.valueOf(this.coeff));
 			s = s.replace("VAR", String.valueOf(var));
 			return s;
+		}
+		
+		public List<SolutionStep> generateSolutionSteps(){
+			List<SolutionStep> steps = new ArrayList<>();		
+			
+			SolutionStep step1 = new SolutionStep();
+			step1.setExplanation("Remove both multiplier and divisor simultaneously");
+			String exp = "\\frac{coeffVAR^2}{divisor} \\times \\frac{divisor}{coeff} = rightval \\times \\frac{divisor}{coeff}";			
+			exp = replaceAllSymbols(exp);
+			exp = CommonFunctionAndValues.enclosedWithMathJaxExp(exp);
+			step1.setExpression(exp);			
+			steps.add(step1);
+									
+			SolutionStep step2 = new SolutionStep();			
+			exp = "VAR^2 = "+(unsignedRoot * unsignedRoot);			
+			exp = replaceAllSymbols(exp);
+			exp = CommonFunctionAndValues.enclosedWithMathJaxExp(exp);
+			step2.setExpression(exp);
+			step2.setExplanation("Simplify");
+			steps.add(step2);
+			
+			SolutionStep step3 = new SolutionStep();
+			step3.setExplanation("Take square root on both sides");
+			exp = "VAR = ± \\sqrt"+(this.unsignedRoot*this.unsignedRoot);			
+			exp = replaceAllSymbols(exp);
+			exp = CommonFunctionAndValues.enclosedWithMathJaxExp(exp);
+			step3.setExpression(exp);			
+			steps.add(step3);
+									
+			SolutionStep step4 = new SolutionStep();			
+			exp = "VAR = " +this.unsignedRoot +" and VAR = "+-this.unsignedRoot;
+			exp = replaceAllSymbols(exp);
+			exp = CommonFunctionAndValues.enclosedWithMathJaxExp(exp);
+			step4.setExpression(exp);
+			step4.setExplanation("Simplify, solved");
+			steps.add(step4);
+									
+			return steps;
 		}
 
 		private String[] wrongChoices() {
