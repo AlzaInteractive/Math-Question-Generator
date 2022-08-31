@@ -20,7 +20,7 @@ import net.objecthunter.exp4j.ExpressionBuilder;
 public class Level1Mult implements IQuestionFactory{
 	// private final static String MJXTAG ="$$"; 
 	Locale loc;
-	ResourceBundle bundle,bundleAlgebra;
+	ResourceBundle bundle,bundleAlgebra,bundleAlgebraSteps;
 	private String[] VARSYM = {"x","y"};
 	List<ProblemPattern> lProbs = new ArrayList<>();
 	public Level1Mult(Locale loc){
@@ -34,7 +34,7 @@ public class Level1Mult implements IQuestionFactory{
 	private void initStringFromLocale(){
 		bundle = ResourceBundle.getBundle("lang.langbundle", loc);
 		bundleAlgebra = ResourceBundle.getBundle("lang.langbundle-algebra", loc);
-		
+		bundleAlgebraSteps = ResourceBundle.getBundle("lang.algebra-steps", loc);
 	}
 	int numOfQuestion = 5;
 	int[][] bounds = {
@@ -122,7 +122,7 @@ public class Level1Mult implements IQuestionFactory{
 		qLine1 = CommonFunctionAndValues.enclosedWithMathJaxExp(qLine1);
 		String qLine2 = CommonFunctionAndValues.enclosedWithMathJaxExp(var + " = ?");
 		q.setQuestion(qLine1+" "+qLine2);
-		q.setSolutionSteps(Level1MultSolution.getSolutionSteps(a, b, c, var, p));
+		q.setSolutionSteps(Level1MultSolution.getSolutionSteps(a, b, c, var, p, bundleAlgebraSteps));
 	}
 	
 	private void setQuizSecondaryAttributes(int idx, MultipleChoiceQuiz q) {
