@@ -166,9 +166,8 @@ public class Level5SimpleQuadraticWithCoeffDiv implements IQuestionFactory {
 			steps.add(step3);
 									
 			SolutionStep step4 = new SolutionStep();			
-			exp = "VAR = " +this.unsignedRoot +" and VAR = "+-this.unsignedRoot;
-			exp = replaceAllSymbols(exp);
-			exp = CommonFunctionAndValues.enclosedWithMathJaxExp(exp);
+			exp = "$$VAR = " +this.unsignedRoot +"$$ or $$VAR = "+-this.unsignedRoot+"$$";
+			exp = replaceAllSymbols(exp);			
 			step4.setExpression(exp);
 			step4.setExplanation("Simplify, solved");
 			steps.add(step4);

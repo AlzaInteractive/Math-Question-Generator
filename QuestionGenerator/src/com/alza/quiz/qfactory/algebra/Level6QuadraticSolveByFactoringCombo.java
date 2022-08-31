@@ -15,23 +15,24 @@ import com.alza.quiz.model.ISingleQuizPrimaryAttributeGenerator;
 import com.alza.quiz.model.MultipleChoiceQuiz;
 import com.alza.quiz.model.Quiz;
 import com.alza.quiz.model.QuizLevel;
+import com.alza.quiz.model.SolutionStep;
 import com.alza.quiz.qfactory.IQuestionFactory;
 import com.alza.quiz.util.CommonFunctionAndValues;
 
-public class Level6QuadraticFactorizeCombo implements IQuestionFactory {
+public class Level6QuadraticSolveByFactoringCombo implements IQuestionFactory {
 
 	private int numOfQuestion = 5;
-	private Map<Integer, ProblemSkeleton> qMap = new HashMap<Integer, Level6QuadraticFactorizeCombo.ProblemSkeleton>();
+	private Map<Integer, ProblemSkeleton> qMap = new HashMap<Integer, Level6QuadraticSolveByFactoringCombo.ProblemSkeleton>();
 	private Locale loc;
 	private ResourceBundle bundle;
 	private ResourceBundle bundleAlgebra;
 
-	public Level6QuadraticFactorizeCombo(Locale loc) {
+	public Level6QuadraticSolveByFactoringCombo(Locale loc) {
 		this.loc = loc;
 		initStringFromLocale();
 	}
 
-	public Level6QuadraticFactorizeCombo() {
+	public Level6QuadraticSolveByFactoringCombo() {
 		this.loc = new Locale("in", "ID");
 		initStringFromLocale();
 	}
@@ -61,6 +62,7 @@ public class Level6QuadraticFactorizeCombo implements IQuestionFactory {
 			ProblemSkeleton p = generateUniqueProblem(i);
 			Quiz q = p.generateSingleQuiz();
 			setQuizSecondaryAttributes(q);
+			//q.setSolutionSteps(p.generateSolutionSteps());
 			lq.add(q);
 		}
 		return lq;
@@ -95,10 +97,11 @@ public class Level6QuadraticFactorizeCombo implements IQuestionFactory {
 		int a,b,c;	
 		int firstFactorConst;
 		int secondFactorConst;
+		int split1,split2;
 		String var;		
 		final String[] VARSYM = { "x", "y", "z" };
-		ProblemSkeleton(int idx) {			
-			
+		
+		ProblemSkeleton(int idx) {						
 			var = VARSYM[ThreadLocalRandom.current().nextInt(0, VARSYM.length)];
 			do {
 				firstFactorConst = ThreadLocalRandom.current().nextInt(2, 6);
@@ -106,11 +109,14 @@ public class Level6QuadraticFactorizeCombo implements IQuestionFactory {
 				secondFactorConst = ThreadLocalRandom.current().nextInt(2, 6);
 				secondFactorConst = secondFactorConst * CommonFunctionAndValues.getRandom(new int[] {1,-1});
 				
-			} while (firstFactorConst == secondFactorConst || firstFactorConst + secondFactorConst == 0);
+			} while (firstFactorConst == secondFactorConst 
+					|| firstFactorConst + secondFactorConst == 0);
 			a = ThreadLocalRandom.current().nextInt(2, 6);;
 			a = a * CommonFunctionAndValues.getRandom(new int[] {1,-1});
 			b = a*(firstFactorConst + secondFactorConst);
 			c = a*(firstFactorConst * secondFactorConst);
+			split1 = a*firstFactorConst;
+			split2 = secondFactorConst;
 		}
 
 		int hash() {
@@ -125,6 +131,15 @@ public class Level6QuadraticFactorizeCombo implements IQuestionFactory {
 			s = s.replace("VAR", String.valueOf(var));
 			return s;
 		}
+		
+		private String replaceAllSymbolsInverted(String s) {
+			s = s.replace("avar", String.valueOf(-this.a));
+			s = s.replace("bvar", String.valueOf(-this.b));
+			s = s.replace("cvar", String.valueOf(-this.c));			
+			s = s.replace("VAR", String.valueOf(var));
+			return s;
+		}
+				
 
 		private String[] wrongChoices() {
 			String[] choices = { 
@@ -133,6 +148,23 @@ public class Level6QuadraticFactorizeCombo implements IQuestionFactory {
 					(-this.firstFactorConst) + "," + (this.secondFactorConst),
 					(this.a) + "," + (this.b)};
 			return choices;
+		}
+		
+		public String generateInvertedQuestion() {						
+			String s = "avarVAR^2";
+			if (b < 0) {
+				s += "+bvarVAR";
+			} else {
+				s += "bvarVAR";
+			}
+			if (c < 0) {
+				s += "+cvar";
+			} else {
+				s += "cvar";
+			}
+			s += "=0";
+			s = replaceAllSymbolsInverted(s);
+			return s;			
 		}
 
 		@Override

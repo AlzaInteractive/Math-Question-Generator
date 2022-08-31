@@ -122,11 +122,10 @@ public class Level5SimpleQuadraticPlain implements IQuestionFactory{
 			steps.add(step1);
 									
 			SolutionStep step2 = new SolutionStep();			
-			exp = "VAR = " +this.a +" and VAR = "+-this.a;
-			exp = replaceAllSymbols(exp);
-			exp = CommonFunctionAndValues.enclosedWithMathJaxExp(exp);
+			exp = "$$VAR = " +this.a +"$$ or $$VAR = "+-this.a+"$$";
+			exp = replaceAllSymbols(exp);			
 			step2.setExpression(exp);
-			step2.setExplanation("Simplify");
+			step2.setExplanation("Simplify, solved");
 			steps.add(step2);						
 									
 			return steps;

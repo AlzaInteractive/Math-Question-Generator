@@ -15,6 +15,7 @@ import com.alza.quiz.model.ISingleQuizPrimaryAttributeGenerator;
 import com.alza.quiz.model.MultipleChoiceQuiz;
 import com.alza.quiz.model.Quiz;
 import com.alza.quiz.model.QuizLevel;
+import com.alza.quiz.model.SolutionStep;
 import com.alza.quiz.qfactory.IQuestionFactory;
 import com.alza.quiz.util.CommonFunctionAndValues;
 
@@ -61,6 +62,7 @@ public class Level6QuadraticFactorAOne implements IQuestionFactory {
 			ProblemSkeleton p = generateUniqueProblem(i);
 			Quiz q = p.generateSingleQuiz();
 			setQuizSecondaryAttributes(q);
+			q.setSolutionSteps(p.generateSolutionSteps());
 			lq.add(q);
 		}
 		return lq;
@@ -134,6 +136,33 @@ public class Level6QuadraticFactorAOne implements IQuestionFactory {
 			s = s.replace("cvar", String.valueOf(this.c));			
 			s = s.replace("VAR", String.valueOf(var));
 			return s;
+		}
+		
+		public List<SolutionStep> generateSolutionSteps(){
+			List<SolutionStep> steps = new ArrayList<>();		
+				
+			SolutionStep step1 = new SolutionStep();			
+			String exp = "$$a=avar$$, $$b=bvar$$, $$c=cvar$$";				
+			exp = replaceAllSymbols(exp);
+			step1.setExpression(exp);
+			step1.setExplanation("Determine $$a$$, $$b$$, $$c$$. Refer to general form $$ax^2+bx+c$$ ");
+			steps.add(step1);
+												
+			SolutionStep step2 = new SolutionStep();			
+			exp = "$$"+num1+"+"+num2+"="+(this.b)+"$$ and "
+					+ "$$"+num1+"\\times"+num2+"="+(this.c)+"$$";								
+			step2.setExpression(exp);
+			step2.setExplanation("Find pair of numbers which sum is $$b$$, and multiply to $$c$$");
+			steps.add(step2);
+			
+			SolutionStep step3 = new SolutionStep();			
+			exp = generateQuestion()+" = "+generateAnswer();						
+			exp = CommonFunctionAndValues.enclosedWithMathJaxExp(exp);
+			step3.setExpression(exp);
+			step3.setExplanation("Use both numbers to rewrite the form to its factored one");
+			steps.add(step3);
+									
+			return steps;
 		}
 
 		private String[] wrongChoices() {

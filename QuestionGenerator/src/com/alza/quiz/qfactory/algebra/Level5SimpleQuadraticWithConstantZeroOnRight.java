@@ -138,9 +138,8 @@ public class Level5SimpleQuadraticWithConstantZeroOnRight implements IQuestionFa
 			steps.add(step3);
 									
 			SolutionStep step4 = new SolutionStep();			
-			exp = "VAR = " +this.a +" and VAR = "+-this.a;
-			exp = replaceAllSymbols(exp);
-			exp = CommonFunctionAndValues.enclosedWithMathJaxExp(exp);
+			exp = "$$VAR = " +this.a +"$$ or $$VAR = "+-this.a+"$$";
+			exp = replaceAllSymbols(exp);			
 			step4.setExpression(exp);
 			step4.setExplanation("Simplify, solved");
 			steps.add(step4);

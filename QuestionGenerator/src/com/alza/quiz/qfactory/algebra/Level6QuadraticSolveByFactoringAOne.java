@@ -15,6 +15,7 @@ import com.alza.quiz.model.ISingleQuizPrimaryAttributeGenerator;
 import com.alza.quiz.model.MultipleChoiceQuiz;
 import com.alza.quiz.model.Quiz;
 import com.alza.quiz.model.QuizLevel;
+import com.alza.quiz.model.SolutionStep;
 import com.alza.quiz.qfactory.IQuestionFactory;
 import com.alza.quiz.util.CommonFunctionAndValues;
 
@@ -61,6 +62,7 @@ public class Level6QuadraticSolveByFactoringAOne implements IQuestionFactory {
 			ProblemSkeleton p = generateUniqueProblem(i);
 			Quiz q = p.generateSingleQuiz();
 			setQuizSecondaryAttributes(q);
+			q.setSolutionSteps(p.generateSolutionSteps());
 			lq.add(q);
 		}
 		return lq;
@@ -135,6 +137,49 @@ public class Level6QuadraticSolveByFactoringAOne implements IQuestionFactory {
 			s = s.replace("VAR", String.valueOf(var));
 			return s;
 		}
+		
+		public List<SolutionStep> generateSolutionSteps(){
+			List<SolutionStep> steps = new ArrayList<>();		
+				
+			SolutionStep step1 = new SolutionStep();			
+			String exp = "$$a=avar$$, $$b=bvar$$, $$c=cvar$$";				
+			exp = replaceAllSymbols(exp);
+			step1.setExpression(exp);
+			step1.setExplanation("Determine $$a$$, $$b$$, $$c$$. Refer to general form $$ax^2+bx+c$$ ");
+			steps.add(step1);
+												
+			SolutionStep step2 = new SolutionStep();			
+			exp = "$$"+num1+"+"+num2+"="+(this.b)+"$$ and "
+					+ "$$"+num1+"\\times"+num2+"="+(this.c)+"$$";								
+			step2.setExpression(exp);
+			step2.setExplanation("Find pair of numbers which sum is $$b$$, and multiply to $$c$$");
+			steps.add(step2);
+			
+			SolutionStep step3 = new SolutionStep();			
+			exp = generateQuadraticForm()+"="+generateFactoredForm() +"=0 ";
+			exp = replaceAllSymbols(exp);
+			exp = CommonFunctionAndValues.enclosedWithMathJaxExp(exp);
+			step3.setExpression(exp);			
+			step3.setExplanation("Use both numbers to rewrite the form to its factored one");
+			steps.add(step3);
+			
+			SolutionStep step4 = new SolutionStep();			
+			exp = "$$"+generateFirstFactorIsZero()+"$$ or $$"
+					+generateSecondFactorIsZero()+"$$";						
+			exp = replaceAllSymbols(exp);			
+			step4.setExpression(exp);
+			step4.setExplanation("To satisfy the equation, either factor must be zero");
+			steps.add(step4);
+			
+			SolutionStep step5 = new SolutionStep();			
+			exp = "$$VAR="+(-num1)+"$$ or $$VAR="+(-num2)+"$$";						
+			exp = replaceAllSymbols(exp);			
+			step5.setExpression(exp);
+			step5.setExplanation("Solve for $$"+this.var+"$$");
+			steps.add(step5);			
+									
+			return steps;
+		}
 
 		private String[] wrongChoices() {			
 			int ans1 = num1 * -1;
@@ -147,7 +192,57 @@ public class Level6QuadraticSolveByFactoringAOne implements IQuestionFactory {
 					};
 			return choices;
 		}
-
+		
+		private String generateFactoredForm() {
+			String firstFactor,secondFactor;
+			if (num1>0) {
+				firstFactor = "("+var+"+"+num1+")";
+			} else {
+				firstFactor = "("+var+num1+")";
+			}
+			if (num2>0) {
+				secondFactor = "("+var+"+"+num2+")";
+			} else {
+				secondFactor = "("+var+num2+")";
+			}
+			return firstFactor+secondFactor;
+		}
+		
+		private String generateFirstFactorIsZero() {
+			String firstFactor;
+			if (num1>0) {
+				firstFactor = "("+var+"+"+num1+")";
+			} else {
+				firstFactor = "("+var+num1+")";
+			}			
+			return firstFactor+"=0";
+		}
+		
+		private String generateSecondFactorIsZero() {
+			String secondFactor;
+			if (num2>0) {
+				secondFactor = "("+var+"+"+num2+")";
+			} else {
+				secondFactor = "("+var+num2+")";
+			}			
+			return secondFactor+"=0";
+		}
+		
+		private String generateQuadraticForm() {
+			String s = "VAR^2";
+			if (b > 0) {
+				s += "+bvarVAR";
+			} else {
+				s += "bvarVAR";
+			}
+			if (c > 0) {
+				s += "+cvar";
+			} else {
+				s += "cvar";
+			}
+			return s;
+		}
+		
 		@Override
 		public String generateQuestion() {
 			String s = "VAR^2";

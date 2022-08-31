@@ -20,20 +20,20 @@ import com.alza.quiz.model.SolutionStep;
 import com.alza.quiz.qfactory.IQuestionFactory;
 import com.alza.quiz.util.CommonFunctionAndValues;
 
-public class Level6QuadraticFactorANotOne implements IQuestionFactory {
+public class Level6QuadraticSolveByFactoringANotOneNegativeCoeff implements IQuestionFactory {
 
 	private int numOfQuestion = 5;
-	private Map<Integer, ProblemSkeleton> qMap = new HashMap<Integer, Level6QuadraticFactorANotOne.ProblemSkeleton>();
+	private Map<Integer, ProblemSkeleton> qMap = new HashMap<Integer, Level6QuadraticSolveByFactoringANotOneNegativeCoeff.ProblemSkeleton>();
 	private Locale loc;
 	private ResourceBundle bundle;
 	private ResourceBundle bundleAlgebra;
 
-	public Level6QuadraticFactorANotOne(Locale loc) {
+	public Level6QuadraticSolveByFactoringANotOneNegativeCoeff(Locale loc) {
 		this.loc = loc;
 		initStringFromLocale();
 	}
 
-	public Level6QuadraticFactorANotOne() {
+	public Level6QuadraticSolveByFactoringANotOneNegativeCoeff() {
 		this.loc = new Locale("in", "ID");
 		initStringFromLocale();
 	}
@@ -102,7 +102,7 @@ public class Level6QuadraticFactorANotOne implements IQuestionFactory {
 		String var;		
 		final String[] VARSYM = { "x", "y", "z" };
 		ProblemSkeleton(int idx) {			
-			int modA,modAinv,gcdABC; 
+			int modA,modAInv,gcdABC;			
 			var = VARSYM[ThreadLocalRandom.current().nextInt(0, VARSYM.length)];
 			do {
 				// default positive pair
@@ -112,21 +112,25 @@ public class Level6QuadraticFactorANotOne implements IQuestionFactory {
 				if (mod==1) {
 					// positive and negative pair
 					num1 = num1 * CommonFunctionAndValues.getRandom(new int[] {1,-1});
+					if (num1 > 0) {
+						num2 = num2 * -1;
+					}
 				} else if (mod==2) {
 					// negative pair
 					num1 = num1 * -1;
 					num2 = num2 * -1;					
 				}
 				a = ThreadLocalRandom.current().nextInt(2, 6);
-				b = num1 + a*num2;
+				a = a;
+				b = (num1 + a*num2) ;
 				c = num1 * num2;
 				split1 = a*num2;
 				split2 = num1;
 				modA = num1 % a;
-				modAinv = a % num1;
+				modAInv = a % num1;
 				gcdABC = MathUtils.findGCD(a,b,c);
 			} while (num1 == num2 || num1 + num2 == 0 
-					|| modA == 0 || modAinv == 0 || gcdABC > 1);			
+					|| modA==0 || modAInv==0 || gcdABC > 1);			
 			
 		}
 
@@ -143,19 +147,41 @@ public class Level6QuadraticFactorANotOne implements IQuestionFactory {
 			return s;
 		}
 		
+		private String replaceAllSymbolsInverted(String s) {
+			s = s.replace("avar", String.valueOf(-this.a));
+			s = s.replace("bvar", String.valueOf(-this.b));
+			s = s.replace("cvar", String.valueOf(-this.c));			
+			s = s.replace("VAR", String.valueOf(var));
+			return s;
+		}
+		
 		public List<SolutionStep> generateSolutionSteps(){
-			List<SolutionStep> steps = new ArrayList<>();		
+			List<SolutionStep> steps = new ArrayList<>();
+			
+			SolutionStep step0 = new SolutionStep();			
+			String exp = "$$("+generateQuestionNoZero()+")\\times -1=0\\times-1$$";				
+			exp = replaceAllSymbols(exp);
+			step0.setExpression(exp);
+			step0.setExplanation("Multiply by -1 to invert signs");
+			steps.add(step0);
+			
+			SolutionStep step01 = new SolutionStep();			
+			exp = "$$"+generateQuestionInverted()+"$$";				
+			exp = replaceAllSymbols(exp);
+			step01.setExpression(exp);
+			step01.setExplanation("Simplify");
+			steps.add(step01);
 				
 			SolutionStep step1 = new SolutionStep();			
-			String exp = "$$a=avar$$, $$b=bvar$$, $$c=cvar$$";				
+			exp = "$$a=avar$$, $$b=bvar$$, $$c=cvar$$";				
 			exp = replaceAllSymbols(exp);
 			step1.setExpression(exp);
 			step1.setExplanation("Determine $$a$$, $$b$$, $$c$$. Refer to general form $$ax^2+bx+c$$ ");
 			steps.add(step1);
 												
 			SolutionStep step2 = new SolutionStep();			
-			exp = "$$"+(this.a*num2)+"+"+num1+"="+(this.b)+"$$ and "
-					+ "$$"+(this.a*num2)+"\\times"+num1+"="+(this.a)+" \\times "+(this.c)+"$$";						
+			exp = "$$"+(num2*this.a)+"+"+num1+"="+(this.b)+"$$ and "
+					+ "$$"+(num2*this.a)+"\\times"+num1+"="+(this.a)+" \\times "+(this.c)+"$$";						
 			step2.setExpression(exp);
 			step2.setExplanation("Find pair of numbers which sum is $$b$$, and multiply to  $$a \\times c$$");
 			steps.add(step2);
@@ -184,16 +210,81 @@ public class Level6QuadraticFactorANotOne implements IQuestionFactory {
 			steps.add(step5);
 			
 			SolutionStep step6 = new SolutionStep();			
-			exp = generateAnswer();						
+			exp = generateQuadraticForm()+"="+generateFactoredForm() +"=0 ";
+			exp = replaceAllSymbols(exp);
 			exp = CommonFunctionAndValues.enclosedWithMathJaxExp(exp);
-			step6.setExpression(exp);
-			step6.setExplanation("Simplify, solved");			
+			step6.setExpression(exp);			
+			step6.setExplanation("Rewrite the form to its factored one");
 			steps.add(step6);
+			
+			SolutionStep step7 = new SolutionStep();			
+			exp = "$$"+generateFirstFactorIsZero()+"$$ or $$"
+					+generateSecondFactorIsZero()+"$$";						
+			exp = replaceAllSymbols(exp);			
+			step7.setExpression(exp);
+			step7.setExplanation("To satisfy the equation, either factor must be zero");
+			steps.add(step7);
+			
+			SolutionStep step8 = new SolutionStep();			
+			exp = "$$VAR="+(-num1)+"/avar$$ or $$VAR="+(-num2)+"$$";						
+			exp = replaceAllSymbols(exp);			
+			step8.setExpression(exp);
+			step8.setExplanation("Solve for $$"+this.var+"$$");
+			steps.add(step8);
 			
 			return steps;
 		}
 
 		private String[] wrongChoices() {
+			int ans1 = num1 * -1;
+			int ans2 = num2 * -1;
+			
+			String wrongAns1a = num1+"/"+this.a;			
+			
+			String[] choices = { 
+					wrongAns1a+","+num2, 
+					wrongAns1a+","+ans2,
+					ans1+","+num2,					
+					};			
+			return choices;
+		}
+		
+		private String generateFirstFactorIsZero() {
+			String firstFactor;
+			if (num1>0) {
+				firstFactor = "("+this.a+var+"+"+num1+")";
+			} else {
+				firstFactor = "("+this.a+var+num1+")";
+			}			
+			return firstFactor+"=0";
+		}
+		
+		private String generateSecondFactorIsZero() {
+			String secondFactor;
+			if (num2>0) {
+				secondFactor = "("+var+"+"+num2+")";
+			} else {
+				secondFactor = "("+var+num2+")";
+			}			
+			return secondFactor+"=0";
+		}
+		
+		private String generateQuadraticForm() {
+			String s = "avarVAR^2";
+			if (b > 0) {
+				s += "+bvarVAR";
+			} else {
+				s += "bvarVAR";
+			}
+			if (c > 0) {
+				s += "+cvar";
+			} else {
+				s += "cvar";
+			}			
+			s = replaceAllSymbols(s);
+			return s;
+		}
+		private String generateFactoredForm() {
 			String firstFactor,secondFactor;
 			if (num1>0) {
 				firstFactor = "("+this.a+var+"+"+num1+")";
@@ -205,32 +296,7 @@ public class Level6QuadraticFactorANotOne implements IQuestionFactory {
 			} else {
 				secondFactor = "("+var+num2+")";
 			}
-			
-			String firstFactorWrong,secondFactorWrong;
-			String firstFactorWrongCoeff,secondFactorWrongCoeff;
-			if (num1>0) {
-				firstFactorWrong = "("+this.a+var+"-"+num1+")";
-				firstFactorWrongCoeff = "("+var+"-"+num1+")";
-			} else {
-				firstFactorWrong = "("+this.a+var+"+"+(-num1)+")";
-				firstFactorWrongCoeff = "("+var+"+"+(-num1)+")";
-			}
-			if (num2>0) {
-				secondFactorWrong = "("+var+"-"+num2+")";
-				secondFactorWrongCoeff = "("+this.a+var+"-"+num2+")";
-			} else {
-				secondFactorWrong = "("+var+"+"+(-num2)+")";
-				secondFactorWrongCoeff = "("+this.a+var+"+"+(-num2)+")";
-			}
-									
-			String[] choices = { 
-					firstFactorWrong+secondFactorWrong, 
-					firstFactor+secondFactorWrong,
-					firstFactorWrong+secondFactor,
-					firstFactorWrongCoeff+secondFactorWrongCoeff,
-					firstFactorWrong+secondFactorWrongCoeff,
-					};
-			return choices;
+			return firstFactor+secondFactor;
 		}
 		
 		public String generateSplittedTerm() {
@@ -311,33 +377,66 @@ public class Level6QuadraticFactorANotOne implements IQuestionFactory {
 			return s;
 		}
 		
-		@Override
-		public String generateQuestion() {
+		public String generateQuestionInverted() {
 			String s = "avarVAR^2";
 			if (b > 0) {
-				s += " + bvarVAR";
+				s += "+bvarVAR";
 			} else {
-				int invB = - b;
-				s += " - "+invB+"VAR";
+				s += "bvarVAR";
 			}
 			if (c > 0) {
-				s += " + cvar";
+				s += "+cvar";
 			} else {
-				int invC = - c;
-				s += " - "+invC;
-			}			
+				s += "cvar";
+			}
+			s += "=0";
 			s = replaceAllSymbols(s);
+			return s;
+		}
+		
+		public String generateQuestionNoZero() {			
+			String s = "avarVAR^2";
+			if (b < 0) {
+				s += "+bvarVAR";
+			} else {
+				s += "bvarVAR";
+			}
+			if (c < 0) {
+				s += "+cvar";
+			} else {
+				s += "cvar";
+			}			
+			s = replaceAllSymbolsInverted(s);
+			return s;
+		}
+		
+		@Override
+		public String generateQuestion() {			
+			String s = "avarVAR^2";
+			if (b < 0) {
+				s += "+bvarVAR";
+			} else {
+				s += "bvarVAR";
+			}
+			if (c < 0) {
+				s += "+cvar";
+			} else {
+				s += "cvar";
+			}
+			s += "=0";
+			s = replaceAllSymbolsInverted(s);
 			return s;
 		}
 
 		@Override
 		public String generateQuestionMathjax() {
-			String factorString = bundleAlgebra.getString("algebra.factor.imperative");
-			factorString = CommonFunctionAndValues.enclosedWithMathJaxExp(factorString);
 			String s = generateQuestion();
 			s = replaceAllSymbols(s);
 			s = CommonFunctionAndValues.enclosedWithMathJaxExp(s);
-			return factorString +" "+s;
+			String s2 = var + "=?";
+			s2 = CommonFunctionAndValues.enclosedWithMathJaxExp(s2);
+			s = s + " " + s2;
+			return s;
 		}
 
 		@Override
@@ -360,18 +459,7 @@ public class Level6QuadraticFactorANotOne implements IQuestionFactory {
 
 		@Override
 		public String generateAnswer() {
-			String firstFactor,secondFactor;
-			if (num1>0) {
-				firstFactor = "("+this.a+var+"+"+num1+")";
-			} else {
-				firstFactor = "("+this.a+var+num1+")";
-			}
-			if (num2>0) {
-				secondFactor = "("+var+"+"+num2+")";
-			} else {
-				secondFactor = "("+var+num2+")";
-			}
-			return firstFactor+secondFactor;
+			return (num1*-1)+"/"+this.a+","+(num2*-1);
 		}
 
 		@Override

@@ -34,6 +34,21 @@ public class CommonFunctionAndValues {
 	public static String enclosedWithMathJaxExp(String s) {
 		return MJXTAG + s + MJXTAG;
 	}
+	
+	public static String enclosedWithMathJaxExp(String[] s) {
+		String rslts="";
+		for (String st:s) {
+			rslts += enclosedWithMathJaxExp(st)+" ";
+		}
+		return rslts;
+	}
+	public static String enclosedWithMathJaxExpNewline(String[] s) {
+		String rslts="";
+		for (String st:s) {
+			rslts += enclosedWithMathJaxExp(st)+" \n";
+		}
+		return rslts;
+	}
 
 	public static String[] nameElder = { "Mbah Jamil", "Papuq Abok", "Ninik Senah", "Papuq Senep", " Wak Ikoh",
 			"Wak Marli", "Eyang Segep", "Eyang Ahmad", "Ninik Zaenab", "Mbah Soleh", "Datuk Sunar", "Datuk Menggep",

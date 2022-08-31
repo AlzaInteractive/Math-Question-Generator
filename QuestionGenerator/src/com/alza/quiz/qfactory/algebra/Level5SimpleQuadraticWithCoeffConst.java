@@ -178,9 +178,8 @@ public class Level5SimpleQuadraticWithCoeffConst implements IQuestionFactory {
 			steps.add(step5);
 									
 			SolutionStep step6 = new SolutionStep();			
-			exp = "VAR = " +this.unsignedRoot +" and VAR = "+-this.unsignedRoot;
-			exp = replaceAllSymbols(exp);
-			exp = CommonFunctionAndValues.enclosedWithMathJaxExp(exp);
+			exp = "$$VAR = " +this.unsignedRoot +"$$ or $$VAR = "+-this.unsignedRoot+"$$";
+			exp = replaceAllSymbols(exp);			
 			step6.setExpression(exp);
 			step6.setExplanation("Simplify, solved");
 			steps.add(step6);

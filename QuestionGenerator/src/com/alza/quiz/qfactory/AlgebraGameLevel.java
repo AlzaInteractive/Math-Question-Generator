@@ -15,7 +15,13 @@ import com.alza.quiz.qfactory.algebra.Level2Mult;
 import com.alza.quiz.qfactory.algebra.Level3MixedOperationA;
 import com.alza.quiz.qfactory.algebra.Level3MixedOperationB;
 import com.alza.quiz.qfactory.algebra.Level4FractionFindDivisorSimple;
+import com.alza.quiz.qfactory.algebra.Level4FractionFindDivisorWithCoefficient;
+import com.alza.quiz.qfactory.algebra.Level4FractionFindDivisorWithCoefficientAndConstant;
+import com.alza.quiz.qfactory.algebra.Level4FractionFindDivisorWithConstant;
 import com.alza.quiz.qfactory.algebra.Level4FractionFindNumeratorSimple;
+import com.alza.quiz.qfactory.algebra.Level4FractionFindNumeratorWithCoefficient;
+import com.alza.quiz.qfactory.algebra.Level4FractionFindNumeratorWithCoefficientAndConstant;
+import com.alza.quiz.qfactory.algebra.Level4FractionFindNumeratorWithConstant;
 import com.alza.quiz.qfactory.algebra.Level5SimpleQuadraticCombo;
 import com.alza.quiz.qfactory.algebra.Level5SimpleQuadraticNegativePlainUgly;
 import com.alza.quiz.qfactory.algebra.Level5SimpleQuadraticPlain;
@@ -32,9 +38,10 @@ import com.alza.quiz.qfactory.algebra.Level6QuadraticFactorANotOne;
 import com.alza.quiz.qfactory.algebra.Level6QuadraticFactorAOne;
 import com.alza.quiz.qfactory.algebra.Level6QuadraticUseFactoring;
 import com.alza.quiz.qfactory.algebra.Level6QuadraticFactorizeALargerThanOne;
-import com.alza.quiz.qfactory.algebra.Level6QuadraticFactorizeCombo;
-import com.alza.quiz.qfactory.algebra.Level6QuadraticFactorizeNegativeCoeff;
+import com.alza.quiz.qfactory.algebra.Level6QuadraticSolveByFactoringCombo;
+import com.alza.quiz.qfactory.algebra.Level6QuadraticSolveByFactoringAOneNegativeCoeff;
 import com.alza.quiz.qfactory.algebra.Level6QuadraticSolveByFactoringANotOne;
+import com.alza.quiz.qfactory.algebra.Level6QuadraticSolveByFactoringANotOneNegativeCoeff;
 import com.alza.quiz.qfactory.algebra.Level6QuadraticSolveByFactoringAOne;
 import com.alza.quiz.qfactory.algebra.Level7QuadraticUglyNumberSimple;
 import com.alza.quiz.qfactory.integer.AdditionOfThreeIntegersSigned;
@@ -63,24 +70,52 @@ public class AlgebraGameLevel implements IPlayableLevelsGroup{
 		List<GameLevel> lgl = new ArrayList<GameLevel>();
 		String name, desc;
 		GameLevel g;
-		g = GameLevel.createSingleQF(0, "Exp", new Level1AddSub(loc), 0);
+		g = GameLevel.createSingleQF(0, "Exp", new Level1AddSub(loc), 4);
 		//g.addQuestionFactory(new Level1Mult(loc), 4);
 		//g.addQuestionFactory(new Level1Div(loc), 4);
 		//g.addQuestionFactory(new Level2AddSub(loc), 4);
 		//g.addQuestionFactory(new Level2Div(loc), 4);
 		//g.addQuestionFactory(new Level2Mult(loc), 4);
 		//g.addQuestionFactory(new Level3MixedOperationA(loc), 8);
-		g.addQuestionFactory(new Level3MixedOperationB(loc), 8);
+		//g.addQuestionFactory(new Level3MixedOperationB(loc), 8);
 		//g.addQuestionFactory(new Level4FractionFindNumeratorSimple(loc), 2);
 		//g.addQuestionFactory(new Level4FractionFindDivisorSimple(loc), 2);
+		//g.addQuestionFactory(new Level4FractionFindNumeratorWithConstant(loc), 2);
+		//g.addQuestionFactory(new Level4FractionFindNumeratorWithCoefficient(loc), 2);
+		//g.addQuestionFactory(new Level4FractionFindDivisorWithConstant(loc), 2);
+		//g.addQuestionFactory(new Level4FractionFindDivisorWithCoefficient(loc), 2);
+		//g.addQuestionFactory(new Level4FractionFindNumeratorWithCoefficientAndConstant(loc), 2);
+		//g.addQuestionFactory(new Level4FractionFindDivisorWithCoefficientAndConstant(loc), 2);
+		//g.addQuestionFactory(new Level5SimpleQuadraticPlain(loc), 2);
+		//g.addQuestionFactory(new Level5SimpleQuadraticPlainNegative(loc), 2);
+		//g.addQuestionFactory(new Level5SimpleQuadraticPlainUgly(loc), 6);
+		//g.addQuestionFactory(new Level5SimpleQuadraticNegativePlainUgly(loc), 6);
+		//g.addQuestionFactory(new Level5SimpleQuadraticWithConstant(loc), 2);
+		//g.addQuestionFactory(new Level5SimpleQuadraticWithConstantZeroOnRight(loc), 2);
+		//g.addQuestionFactory(new Level5SimpleQuadraticWithCoeff(loc), 2);
+		//g.addQuestionFactory(new Level5SimpleQuadraticWithDivisor(loc), 2);
+		//g.addQuestionFactory(new Level5SimpleQuadraticWithCoeffConst(loc), 2);
+		//g.addQuestionFactory(new Level5SimpleQuadraticWithConstDiv(loc), 2);
+		//g.addQuestionFactory(new Level5SimpleQuadraticWithCoeffDiv(loc), 2);
+		//g.addQuestionFactory(new Level5SimpleQuadraticCombo(loc), 6);
+		//g.addQuestionFactory(new Level6QuadraticFactorAOne(loc), 6);
+		//g.addQuestionFactory(new Level6QuadraticFactorANotOne(loc), 6);
+		//g.addQuestionFactory(new Level6QuadraticSolveByFactoringAOne(loc), 6);
+		//g.addQuestionFactory(new Level6QuadraticSolveByFactoringANotOne(loc), 6);
+		//g.addQuestionFactory(new Level6QuadraticSolveByFactoringAOneNegativeCoeff(loc), 6);
+		//g.addQuestionFactory(new Level6QuadraticSolveByFactoringANotOneNegativeCoeff(loc), 6);
+		//g.addQuestionFactory(new Level6QuadraticSolveByFactoringCombo(loc), 6);
+		
+		//
+		//g.addQuestionFactory(new Level7QuadraticUglyNumberSimple(loc), 6);
 		/*		
 		name = bundle.getString("algebra.level3.mixop");
 		desc = "";//bundle.getString("");
 		// Level 5.1
-		g = GameLevel.createSingleQF(0, name, desc, new Level5SimpleQuadraticPlain(loc), 0);
+		
 		
 		 
-		g.addQuestionFactory(new Level5SimpleQuadraticPlainNegative(loc), 1);
+		
 		g.addQuestionFactory(new Level5SimpleQuadraticPlainUgly(loc), 1);
 		g.addQuestionFactory(new Level5SimpleQuadraticNegativePlainUgly(), 1);
 		

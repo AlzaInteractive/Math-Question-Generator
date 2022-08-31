@@ -115,7 +115,7 @@ public class Level5SimpleQuadraticPlainNegative implements IQuestionFactory{
 			
 			SolutionStep step1 = new SolutionStep();
 			step1.setExplanation("Multiply by -1");
-			String exp = "-VAR^2 \\times -1 = ± v1 \\times -1";		
+			String exp = "-VAR^2 \\times -1 = v1 \\times -1";		
 			exp = replaceAllSymbols(exp);
 			exp = CommonFunctionAndValues.enclosedWithMathJaxExp(exp);
 			step1.setExpression(exp);			
@@ -138,9 +138,8 @@ public class Level5SimpleQuadraticPlainNegative implements IQuestionFactory{
 			steps.add(step3);
 									
 			SolutionStep step4 = new SolutionStep();			
-			exp = "VAR = " +this.root +" and VAR = "+-this.root;
-			exp = replaceAllSymbols(exp);
-			exp = CommonFunctionAndValues.enclosedWithMathJaxExp(exp);
+			exp = "$$VAR = " +this.root +"$$ or $$VAR = "+-this.root+"$$";
+			exp = replaceAllSymbols(exp);			
 			step4.setExpression(exp);
 			step4.setExplanation("Simplify, solved");
 			steps.add(step4);

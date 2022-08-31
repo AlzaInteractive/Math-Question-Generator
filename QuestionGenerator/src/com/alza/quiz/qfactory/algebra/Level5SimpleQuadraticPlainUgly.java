@@ -125,27 +125,30 @@ public class Level5SimpleQuadraticPlainUgly implements IQuestionFactory{
 			
 			SolutionStep step1 = new SolutionStep();
 			step1.setExplanation("Take square root on both sides");
-			String exp = "-VAR^2 \\times -1 = ± v1 \\times -1";		
+			String exp = "VAR = ± \\sqrtv1";		
 			exp = replaceAllSymbols(exp);
 			exp = CommonFunctionAndValues.enclosedWithMathJaxExp(exp);
 			step1.setExpression(exp);			
 			steps.add(step1);
-									
-			SolutionStep step2 = new SolutionStep();			
-			exp = "VAR^2 = v1";
-			exp = replaceAllSymbols(exp);
-			exp = CommonFunctionAndValues.enclosedWithMathJaxExp(exp);
-			step2.setExpression(exp);
-			step2.setExplanation("Multiply by -1");
-			steps.add(step2);
+															
+			if (getSquareDivisor() > 1) {
+				SolutionStep stepx = new SolutionStep();
+				stepx.setExplanation("Simplify the form");
+				int outRoot = (int) Math.sqrt(getSquareDivisor());
+				int insideRoot = this.square / getSquareDivisor();
+				exp = "$$VAR = ± \\sqrt{"+getSquareDivisor()+" \\times "+insideRoot+"}";
+				exp += " = ± "+outRoot+"\\sqrt"+insideRoot+"$$";
+				exp = replaceAllSymbols(exp);				
+				stepx.setExpression(exp);			
+				steps.add(stepx);
+			}
 			
-			SolutionStep step3 = new SolutionStep();
-			step3.setExplanation("Take square root on both sides");
-			exp = "VAR = ± \\sqrtv1";		
-			exp = replaceAllSymbols(exp);
-			exp = CommonFunctionAndValues.enclosedWithMathJaxExp(exp);
-			step3.setExpression(exp);			
-			steps.add(step3);
+			SolutionStep step4 = new SolutionStep();			
+			exp = generateSimplifiedRoot();
+			exp = replaceAllSymbols(exp);			
+			step4.setExpression(exp);
+			step4.setExplanation("Solved");
+			steps.add(step4);
 							
 									
 			return steps;
@@ -160,6 +163,41 @@ public class Level5SimpleQuadraticPlainUgly implements IQuestionFactory{
 					"√"+(this.square)+",0",
 					};
 			return choices;
+		}
+		
+		private int getSquareDivisor() {
+			int sqDiv = 1;
+			for (int i = squares.size()-1;i>=0;i--) {
+				int curSq = squares.get(i).intValue(); 
+				if (this.square % curSq == 0) {
+					sqDiv = squares.get(i).intValue();
+					break;
+				}
+			}									
+			return sqDiv; 
+		}
+				
+		
+		public String generateSimplifiedRoot() {
+			int sqDiv = 1;
+			for (int i = squares.size()-1;i>=0;i--) {
+				int curSq = squares.get(i).intValue(); 
+				if (this.square % curSq == 0) {
+					sqDiv = squares.get(i).intValue();
+					break;
+				}
+			}
+			if (sqDiv>1) {
+				int insideRoot = square / sqDiv;
+				int outsideRoot = (int) Math.sqrt(sqDiv);
+				if (outsideRoot > 1) {
+					return String.valueOf("$$"+outsideRoot+"\\sqrt"+insideRoot
+							+"$$ or $$-"+outsideRoot+"\\sqrt"+insideRoot+"$$");
+				}
+			}
+
+			return String.valueOf("$$\\sqrt"+this.square+"$$ or "
+					+ "$$-"+"\\sqrt"+this.square+"$$");
 		}
 
 		@Override

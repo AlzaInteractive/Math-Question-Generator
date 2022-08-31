@@ -140,7 +140,7 @@ public class Level5SimpleQuadraticWithDivisor implements IQuestionFactory{
 			List<SolutionStep> steps = new ArrayList<>();		
 			
 			SolutionStep step1 = new SolutionStep();
-			step1.setExplanation("Multiply to remove divisot");
+			step1.setExplanation("Multiply to remove divisor");
 			String exp = "\\frac{VAR^2}{divisor} \\times divisor = rightval \\times divisor";
 			exp = replaceAllSymbols(exp);
 			exp = CommonFunctionAndValues.enclosedWithMathJaxExp(exp);
@@ -164,9 +164,8 @@ public class Level5SimpleQuadraticWithDivisor implements IQuestionFactory{
 			steps.add(step3);
 									
 			SolutionStep step4 = new SolutionStep();			
-			exp = "VAR = " +this.unsignedRoot +" and VAR = "+-this.unsignedRoot;
-			exp = replaceAllSymbols(exp);
-			exp = CommonFunctionAndValues.enclosedWithMathJaxExp(exp);
+			exp = "$$VAR = " +this.unsignedRoot +"$$ or $$VAR = "+-this.unsignedRoot+"$$";
+			exp = replaceAllSymbols(exp);			
 			step4.setExpression(exp);
 			step4.setExplanation("Simplify, solved");
 			steps.add(step4);

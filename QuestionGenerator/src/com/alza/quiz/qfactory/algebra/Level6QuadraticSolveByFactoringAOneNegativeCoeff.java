@@ -15,23 +15,24 @@ import com.alza.quiz.model.ISingleQuizPrimaryAttributeGenerator;
 import com.alza.quiz.model.MultipleChoiceQuiz;
 import com.alza.quiz.model.Quiz;
 import com.alza.quiz.model.QuizLevel;
+import com.alza.quiz.model.SolutionStep;
 import com.alza.quiz.qfactory.IQuestionFactory;
 import com.alza.quiz.util.CommonFunctionAndValues;
 
-public class Level6QuadraticFactorizeNegativeCoeff implements IQuestionFactory {
+public class Level6QuadraticSolveByFactoringAOneNegativeCoeff implements IQuestionFactory {
 
 	private int numOfQuestion = 5;
-	private Map<Integer, ProblemSkeleton> qMap = new HashMap<Integer, Level6QuadraticFactorizeNegativeCoeff.ProblemSkeleton>();
+	private Map<Integer, ProblemSkeleton> qMap = new HashMap<Integer, Level6QuadraticSolveByFactoringAOneNegativeCoeff.ProblemSkeleton>();
 	private Locale loc;
 	private ResourceBundle bundle;
 	private ResourceBundle bundleAlgebra;
 
-	public Level6QuadraticFactorizeNegativeCoeff(Locale loc) {
+	public Level6QuadraticSolveByFactoringAOneNegativeCoeff(Locale loc) {
 		this.loc = loc;
 		initStringFromLocale();
 	}
 
-	public Level6QuadraticFactorizeNegativeCoeff() {
+	public Level6QuadraticSolveByFactoringAOneNegativeCoeff() {
 		this.loc = new Locale("in", "ID");
 		initStringFromLocale();
 	}
@@ -61,6 +62,7 @@ public class Level6QuadraticFactorizeNegativeCoeff implements IQuestionFactory {
 			ProblemSkeleton p = generateUniqueProblem(i);
 			Quiz q = p.generateSingleQuiz();
 			setQuizSecondaryAttributes(q);
+			q.setSolutionSteps(p.generateSolutionSteps());
 			lq.add(q);
 		}
 		return lq;
@@ -105,11 +107,14 @@ public class Level6QuadraticFactorizeNegativeCoeff implements IQuestionFactory {
 				firstFactorConst = firstFactorConst * CommonFunctionAndValues.getRandom(new int[] {1,-1});
 				secondFactorConst = ThreadLocalRandom.current().nextInt(2, 9);
 				secondFactorConst = secondFactorConst * CommonFunctionAndValues.getRandom(new int[] {1,-1});
+				a = -1;
+				b = firstFactorConst + a*secondFactorConst;
+				c = firstFactorConst * secondFactorConst;
 				
-			} while (firstFactorConst == secondFactorConst || firstFactorConst + secondFactorConst == 0);
-			a = -1;
-			b = firstFactorConst + a*secondFactorConst;
-			c = firstFactorConst * secondFactorConst;
+			} while (firstFactorConst == secondFactorConst 
+					|| firstFactorConst + secondFactorConst == 0
+					|| b == 1);
+			
 		}
 
 		int hash() {
@@ -124,6 +129,122 @@ public class Level6QuadraticFactorizeNegativeCoeff implements IQuestionFactory {
 			s = s.replace("VAR", String.valueOf(var));
 			return s;
 		}
+		
+		private String replaceAllSymbolsInverted(String s) {
+			s = s.replace("avar", String.valueOf(-this.a));
+			s = s.replace("bvar", String.valueOf(-this.b));
+			s = s.replace("cvar", String.valueOf(-this.c));			
+			s = s.replace("VAR", String.valueOf(var));
+			return s;
+		}
+		
+		public List<SolutionStep> generateSolutionSteps(){
+			List<SolutionStep> steps = new ArrayList<>();		
+				
+			SolutionStep step0 = new SolutionStep();			
+			String exp = "$$("+generateQuestionNoZero()+")\\times -1=0\\times-1$$";				
+			exp = replaceAllSymbols(exp);
+			step0.setExpression(exp);
+			step0.setExplanation("Multiply by -1 to invert signs");
+			steps.add(step0);
+			
+			SolutionStep step01 = new SolutionStep();			
+			exp = "$$"+generateInvertedQuestion()+"$$";				
+			exp = replaceAllSymbols(exp);
+			step01.setExpression(exp);
+			step01.setExplanation("Simplify");
+			steps.add(step01);
+			
+			SolutionStep step1 = new SolutionStep();			
+			exp = "$$a=avar$$, $$b=bvar$$, $$c=cvar$$";				
+			exp = replaceAllSymbolsInverted(exp);
+			step1.setExpression(exp);
+			step1.setExplanation("Determine $$a$$, $$b$$, $$c$$. Refer to general form $$ax^2+bx+c$$ ");
+			steps.add(step1);
+												
+			SolutionStep step2 = new SolutionStep();			
+			exp = "$$"+(-this.firstFactorConst)+"+"+(+this.secondFactorConst)+"="+(-this.b)+"$$ and "
+					+ "$$"+(-this.firstFactorConst)+"\\times"+(+this.secondFactorConst)+"="+(-this.c)+"$$";								
+			step2.setExpression(exp);
+			step2.setExplanation("Find pair of numbers which sum is $$b$$, and multiply to $$c$$");
+			steps.add(step2);
+			
+			SolutionStep step3 = new SolutionStep();			
+			exp = generateQuadraticForm()+"="+generateFactoredForm() +"=0 ";
+			exp = replaceAllSymbols(exp);
+			exp = CommonFunctionAndValues.enclosedWithMathJaxExp(exp);
+			step3.setExpression(exp);			
+			step3.setExplanation("Use both numbers to rewrite the form to its factored one");
+			steps.add(step3);
+			
+			SolutionStep step4 = new SolutionStep();			
+			exp = "$$"+generateFirstFactorIsZero()+"$$ or $$"
+					+generateSecondFactorIsZero()+"$$";						
+			exp = replaceAllSymbols(exp);			
+			step4.setExpression(exp);
+			step4.setExplanation("To satisfy the equation, either factor must be zero");
+			steps.add(step4);
+			
+			SolutionStep step5 = new SolutionStep();			
+			exp = "$$VAR="+(this.firstFactorConst)+"$$ or $$VAR="+(-this.secondFactorConst)+"$$";						
+			exp = replaceAllSymbols(exp);			
+			step5.setExpression(exp);
+			step5.setExplanation("Solve for $$"+this.var+"$$");
+			steps.add(step5);			
+									
+			return steps;
+		}
+		
+		private String generateFactoredForm() {
+			String firstFactor,secondFactor;
+			if (this.firstFactorConst<0) {
+				firstFactor = "("+var+"+"+-this.firstFactorConst+")";
+			} else {
+				firstFactor = "("+var+-this.firstFactorConst+")";
+			}
+			if (this.secondFactorConst>0) {
+				secondFactor = "("+var+"+"+this.secondFactorConst+")";
+			} else {
+				secondFactor = "("+var+this.secondFactorConst+")";
+			}
+			return firstFactor+secondFactor;
+		}
+		
+		private String generateFirstFactorIsZero() {
+			String firstFactor;
+			if (this.firstFactorConst<0) {
+				firstFactor = "("+var+"+"+-this.firstFactorConst+")";
+			} else {
+				firstFactor = "("+var+-this.firstFactorConst+")";
+			}			
+			return firstFactor+"=0";
+		}
+		
+		private String generateSecondFactorIsZero() {
+			String secondFactor;
+			if (this.secondFactorConst>0) {
+				secondFactor = "("+var+"+"+this.secondFactorConst+")";
+			} else {
+				secondFactor = "("+var+this.secondFactorConst+")";
+			}			
+			return secondFactor+"=0";
+		}
+		
+		private String generateQuadraticForm() {
+			String s = "VAR^2";
+			if (b < 0) {
+				s += "+bvarVAR";
+			} else {
+				s += "bvarVAR";
+			}
+			if (c < 0) {
+				s += "+cvar";
+			} else {
+				s += "cvar";
+			}			
+			s = replaceAllSymbolsInverted(s);
+			return s;
+		}
 
 		private String[] wrongChoices() {
 			String[] choices = { 
@@ -133,7 +254,40 @@ public class Level6QuadraticFactorizeNegativeCoeff implements IQuestionFactory {
 					(this.a) + "," + (this.b)};
 			return choices;
 		}
-
+		
+		public String generateInvertedQuestion() {
+			String s = "VAR^2";
+			if (b < 0) {
+				s += "+bvarVAR";
+			} else {
+				s += "bvarVAR";
+			}
+			if (c < 0) {
+				s += "+cvar";
+			} else {
+				s += "cvar";
+			}
+			s += "=0";
+			s = replaceAllSymbolsInverted(s);
+			return s;
+		}
+				
+		public String generateQuestionNoZero() {
+			String s = "-VAR^2";
+			if (b > 0) {
+				s += "+bvarVAR";
+			} else {
+				s += "bvarVAR";
+			}
+			if (c > 0) {
+				s += "+cvar";
+			} else {
+				s += "cvar";
+			}			
+			s = replaceAllSymbols(s);
+			return s;
+		}
+		
 		@Override
 		public String generateQuestion() {
 			String s = "-VAR^2";

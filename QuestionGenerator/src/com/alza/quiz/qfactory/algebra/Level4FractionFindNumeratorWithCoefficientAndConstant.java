@@ -154,7 +154,7 @@ public class Level4FractionFindNumeratorWithCoefficientAndConstant implements IQ
 			step1.setExplanation("Subtract to remove constant");
 			String exp = "v1 - constant = \\frac{coeffVAR}{v2} + constant - constant";
 			if (even) {
-				exp = "v1 + constant = \\\\frac{coeffVAR}{v2} - constant + constant";
+				exp = "v1 + constant = \\frac{coeffVAR}{v2} - constant + constant";
 				step1.setExplanation("Add to remove constant");
 				left = this.a + this.constant;
 			}

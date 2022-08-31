@@ -165,9 +165,9 @@ public class Level5SimpleQuadraticWithConstDiv implements IQuestionFactory {
 			
 			SolutionStep step3 = new SolutionStep();
 			step3.setExplanation("Multiply to remove divisor");
-			exp = "\\frac{VAR^2}{divisor} \\ times divisor = "+(this.rightVal-this.constant)+" \\times divisor";
+			exp = "\\frac{VAR^2}{divisor} \\times divisor = "+(this.rightVal-this.constant)+" \\times divisor";
 			if (even) {
-				exp = "\\frac{VAR^2}{divisor} \\ times divisor = "+(this.rightVal+this.constant)+" \\times divisor";
+				exp = "\\frac{VAR^2}{divisor} \\times divisor = "+(this.rightVal+this.constant)+" \\times divisor";
 			}			
 			exp = replaceAllSymbols(exp);
 			exp = CommonFunctionAndValues.enclosedWithMathJaxExp(exp);
@@ -191,9 +191,8 @@ public class Level5SimpleQuadraticWithConstDiv implements IQuestionFactory {
 			steps.add(step5);
 									
 			SolutionStep step6 = new SolutionStep();			
-			exp = "VAR = " +this.unsignedRoot +" and VAR = "+-this.unsignedRoot;
-			exp = replaceAllSymbols(exp);
-			exp = CommonFunctionAndValues.enclosedWithMathJaxExp(exp);
+			exp = "$$VAR = " +this.unsignedRoot +"$$ or $$VAR = "+-this.unsignedRoot+"$$";
+			exp = replaceAllSymbols(exp);			
 			step6.setExpression(exp);
 			step6.setExplanation("Simplify, solved");
 			steps.add(step6);
