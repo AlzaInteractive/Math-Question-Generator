@@ -34,8 +34,7 @@ public class Level2AddSub implements IQuestionFactory{
 	private void initStringFromLocale(){
 		bundle = ResourceBundle.getBundle("lang.langbundle", loc);
 		bundleAlgebra = ResourceBundle.getBundle("lang.langbundle-algebra", loc);
-		bundleAlgebraSteps = ResourceBundle.getBundle("lang.algebra-steps", loc);
-		
+		bundleAlgebraSteps = ResourceBundle.getBundle("lang.algebra-steps", loc);		
 	}
 	int numOfQuestion = 5;
 	int[][] bounds = {

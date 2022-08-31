@@ -72,10 +72,10 @@ public class AlgebraGameLevel implements IPlayableLevelsGroup{
 		GameLevel g;
 		g = GameLevel.createSingleQF(0, "Exp", new Level1AddSub(loc), 0);
 		//g.addQuestionFactory(new Level1Mult(loc), 4);
-		g.addQuestionFactory(new Level1Div(loc), 4);
+		//g.addQuestionFactory(new Level1Div(loc), 4);
 		//g.addQuestionFactory(new Level2AddSub(loc), 4);
 		//g.addQuestionFactory(new Level2Div(loc), 4);
-		//g.addQuestionFactory(new Level2Mult(loc), 4);
+		g.addQuestionFactory(new Level2Mult(loc), 4);
 		//g.addQuestionFactory(new Level3MixedOperationA(loc), 8);
 		//g.addQuestionFactory(new Level3MixedOperationB(loc), 8);
 		//g.addQuestionFactory(new Level4FractionFindNumeratorSimple(loc), 2);
