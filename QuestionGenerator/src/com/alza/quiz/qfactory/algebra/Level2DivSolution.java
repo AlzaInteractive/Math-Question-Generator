@@ -47,7 +47,7 @@ public class Level2DivSolution {
 		exp = "-VAR = "+(-ans);
 		exp = injectValsAndEnclosedWithMathJax(a, b, var, exp);
 		step2.setExpression(exp);
-		step2.setExplanation("Simplify");
+		step2.setExplanation(bundle.getString("globsimp"));
 		steps.add(step2);
 		
 		SolutionStep step3 = new SolutionStep();
