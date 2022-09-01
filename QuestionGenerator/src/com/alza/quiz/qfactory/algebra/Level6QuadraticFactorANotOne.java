@@ -26,7 +26,7 @@ public class Level6QuadraticFactorANotOne implements IQuestionFactory {
 	private Map<Integer, ProblemSkeleton> qMap = new HashMap<Integer, Level6QuadraticFactorANotOne.ProblemSkeleton>();
 	private Locale loc;
 	private ResourceBundle bundle;
-	private ResourceBundle bundleAlgebra;
+	private ResourceBundle bundleAlgebra,bundleAlgebraSteps;
 
 	public Level6QuadraticFactorANotOne(Locale loc) {
 		this.loc = loc;
@@ -41,7 +41,7 @@ public class Level6QuadraticFactorANotOne implements IQuestionFactory {
 	private void initStringFromLocale() {
 		bundle = ResourceBundle.getBundle("lang.langbundle", loc);
 		bundleAlgebra = ResourceBundle.getBundle("lang.langbundle-algebra", loc);
-
+		bundleAlgebraSteps = ResourceBundle.getBundle("lang.algebra-steps", loc);
 	}
 
 	@Override
@@ -150,44 +150,44 @@ public class Level6QuadraticFactorANotOne implements IQuestionFactory {
 			String exp = "$$a=avar$$, $$b=bvar$$, $$c=cvar$$";				
 			exp = replaceAllSymbols(exp);
 			step1.setExpression(exp);
-			step1.setExplanation("Determine $$a$$, $$b$$, $$c$$. Refer to general form $$ax^2+bx+c$$ ");
+			step1.setExplanation(bundleAlgebraSteps.getString("lv6detabc"));
 			steps.add(step1);
 												
 			SolutionStep step2 = new SolutionStep();			
 			exp = "$$"+(this.a*num2)+"+"+num1+"="+(this.b)+"$$ and "
 					+ "$$"+(this.a*num2)+"\\times"+num1+"="+(this.a)+" \\times "+(this.c)+"$$";						
 			step2.setExpression(exp);
-			step2.setExplanation("Find pair of numbers which sum is $$b$$, and multiply to  $$a \\times c$$");
+			step2.setExplanation(bundleAlgebraSteps.getString("lv6pairm"));
 			steps.add(step2);
 			
 			SolutionStep step3 = new SolutionStep();			
 			exp = generateSplittedTerm();						
 			exp = CommonFunctionAndValues.enclosedWithMathJaxExp(exp);
 			step3.setExpression(exp);
-			step3.setExplanation("Use both numbers to split the-$$"+this.var+"$$ term");			
+			step3.setExplanation(bundleAlgebraSteps.getString("lv6split"));			
 			steps.add(step3);
 			
 			SolutionStep step4 = new SolutionStep();			
 			exp = generateGroupedSplittedTerm();						
 			exp = CommonFunctionAndValues.enclosedWithMathJaxExp(exp);
 			step4.setExpression(exp);
-			step4.setExplanation("Group the first two terms, also group the last two");			
+			step4.setExplanation(bundleAlgebraSteps.getString("lv6grp"));			
 			steps.add(step4);
 			
 			SolutionStep step5 = new SolutionStep();			
 			exp = generateFactoredGroupedTerm();						
 			exp = CommonFunctionAndValues.enclosedWithMathJaxExp(exp);
 			step5.setExpression(exp);
-			step5.setExplanation("Factor out $$"+this.a+this.var+""
-					+ "$$ from the first group"
-					+ " and $$"+this.num1+"$$ from the second");			
+			step5.setExplanation(bundleAlgebraSteps.getString("lv6fctout")+"$$"+this.a+this.var+""
+					+ "$$ "+bundleAlgebraSteps.getString("lv6fr1grp")
+					+ " & $$"+this.num1+"$$ "+bundleAlgebraSteps.getString("lv6fr2grp"));			
 			steps.add(step5);
 			
 			SolutionStep step6 = new SolutionStep();			
 			exp = generateAnswer();						
 			exp = CommonFunctionAndValues.enclosedWithMathJaxExp(exp);
 			step6.setExpression(exp);
-			step6.setExplanation("Simplify, solved");			
+			step6.setExplanation(bundleAlgebraSteps.getString("globsimpsolv"));			
 			steps.add(step6);
 			
 			return steps;

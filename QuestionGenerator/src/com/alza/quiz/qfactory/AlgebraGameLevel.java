@@ -97,9 +97,9 @@ public class AlgebraGameLevel implements IPlayableLevelsGroup{
 		//g.addQuestionFactory(new Level5SimpleQuadraticWithCoeffConst(loc), 2);
 		//g.addQuestionFactory(new Level5SimpleQuadraticWithConstDiv(loc), 2);
 		//g.addQuestionFactory(new Level5SimpleQuadraticWithCoeffDiv(loc), 2);
-		g.addQuestionFactory(new Level5SimpleQuadraticCombo(loc), 6);
+		//g.addQuestionFactory(new Level5SimpleQuadraticCombo(loc), 6);
 		//g.addQuestionFactory(new Level6QuadraticFactorAOne(loc), 6);
-		//g.addQuestionFactory(new Level6QuadraticFactorANotOne(loc), 6);
+		g.addQuestionFactory(new Level6QuadraticFactorANotOne(loc), 6);
 		//g.addQuestionFactory(new Level6QuadraticSolveByFactoringAOne(loc), 6);
 		//g.addQuestionFactory(new Level6QuadraticSolveByFactoringANotOne(loc), 6);
 		//g.addQuestionFactory(new Level6QuadraticSolveByFactoringAOneNegativeCoeff(loc), 6);

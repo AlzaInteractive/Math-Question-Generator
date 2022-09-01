@@ -25,7 +25,7 @@ public class Level6QuadraticFactorAOne implements IQuestionFactory {
 	private Map<Integer, ProblemSkeleton> qMap = new HashMap<Integer, Level6QuadraticFactorAOne.ProblemSkeleton>();
 	private Locale loc;
 	private ResourceBundle bundle;
-	private ResourceBundle bundleAlgebra;
+	private ResourceBundle bundleAlgebra,bundleAlgebraSteps;
 
 	public Level6QuadraticFactorAOne(Locale loc) {
 		this.loc = loc;
@@ -40,7 +40,7 @@ public class Level6QuadraticFactorAOne implements IQuestionFactory {
 	private void initStringFromLocale() {
 		bundle = ResourceBundle.getBundle("lang.langbundle", loc);
 		bundleAlgebra = ResourceBundle.getBundle("lang.langbundle-algebra", loc);
-
+		bundleAlgebraSteps = ResourceBundle.getBundle("lang.algebra-steps", loc);
 	}
 
 	@Override
@@ -145,21 +145,21 @@ public class Level6QuadraticFactorAOne implements IQuestionFactory {
 			String exp = "$$a=avar$$, $$b=bvar$$, $$c=cvar$$";				
 			exp = replaceAllSymbols(exp);
 			step1.setExpression(exp);
-			step1.setExplanation("Determine $$a$$, $$b$$, $$c$$. Refer to general form $$ax^2+bx+c$$ ");
+			step1.setExplanation(bundleAlgebraSteps.getString("lv6detabc"));
 			steps.add(step1);
 												
 			SolutionStep step2 = new SolutionStep();			
 			exp = "$$"+num1+"+"+num2+"="+(this.b)+"$$ and "
 					+ "$$"+num1+"\\times"+num2+"="+(this.c)+"$$";								
 			step2.setExpression(exp);
-			step2.setExplanation("Find pair of numbers which sum is $$b$$, and multiply to $$c$$");
+			step2.setExplanation(bundleAlgebraSteps.getString("lv6pair1"));
 			steps.add(step2);
 			
 			SolutionStep step3 = new SolutionStep();			
 			exp = generateQuestion()+" = "+generateAnswer();						
 			exp = CommonFunctionAndValues.enclosedWithMathJaxExp(exp);
 			step3.setExpression(exp);
-			step3.setExplanation("Use both numbers to rewrite the form to its factored one");
+			step3.setExplanation(bundleAlgebraSteps.getString("lv6rwr1"));
 			steps.add(step3);
 									
 			return steps;
