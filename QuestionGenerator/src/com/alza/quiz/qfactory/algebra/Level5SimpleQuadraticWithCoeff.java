@@ -25,7 +25,7 @@ public class Level5SimpleQuadraticWithCoeff implements IQuestionFactory {
 	private Map<Integer, ProblemSkeleton> qMap = new HashMap<Integer, Level5SimpleQuadraticWithCoeff.ProblemSkeleton>();
 	private Locale loc;
 	private ResourceBundle bundle;
-	private ResourceBundle bundleAlgebra;
+	private ResourceBundle bundleAlgebra,bundleAlgebraSteps;
 
 	public Level5SimpleQuadraticWithCoeff(Locale loc) {
 		this.loc = loc;
@@ -40,7 +40,7 @@ public class Level5SimpleQuadraticWithCoeff implements IQuestionFactory {
 	private void initStringFromLocale() {
 		bundle = ResourceBundle.getBundle("lang.langbundle", loc);
 		bundleAlgebra = ResourceBundle.getBundle("lang.langbundle-algebra", loc);
-
+		bundleAlgebraSteps = ResourceBundle.getBundle("lang.algebra-steps", loc);
 	}
 
 	@Override
@@ -136,7 +136,7 @@ public class Level5SimpleQuadraticWithCoeff implements IQuestionFactory {
 			List<SolutionStep> steps = new ArrayList<>();		
 			
 			SolutionStep step1 = new SolutionStep();
-			step1.setExplanation("Divide to remove multiplier/coefficient");
+			step1.setExplanation(bundleAlgebraSteps.getString("globdiv"));
 			String exp = "coeffVAR^2 ÷ coeff = rightval ÷ coeff";			
 			exp = replaceAllSymbols(exp);
 			exp = CommonFunctionAndValues.enclosedWithMathJaxExp(exp);
@@ -148,11 +148,11 @@ public class Level5SimpleQuadraticWithCoeff implements IQuestionFactory {
 			exp = replaceAllSymbols(exp);
 			exp = CommonFunctionAndValues.enclosedWithMathJaxExp(exp);
 			step2.setExpression(exp);
-			step2.setExplanation("Simplify");
+			step2.setExplanation(bundleAlgebraSteps.getString("globsimp"));
 			steps.add(step2);
 			
 			SolutionStep step3 = new SolutionStep();
-			step3.setExplanation("Take square root on both sides");
+			step3.setExplanation(bundleAlgebraSteps.getString("globtkroot"));
 			exp = "VAR = ± \\sqrt"+(this.unsignedRoot*this.unsignedRoot);			
 			exp = replaceAllSymbols(exp);
 			exp = CommonFunctionAndValues.enclosedWithMathJaxExp(exp);
@@ -163,7 +163,7 @@ public class Level5SimpleQuadraticWithCoeff implements IQuestionFactory {
 			exp = "$$VAR = " +this.unsignedRoot +"$$ or $$VAR = "+-this.unsignedRoot+"$$";
 			exp = replaceAllSymbols(exp);			
 			step4.setExpression(exp);
-			step4.setExplanation("Simplify, solved");
+			step4.setExplanation(bundleAlgebraSteps.getString("globsolv"));
 			steps.add(step4);
 									
 			return steps;

@@ -25,7 +25,7 @@ public class Level5SimpleQuadraticNegativePlainUgly implements IQuestionFactory{
 	private Map<Integer, ProblemSkeleton> qMap = new HashMap<Integer, Level5SimpleQuadraticNegativePlainUgly.ProblemSkeleton>();
 	private Locale loc;
 	private ResourceBundle bundle;
-	private ResourceBundle bundleAlgebra;
+	private ResourceBundle bundleAlgebra,bundleAlgebraSteps;
 	
 	public Level5SimpleQuadraticNegativePlainUgly(Locale loc){
 		this.loc = loc;
@@ -38,7 +38,7 @@ public class Level5SimpleQuadraticNegativePlainUgly implements IQuestionFactory{
 	private void initStringFromLocale(){
 		bundle = ResourceBundle.getBundle("lang.langbundle", loc);
 		bundleAlgebra = ResourceBundle.getBundle("lang.langbundle-algebra", loc);
-		
+		bundleAlgebraSteps = ResourceBundle.getBundle("lang.algebra-steps", loc);
 	}
 
 	@Override
@@ -124,7 +124,7 @@ public class Level5SimpleQuadraticNegativePlainUgly implements IQuestionFactory{
 			List<SolutionStep> steps = new ArrayList<>();
 			
 			SolutionStep step0 = new SolutionStep();
-			step0.setExplanation("Multiply by -1");
+			step0.setExplanation(bundleAlgebraSteps.getString("globmultbyneg1"));
 			String exp = "-VAR^2 \\times -1 = v1 \\times -1";		
 			exp = replaceAllSymbols(exp);
 			exp = CommonFunctionAndValues.enclosedWithMathJaxExp(exp);
@@ -136,11 +136,11 @@ public class Level5SimpleQuadraticNegativePlainUgly implements IQuestionFactory{
 			exp = replaceAllSymbols(exp);
 			exp = CommonFunctionAndValues.enclosedWithMathJaxExp(exp);
 			step02.setExpression(exp);
-			step02.setExplanation("Simplify");
+			step02.setExplanation(bundleAlgebraSteps.getString("globsimp"));
 			steps.add(step02);
 			
 			SolutionStep step1 = new SolutionStep();
-			step1.setExplanation("Take square root on both sides");
+			step1.setExplanation(bundleAlgebraSteps.getString("globtkroot"));
 			exp = "VAR = ± \\sqrtv1";		
 			exp = replaceAllSymbols(exp);
 			exp = CommonFunctionAndValues.enclosedWithMathJaxExp(exp);
@@ -149,7 +149,7 @@ public class Level5SimpleQuadraticNegativePlainUgly implements IQuestionFactory{
 															
 			if (getSquareDivisor() > 1) {
 				SolutionStep stepx = new SolutionStep();
-				stepx.setExplanation("Simplify the form");
+				stepx.setExplanation(bundleAlgebraSteps.getString("globsimpsq"));
 				int outRoot = (int) Math.sqrt(getSquareDivisor());
 				int insideRoot = this.square / getSquareDivisor();
 				exp = "$$VAR = ± \\sqrt{"+getSquareDivisor()+" \\times "+insideRoot+"}";
@@ -163,9 +163,8 @@ public class Level5SimpleQuadraticNegativePlainUgly implements IQuestionFactory{
 			exp = generateSimplifiedRoot();
 			exp = replaceAllSymbols(exp);			
 			step4.setExpression(exp);
-			step4.setExplanation("Solved");
-			steps.add(step4);
-							
+			step4.setExplanation(bundleAlgebraSteps.getString("globsolv"));
+			steps.add(step4);							
 									
 			return steps;
 		}

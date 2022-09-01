@@ -25,7 +25,7 @@ public class Level5SimpleQuadraticWithCoeffConst implements IQuestionFactory {
 	private Map<Integer, ProblemSkeleton> qMap = new HashMap<Integer, Level5SimpleQuadraticWithCoeffConst.ProblemSkeleton>();
 	private Locale loc;
 	private ResourceBundle bundle;
-	private ResourceBundle bundleAlgebra;
+	private ResourceBundle bundleAlgebra,bundleAlgebraSteps;
 
 	public Level5SimpleQuadraticWithCoeffConst(Locale loc) {
 		this.loc = loc;
@@ -40,7 +40,7 @@ public class Level5SimpleQuadraticWithCoeffConst implements IQuestionFactory {
 	private void initStringFromLocale() {
 		bundle = ResourceBundle.getBundle("lang.langbundle", loc);
 		bundleAlgebra = ResourceBundle.getBundle("lang.langbundle-algebra", loc);
-
+		bundleAlgebraSteps = ResourceBundle.getBundle("lang.algebra-steps", loc);
 	}
 
 	@Override
@@ -138,7 +138,7 @@ public class Level5SimpleQuadraticWithCoeffConst implements IQuestionFactory {
 			List<SolutionStep> steps = new ArrayList<>();		
 			
 			SolutionStep step1 = new SolutionStep();
-			step1.setExplanation("Remove constant on the left");
+			step1.setExplanation(bundleAlgebraSteps.getString("globrmvconst"));
 			String exp = "coeffVAR^2 + constant - constant = rightval - constant";			
 			exp = replaceAllSymbols(exp);
 			exp = CommonFunctionAndValues.enclosedWithMathJaxExp(exp);
@@ -150,11 +150,11 @@ public class Level5SimpleQuadraticWithCoeffConst implements IQuestionFactory {
 			exp = replaceAllSymbols(exp);
 			exp = CommonFunctionAndValues.enclosedWithMathJaxExp(exp);
 			step2.setExpression(exp);
-			step2.setExplanation("Simplify");
+			step2.setExplanation(bundleAlgebraSteps.getString("globsimp"));
 			steps.add(step2);
 			
 			SolutionStep step3 = new SolutionStep();
-			step3.setExplanation("Divide to remove multiplier/coefficient");
+			step3.setExplanation(bundleAlgebraSteps.getString("globdiv"));
 			exp = "coeffVAR^2 ÷ coeff = "+(this.rightVal-this.constant)+" ÷ coeff";			
 			exp = replaceAllSymbols(exp);
 			exp = CommonFunctionAndValues.enclosedWithMathJaxExp(exp);
@@ -166,11 +166,11 @@ public class Level5SimpleQuadraticWithCoeffConst implements IQuestionFactory {
 			exp = replaceAllSymbols(exp);
 			exp = CommonFunctionAndValues.enclosedWithMathJaxExp(exp);
 			step4.setExpression(exp);
-			step4.setExplanation("Simplify");
+			step4.setExplanation(bundleAlgebraSteps.getString("globsimp"));
 			steps.add(step4);
 			
 			SolutionStep step5 = new SolutionStep();
-			step5.setExplanation("Take square root on both sides");
+			step5.setExplanation(bundleAlgebraSteps.getString("globtkroot"));
 			exp = "VAR = ± \\sqrt"+(unsignedRoot * unsignedRoot);			
 			exp = replaceAllSymbols(exp);
 			exp = CommonFunctionAndValues.enclosedWithMathJaxExp(exp);
@@ -181,7 +181,7 @@ public class Level5SimpleQuadraticWithCoeffConst implements IQuestionFactory {
 			exp = "$$VAR = " +this.unsignedRoot +"$$ or $$VAR = "+-this.unsignedRoot+"$$";
 			exp = replaceAllSymbols(exp);			
 			step6.setExpression(exp);
-			step6.setExplanation("Simplify, solved");
+			step6.setExplanation(bundleAlgebraSteps.getString("globsimpsolv"));
 			steps.add(step6);
 									
 			return steps;

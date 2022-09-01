@@ -23,7 +23,7 @@ public class Level5SimpleQuadraticWithConstantZeroOnRight implements IQuestionFa
 	private Map<Integer, ProblemSkeleton> qMap = new HashMap<Integer, Level5SimpleQuadraticWithConstantZeroOnRight.ProblemSkeleton>();
 	private Locale loc;
 	private ResourceBundle bundle;
-	private ResourceBundle bundleAlgebra;
+	private ResourceBundle bundleAlgebra,bundleAlgebraSteps;
 	
 	public Level5SimpleQuadraticWithConstantZeroOnRight(Locale loc){
 		this.loc = loc;
@@ -36,7 +36,7 @@ public class Level5SimpleQuadraticWithConstantZeroOnRight implements IQuestionFa
 	private void initStringFromLocale(){
 		bundle = ResourceBundle.getBundle("lang.langbundle", loc);
 		bundleAlgebra = ResourceBundle.getBundle("lang.langbundle-algebra", loc);
-		
+		bundleAlgebraSteps = ResourceBundle.getBundle("lang.algebra-steps", loc);
 	}
 
 	@Override
@@ -114,7 +114,7 @@ public class Level5SimpleQuadraticWithConstantZeroOnRight implements IQuestionFa
 			List<SolutionStep> steps = new ArrayList<>();		
 			
 			SolutionStep step1 = new SolutionStep();
-			step1.setExplanation("Remove constant on the left");
+			step1.setExplanation(bundleAlgebraSteps.getString("globrmvconst"));
 			String exp = "VAR^2 - v1 + v1 = 0 + v1";			
 			exp = replaceAllSymbols(exp);
 			exp = CommonFunctionAndValues.enclosedWithMathJaxExp(exp);
@@ -126,11 +126,11 @@ public class Level5SimpleQuadraticWithConstantZeroOnRight implements IQuestionFa
 			exp = replaceAllSymbols(exp);
 			exp = CommonFunctionAndValues.enclosedWithMathJaxExp(exp);
 			step2.setExpression(exp);
-			step2.setExplanation("Simplify");
+			step2.setExplanation(bundleAlgebraSteps.getString("globsimp"));
 			steps.add(step2);
 			
 			SolutionStep step3 = new SolutionStep();
-			step3.setExplanation("Take square root on both sides");
+			step3.setExplanation(bundleAlgebraSteps.getString("globtkroot"));
 			exp = "VAR = ± \\sqrtv1";			
 			exp = replaceAllSymbols(exp);
 			exp = CommonFunctionAndValues.enclosedWithMathJaxExp(exp);
@@ -141,7 +141,7 @@ public class Level5SimpleQuadraticWithConstantZeroOnRight implements IQuestionFa
 			exp = "$$VAR = " +this.a +"$$ or $$VAR = "+-this.a+"$$";
 			exp = replaceAllSymbols(exp);			
 			step4.setExpression(exp);
-			step4.setExplanation("Simplify, solved");
+			step4.setExplanation(bundleAlgebraSteps.getString("globsolv"));
 			steps.add(step4);
 									
 			return steps;

@@ -25,7 +25,7 @@ public class Level5SimpleQuadraticPlainUgly implements IQuestionFactory{
 	private Map<Integer, ProblemSkeleton> qMap = new HashMap<Integer, Level5SimpleQuadraticPlainUgly.ProblemSkeleton>();
 	private Locale loc;
 	private ResourceBundle bundle;
-	private ResourceBundle bundleAlgebra;
+	private ResourceBundle bundleAlgebra,bundleAlgebraSteps;
 	
 	public Level5SimpleQuadraticPlainUgly(Locale loc){
 		this.loc = loc;
@@ -38,7 +38,7 @@ public class Level5SimpleQuadraticPlainUgly implements IQuestionFactory{
 	private void initStringFromLocale(){
 		bundle = ResourceBundle.getBundle("lang.langbundle", loc);
 		bundleAlgebra = ResourceBundle.getBundle("lang.langbundle-algebra", loc);
-		
+		bundleAlgebraSteps = ResourceBundle.getBundle("lang.algebra-steps", loc);
 	}
 
 	@Override
@@ -124,7 +124,7 @@ public class Level5SimpleQuadraticPlainUgly implements IQuestionFactory{
 			List<SolutionStep> steps = new ArrayList<>();		
 			
 			SolutionStep step1 = new SolutionStep();
-			step1.setExplanation("Take square root on both sides");
+			step1.setExplanation(bundleAlgebraSteps.getString("globtkroot"));
 			String exp = "VAR = ± \\sqrtv1";		
 			exp = replaceAllSymbols(exp);
 			exp = CommonFunctionAndValues.enclosedWithMathJaxExp(exp);
@@ -133,7 +133,7 @@ public class Level5SimpleQuadraticPlainUgly implements IQuestionFactory{
 															
 			if (getSquareDivisor() > 1) {
 				SolutionStep stepx = new SolutionStep();
-				stepx.setExplanation("Simplify the form");
+				stepx.setExplanation(bundleAlgebraSteps.getString("globsimpsq"));
 				int outRoot = (int) Math.sqrt(getSquareDivisor());
 				int insideRoot = this.square / getSquareDivisor();
 				exp = "$$VAR = ± \\sqrt{"+getSquareDivisor()+" \\times "+insideRoot+"}";
@@ -147,7 +147,7 @@ public class Level5SimpleQuadraticPlainUgly implements IQuestionFactory{
 			exp = generateSimplifiedRoot();
 			exp = replaceAllSymbols(exp);			
 			step4.setExpression(exp);
-			step4.setExplanation("Solved");
+			step4.setExplanation(bundleAlgebraSteps.getString("globsolv"));
 			steps.add(step4);
 							
 									

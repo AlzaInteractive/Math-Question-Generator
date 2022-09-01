@@ -23,7 +23,7 @@ public class Level5SimpleQuadraticPlain implements IQuestionFactory{
 	private Map<Integer, ProblemSkeleton> qMap = new HashMap<Integer, Level5SimpleQuadraticPlain.ProblemSkeleton>();
 	private Locale loc;
 	private ResourceBundle bundle;
-	private ResourceBundle bundleAlgebra;
+	private ResourceBundle bundleAlgebra,bundleAlgebraSteps;
 	
 	public Level5SimpleQuadraticPlain(Locale loc){
 		this.loc = loc;
@@ -36,7 +36,7 @@ public class Level5SimpleQuadraticPlain implements IQuestionFactory{
 	private void initStringFromLocale(){
 		bundle = ResourceBundle.getBundle("lang.langbundle", loc);
 		bundleAlgebra = ResourceBundle.getBundle("lang.langbundle-algebra", loc);
-		
+		bundleAlgebraSteps = ResourceBundle.getBundle("lang.algebra-steps", loc);
 	}
 
 	@Override
@@ -114,7 +114,7 @@ public class Level5SimpleQuadraticPlain implements IQuestionFactory{
 			List<SolutionStep> steps = new ArrayList<>();		
 			
 			SolutionStep step1 = new SolutionStep();
-			step1.setExplanation("Take square root on both sides");
+			step1.setExplanation(bundleAlgebraSteps.getString("globtkroot"));
 			String exp = "VAR = ± \\sqrtv1";		
 			exp = replaceAllSymbols(exp);
 			exp = CommonFunctionAndValues.enclosedWithMathJaxExp(exp);
@@ -125,7 +125,7 @@ public class Level5SimpleQuadraticPlain implements IQuestionFactory{
 			exp = "$$VAR = " +this.a +"$$ or $$VAR = "+-this.a+"$$";
 			exp = replaceAllSymbols(exp);			
 			step2.setExpression(exp);
-			step2.setExplanation("Simplify, solved");
+			step2.setExplanation(bundleAlgebraSteps.getString("globsimpsolv"));
 			steps.add(step2);						
 									
 			return steps;
