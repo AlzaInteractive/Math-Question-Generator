@@ -77,15 +77,15 @@ public class AlgebraGameLevel implements IPlayableLevelsGroup{
 		//g.addQuestionFactory(new Level2Div(loc), 4);
 		//g.addQuestionFactory(new Level2Mult(loc), 4);
 		//g.addQuestionFactory(new Level3MixedOperationA(loc), 8);
-		g.addQuestionFactory(new Level3MixedOperationB(loc), 8);
-		//g.addQuestionFactory(new Level4FractionFindNumeratorSimple(loc), 2);
+		//g.addQuestionFactory(new Level3MixedOperationB(loc), 8);
+		//g.addQuestionFactory(new Level4FractionFindNumeratorSimple(loc), 4);
 		//g.addQuestionFactory(new Level4FractionFindDivisorSimple(loc), 2);
 		//g.addQuestionFactory(new Level4FractionFindNumeratorWithConstant(loc), 2);
 		//g.addQuestionFactory(new Level4FractionFindNumeratorWithCoefficient(loc), 2);
 		//g.addQuestionFactory(new Level4FractionFindDivisorWithConstant(loc), 2);
 		//g.addQuestionFactory(new Level4FractionFindDivisorWithCoefficient(loc), 2);
 		//g.addQuestionFactory(new Level4FractionFindNumeratorWithCoefficientAndConstant(loc), 2);
-		//g.addQuestionFactory(new Level4FractionFindDivisorWithCoefficientAndConstant(loc), 2);
+		g.addQuestionFactory(new Level4FractionFindDivisorWithCoefficientAndConstant(loc), 2);
 		//g.addQuestionFactory(new Level5SimpleQuadraticPlain(loc), 2);
 		//g.addQuestionFactory(new Level5SimpleQuadraticPlainNegative(loc), 2);
 		//g.addQuestionFactory(new Level5SimpleQuadraticPlainUgly(loc), 6);

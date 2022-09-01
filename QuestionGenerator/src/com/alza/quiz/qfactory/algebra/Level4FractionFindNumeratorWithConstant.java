@@ -23,7 +23,7 @@ public class Level4FractionFindNumeratorWithConstant implements IQuestionFactory
 	private Map<Integer, ProblemSkeleton> qMap = new HashMap<Integer, Level4FractionFindNumeratorWithConstant.ProblemSkeleton>();
 	private Locale loc;
 	private ResourceBundle bundle;
-	private ResourceBundle bundleAlgebra;
+	private ResourceBundle bundleAlgebra,bundleAlgebraSteps;
 	
 	public Level4FractionFindNumeratorWithConstant(Locale loc){
 		this.loc = loc;
@@ -36,7 +36,7 @@ public class Level4FractionFindNumeratorWithConstant implements IQuestionFactory
 	private void initStringFromLocale(){
 		bundle = ResourceBundle.getBundle("lang.langbundle", loc);
 		bundleAlgebra = ResourceBundle.getBundle("lang.langbundle-algebra", loc);
-		
+		bundleAlgebraSteps = ResourceBundle.getBundle("lang.algebra-steps", loc);
 	}
 
 	@Override
@@ -143,11 +143,11 @@ public class Level4FractionFindNumeratorWithConstant implements IQuestionFactory
 			int left = this.a - this.constant;
 			
 			SolutionStep step1 = new SolutionStep();
-			step1.setExplanation("Subtract to remove constant");
+			step1.setExplanation(bundleAlgebraSteps.getString("globsubtract"));
 			String exp = "v1 - constant = \\frac{VAR}{v2} + constant - constant";
 			if (even) {
 				exp = "v1 + constant = \\frac{VAR}{v2} - constant + constant";
-				step1.setExplanation("Add to remove constant");
+				step1.setExplanation(bundleAlgebraSteps.getString("globadd"));
 				left = this.a + this.constant;
 			}
 			exp = replaceAllSymbols(exp);
@@ -160,7 +160,7 @@ public class Level4FractionFindNumeratorWithConstant implements IQuestionFactory
 			exp = replaceAllSymbols(exp);
 			exp = CommonFunctionAndValues.enclosedWithMathJaxExp(exp);
 			step2.setExpression(exp);
-			step2.setExplanation("Simplify");
+			step2.setExplanation(bundleAlgebraSteps.getString("globsimp"));
 			steps.add(step2);
 			
 			SolutionStep step3 = new SolutionStep();
@@ -168,7 +168,7 @@ public class Level4FractionFindNumeratorWithConstant implements IQuestionFactory
 			exp = replaceAllSymbols(exp);
 			exp = CommonFunctionAndValues.enclosedWithMathJaxExp(exp);
 			step3.setExpression(exp);
-			step3.setExplanation("Multiply to remove divisor");			
+			step3.setExplanation(bundleAlgebraSteps.getString("globmultfr"));			
 			steps.add(step3);
 			
 			int ans = generateAnswerInt();
@@ -178,7 +178,7 @@ public class Level4FractionFindNumeratorWithConstant implements IQuestionFactory
 			exp = replaceAllSymbols(exp);
 			exp = CommonFunctionAndValues.enclosedWithMathJaxExp(exp);
 			step4.setExpression(exp);
-			step4.setExplanation("Simplify, solved");
+			step4.setExplanation(bundleAlgebraSteps.getString("globsimpsolv"));
 			steps.add(step4);
 									
 			return steps;

@@ -23,7 +23,7 @@ public class Level4FractionFindNumeratorSimple implements IQuestionFactory{
 	private Map<Integer, ProblemSkeleton> qMap = new HashMap<Integer, Level4FractionFindNumeratorSimple.ProblemSkeleton>();
 	private Locale loc;
 	private ResourceBundle bundle;
-	private ResourceBundle bundleAlgebra;
+	private ResourceBundle bundleAlgebra,bundleAlgebraSteps;
 	
 	public Level4FractionFindNumeratorSimple(Locale loc){
 		this.loc = loc;
@@ -36,7 +36,7 @@ public class Level4FractionFindNumeratorSimple implements IQuestionFactory{
 	private void initStringFromLocale(){
 		bundle = ResourceBundle.getBundle("lang.langbundle", loc);
 		bundleAlgebra = ResourceBundle.getBundle("lang.langbundle-algebra", loc);
-		
+		bundleAlgebraSteps = ResourceBundle.getBundle("lang.algebra-steps", loc);
 	}
 
 	@Override
@@ -143,7 +143,7 @@ public class Level4FractionFindNumeratorSimple implements IQuestionFactory{
 			exp = replaceAllSymbols(exp);
 			exp = CommonFunctionAndValues.enclosedWithMathJaxExp(exp);
 			step1.setExpression(exp);
-			step1.setExplanation("Multiply to remove divisor");
+			step1.setExplanation(bundleAlgebraSteps.getString("globmultfr"));
 			steps.add(step1);
 			
 			SolutionStep step2 = new SolutionStep();
@@ -152,7 +152,7 @@ public class Level4FractionFindNumeratorSimple implements IQuestionFactory{
 			exp = replaceAllSymbols(exp);
 			exp = CommonFunctionAndValues.enclosedWithMathJaxExp(exp);
 			step2.setExpression(exp);
-			step2.setExplanation("Simplify, solved");
+			step2.setExplanation(bundleAlgebraSteps.getString("globsimpsolv"));
 			steps.add(step2);
 									
 			return steps;

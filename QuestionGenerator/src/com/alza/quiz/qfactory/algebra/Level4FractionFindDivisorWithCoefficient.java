@@ -23,7 +23,7 @@ public class Level4FractionFindDivisorWithCoefficient implements IQuestionFactor
 	private Map<Integer, ProblemSkeleton> qMap = new HashMap<Integer, Level4FractionFindDivisorWithCoefficient.ProblemSkeleton>();
 	private Locale loc;
 	private ResourceBundle bundle;
-	private ResourceBundle bundleAlgebra;
+	private ResourceBundle bundleAlgebra, bundleAlgebraSteps;
 	
 	public Level4FractionFindDivisorWithCoefficient(Locale loc){
 		this.loc = loc;
@@ -36,7 +36,7 @@ public class Level4FractionFindDivisorWithCoefficient implements IQuestionFactor
 	private void initStringFromLocale(){
 		bundle = ResourceBundle.getBundle("lang.langbundle", loc);
 		bundleAlgebra = ResourceBundle.getBundle("lang.langbundle-algebra", loc);
-		
+		bundleAlgebraSteps = ResourceBundle.getBundle("lang.algebra-steps", loc);
 	}
 
 	@Override
@@ -138,7 +138,7 @@ public class Level4FractionFindDivisorWithCoefficient implements IQuestionFactor
 			exp = replaceAllSymbols(exp);
 			exp = CommonFunctionAndValues.enclosedWithMathJaxExp(exp);
 			step1.setExpression(exp);
-			step1.setExplanation("Multiply to remove divisor");
+			step1.setExplanation(bundleAlgebraSteps.getString("globmultfr"));
 			steps.add(step1);
 			
 			SolutionStep step2 = new SolutionStep();
@@ -147,7 +147,7 @@ public class Level4FractionFindDivisorWithCoefficient implements IQuestionFactor
 			exp = replaceAllSymbols(exp);
 			exp = CommonFunctionAndValues.enclosedWithMathJaxExp(exp);
 			step2.setExpression(exp);
-			step2.setExplanation("Simplify");
+			step2.setExplanation(bundleAlgebraSteps.getString("globsimp"));
 			steps.add(step2);
 			
 			SolutionStep step3 = new SolutionStep();			
@@ -155,7 +155,7 @@ public class Level4FractionFindDivisorWithCoefficient implements IQuestionFactor
 			exp = replaceAllSymbols(exp);
 			exp = CommonFunctionAndValues.enclosedWithMathJaxExp(exp);
 			step3.setExpression(exp);
-			step3.setExplanation("Divide to remove multiplier/coefficient");
+			step3.setExplanation(bundleAlgebraSteps.getString("globdiv"));
 			steps.add(step3);
 			
 			SolutionStep step4 = new SolutionStep();
@@ -163,7 +163,7 @@ public class Level4FractionFindDivisorWithCoefficient implements IQuestionFactor
 			exp = replaceAllSymbols(exp);
 			exp = CommonFunctionAndValues.enclosedWithMathJaxExp(exp);
 			step4.setExpression(exp);
-			step4.setExplanation("Simplify, solved");
+			step4.setExplanation(bundleAlgebraSteps.getString("globsimpsolv"));
 			steps.add(step4);
 									
 			return steps;
