@@ -25,7 +25,7 @@ public class Level6QuadraticSolveByFactoringCombo implements IQuestionFactory {
 	private Map<Integer, ProblemSkeleton> qMap = new HashMap<Integer, Level6QuadraticSolveByFactoringCombo.ProblemSkeleton>();
 	private Locale loc;
 	private ResourceBundle bundle;
-	private ResourceBundle bundleAlgebra;
+	private ResourceBundle bundleAlgebra,bundleAlgebraSteps;
 
 	public Level6QuadraticSolveByFactoringCombo(Locale loc) {
 		this.loc = loc;
@@ -40,7 +40,7 @@ public class Level6QuadraticSolveByFactoringCombo implements IQuestionFactory {
 	private void initStringFromLocale() {
 		bundle = ResourceBundle.getBundle("lang.langbundle", loc);
 		bundleAlgebra = ResourceBundle.getBundle("lang.langbundle-algebra", loc);
-
+		bundleAlgebraSteps = ResourceBundle.getBundle("lang.algebra-steps", loc);
 	}
 
 	@Override

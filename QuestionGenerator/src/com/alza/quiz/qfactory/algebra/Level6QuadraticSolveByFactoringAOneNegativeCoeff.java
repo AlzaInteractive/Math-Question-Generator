@@ -25,7 +25,7 @@ public class Level6QuadraticSolveByFactoringAOneNegativeCoeff implements IQuesti
 	private Map<Integer, ProblemSkeleton> qMap = new HashMap<Integer, Level6QuadraticSolveByFactoringAOneNegativeCoeff.ProblemSkeleton>();
 	private Locale loc;
 	private ResourceBundle bundle;
-	private ResourceBundle bundleAlgebra;
+	private ResourceBundle bundleAlgebra,bundleAlgebraSteps;
 
 	public Level6QuadraticSolveByFactoringAOneNegativeCoeff(Locale loc) {
 		this.loc = loc;
@@ -40,7 +40,7 @@ public class Level6QuadraticSolveByFactoringAOneNegativeCoeff implements IQuesti
 	private void initStringFromLocale() {
 		bundle = ResourceBundle.getBundle("lang.langbundle", loc);
 		bundleAlgebra = ResourceBundle.getBundle("lang.langbundle-algebra", loc);
-
+		bundleAlgebraSteps = ResourceBundle.getBundle("lang.algebra-steps", loc);
 	}
 
 	@Override
@@ -145,28 +145,28 @@ public class Level6QuadraticSolveByFactoringAOneNegativeCoeff implements IQuesti
 			String exp = "$$("+generateQuestionNoZero()+")\\times -1=0\\times-1$$";				
 			exp = replaceAllSymbols(exp);
 			step0.setExpression(exp);
-			step0.setExplanation("Multiply by -1 to invert signs");
+			step0.setExplanation(bundleAlgebraSteps.getString("globmultbyneg1"));
 			steps.add(step0);
 			
 			SolutionStep step01 = new SolutionStep();			
 			exp = "$$"+generateInvertedQuestion()+"$$";				
 			exp = replaceAllSymbols(exp);
 			step01.setExpression(exp);
-			step01.setExplanation("Simplify");
+			step01.setExplanation(bundleAlgebraSteps.getString("globsimp"));
 			steps.add(step01);
 			
 			SolutionStep step1 = new SolutionStep();			
 			exp = "$$a=avar$$, $$b=bvar$$, $$c=cvar$$";				
 			exp = replaceAllSymbolsInverted(exp);
 			step1.setExpression(exp);
-			step1.setExplanation("Determine $$a$$, $$b$$, $$c$$. Refer to general form $$ax^2+bx+c$$ ");
+			step1.setExplanation(bundleAlgebraSteps.getString("lv6detabc"));
 			steps.add(step1);
 												
 			SolutionStep step2 = new SolutionStep();			
 			exp = "$$"+(-this.firstFactorConst)+"+"+(+this.secondFactorConst)+"="+(-this.b)+"$$ and "
 					+ "$$"+(-this.firstFactorConst)+"\\times"+(+this.secondFactorConst)+"="+(-this.c)+"$$";								
 			step2.setExpression(exp);
-			step2.setExplanation("Find pair of numbers which sum is $$b$$, and multiply to $$c$$");
+			step2.setExplanation(bundleAlgebraSteps.getString("lv6pair1"));
 			steps.add(step2);
 			
 			SolutionStep step3 = new SolutionStep();			
@@ -174,7 +174,7 @@ public class Level6QuadraticSolveByFactoringAOneNegativeCoeff implements IQuesti
 			exp = replaceAllSymbols(exp);
 			exp = CommonFunctionAndValues.enclosedWithMathJaxExp(exp);
 			step3.setExpression(exp);			
-			step3.setExplanation("Use both numbers to rewrite the form to its factored one");
+			step3.setExplanation(bundleAlgebraSteps.getString("lv6rwr1"));
 			steps.add(step3);
 			
 			SolutionStep step4 = new SolutionStep();			
@@ -182,14 +182,14 @@ public class Level6QuadraticSolveByFactoringAOneNegativeCoeff implements IQuesti
 					+generateSecondFactorIsZero()+"$$";						
 			exp = replaceAllSymbols(exp);			
 			step4.setExpression(exp);
-			step4.setExplanation("To satisfy the equation, either factor must be zero");
+			step4.setExplanation(bundleAlgebraSteps.getString("lv6stsfy"));
 			steps.add(step4);
 			
 			SolutionStep step5 = new SolutionStep();			
 			exp = "$$VAR="+(this.firstFactorConst)+"$$ or $$VAR="+(-this.secondFactorConst)+"$$";						
 			exp = replaceAllSymbols(exp);			
 			step5.setExpression(exp);
-			step5.setExplanation("Solve for $$"+this.var+"$$");
+			step5.setExplanation(bundleAlgebraSteps.getString("globsolvfor")+" $$"+this.var+"$$");
 			steps.add(step5);			
 									
 			return steps;
