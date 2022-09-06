@@ -105,17 +105,12 @@ public class AlgebraGameLevel implements IPlayableLevelsGroup{
 		//g.addQuestionFactory(new Level6QuadraticSolveByFactoringAOneNegativeCoeff(loc), 6);
 		//g.addQuestionFactory(new Level6QuadraticSolveByFactoringANotOneNegativeCoeff(loc), 6);
 		//g.addQuestionFactory(new Level6QuadraticSolveByFactoringCombo(loc), 6);
-		
-		//
-		//g.addQuestionFactory(new Level7QuadraticUglyNumberSimple(loc), 6);
+		g.addQuestionFactory(new Level7QuadraticUglyNumberSimple(loc), 6);
 		/*		
 		name = bundle.getString("algebra.level3.mixop");
 		desc = "";//bundle.getString("");
 		// Level 5.1
-		
-		
-		 
-		
+								
 		g.addQuestionFactory(new Level5SimpleQuadraticPlainUgly(loc), 1);
 		g.addQuestionFactory(new Level5SimpleQuadraticNegativePlainUgly(), 1);
 		

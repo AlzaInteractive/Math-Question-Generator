@@ -176,7 +176,7 @@ public class Level6QuadraticSolveByFactoringANotOneNegativeCoeff implements IQue
 			exp = "$$a=avar$$, $$b=bvar$$, $$c=cvar$$";				
 			exp = replaceAllSymbols(exp);
 			step1.setExpression(exp);
-			step1.setExplanation(bundleAlgebraSteps.getString("lv6pair1"));
+			step1.setExplanation(bundleAlgebraSteps.getString("lv6detabc"));
 			steps.add(step1);
 												
 			SolutionStep step2 = new SolutionStep();			

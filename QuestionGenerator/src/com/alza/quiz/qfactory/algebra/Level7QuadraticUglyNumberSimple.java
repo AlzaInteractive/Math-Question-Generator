@@ -11,10 +11,12 @@ import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.concurrent.ThreadLocalRandom;
 
+import com.alza.common.math.MathUtils;
 import com.alza.quiz.model.ISingleQuizPrimaryAttributeGenerator;
 import com.alza.quiz.model.MultipleChoiceQuiz;
 import com.alza.quiz.model.Quiz;
 import com.alza.quiz.model.QuizLevel;
+import com.alza.quiz.model.SolutionStep;
 import com.alza.quiz.qfactory.IQuestionFactory;
 import com.alza.quiz.util.CommonFunctionAndValues;
 
@@ -24,7 +26,7 @@ public class Level7QuadraticUglyNumberSimple implements IQuestionFactory {
 	private Map<Integer, ProblemSkeleton> qMap = new HashMap<Integer, Level7QuadraticUglyNumberSimple.ProblemSkeleton>();
 	private Locale loc;
 	private ResourceBundle bundle;
-	private ResourceBundle bundleAlgebra;
+	private ResourceBundle bundleAlgebra,bundleAlgebraSteps;
 
 	public Level7QuadraticUglyNumberSimple(Locale loc) {
 		this.loc = loc;
@@ -39,7 +41,7 @@ public class Level7QuadraticUglyNumberSimple implements IQuestionFactory {
 	private void initStringFromLocale() {
 		bundle = ResourceBundle.getBundle("lang.langbundle", loc);
 		bundleAlgebra = ResourceBundle.getBundle("lang.langbundle-algebra", loc);
-
+		bundleAlgebraSteps = ResourceBundle.getBundle("lang.algebra-steps", loc);
 	}
 
 	@Override
@@ -61,6 +63,7 @@ public class Level7QuadraticUglyNumberSimple implements IQuestionFactory {
 			ProblemSkeleton p = generateUniqueProblem(i);
 			Quiz q = p.generateSingleQuiz();
 			setQuizSecondaryAttributes(q);
+			q.setSolutionSteps(p.generateSolutionSteps());
 			lq.add(q);
 		}
 		return lq;
@@ -99,7 +102,7 @@ public class Level7QuadraticUglyNumberSimple implements IQuestionFactory {
 		final String[] VARSYM = { "x", "y", "z" };
 		List<Integer> squares = new ArrayList<Integer>();
 		ProblemSkeleton(int idx) {
-			int rootLimit = 20;
+			int rootLimit = 30;
 			for (int i =1;i<=rootLimit;i++) {
 				squares.add(i*i);
 			}			
@@ -108,16 +111,19 @@ public class Level7QuadraticUglyNumberSimple implements IQuestionFactory {
 			do {
 				a = ThreadLocalRandom.current().nextInt(2, 13);
 				a = a * CommonFunctionAndValues.getRandom(new int[] {1,-1});
-				b = CommonFunctionAndValues.getRandom(new int[] {2,4,6,8,12});
+				//b = CommonFunctionAndValues.getRandom(new int[] {2,4,6,8,12});
+				b = ThreadLocalRandom.current().nextInt(2, 13);
 				b = b * CommonFunctionAndValues.getRandom(new int[] {1,-1});
 				c = a * CommonFunctionAndValues.getRandom(new int[] {2,3,4,5,6,7,8,9});
 				c = c * CommonFunctionAndValues.getRandom(new int[] {1,-1});
 				bmod2a = -b % (2*a);
 				b4acmod4asq = b4ac() % (4*a*a);
-			} while (b4ac() <= 1 || b4ac() > rootLimit * rootLimit 
+			} while (b4ac() <= 1 
+					|| b4ac() > rootLimit * rootLimit 
 					|| bmod2a !=0 
 					|| b4acmod4asq != 0
-					|| b4acinsquares());
+					|| b4acinsquares()
+					 );
 			
 		}
 		
@@ -170,6 +176,82 @@ public class Level7QuadraticUglyNumberSimple implements IQuestionFactory {
 					String.valueOf(leftSideWrong2+"±"+rightSideWrong2),					
 			};
 			return choices;
+		}
+		
+		public List<SolutionStep> generateSolutionSteps(){
+			List<SolutionStep> steps = new ArrayList<>();
+					
+			String exp;	
+			SolutionStep step1 = new SolutionStep();			
+			exp = "$$a=avar$$, $$b=bvar$$, $$c=cvar$$";				
+			exp = replaceAllSymbols(exp);
+			step1.setExpression(exp);
+			step1.setExplanation(bundleAlgebraSteps.getString("lv6detabc"));
+			steps.add(step1);
+												
+			SolutionStep step2 = new SolutionStep();			
+			exp = "$$"+this.var+" = "+getValsInABCFormula()+"$$";											
+			step2.setExpression(exp);
+			step2.setExplanation(bundleAlgebraSteps.getString("lv7useform")
+					+ " $$x = \\frac {-b \\pm \\sqrt {b^2 - 4ac}}{2a}$$");
+			steps.add(step2);
+			
+			SolutionStep step3 = new SolutionStep();			
+			exp = this.var+" = "+getSimpValsInABCFormula();						
+			exp = CommonFunctionAndValues.enclosedWithMathJaxExp(exp);
+			step3.setExpression(exp);
+			step3.setExplanation(bundleAlgebraSteps.getString("globsimp"));			
+			steps.add(step3);
+			
+			SolutionStep step4 = new SolutionStep();			
+			exp = getFinalForm();									
+			step4.setExpression(exp);
+			step4.setExplanation(bundleAlgebraSteps.getString("globsolv"));			
+			steps.add(step4);
+			
+			return steps;
+		}
+		
+		public String getValsInABCFormula() {
+			String s;
+			String minB = "-"+this.b;
+			if (b<0) {
+				minB = "-("+this.b+")";
+			}
+			String fourAC = "4\\times "+this.a+" \\times "+this.c;
+			String b24AC = "b^2 - "+fourAC;
+			String twoA = "2 \\times "+this.a;
+			String sqb24ac = "\\sqrt{"+b24AC+"}";
+			String minBPM4AC = minB +" \\pm "+sqb24ac;
+			s = "\\frac{"+minBPM4AC+"}{"+twoA+"}";			
+			return s;
+		}
+		
+		public String getSimpValsInABCFormula() {
+			String s;			
+			String minB = "-"+this.b;
+			if (b<0) {
+				minB = "-("+this.b+")";
+			}
+			String b2fourAC = String.valueOf((this.b*this.b)-(4 * this.a * this.c));
+			String twoA = String.valueOf(2 * this.a);
+			String sqb24ac = "\\sqrt{"+b2fourAC+"}";
+			String minBPM4AC = minB +" \\pm "+sqb24ac;
+			s = "\\frac{"+minBPM4AC+"}{"+twoA+"}";
+			return s;
+		}
+		
+		public String getFinalForm() {
+			int[] alior = answerLeftInsideOutsideRoot();			
+			int leftSide = alior[0];
+			int insideRoot = alior[1];
+			int outsideRoot = alior[2];
+			String rightSide = outsideRoot + "\\sqrt" + insideRoot;
+			if (outsideRoot == 1) {
+				rightSide = "\\sqrt" + insideRoot;
+			}
+			return String.valueOf("$$"+this.var+" = "+leftSide+" \\pm "+rightSide+"$$");			
+			
 		}
 
 		@Override
