@@ -210,7 +210,7 @@ public class Level6QuadraticSolveByFactoringANotOneNegativeCoeff implements IQue
 			steps.add(step5);
 			
 			SolutionStep step6 = new SolutionStep();			
-			exp = generateQuadraticForm()+"="+generateFactoredForm() +"=0 ";
+			exp = generateFactoredForm() +"=0 ";
 			exp = replaceAllSymbols(exp);
 			exp = CommonFunctionAndValues.enclosedWithMathJaxExp(exp);
 			step6.setExpression(exp);			

@@ -23,7 +23,7 @@ public class Level1AddSubSolution {
 			exp = injectValsAndEnclosedWithMathJax(a, b, var, exp);			
 			step1.setExpression(exp);
 			//step1.setExplanation("Subtract "+a+" from both sides to remove + "+a);
-			step1.setExplanation(bundle.getString("lv1subtract")+a+" "+bundle.getString("lv1frombothtoremove")+a);
+			step1.setExplanation(bundle.getString("lv1subtract")+a+" "+bundle.getString("lv1frombothtoremove")+"+ "+a);
 			ans = b - a;
 			
 		}
@@ -44,7 +44,7 @@ public class Level1AddSubSolution {
 			exp = injectValsAndEnclosedWithMathJax(a, b, var, exp);			
 			step1.setExpression(exp);
 			//step1.setExplanation("Subtract "+a+" from both sides to remove + "+a);
-			step1.setExplanation(bundle.getString("lv1subtract")+a+" "+bundle.getString("lv1frombothtoremove")+a);			
+			step1.setExplanation(bundle.getString("lv1subtract")+a+" "+bundle.getString("lv1frombothtoremove")+"+ "+a);			
 			ans = -b - a;			
 		}		
 		// VAR - a = -b

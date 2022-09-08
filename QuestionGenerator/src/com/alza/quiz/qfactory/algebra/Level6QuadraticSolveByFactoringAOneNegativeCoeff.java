@@ -170,7 +170,7 @@ public class Level6QuadraticSolveByFactoringAOneNegativeCoeff implements IQuesti
 			steps.add(step2);
 			
 			SolutionStep step3 = new SolutionStep();			
-			exp = generateQuadraticForm()+"="+generateFactoredForm() +"=0 ";
+			exp = generateFactoredForm() +"=0 ";
 			exp = replaceAllSymbols(exp);
 			exp = CommonFunctionAndValues.enclosedWithMathJaxExp(exp);
 			step3.setExpression(exp);			
