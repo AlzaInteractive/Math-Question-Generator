@@ -62,7 +62,7 @@ public class Level1AddSubSolution {
 		exp = injectValsAndEnclosedWithMathJax(a, b, var, exp);
 		step2.setExpression(exp);
 		//step2.setExplanation("Perform simple arithmetic equation on both sides, "+var+ " is solved");
-		step2.setExplanation(bundle.getString("lv1simp")+var+" "+ bundle.getString("lv1solv"));			
+		step2.setExplanation(bundle.getString("lv1simp")+"$$"+var+"$$ "+ bundle.getString("lv1solv"));			
 		steps.add(step2);
 		return steps;
 	}
