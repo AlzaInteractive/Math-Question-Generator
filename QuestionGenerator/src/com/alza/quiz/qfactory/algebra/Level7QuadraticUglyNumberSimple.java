@@ -219,7 +219,10 @@ public class Level7QuadraticUglyNumberSimple implements IQuestionFactory {
 				minB = "-("+this.b+")";
 			}
 			String fourAC = "4\\times "+this.a+" \\times "+this.c;
-			String b24AC = "b^2 - "+fourAC;
+			String b24AC = this.b+"^2 - "+fourAC;
+			if (this.b < 0) {
+				b24AC = "("+this.b+")^2 - "+fourAC;
+			}
 			String twoA = "2 \\times "+this.a;
 			String sqb24ac = "\\sqrt{"+b24AC+"}";
 			String minBPM4AC = minB +" \\pm "+sqb24ac;

@@ -129,7 +129,7 @@ public class Level6QuadraticSolveByFactoringANotOneNegativeCoeff implements IQue
 				modA = num1 % a;
 				modAInv = a % num1;
 				gcdABC = MathUtils.findGCD(a,b,c);
-			} while (num1 == num2 || num1 + num2 == 0 
+			} while (num1 == num2 || num1 + num2 == 0 || Math.abs(b)==1 
 					|| modA==0 || modAInv==0 || gcdABC > 1);			
 			
 		}

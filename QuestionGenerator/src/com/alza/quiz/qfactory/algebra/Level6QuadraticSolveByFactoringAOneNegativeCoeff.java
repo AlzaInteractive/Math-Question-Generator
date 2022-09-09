@@ -113,7 +113,7 @@ public class Level6QuadraticSolveByFactoringAOneNegativeCoeff implements IQuesti
 				
 			} while (firstFactorConst == secondFactorConst 
 					|| firstFactorConst + secondFactorConst == 0
-					|| b == 1);
+					|| Math.abs(b) == 1);
 			
 		}
 
