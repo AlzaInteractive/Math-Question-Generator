@@ -8,7 +8,7 @@ import java.util.Set;
 
 
 public class MultipleChoiceGeomQuiz extends  GeomQuiz{
-	private String correctAnswer;
+	//private String correctAnswer;
 	private List<String> choices = new ArrayList<String>();
 	protected boolean sortedChoices = false; 
 	

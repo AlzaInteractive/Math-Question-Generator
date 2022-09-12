@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Set;
 
 public class MultipleChoiceQuiz extends  Quiz{
-	protected String correctAnswer;
+	//protected String correctAnswer;
 	protected boolean sortedChoices = false; 
 	private List<String> choices = new ArrayList<String>();
 	
