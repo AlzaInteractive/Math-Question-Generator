@@ -181,5 +181,8 @@ public abstract class Quiz implements Comparable<Quiz>, Comparator<Quiz>{
 		return o1.compareTo(o2);
 	}
 	
+	public String hash() {
+		return this.locale+this.correctAnswer+this.question+this.problemString;
+	}
 	
 }
