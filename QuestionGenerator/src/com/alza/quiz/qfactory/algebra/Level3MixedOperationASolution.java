@@ -21,7 +21,8 @@ public class Level3MixedOperationASolution {
 			String exp = "(aVAR ÷ b) - c + c = d + c";
 			exp = injectValsAndEnclosedWithMathJax(a, b, c, d, var, exp);						
 			step1.setExpression(exp);
-			step1.setExplanation(bundle.getString("lv3add")+c+" "+bundle.getString("lv3tormv")+"- "+c);
+			step1.setExplanation(bundle.getString("lv3add")
+					+c+" "+bundle.getString("lv3tormv")+"- "+c);
 			steps.add(step1);
 
 			SolutionStep step2 = new SolutionStep();
@@ -68,7 +69,8 @@ public class Level3MixedOperationASolution {
 			String exp = "(aVAR ÷ b) + c - c = d - c";
 			exp = injectValsAndEnclosedWithMathJax(a, b, c, d, var, exp);						
 			step1.setExpression(exp);
-			step1.setExplanation(bundle.getString("lv3subtract")+c+" "+bundle.getString("lv3tormv")+"+ "+c);
+			step1.setExplanation(bundle.getString("lv3subtract")
+					+c+" "+bundle.getString("lv3tormv")+"+ "+c);
 			steps.add(step1);
 
 			SolutionStep step2 = new SolutionStep();
@@ -162,7 +164,8 @@ public class Level3MixedOperationASolution {
 			exp = injectValsAndEnclosedWithMathJax(a, b, c, d, var, exp);						
 			step1.setExpression(exp);
 			//step1.setExplanation("Add "+c+" to remove - "+c);
-			step1.setExplanation(bundle.getString("lv3add")+c+" "+bundle.getString("lv3tormv")+"- "+c);
+			step1.setExplanation(bundle.getString("lv3add")
+					+c+" "+bundle.getString("lv3tormv")+"- "+c);
 			steps.add(step1);
 
 			SolutionStep step2 = new SolutionStep();
@@ -209,7 +212,8 @@ public class Level3MixedOperationASolution {
 			exp = injectValsAndEnclosedWithMathJax(a, b, c, d, var, exp);						
 			step1.setExpression(exp);
 			//step1.setExplanation("Add "+c+" to remove - "+c);
-			step1.setExplanation(bundle.getString("lv3add")+c+" "+bundle.getString("lv3tormv")+"- "+c);
+			step1.setExplanation(bundle.getString("lv3add")
+					+c+" "+bundle.getString("lv3tormv")+"- "+c);
 			steps.add(step1);
 
 			SolutionStep step2 = new SolutionStep();
@@ -265,7 +269,8 @@ public class Level3MixedOperationASolution {
 			exp = injectValsAndEnclosedWithMathJax(a, b, c, d, var, exp);						
 			step1.setExpression(exp);
 			//step1.setExplanation("Subtract by "+c+" to remove + "+c);
-			step1.setExplanation(bundle.getString("lv3add")+c+" "+bundle.getString("lv3tormv")+"- "+c);
+			step1.setExplanation(bundle.getString("lv3subtract")
+					+c+" "+bundle.getString("lv3tormv")+"+ "+c);
 			steps.add(step1);
 
 			SolutionStep step2 = new SolutionStep();
@@ -321,7 +326,8 @@ public class Level3MixedOperationASolution {
 			exp = injectValsAndEnclosedWithMathJax(a, b, c, d, var, exp);						
 			step1.setExpression(exp);
 			//step1.setExplanation("Subtract by "+c+" to remove + "+c);
-			step1.setExplanation(bundle.getString("lv3subtract")+c+" "+bundle.getString("lv3tormv")+"+ "+c);
+			step1.setExplanation(bundle.getString("lv3subtract")
+					+c+" "+bundle.getString("lv3tormv")+"+ "+c);
 			steps.add(step1);
 
 			SolutionStep step2 = new SolutionStep();
@@ -377,7 +383,8 @@ public class Level3MixedOperationASolution {
 			exp = injectValsAndEnclosedWithMathJax(a, b, c, d, var, exp);						
 			step1.setExpression(exp);
 			//step1.setExplanation("Add "+c+" to remove - "+c);
-			step1.setExplanation(bundle.getString("lv3add")+c+" "+bundle.getString("lv3tormv")+"- "+c);
+			step1.setExplanation(bundle.getString("lv3add")
+					+c+" "+bundle.getString("lv3tormv")+"- "+c);
 			steps.add(step1);
 
 			SolutionStep step2 = new SolutionStep();
